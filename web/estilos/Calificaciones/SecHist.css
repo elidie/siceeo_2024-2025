@@ -1,0 +1,228 @@
+/* 
+    Creado el : 16/02/2016, 08:48:11 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+
+#pnlSecHist
+{
+    font-size: 0.8em;
+}
+
+#pnlSecHist .buttonBar
+{
+    font-size: 1.2em;
+}
+
+#pnlSecHist .panel .tituloPanel
+{
+    font-size: 0.9em;
+}
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlSecHist #pnlCalifsFinales1ro, #pnlSecHist #pnlCalifsFinales2do, #pnlSecHist #pnlCalifsFinales3ro
+{
+    margin-top: 7px;
+}
+#pnlSecHist #pnlExamenes1ro, #pnlSecHist #pnlExamenes2do, #pnlSecHist #pnlExamenes3ro
+{
+    margin-bottom: 0;
+}
+
+#pnlSecHist #pnlTablaCalif1ro, #pnlSecHist #pnlTablaCalif2do, #pnlSecHist #pnlTablaCalif3ro
+{
+    border: 1px solid #a9a9a9;
+    height: 180px;/*368*/
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+#pnlSecHist #pnlTablaExmExt1ro, #pnlSecHist #pnlTablaExmExt2do, #pnlSecHist #pnlTablaExmExt3ro
+{
+    border: 1px solid #a9a9a9;
+    height: 100px;/*368*/
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+#pnlSecHist #pnlExamExtraord1ro, #pnlSecHist #pnlExamExtraord2do, #pnlSecHist #pnlExamExtraord3ro
+{
+    background: rgba(128,128,0,0.2);
+    border: 1px solid #bcbcbc;
+    margin-right: 5px;
+    padding: 5px;
+    width: 30%;
+}
+
+#pnlSecHist #pnlInfoDataYButtons
+{
+    text-align: center;
+}
+
+#pnlSecHist #pnlBotones1roGuardaYCalif, #pnlSecHist #pnlBotones2doGuardaYCalif, #pnlSecHist #pnlBotones3roGuardaYCalif
+{
+    text-align: center;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlSecHist .buttonBar li
+{
+    padding-right: 5px;
+}
+
+#pnlSecHist #ubtnAntSigAlum li a
+{
+    width: 120px;
+}
+#pnlSecHist .tam1Button
+{
+    width: 83px;
+}
+#pnlSecHist .tam2Button
+{
+    width: 115px;
+}
+#pnlSecHist #ubtnGuardaYCalif1ro
+{
+    margin-top: 15px;
+}
+#pnlSecHist #btnActualizaReprobadas
+{
+    width: 93px;
+}
+
+#pnlSecHist .buttonBar li
+{
+    margin-bottom: 3px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+#pnlSecHist #tblExmExt1ro select, #pnlSecHist #tblExmExt2do select, #pnlSecHist #tblExmExt3ro select
+{
+    font-size: 1.2em
+}
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlSecHist #pnlInfoDataYButtons
+{
+    margin-bottom: 7px;
+}
+#pnlSecHist #pnlIdaluCurpNom
+{
+    margin-top: 5px;
+}
+#pnlSecHist #lblTAlumCapCalif_idalu
+{
+    padding-right: 15px;
+}
+#pnlSecHist #lblTAlumCapCalif_curp
+{
+    padding-right: 15px;
+}
+#pnlSecHist #lblTAlumCapCalif_nomTot
+{
+    padding-right: 15px;
+}
+
+#pnlSecHist #lblTCalif1ro_grupo, #pnlSecHist #lblTCalif2do_grupo
+{
+    padding-right: 25%;
+}
+#pnlSecHist .colorDeResalte
+{
+    color: #ad5500; /*#808000;*/
+    font-weight: bold;
+}
+#pnlSecHist #lblTCalif1ro_deleg, #pnlSecHist #lblTCalif2do_deleg
+{
+    padding-right: 14%;
+}
+#pnlSecHist #lblTCalif1ro_alumextrj, #pnlSecHist #lblTCalif2do_alumextrj
+{
+    padding-right: 25%;
+}
+#pnlSecHist #lblTCalif1ro_idcct, #pnlSecHist #lblTCalif2do_idcct
+{
+    padding-right: 21%;
+}
+
+
+#pnlSecHist #lblTCalif3ro_grupo
+{
+    padding-right: 25%;
+}
+#pnlSecHist #lblTCalif3ro_deleg
+{
+    padding-right: 12%;
+}
+#pnlSecHist #lblTCalif3ro_cct
+{
+    padding-right: 16%;
+}
+#pnlSecHist #lblTCalif3ro_promediogral
+{
+    padding-right: 12%;
+}
+#pnlSecHist #lblTCalif3ro_idcct
+{
+    padding-right: 11%;
+}
+#pnlSecHist #lblTCalif3ro_matrepant
+{
+    margin-right: 20px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlSecHist #tblCalif1ro input, #pnlSecHist #tblCalif2do input, #pnlSecHist #tblCalif3ro input
+{
+    font-size: 1.2em;
+    height: 11px;
+    width: 30px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlSecHist #tblExmExt1ro input, #pnlSecHist #tblExmExt2do input, #pnlSecHist #tblExmExt3ro input
+{
+    font-size: 1.2em;
+    height: 11px;
+    width: 30px;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+#pnlSecHist #pnlExamExtraord
+{
+    padding-left: 5%;    
+}
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 600px){
+    #pnlSecHist #pnlExamExtraord
+    {
+        padding-left: 5px;
+    }
+    #pnlSecHist .alinearHoriz
+    {
+        display: block;
+    }
+    #pnlSecHist #pnlExamExtraord1ro, #pnlSecHist #pnlExamExtraord2do, #pnlSecHist #pnlExamExtraord3ro
+    {
+        width: 95%;
+        margin-bottom: 7px; 
+    }
+    #pnlSecHist #pnlIdaluCurpNom label {
+        display: inline-block;
+    }
+}

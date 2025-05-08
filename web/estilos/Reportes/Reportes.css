@@ -1,0 +1,166 @@
+/* 
+    Creado el : 15/06/2017, 07:25:01 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlReportes .singleButton
+{
+    margin-right: 7px;
+}
+
+#pnlReportes .singleButton
+{
+    background-color: #3b8cd2;
+    border: 0px;
+    color: whitesmoke;
+    height: auto;
+    margin-bottom: 7px;
+    overflow: hidden;
+    padding: 5px 5px;
+    width: 180px;
+}
+#pnlReportes .singleButton:hover
+{
+    outline: #48dafb solid 3px;
+}
+#pnlReportes .singleButton .logo
+{
+    background-color: white;
+    border-radius: 30px;
+    color: #3b8cd2;
+    display: inline-block;
+    font-size: 1.2em;
+    margin: 2px auto 8px auto;
+    padding: 13px 4px;
+}
+#pnlReportes .singleButton .titulo1,
+#pnlReportes .singleButton .titulo2,
+#pnlReportes .singleButton .titulo3
+{
+    display: block;
+    margin-bottom: 4px;
+    text-align: left;
+}
+#pnlReportes .singleButton .titulo1
+{
+    font-size: 0.9em;
+    font-weight: bold;
+}
+#pnlReportes .singleButton .titulo2
+{
+    font-size: 0.8em;
+}
+#pnlReportes .singleButton .titulo3
+{
+    font-size: 0.7em;
+}
+#pnlReportes .singleButton .bandaInferior
+{
+    background-color: white;
+    color: #3b8cd2;
+    display: block;
+    font-size: 0.8em;
+    font-weight: lighter;
+}
+
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+
+
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlReportes #btnAcuseOfic{  background-color: #3b8cd2; width: 170px; }
+#pnlReportes #btnAcuseOfic .logo{  color: #3b8cd2;  }
+#pnlReportes #btnAcuseOfic .bandaInferior{  color: #3b8cd2;  }
+
+#pnlReportes #btnRepEval{  background-color: #F86924;  width: 120px;  }
+#pnlReportes #btnRepEval .logo{  color: #F86924;  }
+#pnlReportes #btnRepEval .bandaInferior{  color: #F86924;  }
+
+#pnlReportes #btnCertificado{  background-color: #57ab5b;  width: 120px;  }
+#pnlReportes #btnCertificado .logo{  color: #57ab5b;  }
+#pnlReportes #btnCertificado .bandaInferior{  color: #57ab5b;  }
+
+#pnlReportes #btnIAR{  background-color: #bf3c8f; width: 120px; }
+#pnlReportes #btnIAR .logo{  color: #bf3c8f;  }
+#pnlReportes #btnIAR .bandaInferior{  color: #bf3c8f;  }
+
+#pnlReportes #btnCREL{  background-color: #8a37ab; width: 120px; }
+#pnlReportes #btnCREL .logo{  color: #8a37ab;  }
+#pnlReportes #btnCREL .bandaInferior{  color: #8a37ab;  }
+
+#pnlReportes #btnIAE{  background-color: #bf3c8f; width: 120px; }
+#pnlReportes #btnIAE .logo{  color: #bf3c8f;  }
+#pnlReportes #btnIAE .bandaInferior{  color: #bf3c8f;  }
+
+#pnlReportes #btnREL{  background-color: #8a37ab; width: 120px; }
+#pnlReportes #btnREL .logo{  color: #8a37ab;  }
+#pnlReportes #btnREL .bandaInferior{  color: #8a37ab;  }
+
+#pnlReportes #btnR{  background-color: #bf3c8f; width: 120px; }
+#pnlReportes #btnR .logo{  color: #bf3c8f;  }
+#pnlReportes #btnR .bandaInferior{  color: #bf3c8f;  }
+
+#pnlReportes #btnRc{  background-color: #bf3c5e; width: 180px; }
+#pnlReportes #btnRc .logo{  color: #bf3c5e;  }
+#pnlReportes #btnRc .bandaInferior{  color: #bf3c5e;  }
+
+#pnlReportes #btnRELc{  background-color: #66088c; width: 180px; }
+#pnlReportes #btnRELc .logo{  color: #66088c;  padding: 17px 4px!important;  }
+#pnlReportes #btnRELc .bandaInferior{  color: #66088c;  }
+
+#pnlReportes #btnCRELc{  background-color: #66088c; width: 190px; }
+#pnlReportes #btnCRELc .logo{  color: #66088c;  font-size: 17px; }
+#pnlReportes #btnCRELc .bandaInferior{  color: #66088c;  }
+
+#pnlReportes #btnIAEc{  background-color: #a01d70; width: 180px; }
+#pnlReportes #btnIAEc .logo{  color: #a01d70;  padding: 17px 8px!important; }
+#pnlReportes #btnIAEc .bandaInferior{  color: #a01d70;  }
+
+
+
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+#pnlReportes #pnlCambioDeCiclo .combobox
+{
+    display: inline-table;
+    width: 120px;
+}
+#pnlReportes #pnlCambioDeCiclo .combobox select
+{
+    width: 120px;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlReportes #lblEtiquetaCiclo
+{
+    display: inline-block;
+    width: 180px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */

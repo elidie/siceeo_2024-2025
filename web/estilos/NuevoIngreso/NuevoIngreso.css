@@ -1,0 +1,231 @@
+/* 
+    Creado el : 13/05/2015, 01:55:08 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#frmwNuevoIngreso
+{
+    /*font-size: 0.9em; */
+}
+
+#divTblPreescolar
+{
+    height: 390px;
+}
+
+#frmwNuevoIngreso table
+{
+    padding: 0;
+    /*position: absolute;                                                         /*para que permita que el contenedor (scrollTable) se resizee*/
+    margin: 0;
+    width: 100%;
+}
+#frmwNuevoIngreso table th{
+	background: #9b6d02;/*rgba(0,0,0,0.2);*/
+	color: white;/*rgba(0,0,0,0.8);  rgba(25,25,112,1);*/
+	font-size: 0.7em;
+    height:15px;
+	padding: 1px 3px 1px 3px;
+	text-align: center;
+}
+#frmwNuevoIngreso table tr{
+	height:15px;
+}
+#frmwNuevoIngreso table td{
+	font-size: 0.7em;
+	text-align: left;
+	border-left: 1px dashed rgba(0,0,0,0.2);
+	border-right: 1px dashed rgba(0,0,0,0.2);
+}
+#frmwNuevoIngreso #resaltado{
+        font-weight:bold;
+        color: #ff0;
+}
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#ftblPreescolar .estiloEncabezados
+{
+    background: rgba(172,144,38,1);/*128,0,128,0.2*/    /*176,97,85*/
+    color: #F4F4F4;
+    font-size: 1.3em; 
+}
+
+#ftblPrimaria .estiloEncabezados
+{
+    background: rgba(218,176,5,1);  /*218,176,5,1*/
+    color: #F4F4F4;
+    font-size: 1.3em;
+}
+
+#ftblSecundaria .estiloEncabezados
+{
+    background: rgba(173,47,45,1);  /*218,176,5,1*/
+    color: #F4F4F4;
+    font-size: 1.3em;
+}
+
+#frmwNuevoIngreso #pnlCurp
+{
+   padding-top: 1px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#frmwNuevoIngreso #btnBuskAlum
+{
+    font-size: 1.1em;
+    height: 15px;
+    padding-bottom: 1px;
+    padding-top: 3px;
+    width: 70px;
+}
+
+
+#frmwNuevoIngreso .buttonGuardar {
+	color: #000;
+	border: solid 1px rgba(70,130,180,1);
+	font-size: 11px;
+	height: 30px;
+	width: auto;
+	-webkit-border-radius: .1em;
+	-moz-border-radius: .1em;
+	border-radius:.1em;
+	background: rgba(70,130,180,0.9);
+	margin-left: 10px;
+}
+#frmwNuevoIngreso .buttonGuardar:hover {
+	border: dashed 1px rgba(255,255,255,1);
+	color: white;
+}
+
+#frmwNuevoIngreso .buttonLimpiar {
+	color: #000;
+	border: solid 1px rgba(255,165,0,1);
+	font-size: 11px;
+	height: 30px;
+	width: auto;
+	-webkit-border-radius: .1em;
+	-moz-border-radius: .1em;
+	border-radius: .1em;
+	background: rgba(255,165,0,0.9);
+	margin-left: 10px;
+}
+#frmwNuevoIngreso .buttonLimpiar:hover {
+	border: dashed 1px rgba(240,240,240,1);
+	color: white;
+}
+
+#frmwNuevoIngreso .desactivarBoton
+{
+    background: #d1d1d1 !important;
+    color: #5f5f5f !important ;
+    cursor: default !important;
+    text-shadow: #fbfbfb 1px 1px 0px !important;
+}
+
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+#frmwNuevoIngreso select{
+	margin: 0;
+	padding: 0.1em 0 0 0;
+	height: 1.9em;
+	font-size: 1em;
+	/*color: rgba(0,100,0,0.5);*/
+}
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#frmwNuevoIngreso #lblAvisoGuard
+{
+    font-size: 1.5em;
+    color: blueviolet;
+}
+
+#frmwNuevoIngreso .lblRangoEdad{
+    font-size: 1.2em;
+    color: olive;
+}
+
+#frmwNuevoIngreso #lblEdad{
+    margin-left: 10px;
+    font-size: 1.2em;
+    color: olive;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#frmwNuevoIngreso #pnlCurp input
+{
+   margin-right: 3px;
+}
+
+#frmwNuevoIngreso #txtApe1, #frmwNuevoIngreso #txtApe2, #frmwNuevoIngreso #txtNombre{
+	text-align: left;
+	width: 60%;
+	height:13px;
+	font-size: 1.1em;
+	text-transform: uppercase;
+}
+
+#frmwNuevoIngreso #txtEdad, #frmwNuevoIngreso #txtCurp, #frmwNuevoIngreso #txtFechaIng 
+{
+	text-align: left;
+	/*width: 20%;*/
+	height:13px;
+	font-size: 1.1em;
+	text-transform: uppercase;
+}
+
+#txtFechaIng {
+        border: 2px solid red;
+}
+
+#frmwNuevoIngreso #txt18
+{
+    text-align: left;
+	width: 30px;
+	height:13px;
+	font-size: 1.1em;
+	/*color: olive;*/
+	text-transform: uppercase;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

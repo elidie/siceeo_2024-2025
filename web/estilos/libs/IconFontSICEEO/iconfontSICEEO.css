@@ -1,0 +1,347 @@
+@font-face {
+	font-family: 'iconfont_siceeo';
+	src:url('fonts/iconfont_siceeo.eot?-cmq4pr');
+	src:url('fonts/iconfont_siceeo.eot?#iefix-cmq4pr') format('embedded-opentype'),
+		url('fonts/iconfont_siceeo.woff?-cmq4pr') format('woff'),
+		url('fonts/iconfont_siceeo.ttf?-cmq4pr') format('truetype'),
+		url('fonts/iconfont_siceeo.svg?-cmq4pr#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'iconfont_siceeo';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cw:before {
+	content: "\e600";
+}
+
+.icon-layout:before {
+	content: "\e601";
+}
+
+.icon-list:before {
+	content: "\e602";
+}
+
+.icon-grid:before {
+	content: "\e603";
+}
+
+.icon-arrow-left:before {
+	content: "\e604";
+}
+
+.icon-arrow-down:before {
+	content: "\e605";
+}
+
+.icon-arrow-up:before {
+	content: "\e606";
+}
+
+.icon-arrow-right:before {
+	content: "\e607";
+}
+
+.icon-arrow-left2:before {
+	content: "\e608";
+}
+
+.icon-arrow-down2:before {
+	content: "\e609";
+}
+
+.icon-arrow-up2:before {
+	content: "\e60a";
+}
+
+.icon-arrow-right2:before {
+	content: "\e60b";
+}
+
+.icon-arrow-left3:before {
+	content: "\e60c";
+}
+
+.icon-arrow-down3:before {
+	content: "\e60d";
+}
+
+.icon-arrow-up3:before {
+	content: "\e60e";
+}
+
+.icon-arrow-right3:before {
+	content: "\e60f";
+}
+
+.icon-arrow-left4:before {
+	content: "\e610";
+}
+
+.icon-arrow-down4:before {
+	content: "\e611";
+}
+
+.icon-arrow-up4:before {
+	content: "\e612";
+}
+
+.icon-arrow-right4:before {
+	content: "\e613";
+}
+
+.icon-resize-enlarge:before {
+	content: "\e614";
+}
+
+.icon-resize-shrink:before {
+	content: "\e615";
+}
+
+.icon-minus:before {
+	content: "\e616";
+}
+
+.icon-plus:before {
+	content: "\e617";
+}
+
+.icon-cross:before {
+	content: "\e618";
+}
+
+.icon-minus2:before {
+	content: "\e619";
+}
+
+.icon-plus2:before {
+	content: "\e61a";
+}
+
+.icon-cross2:before {
+	content: "\e61b";
+}
+
+.icon-minus3:before {
+	content: "\e61c";
+}
+
+.icon-plus3:before {
+	content: "\e61d";
+}
+
+.icon-cross3:before {
+	content: "\e61e";
+}
+
+.icon-info:before {
+	content: "\e61f";
+}
+
+.icon-info-outline:before {
+	content: "\e620";
+}
+
+.icon-info2:before {
+	content: "\e621";
+}
+
+.icon-help:before {
+	content: "\e622";
+}
+
+.icon-warning:before {
+	content: "\e623";
+}
+
+.icon-equalizer:before {
+	content: "\e624";
+}
+
+.icon-lupa:before {
+	content: "\e625";
+}
+
+.icon-regresar:before {
+	content: "\e626";
+}
+
+.icon-disquete:before {
+	content: "\e627";
+}
+
+.icon-exportexcel:before {
+	content: "\e628";
+}
+
+.icon-oaxaca:before {
+	content: "\e629";
+}
+
+.icon-engrane:before {
+	content: "\e62a";
+}
+
+.icon-banderin:before {
+	content: "\e62b";
+}
+
+.icon-usuarios:before {
+	content: "\e62c";
+}
+
+.icon-calendreloj:before {
+	content: "\e62d";
+}
+
+.icon-outdoor:before {
+	content: "\e62e";
+}
+
+.icon-manual:before {
+	content: "\e62f";
+}
+
+.icon-telefono:before {
+	content: "\e630";
+}
+
+.icon-ejecutivo:before {
+	content: "\e631";
+}
+
+.icon-mail:before {
+	content: "\e632";
+}
+
+.icon-operador:before {
+	content: "\e633";
+}
+
+.icon-impresora:before {
+	content: "\e634";
+}
+
+.icon-documento:before {
+	content: "\e635";
+}
+
+.icon-reporte:before {
+	content: "\e636";
+}
+
+.icon-cambiar:before {
+	content: "\e637";
+}
+
+.icon-corregir:before {
+	content: "\e638";
+}
+
+.icon-historial:before {
+	content: "\e639";
+}
+
+.icon-insertar:before {
+	content: "\e63a";
+}
+
+.icon-generar:before {
+	content: "\e63b";
+}
+
+.icon-encender:before {
+	content: "\e63c";
+}
+
+.icon-apagador_on:before {
+	content: "\e63d";
+}
+
+.icon-brocha:before {
+	content: "\e63e";
+}
+
+.icon-sincronizar:before {
+	content: "\e63f";
+}
+
+.icon-basurero:before {
+	content: "\e640";
+}
+
+.icon-sello:before {
+	content: "\e641";
+}
+.icon-procesos:before {
+	content: "\e642";
+}
+
+/* --------------------------------------------------------------------------- */
+.icon-preinscripcion:before {
+	content: "\e900";
+}
+
+.icon-nvoingreso:before {
+	content: "\e901";
+}
+
+.icon-grupo:before {
+	content: "\e902";
+}
+
+.icon-necespeciales:before {
+	content: "\e903";
+}
+
+.icon-taller:before {
+	content: "\e904";
+}
+
+.icon-asigestatal:before {
+	content: "\e905";
+}
+
+.icon-artes:before {
+	content: "\e906";
+}
+
+.icon-calificaciones:before {
+	content: "\e907";
+}
+
+.icon-ubicar:before {
+	content: "\e908";
+}
+
+.icon-repevaluacion:before {
+	content: "\e909";
+}
+
+.icon-configs:before {
+	content: "\e90a";
+}
+
+.icon-personal:before {
+	content: "\e90b";
+}
+
+.icon-exalumnos:before {
+	content: "\e90c";
+}
+.icon-tutor:before {
+	content: "\e902";
+}

@@ -1,0 +1,47 @@
+/* 
+    Creado el : 26/05/2015, 02:46:51 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+body {
+  /*background-color: #f7f7f7;*/
+  color: #646464;
+  font: 20px Helvetica;
+}
+
+#frmPrincipal {
+  margin: 100px auto 0;
+  max-width: 600px;
+  width: 100%;
+}
+
+.imagen-mantenimiento {
+  /*background-repeat: no-repeat;*/
+  /*background-size: 100%;*/
+  height: 130px;
+}
+
+.divButton
+{
+    color: whitesmoke;
+    display: inline-block;
+    background-color: #35BC7A;
+    padding: 10px;
+}
+.divButton:hover 
+{
+    cursor: pointer;
+    outline: #31d0b4 solid 3px;
+}
+.divButton label:hover 
+{
+    cursor: pointer;
+}
+
+.divButton label
+{
+    font-size: 0.7em;
+}
+.message-internal h2 {
+    color: #B0281A;
+}

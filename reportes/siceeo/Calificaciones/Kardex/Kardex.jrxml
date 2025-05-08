@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Kardex" language="groovy" pageWidth="612" pageHeight="792" columnWidth="531" leftMargin="39" rightMargin="42" topMargin="28" bottomMargin="20" uuid="44320869-5968-4714-8105-940c681c4d73">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="califCicEscIn" class="java.lang.String"/>
+	<parameter name="cicescin" class="java.lang.Number"/>
+	<parameter name="grado" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="grupo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idcct" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vista" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select  a.idalu, trim(v.nombre) as nombreescuela, v.cct, v.cveturno, v.desturno, (trim(v.domicilio)||', '||v.deslocalidad) as colonloc, v.cvezona, v.desmunicipio, v.cveunidad, v.grado, v.grupo,
+a.apepat, a.apemat, a.nombre, a.curp
+from alumnogrado g, alumno a, V_$P!{vista} v
+where
+ g.idalu        = a.idalu       and
+ g.estatusGrado <>"BD" and
+(a.estatusalu ="I" or a.estatusalu = 'I')  and
+ g.cicescini  = $P{califCicEscIn}  and
+ g.idcct      = v.idcct     and
+ g.Grado      = v.grado      and
+ g.Grupo      = v.grupo and
+ g.cicescini = v.cicescini
+ and v.EstatusEsc = 'AC' and v.grado=$P{grado} AND v.grupo=$P{grupo} and v.idcct=$P{idcct}
+order by  a.apepat, a.apemat, a.nombre, a.curp]]>
+	</queryString>
+	<field name="idalu" class="java.lang.Integer"/>
+	<field name="nombreescuela" class="java.lang.String"/>
+	<field name="cct" class="java.lang.String"/>
+	<field name="cveturno" class="java.lang.String"/>
+	<field name="desturno" class="java.lang.String"/>
+	<field name="colonloc" class="java.lang.String"/>
+	<field name="cvezona" class="java.lang.String"/>
+	<field name="desmunicipio" class="java.lang.String"/>
+	<field name="cveunidad" class="java.lang.String"/>
+	<field name="grado" class="java.lang.Short"/>
+	<field name="grupo" class="java.lang.String"/>
+	<field name="apepat" class="java.lang.String"/>
+	<field name="apemat" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="curp" class="java.lang.String"/>
+	<variable name="estatusAlu" class="java.lang.String">
+		<variableExpression><![CDATA[( $P{califCicEscIn}==$P{cicescin} )? "I":"BD"]]></variableExpression>
+	</variable>
+	<variable name="varPromPrim" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="160" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="44" width="285" height="17" uuid="87a18bc2-b798-41ee-b0f9-ac63ca0b0ff9"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO ESTATAL DE EDUCACIÓN PÚBLICA DE OAXACA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="44" width="80" height="17" uuid="e8454bd1-1cf0-4e2f-8867-12d0dbe23414"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<text><![CDATA[OAXACA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="61" width="221" height="10" forecolor="#999999" uuid="c44bebbe-28ff-4f3b-8a97-3a9b37c0adcf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARÍA DE EDUCACIÓN U ORGANISMO PÚBLICO DESCENTRALIZADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="61" width="80" height="10" forecolor="#999999" uuid="61ce66ee-2cdb-4f40-9102-1f096fe7cdd3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENTIDAD FEDERATIVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="60" width="152" height="10" forecolor="#999999" uuid="84a4e664-df0d-4103-b53c-f32a877027c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLAVE ÚNICA DE REGISTRO DE POBLACIÓN (CURP)]]></text>
+			</staticText>
+			<rectangle radius="8">
+				<reportElement x="0" y="73" width="456" height="60" uuid="5195247e-0f82-4c27-b21b-e09d954b7d28"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="73" width="327" height="20" forecolor="#000000" uuid="7cdd0955-c21a-4b09-b78f-89b3eea88c81"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="false"/>
+					<paragraph firstLineIndent="10" spacingBefore="7" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreescuela}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="73" width="69" height="20" uuid="1770fd16-9d29-48c6-948f-b3a8735f28ca"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="9" isBold="true"/>
+					<paragraph firstLineIndent="4" spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cct}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="396" y="73" width="60" height="20" uuid="adfaf407-c6a8-4fc9-879f-8bdbc671f3f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph firstLineIndent="4" spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cveturno}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="73" width="249" height="10" forecolor="#999999" uuid="7e594140-171b-4be8-a06a-2ec1342b0d6d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE OFICIAL DE LA ESCUELA SEGÚN CATÁLOGO DE CENTROS DE TRABAJO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="73" width="69" height="10" forecolor="#999999" uuid="e76254d5-de33-4d6c-87e4-754a645dd3cd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[CLAVE SEGÚN CCT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="73" width="60" height="10" forecolor="#999999" uuid="5f7c535b-abed-4eb6-8cfb-7f9f72dca034"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[TURNO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="93" width="379" height="20" uuid="40695706-b3e7-486e-8a90-ee8ee75e5b59"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph firstLineIndent="10" spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{colonloc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="93" width="77" height="20" uuid="7a7d1ffc-abc5-4744-915d-dfc50e3abf24"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cvezona}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="93" width="80" height="10" forecolor="#999999" uuid="e8d53e3f-fa83-4a20-962d-3d4dacc07bc4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COLONIA O LOCALIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="93" width="77" height="10" forecolor="#999999" uuid="0ab91529-0da7-48c9-8049-8b0ee1e38bfa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ZONA ESCOLAR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="113" width="379" height="20" uuid="754e1f8d-ffb2-45ec-aca5-517562f754a1"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph firstLineIndent="10" spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desmunicipio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="113" width="77" height="20" uuid="cf0a28f3-cb47-4118-90e3-0b30d5a3e6c5"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cveunidad}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="113" width="116" height="10" forecolor="#999999" uuid="f11b685b-8cdb-477a-8f07-3b673e1bf5f7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MUNICIPIO O DELEGACIÓN POLÍTICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="113" width="67" height="10" forecolor="#999999" uuid="d62a2239-79da-49c8-a010-e0223993eb14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SERVICIOS REGIONALES]]></text>
+			</staticText>
+			<rectangle radius="7">
+				<reportElement x="0" y="135" width="456" height="23" uuid="f1b2feb9-c20a-4e74-b719-a8d9a43c6fb0"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="135" width="304" height="23" uuid="439e7b16-3a95-43b4-a30d-1a6083eb89a2"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+					<paragraph firstLineIndent="10" spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{apepat}==null?"":$F{apepat}.trim())+"/"+($F{apemat}==null?"":$F{apemat}.trim())+"*"+$F{nombre}.trim()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="304" y="135" width="23" height="23" uuid="417c9946-ca74-4cc7-824d-26b06351fe44"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="135" width="22" height="23" uuid="e8e72db6-ca63-4a69-9963-4dcf80e00390"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page" isBlankWhenNull="true">
+				<reportElement x="349" y="135" width="40" height="23" uuid="15d44e84-ce17-4edf-bc75-122581b0bdd8"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph spacingBefore="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{varPromPrim}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="135" width="145" height="10" forecolor="#999999" uuid="02386d4b-1990-4ddb-a2d6-2968d0a5362e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIMER APELLIDO / SEGUNDO APELLIDO * NOMBRE(S)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="135" width="23" height="10" forecolor="#999999" uuid="b9155718-f225-4ba6-a0e6-c1e969cb6895"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GRADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="135" width="22" height="10" forecolor="#999999" uuid="60cd1c10-7f4c-4c91-9da3-6495e84c53c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GRUPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="135" width="40" height="10" forecolor="#999999" uuid="4f18a28b-849c-4f7c-83de-e224b15c9246"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROM DE PRIM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="389" y="135" width="67" height="10" forecolor="#999999" uuid="085d4f63-5ed3-465b-83ab-1526d82a3a4c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[AUTORIZÓ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="459" y="73" width="72" height="85" uuid="e77830fa-8ebd-40ad-b923-5d6110cff40e"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement x="379" y="35" width="152" height="26" uuid="0e31b291-22c4-4589-b8ce-a527adb4ef9d"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="379" y="35" width="152" height="26" uuid="155bd073-f6e5-4515-802b-008f13a7906a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{curp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="531" height="17" uuid="7a94849c-d657-403e-8f97-1a01e8bc4254"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="ArialReport" size="14" isBold="true" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[SISTEMA EDUCATIVO NACIONAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="531" height="13" uuid="8c270294-a134-435d-b9e8-f1ef8209b71e"/>
+				<textElement textAlignment="Center">
+					<font fontName="ArialReport" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDUCACIÓN SECUNDARIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="531" height="13" uuid="3d603436-4cdd-4cb1-b193-66f92a3ac563"/>
+				<textElement textAlignment="Center">
+					<font fontName="ArialReport" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KÁRDEX]]></text>
+			</staticText>
+			<image>
+				<reportElement x="12" y="-2" width="138" height="39" uuid="361006e1-f06a-4b8d-8ab6-d0748506ca64"/>
+				<imageExpression><![CDATA["../../../imgs/SEP01.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="0" y="0" width="531" height="36" uuid="4210fbe7-db45-4a4e-aa59-f456cb60b7ab"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="192" height="36" forecolor="#999999" uuid="2b33c2e7-6cb7-4479-ae4b-874a5724cebb"/>
+				<box>
+					<rightPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASIGNATURAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="0" width="90" height="17" forecolor="#999999" uuid="5dba6b59-1882-494a-81ae-26f254abbba5"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALIFICACIONES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="17" width="17" height="19" forecolor="#999999" uuid="cf34a46a-cec5-4170-8485-d439ad485065"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[I]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="17" width="18" height="19" forecolor="#999999" uuid="95689c1d-53bd-461b-901e-d372929a3ab8"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[II]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="17" width="17" height="19" forecolor="#999999" uuid="b04b2c94-1adf-4869-a76f-cfebbc60b319"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[III]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="17" width="17" height="19" forecolor="#999999" uuid="f3226054-1724-4a63-9196-626ca9565523"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="17" width="21" height="19" forecolor="#999999" uuid="8fad5a13-0834-43c8-89e9-dca7a420deb0"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="0" width="83" height="17" forecolor="#999999" uuid="f34584e5-0d11-43f0-9f5e-0d7cd3b836e3"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESULTADOS DE EXAMEN DE RECUPERACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="17" width="20" height="19" forecolor="#999999" uuid="4ff7538c-861c-4803-89ab-6ae4f370872d"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[I]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="306" y="17" width="20" height="19" forecolor="#999999" uuid="a89136c8-8141-4a92-8935-6567fd02e51e"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[II]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="17" width="20" height="19" forecolor="#999999" uuid="4f9b89c7-1dc1-493b-95cc-c0728b19eadf"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[III]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="17" width="23" height="19" forecolor="#999999" uuid="12b23b54-0aed-45b2-93d1-2f3e394a7663"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="0" width="33" height="36" forecolor="#999999" uuid="3f04e189-950d-4fcc-bf80-b95d0b152f14"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALIF FINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="0" width="124" height="17" forecolor="#999999" uuid="c269d405-5cc3-4287-9ad8-4de1fce99cd1"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXAMEN DE REGULARIZACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="17" width="29" height="19" forecolor="#999999" uuid="3fbdcd9d-6559-4e6d-9bb2-49ee860c5738"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO DE EXM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="17" width="63" height="19" forecolor="#999999" uuid="fe10d2a8-dceb-42c1-9f9d-41b0f4886231"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="17" width="32" height="19" forecolor="#999999" uuid="27ca55c1-4f77-4853-b868-fcda661818a7"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALIF]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="495" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="531" height="495" uuid="ac9b697f-c27b-4804-93da-7da62af7b28b"/>
+				<subreportParameter name="idalu">
+					<subreportParameterExpression><![CDATA[$F{idalu}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cicescini">
+					<subreportParameterExpression><![CDATA[$P{califCicEscIn}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="varPromPrim" toVariable="varPromPrim"/>
+				<subreportExpression><![CDATA["Kardex_s1_Califs.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="28" height="13" uuid="e8934a25-112b-4799-b694-86da1fc41209"/>
+				<textElement>
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<text><![CDATA[FOLIO:]]></text>
+			</staticText>
+			<textField pattern="B- 000000000">
+				<reportElement x="28" y="0" width="100" height="13" forecolor="#7F0000" uuid="2860ee52-fe3d-4074-a8c2-0a91a6a51b3a"/>
+				<textElement>
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idalu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="394" y="0" width="76" height="13" uuid="da0558f6-d9f6-47b6-b083-6fdf9e639de5"/>
+				<textElement>
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha de impresión:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="470" y="0" width="61" height="13" uuid="0a48511f-db3e-483f-9de2-589cbd10ed17"/>
+				<textElement>
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

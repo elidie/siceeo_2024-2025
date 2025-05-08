@@ -1,0 +1,102 @@
+/* 
+    Creado el : 11-ago-2017, 14:51:37
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#mwffSelMesCompl
+{
+    margin-left: -25%;
+    width: 50%;
+}
+#mwfpSelMesCompl #pnlSelMesCompl
+{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#mwfpSelMesCompl #pnlSelMesCompl .buttonBar li
+{
+    margin-bottom: 5px;
+    margin-right: 7px;
+}
+
+#mwfpSelMesCompl #pnlSelMesCompl #btnImpMesCompl
+{
+    width: 100px;
+}
+
+#mwfpSelMesCompl #pnlSelMesCompl #btnCancelarMesCompl
+{
+    width: 100px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#mwfpSelMesCompl #pnlSelMesCompl #lblInstrucciones
+{
+    display: block;
+    margin: 5px;
+}
+#mwfpSelMesCompl #pnlSelMesCompl #pnlCompRec_alum,
+#mwfpSelMesCompl #pnlSelMesCompl #pnlCompExt_alum
+{
+    display: block;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    color: olive;
+}
+#mwfpSelMesCompl #pnlSelMesCompl #lineaComp {
+    border: 1px solid black;
+    display: block;
+    margin-bottom: 12px;
+}
+
+#mwfpSelMesCompl #pnlSelMesCompl #lblSelEspAlus
+{
+    display: block;
+    margin-bottom: 12px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#mwfpSelMesCompl #pnlSelMesCompl #scrlAlumnos
+{
+    border: 1px solid black;
+    height: 200px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+
+@media screen and (max-width: 700px)
+{
+    #mwffSelMesCompl                                                            /*Reajustamos la ventana, Como ya definimos un ancho más arriba, ya no agarra el automático de Estilos Generales*/
+    {
+        margin-left: -45%;
+        width: 90%;
+    }
+}

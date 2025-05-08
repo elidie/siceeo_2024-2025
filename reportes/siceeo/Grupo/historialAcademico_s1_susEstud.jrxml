@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historialAcademico_s1_susEstud" language="groovy" pageWidth="262" pageHeight="3146" columnWidth="262" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8b82974e-4449-4a03-889c-f27ce74a4224">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idcct" class="java.lang.String"/>
+	<parameter name="idalu" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[Select a.idalu,
+a.idcct,
+
+a.cicescini,
+substr(a.cicescini,1,4) ||' - '|| substr(a.cicescfin,1,4) as inifin,
+ grado, grupo, substr(grupo,2,1) as guionbajo,
+ estatusgrado,
+CASE WHEN estatusgrado= 'RE' AND PROMEDIO>=6.0 THEN 'APROBADO'
+     WHEN estatusgrado= 'P' AND PROMEDIO>=6.0 THEN 'APROBADO'
+     WHEN (SELECT COUNT(acreditado) FROM alumnodelextrj j
+                                  WHERE j.idalu  = a.idalu
+                                  AND   j.cveplan= a.cveplan
+                                  AND   j.acreditado='RV'
+                                  AND   j.cicescini = a.cicescini
+          )=1 THEN 'APROBADO POR REVALIDACION'
+     WHEN estatusgrado= 'RC' THEN 'NO APROBADO'
+     WHEN estatusgrado= 'C'  THEN 'CERTIFICADO'
+     WHEN estatusgrado= 'BD' THEN 'BAJA DEFINITIVA'
+     WHEN estatusgrado= 'I'  THEN 'INSCRITO'
+     WHEN estatusgrado= 'NP' THEN 'NO APROBADO'
+     ELSE 'NO DEFINIDO'
+END AS DESESTATUSgrado,
+ Promovido,
+ promedioant,
+ CASE WHEN (SELECT COUNT(acreditado) FROM alumnodelextrj j
+                                  WHERE j.idalu  = a.idalu
+                                  AND   j.cveplan= a.cveplan
+                                  AND   j.acreditado='RV'
+                                  AND   j.cicescini = a.cicescini
+            )=1 then ' A'
+      ELSE (SELECT CASE WHEN promedio=0 THEN '---'
+                        WHEN promedio =10 THEN '10'
+                        ELSE CAST(promedio AS CHAR(4)) END
+            FROM alumnogrado gp
+            WHERE gp.idalu = a.idalu
+                 AND gp.cicescini= a.cicescini
+           )
+  END AS Promedio,
+  PromedioGral, PromedioEb, a.cveprograma, matRepAnt, matRepAct
+from alumnoGrado a
+where a.idcct = $P{idcct}
+and idalu = $P{idalu}
+order by a.cicescini]]>
+	</queryString>
+	<field name="idalu" class="java.lang.Integer"/>
+	<field name="idcct" class="java.lang.Integer"/>
+	<field name="cicescini" class="java.lang.Short"/>
+	<field name="inifin" class="java.lang.String"/>
+	<field name="grado" class="java.lang.Short"/>
+	<field name="grupo" class="java.lang.String"/>
+	<field name="guionbajo" class="java.lang.String"/>
+	<field name="estatusgrado" class="java.lang.String"/>
+	<field name="desestatusgrado" class="java.lang.String"/>
+	<field name="promovido" class="java.lang.String"/>
+	<field name="promedioant" class="java.math.BigDecimal"/>
+	<field name="promedio" class="java.lang.String"/>
+	<field name="promediogral" class="java.math.BigDecimal"/>
+	<field name="promedioeb" class="java.math.BigDecimal"/>
+	<field name="cveprograma" class="java.lang.String"/>
+	<field name="matrepant" class="java.lang.Short"/>
+	<field name="matrepact" class="java.lang.Short"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="65" height="10" uuid="f4572f16-2e65-448f-b0b8-9be9ddb6d1a4"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inifin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="0" width="44" height="10" uuid="4f67d526-8067-4150-ad82-a069ca6fda4a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="0" width="30" height="10" uuid="b53d0c4a-2c17-4951-8aef-eea6d3686d46"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{promedio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="0" width="123" height="10" uuid="8791138c-0d75-4234-8c41-92bc506f16e0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desestatusgrado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

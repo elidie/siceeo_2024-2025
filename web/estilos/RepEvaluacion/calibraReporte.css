@@ -1,0 +1,288 @@
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+@font-face {
+   font-family: 'Mathematical';
+   src: url(../fonts/mathematical/Mathematical.ttf);
+}
+@font-face {
+   font-family: 'Oaxaquena_Tall';
+   src: url(../fonts/Oaxaquea-Tall/Oaxaquena_Tall.ttf);
+}
+@font-face {
+   font-family: 'Instruction';
+   src: url(../../fonts/Instruction/Instruction.ttf);
+}
+
+
+body{
+	width: 100%;
+	height: 100%;
+	background: url(../../imagenes/generales/fondo.jpg) no-repeat center center fixed; 
+	background-size: cover;
+}
+
+
+/* ScrollBar NochesDeCode.com.ar */ 
+
+#pnlCoordenadas ::-webkit-scrollbar { 
+    width: 1em; 
+} 
+      
+#pnlCoordenadas ::-webkit-scrollbar-track { 
+    -webkit-box-shadow: #000000; 
+    -webkit-border-radius: 0px; 
+    border-radius: 0px; 
+} 
+
+#pnlCoordenadas ::-webkit-scrollbar-track-piece { 
+    background-color: rgba(255, 255, 255, 0.6);
+} 
+      
+#pnlCoordenadas ::-webkit-scrollbar-thumb { 
+    -webkit-border-radius: 0px; 
+    border-radius: 0px; 
+    background: rgba(255, 255, 255, 0.6); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);  
+} 
+
+#pnlCoordenadas ::-webkit-scrollbar-thumb:window-inactive { 
+    background: #EB8A1D; 
+} 
+
+/* Final ScrollBar NochesDeCode.com.ar */
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlTituloModulo{
+	border-bottom: 0px solid rgba(12,200,89,0.6);	
+	text-align: center;
+	width: 100%;
+    color: #3b712f;
+}
+
+#pnlBotonesRegillaYGuardar{
+	width: 100%;
+	background: rgba(166,45,0,.3);
+	padding: 5px 0 5px 5px;
+}
+
+
+#pnlHoja #pnlEncabezadoDeHoja{
+    padding: 10px 0 0 0;
+    color: rgba(12,200,89,0.6);
+    font-size: 1em;
+    letter-spacing: 2px;
+}
+#pnlHoja #hoja{
+	text-align: center;
+	margin-left: 20px;
+	margin-top: 20px;
+	margin-right: -35px;
+}
+#pnlHoja #pnlEncabezadoDeHoja{
+	text-align: center;
+}
+
+
+#pnlCoordenadas #pnlEncabezadoDeCoordenadas
+{
+    padding: 5px 0 0 0;
+    color: rgba(12,200,89,0.6);
+    font-size: 0.9em;
+    letter-spacing: 2px;
+    text-align: center;
+}
+#pnlCoordenadas #pnlListaDeCoordenadas
+{	
+	margin-top: 10px;
+    padding: 10px;
+    width: 260px;
+}
+#pnlCoordenadas #listaDeCoordenadas{
+	height:250px;
+	overflow-y: auto;
+    padding-left: 0px;
+}
+#pnlCoordenadas .pnlCambiarCoordenadas{
+	margin-top: 10px;
+	padding: 2px 0;
+	width: 100%;
+	border: 0px dashed gray;
+	/*display: inline-block;
+	vertical-align: top;*/
+    text-align: center;
+}
+
+
+#pnlAyuda{
+    border: 1px solid lightgray;
+	margin-top: 20px;
+	height:350px;
+	overflow-y: auto;
+}
+#pnlAyuda #ayuda{
+    color: gray;
+    padding: 10px 15px 0;
+    text-align: justify;
+}
+#pnlAyuda .tipografia{
+ 	font-family: 'Instruction';
+ 	font-size: 12px;
+}
+#pnlAyuda .tituloAyuda{
+	text-align: center;
+	background: #7F0055;
+	margin-bottom: 5px;
+}
+#pnlAyuda h2, #pnlAyuda h3, #pnlAyuda h4{
+	width: 100%;
+	color: lightgray;
+}
+#pnlAyuda .formatoFuenteH3{
+	color: #FF6440;
+}
+#pnlAyuda .formatoFuenteH4{
+	color: #4811AE;
+	font-size: 10px;
+}
+#pnlAyuda b{
+	color: olive;
+}
+#pnlAyuda p{
+	padding-left: 10px;
+}
+
+
+#pnlListaDeCoordenadas ul li, #pnlAyuda ul li{
+	list-style: none;
+	text-align: left;
+	letter-spacing: 2px;
+	color: gray;
+}
+#pnlListaDeCoordenadas ul li:hover, #pnlAyuda ul li:hover{
+	background: transparent;
+	/*background: rgba(0, 0, 0, 0.2);*/
+	border: 1px dashed gray;
+	cursor: pointer;
+	color: black;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+.estiloBoton{
+	border: 1px solid lightgray;
+	color: white;
+	padding: 5px;
+	text-align: center;
+	letter-spacing: 2px;
+	background: transparent;
+	cursor: pointer;
+}
+.estiloBoton:hover{
+	box-shadow: inset 0 0 16px rgba(255,255,255,0.7);
+	-moz-box-shadow: inset 0 0 16px rgba(255,255,255,0.7);
+	-op-box-shadow: inset 0 0 16px rgba(255,255,255,0.7);
+}
+.botonDeshabilitado{
+	color: gray;
+	background: lightgray;
+}
+
+#btnCerrar_calibraRepEval{
+	margin-left: 2%;
+	background: red;
+}
+
+#btnImprimirRejilla{
+	background: #FF4100;
+}
+
+#btnImprimirCaidaDeTextosPrueba{
+	/*background: #FF8E00;*/
+	background: #FF8E00;
+    color: white;
+}
+
+#btnGuardarCambios{
+	background: #0A67A3;
+}
+
+#btnMostrarAyuda{
+	background: #7F0055;
+}
+
+#btnCambiarCoordenada{
+	background: #007929;	
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#lblTblPrincipal_grado{
+	color: white;
+	font-size: 20px;
+	letter-spacing: 2px;
+	margin-left: 40%;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlCoordenadas #txtNewX, #pnlCoordenadas #txtNewY{
+	border: 1px dashed gray;
+	width: 40px;
+	height: 20px;
+	margin-right: 2px;
+	color: red;
+	text-align: center;
+}
+
+#pnlCoordenadas .inputCoordenadas{
+	background: transparent;
+	border: 1px dashed gray;
+	padding: 0;
+	margin: 5px 2px;
+	width: 40px;
+	height: 20px;
+	color: gray;
+	text-align: center;
+}
+#pnlCoordenadas .inputOculto{
+	display: none;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#pnlAreaDeTrabajo{
+	/*width: 100%;
+	margin: 0;
+	padding: 0;*/
+    position: relative;
+}
+#pnlHoja
+{
+    width: 680px;
+}
+
+#pnlCoordenadas
+{
+    margin-left: 680px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 300px;
+}
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */

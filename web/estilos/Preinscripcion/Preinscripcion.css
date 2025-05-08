@@ -1,0 +1,239 @@
+/* 
+    Creado el : 18/11/2015, 08:29:49 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlPreinscripcion
+{
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+#pnlPreinscripcion input
+{
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+#pnlPreinscripcion select
+{
+    height: 1.8em;
+    font-size: 0.8em;
+}
+#pnlPreinscripcion .tituloPanel
+{
+    font-size: 0.9em;
+}
+#pnlPreinscripcion .buttonBar
+{
+    font-size: 1.2em;
+}
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlPreinscripcion #pnlNombreCompleto div, #pnlPreinscripcion #pnlGeneroFechaEnt div, #pnlPreinscripcion #pnlOtrosDatosPreinsc div
+{
+    margin-top: 5px;
+}
+
+#pnlPreinscripcion #pnlGeneroFechaEnt div, #pnlPreinscripcion #pnlNombreCompleto div
+{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+#pnlPreinscripcion #pnlAvisoGuardar
+{
+    margin-top: 15px;
+    text-align:center;
+    color: blue;
+}
+
+#pnlPreinscripcion #pnlDatosAlumno
+{
+    height: 462px;/*412*/
+}
+
+#pnlPreinscripcion #pnlTblPreinscripcion
+{
+    height: 420px;/*368*/
+    /*border: 1px solid #a9a9a9;*/
+    margin-top: 6px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+
+#pnlPreinscripcion #btnBuskAlum
+{
+    height: 17px;
+    width: 80px;
+}
+
+#pnlPreinscripcion #ubtnGuardarLimpiar
+{
+    margin: 10px 0;
+}
+#pnlPreinscripcion #btnGuardar
+{
+    /*background: #588ebb;*/
+}
+
+#pnlPreinscripcion #ubtnGuardarLimpiar li a, #pnlPreinscripcion #ubtnEdicion li a
+{
+    height: 18px;
+    width: 100px;
+}
+
+#pnlPreinscripcion #ubtnEdicion li a
+{
+    margin-top: 5px;
+    margin-right: 3px;
+}
+
+#pnlPreinscripcion #btnLimpiar
+{
+    /*background: #ffad19;*/
+}
+
+#pnlPreinscripcion #btnOficializarPreinsc
+{
+    background: #FF5C24;
+    color: white;
+}
+
+/* ************* CODIGO TEMPORAL ************* */
+#pnlPreinscripcion #btImpAcuseOfic
+{
+    background: #3c82c5 !important;
+    color: white;
+}
+#pnlPreinscripcion #btImpAcuseOfic:hover
+{
+    background: #bee6fd !important;
+    color: black;
+    cursor: pointer;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+#pnlPreinscripcion #cbxDiscap
+{
+    width: 220px;
+}
+
+#pnlPreinscripcion #cbxProbem
+{
+    width: 220px;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlPreinscripcion #lblCURP
+{
+    margin-top: 2px;
+}
+
+#pnlPreinscripcion #lblIdalu
+{
+    margin: 10px 0 0 15px;
+    font-weight: bold;
+    width: 100%;
+}
+
+#pnlPreinscripcion #lblRangoEdad
+{
+    color: #e97a3d;
+}
+
+#pnlPreinscripcion #lblCURP, #pnlPreinscripcion #txtCurp16, #pnlPreinscripcion #txtCurp17y18, #pnlPreinscripcion #ubtnBuscar, #pnlPreinscripcion #lblIdalu
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlPreinscripcion #tblPreinscripcion td
+{
+    height: 15px;
+    font-size: 0.9em;
+}
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlPreinscripcion #txtCurp16, #pnlPreinscripcion #txtCurp16Pre
+{
+    width: 125px;
+}
+
+#pnlPreinscripcion #txtCurp17y18, #pnlPreinscripcion #txtCurp17y18Pre
+{
+    width: 20px;
+}
+
+#pnlPreinscripcion #txtFechaNac
+{
+    width: 76px;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#pnlPreinscripcion #pnlDatosAlumno
+{
+    width: 390px;
+    float: left;
+}
+#pnlPreinscripcion #pnlAlumnosPreinscritos
+{
+    margin-left: 410px;                                                          /*Si se desea superponer, ajustar al tamaño que tiene por ancho el div izquierdo*/
+}
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 726px){
+    #pnlPreinscripcion #pnlDatosAlumno, #pnlPreinscripcion #pnlAlumnosPreinscritos
+    {
+        float: none;
+        width: auto;
+    }
+    #pnlPreinscripcion #pnlDatosAlumno
+    {
+        height: auto;
+    }
+    #pnlPreinscripcion #pnlDatosAlumno div
+    {
+        display: block;
+    }
+    #pnlPreinscripcion #pnlAlumnosPreinscritos
+    {
+        margin-left: 0px !important;
+    }
+}
+
+@media screen and (max-width: 475px){
+    #pnlPreinscripcion #btnExportPreinscripAExcel{
+        display: none
+    }
+}
+
+@media screen and (max-width: 375px){
+    #pnlPreinscripcion #btnBuskAlum
+    {
+        width: 41px;
+    }
+    #pnlPreinscripcion #btnBuskAlum #ibtnBuskAlum
+    {
+        display: none;
+    }
+    #pnlPreinscripcion #btnOficializarPreinsc{
+        /*margin-top: 5px;*/
+    }
+}

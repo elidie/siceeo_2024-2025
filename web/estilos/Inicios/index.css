@@ -1,0 +1,62 @@
+/* 
+    Creado el : 28/04/2015, 12:07:37 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+.mensajeBienvenida{
+	font-size: 1em;
+}
+
+.nombreSistema{
+    font-size: 1.8em;
+}
+
+#manualSICEEO
+{
+    font-style: normal;
+    font-size: 1em;
+    text-align: center;
+}
+#manualSICEEO a{
+    color: #EF9B33;
+}
+
+#navegadorRecomendado{
+    font-style: normal;
+    font-size: 1em;
+    text-align: center;
+}
+#navegadorRecomendado a{
+    color: red;
+}
+
+.copyright{
+	float: none;
+	width: 100%;
+	font-size: 0.8em;
+	text-align: center;
+	color: olive;
+	margin: 0px;
+	font-style: oblique;
+}
+
+/******************************************************************************************************************************************/
+/************************************************* M E D I A   Q U E R Y S ****************************************************************/
+/******************************************************************************************************************************************/
+@media screen and (max-width: 800px){
+    .mensajeBienvenida{
+        font-size: 0.7em;
+    }
+    .nombreSistema{
+		font-size: 0.9em;
+	}
+}
+
+@media screen and (max-width: 400px){
+    .mensajeBienvenida{
+		font-size: 0.6em;
+	}
+    .nombreSistema{
+		font-size: 0.8em;
+	}
+}

@@ -1,0 +1,129 @@
+/* 
+    Creado el : 2/02/2016, 12:28:42 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+
+#pnlCamPass
+{
+    margin: 0 auto;
+    width: 410px;
+}
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+ #pnlCamPass .anchoFijo
+ {
+    text-align: right;
+    width: 160px;
+ }
+ 
+#pnlCamPass #pnlUsuario
+{
+    margin-top: 15px;
+}
+
+#pnlCamPass #pnlNewPass2
+{
+    margin-bottom: 10px;
+}
+
+#pnlCamPass #pnlCurp
+{
+    margin-bottom: 10px;
+}
+
+#pnlCamPass #pnlCorreo
+{
+    margin-bottom: 10px;
+}
+
+#pnlCamPass #pnlCondicion
+{
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlCamPass #btnBuscar
+{
+    padding: 1px 3px;
+    width: 55px;
+}
+#pnlCamPass #btnCamPassw
+{
+    margin: 0 auto;
+    width: 124px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlCamPass #pnlCondicion label
+{
+    color: #dd493b;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlCamPass input[type="text"]
+{
+    text-transform: uppercase;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#mwffCamPass                                                                    /*Le quitamos la elasticidad a la ventana modal y la centamos*/
+{
+    /*margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;*/
+    width: 440px;
+    
+}
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 465px){
+    #mwffCamPass                                                                /*Le quitamos la elasticidad a la ventana modal. Como ya definimos un ancho más arriba, ya no agarra el automático de Estilos Generales}*/
+    {
+        width: 90%;
+        margin-top: 4%;
+        height: 80%;
+    }
+    #mwffCamPass .mwfPanelForm
+    {
+        overflow: scroll;
+    }
+    
+    #pnlCamPass
+    {
+        width: 100%;
+        height: 350px;
+    }
+    #pnlCamPass .anchoFijo
+    {
+        display: block;
+        margin-left: 10px;
+        text-align: left;
+    }
+    #pnlCamPass input
+    {
+        margin-left: 20px;
+    }
+}

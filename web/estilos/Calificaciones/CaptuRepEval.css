@@ -1,0 +1,274 @@
+/* 
+    Creado el : 19-may-2017, 18:13:01
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlCaptuRepEval
+{
+    font-size: 0.9em;
+}
+#pnlCaptuRepEval .scrollTable table td{
+    border-left: 1px dashed rgba(0,0,0,0.2);
+    border-right: 1px dashed rgba(0,0,0,0.2);
+}
+
+#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones .panel
+{
+    margin-bottom: 25px;
+}
+
+#pnlCaptuRepEval .scrollTable select
+{
+    font-family: Arial;
+    font-size: 1.1em;
+}
+
+#pnlCaptuRepEval .scrollTable textarea
+{
+    font-family: Arial;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlCaptuRepEval #pnlCapturaDeEvaluaciones
+{
+    border: 1px solid black;
+}
+#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones {
+    height: 390px;
+    overflow: auto;
+    padding-top: 10px;
+    position: relative;
+    width: 100%;
+}
+
+#pnlCaptuRepEval .marco
+{
+    border: 1px solid #a9a9a9;
+    margin: 0;
+    padding: 0;
+}
+#pnlCaptuRepEval #pnlDatosGenerales
+{
+    background-color: #804000;
+    color: white;
+    font-size: 0.9em;
+    height: 18px;
+    margin: 5px 0; 
+    padding: 5px 0px 0px 5px;
+}
+
+#pnlCaptuRepEval #pnlTblAlumCapRepEval
+{
+    border: 1px solid black;
+    height: 470px;
+}
+
+#pnlCaptuRepEval .riesgosAlerta
+{
+    margin-right: 5px;
+    padding: 8px 0 8px 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 100px;
+}
+
+#pnlCaptuRepEval .riesgosAlerta input
+{
+    margin-top: 5px;
+}
+
+#pnlCaptuRepEval #pnlTutoria label
+{
+    padding: 10px;
+}
+
+#pnlCaptuRepEval #pnlHabilidades #pnlHabilidades_instrucciones
+{
+    font-size: 0.9em;
+}
+
+#pnlCaptuRepEval #pnlRecomendXBimYAsig #pnlRecomendaciones_instrucciones
+{
+    font-size: 0.9em;
+    margin-bottom: 18px;
+}
+
+#pnlCaptuRepEval #pnlRecomendGrales #pnlRecomendGrales_instruc
+{
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+#pnlCaptuRepEval #pnlComprensionLectora #pnlComprensionLectora_instruc
+{
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlCaptuRepEval .tam2Button
+{
+    width: 115px;
+}
+
+#pnlCaptuRepEval #pnlBotonesDeGestion li
+{
+    vertical-align: top;
+    margin-right: 5px;
+}
+#pnlCaptuRepEval #pnlBotonesDeGestion li a
+{
+        width: 115px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+#pnlCaptuRepEval #tblObsYRecomXBimYAsig .coltblObsYRecomXBimYAsig_col1 select
+{
+    width: 200px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlCaptuRepEval #lblTblPrincipal_cct
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlCaptuRepEval #lblTblPrincipal_grado
+{
+    font-weight:bold;
+    margin-right: 1em;
+}
+#pnlCaptuRepEval #lblTblPrincipal_grupo
+{
+    font-weight:bold;
+    margin-right: 3em;
+}
+#pnlCaptuRepEval #lblTblAlumCapRepEval_cveprograma
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlCaptuRepEval #lblTblAlumCapRepEval_idalu
+{
+    margin-right: 2em;
+}
+
+#pnlCaptuRepEval .riesgosAlerta label
+{
+    display: block;
+}
+#pnlCaptuRepEval .riesgosAlerta .lblRiesgosAlertaBim
+{
+    font-size: 0.7em;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlCaptuRepEval #scrlHabilidades
+{
+    height: 330px;
+}
+#pnlCaptuRepEval #pnlHabilidades table td
+{
+    text-align: center;
+}
+#pnlCaptuRepEval #pnlHabilidades table .tblHabilidades_col0
+{
+    width: 50px;
+}
+#pnlCaptuRepEval #pnlHabilidades table .tblHabilidades_col0 label
+{
+    display: block;
+    width: 50px;
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg); 
+}
+#pnlCaptuRepEval #pnlHabilidades table .tblHabilidades_col2
+{
+    width: 60px;
+}
+
+#pnlCaptuRepEval #scrlObsYRecomXBimYAsig
+{
+    height: 115px;
+    margin-bottom: 10px;
+    border: 1px solid black
+}
+.tblObsYRecomXBimYAsig_col2
+{
+    width: 200px;
+}
+
+#pnlCaptuRepEval #scrlEvalLec
+{
+    height: 140px;
+}
+#pnlCaptuRepEval #tblEvalLec #tblEvalLec_titcol0
+{
+    font-weight: lighter;
+}
+#pnlCaptuRepEval #tblEvalLec tbody tr:nth-child(odd) 
+{
+    background: #FFFFFF;
+}
+#pnlCaptuRepEval #tblEvalLec tbody tr:nth-child(even) 
+{
+    background: #EBEBEB;
+}
+#pnlCaptuRepEval #tblEvalLec .checksEvalLec
+{
+    text-align: center;
+}
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones textarea::-webkit-input-placeholder { color: #ffaaaa; }
+#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 18- */
+#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 19+ */
+#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones textarea:-ms-input-placeholder { color: #ffaaaa; } /* IE 10+ */
+
+#pnlCaptuRepEval #pnlHabilidades table textarea
+{
+    display: block;
+    height: 70px;
+    width: 97%;
+}
+
+#pnlCaptuRepEval #pnlRecomendXBimYAsig textarea
+{
+    width: 98%;
+}
+
+#pnlCaptuRepEval #pnlRecomendGrales textarea
+{
+    width: 98%;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#pnlCaptuRepEval #pnlListadoAlumnos
+{
+    float: left;
+    width: 550px;
+}
+#pnlCaptuRepEval #pnlCapturaDeEvaluaciones
+{
+    margin-left: 570px;                                                         /*Si se desea superponer, ajustar al tamaño que tiene por ancho el div izquierdo*/
+}
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+

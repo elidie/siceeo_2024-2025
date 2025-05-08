@@ -1,0 +1,444 @@
+/* 
+    Creado el : 6/03/2015, 08:46:09 AM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlCalifSecXBim
+{
+    font-size: 0.9em;
+}
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlCalifSecXBim #pnlAlumnos
+{
+    width: 60%;
+}
+
+#pnlCalifSecXBim #pnlAlumnos #pnlCicloEscolar
+{
+    height: 25px;
+    padding-top: 10px;
+}
+
+#pnlCalifSecXBim #pnlAlumnos #pnlDatosGenerales
+{
+    font-size: 0.9em;
+    height: 18px;
+    padding: 5px 0px 0px 5px;
+    margin: 5px 0; 
+    background-color: #804000;
+    color: white;
+}
+
+#pnlCalifSecXBim #pnlMensajeGuardar 
+{
+    font-size: 0.8em;
+    color: red;
+    animation-duration: 9s;
+    animation-iteration-count: 50;
+    animation-name: MiAnimacion;
+    animation-direction: alternate;
+    white-space: nowrap;
+    overflow:hidden;
+    padding-left:100px;
+    
+}
+@keyframes MiAnimacion {
+    from
+    {
+        padding-left:100px;
+        color: black;
+        display:block;
+    }
+    25% 
+    {
+        color: red;
+        padding-left: 0%;
+    }
+    85% 
+    {
+        color: red;
+        padding-left: 0%;
+    }
+    to
+    {
+        padding-left: 100%;
+        color: black;
+    }
+}
+
+#pnlCalifSecXBim #pnlGestionBim
+{
+    padding-left: 10px;
+    width: 35%;
+    float: right;
+}
+#pnlCalifSecXBim #pnlGestionBim #pnlBimestre
+{
+    height: 25px;
+    text-align: center;
+    margin-bottom: 5px; 
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlInasistencias #pnlTblInasistencias, 
+#pnlCalifSecXBim #pnlGestionBim #pnlInasistencias #pnlBtnInasistencias
+{
+    display: inline-block;
+    height: 60px;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlComDocAlum #pnlTblComDocAlum, 
+#pnlCalifSecXBim #pnlGestionBim #pnlComDocAlum #pnlBtnComDocAlum
+{
+    display: block;
+    height: 60px;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlInasistencias #pnlBtnInasistencias,
+#pnlCalifSecXBim #pnlGestionBim #pnlComDocAlum #pnlBtnComDocAlum
+{
+    width: 33%;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlInasistencias #pnlBtnInasistencias a
+{
+    width: 9em;
+    margin-top: 10px;
+}
+#pnlCalifSecXBim #pnlGestionBim #pnlComDocAlum #pnlBtnComDocAlum a
+{
+    width: 9em;
+    margin-top: 10px;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlInasistencias #pnlTblInasistencias,
+#pnlCalifSecXBim #pnlGestionBim #pnlComDocAlum #pnlTblComDocAlum
+{
+    border: 1px solid black;
+    width: 82%;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlConOSinProm
+{
+    height: 25px;
+    margin-top: 5px;
+    padding: 0.7em 0 0 0;
+    text-align: center;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlMemo1
+{
+    font-size: .9em;
+    min-height: 4em;
+    margin-top: 5px;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlBotonesDecontrol
+{
+    font-size: 0.85em;
+    margin-bottom: 15px;    
+}
+.pnlBotonesDecontrol {
+    border: 1px solid #5a5a5a;
+    margin-top: 30px;
+    padding: 10px;
+    
+}
+#pnlCalifSecXBim #pnlGestionBim #pnlBotonesDecontrol #pnlBotonesDecontrolIzq
+{
+    width: 48%;
+}
+#pnlCalifSecXBim #pnlGestionBim #pnlBotonesDecontrol #pnlBotonesDecontrolDer
+{
+    width: 48%;
+}
+
+#pnlCalifSecXBim #pnlAlumnos, #pnlCalifSecXBim #pnlGestionBim
+{
+    display: inline-block;
+    vertical-align: top;
+}
+#pnlCalifSecXBim #pnlTblInasistencias, #pnlCalifSecXBim #pnlBtnInasistencias,
+#pnlCalifSecXBim #pnlTblComDocAlum, #pnlCalifSecXBim #pnlBtnComDocAlum
+{
+    display: inline-block;
+    vertical-align: top;
+}
+#pnlCalifSecXBim #pnlBotonesDecontrolIzq, #pnlCalifSecXBim #pnlBotonesDecontrolDer
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlCalifSecXBim .buttonBar li a
+{
+    height: 18px;
+    margin: 2px;
+    padding-top: 3px;
+}
+
+#pnlCalifSecXBim #pnlAlumnos #pnlCicloEscolar .buttonBar a
+{
+    width: 7em;
+}
+
+#pnlCalifSecXBim #pnlAlumnos #pnlCicloEscolar #lblCiclo, #pnlCalifSecXBim #pnlAlumnos #pnlCicloEscolar .buttonBar
+{
+    display: inline;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlBimestre .buttonBar a
+{
+    width: 6em;
+}
+
+/* ************* CODIGO TEMPORAL ************* */
+#pnlCalifSecXBim #pnlGestionBim #btnHistAcad
+{
+    background: #EF9B33 !important;
+    color: white;
+}
+#pnlCalifSecXBim #pnlGestionBim #btnHistAcad:hover
+{
+    background: #bee6fd !important;
+    color: black;
+    cursor: pointer;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlCalifSecXBim #lblTblPrincipal_cct
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlCalifSecXBim #lblTblPrincipal_grado
+{
+    font-weight:bold;
+    margin-right: 1em;
+}
+#pnlCalifSecXBim #lblTblPrincipal_grupo
+{
+    font-weight:bold;
+    margin-right: 3em;
+}
+#pnlCalifSecXBim #lblTblAlumCapCalif_cveprograma
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlCalifSecXBim #lblTblAlumCapCalif_idalu
+{
+    margin-right: 2em;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #lblBim,
+#pnlCalifSecXBim #pnlGestionBim #lblComDA
+{
+    width: 8em;
+}
+
+#pnlCalifSecXBim #lblTblMatCalifXBim_cvemat
+{
+    margin-left: 2em;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlBimestre .buttonBar, #lblBim, #lblTblMatCalifXBim_cvemat
+{
+    display: inline;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlTotMatYDeudas #lblTblAlumCapCalif_debe1ro
+{
+    margin: 0 1.5em 0 10em;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlCalifSecXBim #pnlTblAlumCapCalif
+{
+    border: 1px solid black;
+    height: 500px;
+}
+
+#pnlCalifSecXBim #pnlTblAlumCapCalif #scrlAlumCapCalif
+{
+    height: 100%;
+    overflow: auto;
+}
+
+#pnlCalifSecXBim #pnlTblAlumCapCalif #scrlAlumCapCalif #tblAlumCapCalif td
+{
+    height: 14px;
+}
+
+#pnlCalifSecXBim #tblMatCalifXBim td
+{
+    padding: 0;
+}
+
+#pnlCalifSecXBim #scrlInasistencias,
+#pnlCalifSecXBim #scrlComDocAlum
+{
+    height: 100%;
+    overflow: auto;
+}
+#pnlComunicacion {
+    padding-top: 5px;
+    border: 3px solid #FF4100;
+}
+#pnlComDocAlum div{
+    margin-top: 8px;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlTblMatCalifXBim
+{
+    border: 1px solid black;
+    height: 210px;
+    margin-bottom: 5px;
+}
+#pnlCalifSecXBim #pnlGestionBim #pnlTblMatCalifXBim #scrlMatCalifXBim
+{
+    height: 100%;
+    overflow: auto;
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlTblTotMat
+{
+    border: 1px solid black;
+    height: 50px;
+}
+#pnlCalifSecXBim #pnlGestionBim #scrlTotMat
+{
+    height: 100%;
+    overflow: auto;
+}
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlCalifSecXBim #tblMatCalifXBim input
+{
+    height: 11px;
+    width: 2em;
+    font-size: 1.2em
+}
+
+#pnlCalifSecXBim #pnlGestionBim #pnlInasistencias #pnlTblInasistencias input,
+#pnlCalifSecXBim #pnlGestionBim #pnlComDocAlum #pnlTblComDocAlum input
+{
+    width: 2em;
+}
+
+#pnlBimestre .imagen-mantenimiento {
+  height: 130px;
+}
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+
+@media screen and (max-width: 935px){
+    #pnlCalifSecXBim #lblTblMatCalifXBim_cvemat
+    {
+        margin-left: 0em;
+        float: right;
+        vertical-align: bottom;
+    }
+    
+}
+@media screen and (max-width: 835px){
+    #pnlCalifSecXBim #pnlAlumnos
+    {
+        width: 335px;
+        float: left;
+    }
+    #pnlCalifSecXBim #pnlAlumnos #pnlCicloEscolar 
+    {
+        padding-top: 0;
+    }
+    #pnlCalifSecXBim #lblTblAlumCapCalif_curp
+    {
+        display: none;
+    }
+    #pnlCalifSecXBim #pnlGestionBim
+    {
+        width: auto;
+        margin-left: 340px;
+        vertical-align: top;
+        display: block;
+        float: none;
+    }
+    #pnlCalifSecXBim #pnlMensajeGuardar{
+        color: red;
+        padding-left: 0px;
+        animation-duration: 9s;
+    }
+    @keyframes MiAnimacion 
+    {
+        from
+        {
+            padding-left:0px;
+            color: red;
+        }
+        25% 
+        {
+            color: red;
+            padding-left: 0%;
+        }
+        85% 
+        {
+            color: black;
+            padding-left: 0%;
+        }
+        to
+        {
+            padding-left: 0%;
+        }
+    }
+}
+
+@media screen and (max-width: 730px){
+    #pnlCalifSecXBim #pnlAlumnos
+    {
+        width: 100%;
+        display: block;
+        float: none;
+        height: 134px;
+    }
+    
+    #pnlCalifSecXBim #pnlAlumnos #pnlTblAlumCapCalif
+    {
+        height: 72px;
+    }
+   
+    #pnlCalifSecXBim #pnlGestionBim
+    {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+        padding-left: 0;
+        vertical-align: baseline;
+        display: block;
+        float: none;
+    }
+}
+@media screen and (max-width: 380px){
+    #pnlCalifSecXBim #lblTblAlumCapCalif_cveprograma
+    {
+        display: none;
+    }
+}
+

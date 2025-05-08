@@ -1,0 +1,1 @@
+{localServerName:6, redirectServer:"local", connectionType:"LOCAL"}

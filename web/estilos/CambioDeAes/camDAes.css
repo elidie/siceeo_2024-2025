@@ -1,0 +1,113 @@
+/* 
+    Creado el : 20/01/2016, 09:14:42 AM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlCamDAes #pnlTblCamDAes
+{
+    border: 1px solid #a9a9a9;
+    height: 420px;
+    margin-top: 6px;
+}
+
+#pnlCamDAes #pnlBotonesDeControl
+{
+    margin-top: 10px;
+    text-align: center;
+}
+#pnlCamDAes #pnlBotonesDeControl #pnlCambiarTodoElGrupo, #pnlCamDAes #pnlBotonesDeControl ul
+{
+    display: inline-block;
+}
+
+#pnlCamDAes #pnlCambiarTodoElGrupo
+{
+    background: #908670;/*rgba(128,128,0,0.2);/*#EAEAC1;*/
+    margin: 0 10px 0 10px;
+    padding: 7px 0 7px 0;
+    width: 280px;
+}
+#pnlCamDAes #pnlCambiarTodoElGrupo select, #pnlCamDAes #pnlCambiarTodoElGrupo ul
+{
+    display: inline-block;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlCamDAes #btnInsertAes
+{
+    width: 185px;
+}
+
+#pnlCamDAes #btnCamAes
+{
+    width: 220px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+#pnlCamDAes #cbxAes
+{
+    margin-right: 5px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlCamDAes #pnlDatosGenerales label
+{
+    color: olive;
+    font-weight: bold;
+    margin-right: 3%;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+
+@media screen and (max-width: 710px)
+{
+    #pnlCamDAes #btnGuardar
+    {
+        margin-top: 5px;
+    }
+}
+@media screen and (max-width: 550px)
+{
+    #pnlCamDAes #pnlBotonesDeControl #pnlCambiarTodoElGrupo, #pnlCamDAes #pnlBotonesDeControl > ul
+    {
+        display: block;
+    }
+    
+    #pnlCamDAes #pnlBotonesDeControl
+    {
+        text-align: center;
+    }
+    
+    #pnlCamDAes #pnlBotonesDeControl #pnlCambiarTodoElGrupo
+    {
+        margin: 5px auto 0 auto;                                                /*Auto a los lados para que se centre horizontalmente*/
+    }
+}

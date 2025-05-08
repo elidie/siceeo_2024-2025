@@ -1,0 +1,134 @@
+/* 
+    Creado el : 24-ene-2017, 16:51:40
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#mwfpPermisos 
+{
+    height: 450px;
+}
+
+#pnlPermisos 
+{
+    margin: 10px;
+}
+
+#pnlPermisos #pnlFiltrarUsuario
+{
+    font-size: 0.9em;
+    margin-bottom: 7px;
+}
+
+#pnlPermisos #pnlTablaUsuariosEsp
+{
+    margin-top: 5px;
+}
+#pnlPermisos #pnlTablaUsuariosEsp .tituloPanel
+{
+    background: #f0f0f0;
+    color: #898c51;
+}
+
+#pnlPermisos #pnlTblTipoUsuarios
+{
+    border: 1px solid #a9a9a9;
+    height: 220px;
+    margin-bottom: 10px;
+    margin-top: 6px;
+}
+
+#pnlPermisos #pnlAgregarConfig
+{
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+#pnlPermisos #pnlAgregarConfig .tituloPanel
+{
+    background: #f0f0f0;
+    font-size: 0.9em;
+    color: #898c51;
+}
+
+
+#pnlPermisos #pnlTblUsuariosEsp
+{
+    border: 1px solid #a9a9a9;
+    height: 120px;
+    margin-bottom: 10px;
+}
+
+#pnlPermisos #pnlBuscarUsuario
+{
+    margin-bottom: 5px;
+}
+
+#pnlPermisos #pnlConfigPermiso div, #pnlPermisos #pnlConfigPermiso ul
+{
+    margin-right: 10px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlPermisos #btnFiltrarUsuario
+{
+    height: 15px;
+    padding-top: 2px;
+    width: 60px;
+}
+
+#pnlPermisos #btnBuscarUsuario
+{
+    height: 15px;
+    padding-top: 2px;
+    width: 60px;
+}
+
+#pnlPermisos #btnInsertUsuariosEsp
+{
+    height: 15px;
+    padding-top: 2px;
+    width: 130px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 650px)
+{
+    #pnlPermisos
+    {
+        height: 400px;
+        overflow: auto;
+    }
+}

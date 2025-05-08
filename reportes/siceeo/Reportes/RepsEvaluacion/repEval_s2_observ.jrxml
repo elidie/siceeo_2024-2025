@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repEval_s2_observ" language="groovy" pageWidth="557" pageHeight="792" columnWidth="557" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="360c2d35-8aa7-448b-b514-77f799b22495">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idalu" class="java.lang.String"/>
+	<parameter name="cicescini" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT SKIP 1 (CASE WHEN numeval=1 THEN 'I' WHEN numeval=2 THEN 'II' WHEN numeval=3 THEN 'III' WHEN numeval=4 THEN 'IV'
+        WHEN numeval=5 THEN 'V' END) AS numeval,trim(desmat) as desmat,upper(obsv_esp) as obsv_esp,upper(apoyo_esp) as apoyo_esp
+FROM ev_bimasignatura ba, materias m
+WHERE idalu=$P{idalu}
+and cicescini=$P{cicescini}
+and ba.cvetipmat = m.cvetipmat
+and ba.cvemat = m.cvemat
+order by numeval,ba.ordenimpre]]>
+	</queryString>
+	<field name="numeval" class="java.lang.String"/>
+	<field name="desmat" class="java.lang.String"/>
+	<field name="obsv_esp" class="java.lang.String"/>
+	<field name="apoyo_esp" class="java.lang.String"/>
+	<columnHeader>
+		<band height="13">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="57" height="13" forecolor="#000000" backcolor="#CCCCCC" uuid="9b61438d-fcba-493c-b6d0-e19427f82275"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[BIMESTRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="57" y="0" width="87" height="13" forecolor="#000000" backcolor="#CCCCCC" uuid="5014dcb0-0207-4eb7-98cc-4df8291bfb29"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ASIGNATURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="144" y="0" width="171" height="13" forecolor="#000000" backcolor="#CCCCCC" uuid="655c1bf4-59c0-4826-851e-98b92f82a862"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES ESPECÍFICAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="315" y="0" width="241" height="13" forecolor="#000000" backcolor="#CCCCCC" uuid="3c3d0928-00db-4f07-8c3f-3ad659737a91"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RECOMENDACIONES (ESPECIFICAR LOS APOYOS REQUERIDOS)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="0" width="57" height="28" uuid="1156ea5a-4039-46bb-9768-5d52c88aee13"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="ArialReport" size="7"/>
+					<paragraph spacingBefore="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeval}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="57" y="0" width="87" height="28" uuid="f8da9e69-dbdb-45e9-84f6-7f576a2fa05f"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="ArialReport" size="7"/>
+					<paragraph spacingBefore="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desmat}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="144" y="0" width="171" height="28" uuid="4d0f324c-3983-4995-a6b3-d1dfca7bd216"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="ArialReport" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="1" spacingAfter="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obsv_esp}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="315" y="0" width="241" height="28" uuid="711b98ae-9dfb-48b7-b2bc-8bd94d75c0ea"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font fontName="ArialReport" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="1" spacingAfter="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apoyo_esp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1">
+			<line>
+				<reportElement x="0" y="0" width="556" height="1" uuid="8106ce47-1650-4b0c-9745-e2549f6bdf05"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+</jasperReport>

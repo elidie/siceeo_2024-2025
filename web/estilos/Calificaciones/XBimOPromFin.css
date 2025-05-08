@@ -1,0 +1,199 @@
+/* 
+    Creado el : 6/03/2015, 08:45:44 AM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlXBimOPromFin
+{
+    padding-top: 20px;
+}
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#frmwXBimOPromFin #pnlCapturarCalifs
+{
+    margin-bottom: 25px;
+}
+
+#frmwXBimOPromFin #pnlControles
+{
+    border: 1px solid grey;
+    border-radius: 7px 7px 7px 7px;
+    padding-top: 10px;
+    width: 40%;
+}
+
+#frmwXBimOPromFin #pnlRecomendacion
+{
+    border: 1px solid grey;
+    border-radius: 7px 7px 7px 7px;
+    padding: 1em;
+    width: 50%;
+}
+
+/*#frmwXBimOPromFin #pnlControles, #frmwXBimOPromFin #pnlRecomendacion
+{
+    display: inline-block;
+    vertical-align: top;
+}*/
+
+#frmwXBimOPromFin #pnlCapturarRepsEval .globoayuda_pointdown
+{
+    bottom: initial;
+    left: 50%;
+    top: -80px;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#frmwXBimOPromFin #pnlControles .buttonBar li
+{
+    padding: 5px 0;
+}
+#frmwXBimOPromFin #pnlControles .buttonBar li a
+{
+    width: 9em;
+}
+
+#frmwXBimOPromFin #btnCapDatosRepEv
+{
+    background-color: #3d74ad;
+    color: whitesmoke;
+    height: 100px;
+    margin-top: 15px;
+    padding-left: 20px;
+    position: relative;                                                         /*Esta propiedad sólo es para que el globo ayuda se pueda mostrar superpuesto al botón*/
+    text-align: left;
+    width: 260px;
+}
+#frmwXBimOPromFin #btnImpRepIns
+{
+    background-color: #c95c5a;
+    color: whitesmoke;
+    height: 100px;
+    margin-top: 15px;
+    padding-left: 20px;
+    position: relative;                                                         /*Esta propiedad sólo es para que el globo ayuda se pueda mostrar superpuesto al botón*/
+    text-align: left;
+    width: 280px;
+}
+
+#frmwXBimOPromFin #icnCapDatosRepEv
+{
+    font-size: 1em;
+}
+#frmwXBimOPromFin #btnCapDatosRepEv:hover
+{
+    background: #5388bf;
+    outline: #2c5988 solid 1px;
+}
+
+
+#frmwXBimOPromFin #btnImpRepIns:hover
+{
+    background: #c95c5a;
+    outline: #2c5988 solid 1px;
+}
+
+#frmwXBimOPromFin #btnCapDatosRepEv #btnCapDatosRepEv_obj1, 
+#frmwXBimOPromFin #btnCapDatosRepEv #btnCapDatosRepEv_obj5,
+#frmwXBimOPromFin #btnImpRepIns #btnCapDatosRepEv_obj1, 
+#frmwXBimOPromFin #btnImpRepIns #btnCapDatosRepEv_obj5
+{
+    display: block;
+}
+#frmwXBimOPromFin #btnCapDatosRepEv #btnCapDatosRepEv_obj2,
+#frmwXBimOPromFin #btnImpRepIns #btnCapDatosRepEv_obj2
+{
+    padding-top: 13px;
+    margin-left: 7px;
+}
+#frmwXBimOPromFin #btnCapDatosRepEv #btnCapDatosRepEv_obj2 label,
+#frmwXBimOPromFin #btnImpRepIns #btnCapDatosRepEv_obj2 label
+{
+    display: block;
+}
+#frmwXBimOPromFin #btnCapDatosRepEv #btnCapDatosRepEv_obj3,
+#frmwXBimOPromFin #btnImpRepIns #btnCapDatosRepEv_obj3
+{
+    font-size: 1.5em;
+    font-weight:bold;
+}
+#frmwXBimOPromFin #btnCapDatosRepEv #btnCapDatosRepEv_obj4,
+#frmwXBimOPromFin #btnImpRepIns #btnCapDatosRepEv_obj4
+{
+    font-size: 1.1em;
+}
+#frmwXBimOPromFin #btnCapDatosRepEv #btnCapDatosRepEv_obj6,
+#frmwXBimOPromFin #btnImpRepIns #btnCapDatosRepEv_obj6
+{
+    font-size: 0.9em;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#frmwXBimOPromFin #lblXProm
+{
+    padding-top: 10px;
+}
+#frmwXBimOPromFin #lblXBim, #frmwXBimOPromFin #lblYCalcProm, #frmwXBimOPromFin #lblXProm, #frmwXBimOPromFin #lblValidacion, #pnlXBimOPromFin #pnlControles .buttonBar
+{
+    display: block;
+    text-align: center;
+}
+
+#frmwXBimOPromFin #icnCapDatosRepEv
+{
+   font-size: 3em;
+   line-height: 70px;
+}
+
+#frmwXBimOPromFin #lblInstruccionesDatosComp
+{
+    display: block;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+/******************************************************************************************************************************************/
+/************************************************* M E D I A   Q U E R Y S ****************************************************************/
+/******************************************************************************************************************************************/
+
+@media screen and (max-width: 725px){
+    #frmwXBimOPromFin #pnlControles
+    {
+        width: 100%;
+        padding-bottom: 0;
+        margin-bottom: 5px;
+    }
+    #frmwXBimOPromFin #pnlRecomendacion
+    {
+        width: auto;
+        font-size: 0.8em;
+    }
+    #frmwXBimOPromFin #pnlControles, #frmwXBimOPromFin #pnlRecomendacion
+    {
+        display: block;
+    }
+    
+   #frmfXBimOPromFin
+   {
+       margin-right: 8px;
+   }
+}

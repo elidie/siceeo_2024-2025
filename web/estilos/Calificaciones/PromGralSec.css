@@ -1,0 +1,36 @@
+/* 
+    Creado el : 2/06/2015, 07:32:36 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+#pnlPromGralSec
+{
+    background: rgba(159,168,2,0.2);
+    border: 1px solid #d9e1e6;
+    padding: 20px 0px 20px  10px;
+}
+
+#pnlPromGralSec input
+{
+    margin-left: 5px;
+    width: 3em;
+}
+
+#pnlPromGralSec  #txtPromedio
+{
+    margin-right: 3em;
+}
+
+#pnlPromGralSec  ul
+{
+    margin-left: 2em;
+}
+#pnlPromGralSec  #btnGuardar
+{
+    width: 150px;
+}
+
+#pnlPromGralSec label, #pnlPromGralSec input, #pnlPromGralSec ul
+{
+    display: inline-block;
+}

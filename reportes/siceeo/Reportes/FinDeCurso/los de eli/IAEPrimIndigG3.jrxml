@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="IAEPrimIndigG3" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8488eb9c-0c7d-4d4e-9e06-183459223641">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="667"/>
+	<property name="ireport.y" value="384"/>
+	<style name="sombreado_intercalado">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{NP}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" forecolor="#000000" backcolor="#DFDEDE" fill="Solid"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="cicescini" class="java.lang.String"/>
+	<parameter name="cveplan" class="java.lang.String"/>
+	<parameter name="idcct" class="java.lang.String"/>
+	<parameter name="grado" class="java.lang.String"/>
+	<parameter name="grupo" class="java.lang.String"/>
+	<parameter name="sqryMaterias" class="java.lang.String"/>
+	<parameter name="nombreMat1" class="java.lang.String"/>
+	<parameter name="nombreMat2" class="java.lang.String"/>
+	<parameter name="nombreMat3" class="java.lang.String"/>
+	<parameter name="nombreMat4" class="java.lang.String"/>
+	<parameter name="nombreMat5" class="java.lang.String"/>
+	<parameter name="nombreMat6" class="java.lang.String"/>
+	<parameter name="nombreMat7" class="java.lang.String"/>
+	<parameter name="nombreMat8" class="java.lang.String"/>
+	<parameter name="nombreMat9" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+  a.idalu,
+  TRIM(a.apepat) AS apepat,
+  TRIM(a.apemat) AS apemat,
+  TRIM(a.nombre) AS nombre,
+  (TRIM(NVL(a.apepat,'')) || '/' || TRIM(NVL(a.apemat,'')) || '*' || TRIM(NVL(a.nombre,''))) AS nom_tot,
+  TRIM(a.curp) AS curp,
+  g.promedio,
+  TRIM(NVL(g.promovido,'')) AS promovido,
+  TRIM(e.nombre) as nombreescuela,
+  e.cct,
+  e.modalidad,
+  e.cveturno,
+  e.sector,
+  e.cvezona,
+  TRIM(e.deslocalidad) AS deslocalidad,
+  TRIM(e.desmunicipio) AS desmunicipio,
+  e.cveunidad,
+  TRIM(e.domicilio) AS domicilio,
+  NVL((SELECT TRIM(NVL(nombre,''))||' '||TRIM(NVL(apepat,''))||' '||TRIM(NVL(apemat,'')) FROM profgdogpo WHERE idcct=e.idcct AND cicescini=g.cicescini AND grado=g.grado AND grupo=g.grupo),'') AS profesor,
+  NVL((SELECT (TRIM(nombre)||' '||TRIM(apepat)||' '||TRIM(NVL(apemat,''))) FROM directores WHERE idcct=e.idcct AND estatus='A'),'') AS director,
+  d.nom AS delegado,
+  (CASE WHEN g.repetidor=='R' THEN 'R' ELSE '' END) AS c_rep,
+  a.probem,
+  (CASE WHEN g.cvedefsuf ='N' THEN ''  ELSE g.cvedefsuf END) as discap,
+  CASE g.cveplan WHEN 1 THEN 'PRIMARIA' WHEN 2 THEN 'SECUNDARIA' WHEN 3 THEN 'PREESCOLAR' END AS nivelEduc,
+  d.udse,
+  (SELECT (foliolet || "20" || folionum) from fol_RE_elec WHERE idalu=g.idalu AND cicescini=g.cicescini AND estatus='A') AS folioboleta,
+  g.promedio,
+
+  $P!{sqryMaterias}
+
+FROM
+  ESCUELA e, alumnogrado g, alumno a, delegado d
+
+WHERE
+      g.idalu = a.idalu
+  AND g.idcct = e.idcct
+  AND e.cveunidad = d.cveunidad
+  AND e.estatusesc <>'CL'
+  AND g.estatusgrado <> 'BD'
+  AND g.cicescini = $P{cicescini}
+  AND g.cveplan = $P{cveplan}
+  AND g.idcct = $P{idcct}
+  AND g.grado = $P{grado}
+  AND g.grupo = $P{grupo}
+
+ORDER BY
+  a.apepat, a.apemat, a.nombre, a.curp]]>
+	</queryString>
+	<field name="idalu" class="java.lang.Integer"/>
+	<field name="apepat" class="java.lang.String"/>
+	<field name="apemat" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="nom_tot" class="java.lang.String"/>
+	<field name="curp" class="java.lang.String"/>
+	<field name="promedio" class="java.math.BigDecimal"/>
+	<field name="promovido" class="java.lang.String"/>
+	<field name="nombreescuela" class="java.lang.String"/>
+	<field name="cct" class="java.lang.String"/>
+	<field name="modalidad" class="java.lang.String"/>
+	<field name="cveturno" class="java.lang.String"/>
+	<field name="sector" class="java.lang.String"/>
+	<field name="cvezona" class="java.lang.String"/>
+	<field name="deslocalidad" class="java.lang.String"/>
+	<field name="desmunicipio" class="java.lang.String"/>
+	<field name="cveunidad" class="java.lang.String"/>
+	<field name="domicilio" class="java.lang.String"/>
+	<field name="profesor" class="java.lang.String"/>
+	<field name="director" class="java.lang.String"/>
+	<field name="c_rep" class="java.lang.String"/>
+	<field name="probem" class="java.lang.String"/>
+	<field name="discap" class="java.lang.String"/>
+	<field name="niveleduc" class="java.lang.String"/>
+	<field name="udse" class="java.lang.String"/>
+	<field name="folioboleta" class="java.lang.String"/>
+	<field name="prommat1" class="java.math.BigDecimal"/>
+	<field name="prommat2" class="java.math.BigDecimal"/>
+	<field name="prommat3" class="java.math.BigDecimal"/>
+	<field name="prommat4" class="java.math.BigDecimal"/>
+	<field name="prommat5" class="java.math.BigDecimal"/>
+	<field name="prommat6" class="java.math.BigDecimal"/>
+	<field name="prommat7" class="java.math.BigDecimal"/>
+	<field name="prommat8" class="java.math.BigDecimal"/>
+	<field name="prommat9" class="java.math.BigDecimal"/>
+	<variable name="NP" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[0]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<variable name="numHombres" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($F{curp}.charAt( 10 ) == 'H' ? 1 : 0)]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="numMujeres" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($F{curp}.charAt( 10 ) == 'M' ? 1 : 0)]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalPaginas" class="java.lang.Integer" incrementType="Page" calculation="Count">
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="142" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="752" height="13" uuid="0cc0fc74-a8c6-4f34-8391-49d8659c427d"/>
+				<textElement textAlignment="Center">
+					<font fontName="ArialReport" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO ESTATAL DE EDUCACIÓN PÚBLICA DE OAXACA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="13" width="752" height="13" uuid="161c0d54-608e-4a46-bfb8-486e99da0ee6"/>
+				<textElement textAlignment="Center">
+					<font fontName="ArialReport" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN DE PLANEACIÓN EDUCATIVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="752" height="13" uuid="7a1aa5b5-c7a4-4b88-9f87-1c0a4b3b2ea1"/>
+				<textElement textAlignment="Center">
+					<font fontName="ArialReport" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIDAD DE CONTROL Y DESARROLLO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="39" width="752" height="13" uuid="65a251a6-fd36-4b9e-8f3d-80e0f1cc209d"/>
+				<textElement textAlignment="Center">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO DE REGISTRO Y CERTIFICACIÓN ESCOLAR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="669" y="0" width="62" height="13" uuid="9f846a78-0f91-425d-8239-63ecfc30dd77"/>
+				<textElement textAlignment="Right">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="731" y="0" width="21" height="13" uuid="074ef433-d215-4434-8c3b-a3bd9fb948d9"/>
+				<textElement>
+					<font fontName="ArialReport" size="8"/>
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="689" y="13" width="62" height="13" uuid="a803eb5c-0e5d-4ce2-aec8-3779ea3441ec"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<rectangle radius="7">
+				<reportElement x="0" y="52" width="629" height="20" uuid="7b165e46-17ee-4cf4-a14c-ef1345667af2"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="8">
+				<reportElement x="0" y="75" width="752" height="60" uuid="797ffa49-353b-41c4-833b-07f6bef40e27"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="52" width="540" height="20" uuid="34b3c03b-b4a7-4a99-8247-a41c60088d49"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="9" isBold="true"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["INSCRIPCIÓN Y ACREDITACIÓN ESCOLAR PARA TERCER GRADO DE EDUCACIÓN PRIMARIA"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="540" y="52" width="80" height="10" forecolor="#999999" uuid="93eeffb6-38bf-480b-8213-2a4e52bdb9ab"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<text><![CDATA[PERÍODO ESCOLAR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="540" y="62" width="80" height="10" uuid="fcc7d3b2-9ee6-4f5b-ab8b-a9b6fff72f90"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cicescini}+" - "+(Integer.parseInt($P{cicescini})+1)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="75" width="465" height="9" forecolor="#999999" uuid="6c6e8116-c99e-4eca-b267-e6644fe5ee68"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="5"/>
+				</textElement>
+				<text><![CDATA[NOMBRE OFICIAL DE LA ESCUELA SEGÚN CATÁLOGO DE CENTROS DE TRABAJO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="84" width="465" height="11" forecolor="#000000" uuid="a9bc7608-4917-4e37-a12f-c2ea38615be4"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="false"/>
+					<paragraph firstLineIndent="10" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreescuela}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="465" y="75" width="124" height="9" forecolor="#999999" uuid="099093e1-d117-4943-ac2e-a9903819ce2e"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[UNIDAD DELEG. DE SERVS. EDUC. DE(L)(LA)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="465" y="84" width="124" height="11" uuid="2038c488-774d-4b35-8dc0-d5980c8c3855"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{udse}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="589" y="75" width="49" height="9" forecolor="#999999" uuid="df0181da-f6c5-46cf-91b7-512e4938b104"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[SECTOR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="589" y="84" width="49" height="11" uuid="d5703ef8-aece-41c0-a0e6-9c45d28df784"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sector}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="638" y="75" width="49" height="9" forecolor="#999999" uuid="3fc0fd44-8699-4f2b-9fe3-2314d08f722d"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[ZONA ESCOLAR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="638" y="84" width="49" height="11" uuid="3cb3a83c-6656-4e80-850f-2278c1e30123"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cvezona}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="687" y="75" width="65" height="9" forecolor="#999999" uuid="a75246cb-17f0-4176-ac15-7cc6ee473869"/>
+				<box>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[CLAVE SEGÚN CCT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="687" y="84" width="65" height="11" uuid="cc3f1af4-162f-4089-9963-c3fab793be00"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cct}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="95" width="507" height="9" forecolor="#999999" uuid="d01b2ff7-1e99-47b2-b4e4-9f7f0cf665a3"/>
+				<box>
+					<topPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="5"/>
+				</textElement>
+				<text><![CDATA[COLONIA O LOCALIDAD]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="104" width="507" height="11" uuid="370b05b3-7486-4261-9776-2f0259d85cab"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph firstLineIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{deslocalidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="465" y="95" width="103" height="9" forecolor="#999999" uuid="e3491a56-f9dd-411b-b693-b64d6e2995f0"/>
+				<box>
+					<topPen lineWidth="0.75" lineColor="#000000"/>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[EDUCACIÓN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="465" y="104" width="103" height="11" uuid="6a6bbe25-b64d-4675-95f1-134a9d41eed3"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modalidad}.equals("DPR") || $F{modalidad}.equals("PPR")
+   ?"PRIMARIA GENERAL"
+:$F{modalidad}.equals("DPB") || $F{modalidad}.equals("DCI")
+   ?"PRIMARIA INDÍGENA"
+:$F{modalidad}.equals("DML") && $F{cveturno}.equals( "200" )
+   ?"PRIMARIA ESPECIAL"
+:""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="568" y="95" width="61" height="9" forecolor="#999999" uuid="df397821-47dc-4047-8283-c882e9011abf"/>
+				<box>
+					<topPen lineWidth="0.75" lineColor="#000000"/>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[TURNO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="568" y="104" width="61" height="11" uuid="bfd8def3-4ebc-4b10-ab9c-deee5b169d5b"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cveturno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="629" y="95" width="61" height="9" forecolor="#999999" backcolor="#FFFFFF" uuid="eaa38972-f3db-4e42-83ed-c891e53305aa"/>
+				<box>
+					<topPen lineWidth="0.75" lineColor="#000000"/>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[GRADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="629" y="104" width="61" height="11" uuid="a5889f57-9eaf-43d4-9fd6-51ea44acd834"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{grado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="690" y="95" width="62" height="9" forecolor="#999999" uuid="1b255287-ffef-445e-9274-83fc68360d59"/>
+				<box>
+					<topPen lineWidth="0.75" lineColor="#000000"/>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[GRUPO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="690" y="104" width="62" height="11" uuid="55de7055-e46d-4e00-9522-c0ca3780363f"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{grupo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="115" width="419" height="9" forecolor="#999999" uuid="f1def5cc-237e-4320-86cb-c256a4c6b2ad"/>
+				<box>
+					<topPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="5"/>
+				</textElement>
+				<text><![CDATA[MUNICIPIO O DELEGACIÓN POLÍTICA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="124" width="419" height="11" uuid="7060d2a8-77a5-4f18-96ab-81e528531a08"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph firstLineIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desmunicipio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="419" y="115" width="333" height="9" forecolor="#999999" uuid="ebfd0139-91d6-415b-a0a8-f8a5fcc3a0a6"/>
+				<box>
+					<topPen lineWidth="0.75" lineColor="#000000"/>
+					<leftPen lineWidth="0.75" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="5" isBold="true"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[DOMICILIO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="419" y="124" width="333" height="11" uuid="ccfbd3e4-4f2c-4f13-8fce-2bee8aaadfc1"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph firstLineIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{domicilio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="669" y="26" width="82" height="26" uuid="447106e9-3317-4293-a450-4ba721cbddff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IAE]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="63" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="0" y="0" width="752" height="62" backcolor="#CCCCCC" uuid="c5a29965-c031-4313-a6eb-c1a6f9e0e930"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="732" y="52" width="20" height="10" backcolor="#CCCCCC" uuid="8d4f4d4d-77e6-4b5d-887f-dccfd0959edd"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font fontName="ArialReport"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="0" y="52" width="20" height="10" backcolor="#CCCCCC" uuid="9ff386af-ecc3-4e3e-a615-bda27cff4d5d"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="ArialReport"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="26" height="62" uuid="dbb532d7-848b-4999-b007-d77c519e3d97"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="0" width="98" height="62" uuid="1a6331a7-d203-42c7-ba32-24cea92c38dc"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLAVE ÚNICA DE REGISTRO DE POBLACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="124" y="0" width="218" height="62" uuid="acd61b5e-9be4-4fd5-a635-aaa6f3b05aeb"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE DEL (DE LA) ALUMNO(A)
+PRIM APELLIDO/SEG APELLIDO*NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="0" width="10" height="62" uuid="c6f43c2e-feca-4743-bd0e-e4dfc4fc6450"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R
+E
+P]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="0" width="190" height="12" uuid="a2057803-0256-4483-b8a0-b9b576123220"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROMEDIO POR MATERIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="352" y="12" width="20" height="50" uuid="53f5d0f1-c01d-4b0a-b0d4-9a6f8cd577ab"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left" markup="none">
+					<font fontName="ArialReport" size="5" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreMat1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="12" width="20" height="50" uuid="6818628d-3095-4e6a-b1c3-634882a1809c"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left" markup="none">
+					<font fontName="ArialReport" size="5" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreMat2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="12" width="20" height="50" uuid="e7d298fd-5d7f-4de3-b07e-d997e696406f"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left" markup="none">
+					<font fontName="ArialReport" size="5" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreMat3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="12" width="20" height="50" uuid="06deb03d-da72-40c0-b02e-dee45066327b"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left" markup="none">
+					<font fontName="ArialReport" size="5" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreMat4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="12" width="20" height="50" uuid="66729f0e-32af-4902-b4d3-9da4051864db"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left" markup="none">
+					<font fontName="ArialReport" size="5" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreMat5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="452" y="12" width="20" height="50" uuid="3c916fdc-2c34-4435-ac6f-987f89411d7a"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left" markup="none">
+					<font fontName="ArialReport" size="5" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreMat6}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="512" y="12" width="30" height="50" uuid="66230fcb-5528-4baa-a296-8a4dcfdfeff0"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROM.
+FINAL
+DE
+GRADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="562" y="0" width="20" height="62" uuid="c9d8a52f-9ba8-4f59-82a7-69584d70c913"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXT
+PRO
+BEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="582" y="0" width="75" height="62" uuid="2247e0d3-0ee4-462c-a751-6da138defa4e"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOLIO DEL
+REPORTE DE
+EVALUACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="542" y="0" width="20" height="62" uuid="3e89e42c-4daa-40e2-8658-5d3c5caf196f"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="ArialReport" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIT. DEL ALU.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="657" y="0" width="95" height="62" uuid="0e260a8e-ff22-44aa-b75a-6548eb3f6afc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIRMA DE RECIBIDO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="472" y="12" width="20" height="50" uuid="64c2388a-5120-4bc5-a0b3-b357e1bacc83"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left" markup="none">
+					<font fontName="ArialReport" size="5" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreMat7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="492" y="12" width="20" height="50" uuid="fea64f81-1b16-4156-939e-4fc44c4ed358"/>
+				<box>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left" markup="none">
+					<font fontName="ArialReport" size="5" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreMat8}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="0" y="0" width="26" height="16" uuid="89f4b053-237d-4a13-baf0-1bd5aebeca4f"/>
+				<box>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="LucidaConsoleReport" size="8"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{NP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="26" y="0" width="98" height="16" uuid="30fb53d8-9c25-471f-aea4-61bb0237824c"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="LucidaConsoleReport" size="8"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{curp}.length()==18
+?$F{curp}
+:""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="124" y="0" width="218" height="16" uuid="721685d8-b448-4bb7-bc17-afa847cdf859"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="LucidaConsoleReport" size="8"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom_tot}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="342" y="0" width="10" height="16" uuid="952ca976-2616-4022-977f-f294fc38e159"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c_rep}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="352" y="0" width="20" height="16" uuid="eb59020c-b2ef-4c8e-ba5c-30818866f70a"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prommat1}==null || $F{prommat1}==0
+? "/"
+:
+  $F{prommat1}==10
+  ? $P{cicescini}==2013 ? "10.0" : "10"
+  : ($F{prommat1}>=5 && $F{prommat1}<6
+      ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{prommat1}+"</style>"
+      : $F{prommat1})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="372" y="0" width="20" height="16" uuid="3051816d-b57f-44fb-9b59-5b48b98432d0"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prommat2}==null || $F{prommat2}==0
+? "/"
+:
+  $F{prommat2}==10
+  ? $P{cicescini}==2013 ? "10.0" : "10"
+  : ($F{prommat2}>=5 && $F{prommat2}<6
+      ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{prommat2}+"</style>"
+      : $F{prommat2})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="392" y="0" width="20" height="16" uuid="9a6a949c-8cd7-42b7-b4c7-811a265bc5a4"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prommat3}==null || $F{prommat3}==0
+? "/"
+:
+  $F{prommat3}==10
+  ? $P{cicescini}==2013 ? "10.0" : "10"
+  : ($F{prommat3}>=5 && $F{prommat3}<6
+      ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{prommat3}+"</style>"
+      : $F{prommat3})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="412" y="0" width="20" height="16" uuid="d9762393-87f7-4690-9331-080aa8720502"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prommat4}==null || $F{prommat4}==0
+? "/"
+:
+  $F{prommat4}==10
+  ? $P{cicescini}==2013 ? "10.0" : "10"
+  : ($F{prommat4}>=5 && $F{prommat4}<6
+      ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{prommat4}+"</style>"
+      : $F{prommat4})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="432" y="0" width="20" height="16" uuid="edede3cd-6930-4640-8425-5dc2d3a3cd23"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prommat5}==null || $F{prommat5}==0
+? "/"
+:
+  $F{prommat5}==10
+  ? $P{cicescini}==2013 ? "10.0" : "10"
+  : ($F{prommat5}>=5 && $F{prommat5}<6
+      ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{prommat5}+"</style>"
+      : $F{prommat5})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="452" y="0" width="20" height="16" uuid="42543c01-9ebd-4321-bf56-2f36f3a3da8b"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prommat6}==null || $F{prommat6}==0
+? "/"
+:
+  $F{prommat6}==10
+  ? $P{cicescini}==2013 ? "10.0" : "10"
+  : ($F{prommat6}>=5 && $F{prommat6}<6
+      ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{prommat6}+"</style>"
+      : $F{prommat6})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="472" y="0" width="20" height="16" uuid="30e45e9c-020b-4ea4-8d3e-4f277c0d3a93"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prommat7}==null || $F{prommat7}==0
+? "/"
+:
+  $F{prommat7}==10
+  ? $P{cicescini}==2013 ? "10.0" : "10"
+  : ($F{prommat7}>=5 && $F{prommat7}<6
+      ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{prommat7}+"</style>"
+      : $F{prommat7})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="512" y="0" width="30" height="16" uuid="25fdbe73-cb8d-4731-851a-222ecf072121"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{promedio}==null || $F{promedio}==0.0
+? "/"
+: $F{promedio}==10.0
+  ? "10"
+  : $F{promedio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="542" y="0" width="20" height="16" uuid="215317e3-1837-4401-9055-9f8a3242f156"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{promovido}.equals("PC")
+? $F{promovido}
+: ($F{promedio}==0.0
+  ? ""
+  : ($F{promedio}>=5.0 && $F{promedio}<6.0
+      ? "NP"
+      : ($F{promedio}>=6.0 && $F{promedio}<=10.0
+          ? "P"
+          : ""
+        )
+    )
+  )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="562" y="0" width="20" height="16" uuid="2483a817-8d3e-4ce4-935d-83b6c21fee94"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{probem}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="582" y="0" width="75" height="16" uuid="fa8c6acb-0e2a-49a0-b589-0229742efbae"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{folioboleta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" x="657" y="0" width="95" height="16" uuid="a3d8facd-4dc3-4b37-a83f-7d7590327922"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="sombreado_intercalado" stretchType="RelativeToBandHeight" x="492" y="0" width="20" height="16" uuid="bb45894c-8e7c-4240-921a-09fac547fad7"/>
+				<box>
+					<leftPen lineWidth="1.5" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="LucidaConsoleReport" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prommat8}==null || $F{prommat8}==0
+? "/"
+:
+  $F{prommat8}==10
+  ? $P{cicescini}==2013 ? "10.0" : "10"
+  : ($F{prommat8}>=5 && $F{prommat8}<6
+      ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{prommat8}+"</style>"
+      : $F{prommat8})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15">
+			<printWhenExpression><![CDATA[$V{PAGE_COUNT}.intValue()==19]]></printWhenExpression>
+			<line>
+				<reportElement x="0" y="0" width="751" height="1" uuid="e17208a7-2304-4a0c-8682-50e027420c85"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="22" width="226" height="15" uuid="a036d3ce-d65a-4ad8-ac34-58b4368e3516"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE Y FIRMA DEL (DE LA) MAESTRO(A) DE GPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="22" width="246" height="15" uuid="05019f47-15d3-47b6-b20c-e4802e692636"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE Y FIRMA DEL (DE LA) DIRECTOR(A) DE LA ESC.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="529" y="22" width="86" height="15" uuid="b25408d3-1acf-45b3-868e-f1a8b9d8d073"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SELLO DE LA ESC.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="638" y="22" width="114" height="15" uuid="8be396d2-632d-4152-8971-6ddae4e65c61"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA/SELLO DE LA UDSE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="252" y="9" width="246" height="13" uuid="916861c0-a06b-433e-9f8f-42f54619d5a4"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph firstLineIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{director}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="9" width="226" height="13" uuid="ac521eeb-a1f0-41e4-843f-063cae6a0a4c"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="8"/>
+					<paragraph firstLineIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{profesor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="15">
+			<printWhenExpression><![CDATA[$V{PAGE_COUNT}.intValue()!=19]]></printWhenExpression>
+			<line>
+				<reportElement x="0" y="0" width="751" height="1" uuid="cbc8658e-f257-450d-88f2-31f883980aa0"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

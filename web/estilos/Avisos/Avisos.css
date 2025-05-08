@@ -1,0 +1,87 @@
+/* 
+    Creado el : 20/02/2016, 04:21:54 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#mwffAvisos #pnlAvisos
+{
+    color: white;
+    text-align: center;
+    font-size: 2.5em;
+}
+
+#mwffAvisos #pnlAvisos img{
+    margin-top: 2px;
+    width: auto;
+    margin-right: 60px;
+}
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#mwffAvisos
+{
+    background: #a82a47;
+    height: auto;
+    top: 70px;
+    overflow: visible;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#mwffAvisos #frmBtnCloseAvisos
+{
+    cursor: pointer;
+    float: right;
+    font-size: 1.3em;
+    /*display: block;*/
+    position: relative;
+    top: -15px;
+    left: 15px;
+}
+#mwffAvisos #frmBtnCloseAvisos a
+{
+    text-decoration: none; 
+}
+#mwffAvisos #ibtnCloseAvisos
+{
+    background-color: white;
+    border-radius: 18px;
+    color: #cb9a6c;
+    font-size: 1.4em;
+    padding: 1.4px 1.4px 0.4px 1.2px;
+}
+#mwffAvisos #ibtnCloseAvisos:hover
+{
+    cursor: pointer;
+}
+
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */

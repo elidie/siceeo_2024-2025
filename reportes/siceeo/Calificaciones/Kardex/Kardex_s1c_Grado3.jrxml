@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Kardex_s1c_Grado3" language="groovy" pageWidth="531" pageHeight="46" columnWidth="531" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="51413719-9078-4e9e-b8df-c0793611360c">
+	<property name="ireport.zoom" value="4.287177620000004"/>
+	<property name="ireport.x" value="773"/>
+	<property name="ireport.y" value="0"/>
+	<style name="fondoGris">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($P{cicescini3b} == 2012)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#E5E5E5"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="idalu" class="java.lang.String"/>
+	<parameter name="cicescini3b" class="java.lang.Integer"/>
+	<parameter name="ciccctprom3" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select q.ordenimpres, m.idalu,
+m.cicescini,
+m.cveprograma,
+q.cvetipmat, m.cveplan, m.grado,
+m.cvemat,
+--e.desmat,
+(CASE WHEN m.cvetipmat ='EDT' THEN
+                 (case when m.cvemat='9003' OR m.cvemat like 'NAP%' then
+                      'TECNOLOGÍA III ()'
+                      else
+                      'TECNOLOGÍA III ('||m.cvemat||')'
+                  end)
+ ELSE e.desmat  END) as desmat,
+
+(Select calif1 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 1
+  and     Vb.IDALU =  m.idalu      ) as B1a,
+--  and     vb.cvemat not like 'NAP%') as B1a,
+
+(Select calif2 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 1
+  and     Vb.IDALU =  m.idalu      ) as B1b,
+--  and     vb.cvemat not like 'NAP%') as B1b,
+
+
+
+
+(Select calif1 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 2
+  and     Vb.IDALU =  m.idalu     ) as B2a,
+--  and    vb.cvemat not like 'NAP%') as B2a,
+(Select calif2 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 2
+  and     Vb.IDALU =  m.idalu     ) as B2b,
+--  and    vb.cvemat not like 'NAP%') as B2b,
+
+
+
+
+(Select calif1 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 3
+  and     Vb.IDALU =  m.idalu     ) as B3a,
+--  and    vb.cvemat not like 'NAP%') as B3a,
+(Select calif2 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 3
+  and     Vb.IDALU =  m.idalu     ) as B3b,
+--  and    vb.cvemat not like 'NAP%') as B3b,
+
+
+(Select calif1 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 4
+  and     Vb.IDALU =  m.idalu     ) as B4a,
+--  and    vb.cvemat not like 'NAP%') as B4a,
+(Select calif2 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 4
+  and     Vb.IDALU =  m.idalu     ) as B4b,
+--  and    vb.cvemat not like 'NAP%') as B4b,
+
+
+(Select calif1 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 5
+  and     Vb.IDALU =  m.idalu     ) as B5a,
+--  and    vb.cvemat not like 'NAP%') as B5a,
+(Select calif2 from evaluaciones vb
+  where vb.cvemat = q.cvemat
+  and     vb.cvetipmat = q.cvetipmat
+  and     vb.grado = q.grado
+  and     vb.cveprograma = q.cveprograma
+  and     vb.cicescini = m.cicescini
+  and     vb.numeval = 5
+  and     Vb.IDALU =  m.idalu     ) as B5b,
+--  and    vb.cvemat not like 'NAP%') as B5b,
+
+
+
+(CASE WHEN m.califant >= 5.0 and  m.califant < 6.0 THEN
+           m.califant
+ ELSE m.promedio  END) as promedio,
+
+
+(CASE WHEN m.califant >= 5.0 and  m.califant < 6.0 THEN
+           CAST(m.califant AS CHAR(4))
+      WHEN m.estatmat='E' OR m.cvemat like 'NAP%' THEN
+           'X'
+      ELSE CAST(m.promedio AS CHAR(4))  END) as promText,
+
+CAST(m.PROMEDIO AS CHAR(4)) as prom,
+
+
+(select count(*) from exm_ext_ordi x
+                       where x.cvetipmat= m.cvetipmat
+                       and x.cvemat= m.cvemat
+                       and x.grado= m.grado
+                       and x.idalu = m.idalu
+                       and x.cicescini = m.cicescini
+                       and x.promedio>=6.0) as eer,
+
+trim(nvl(m.exm,'')) as ER,
+
+
+
+(CASE WHEN m.califant >= 5.0 and  m.califant < 6.0 THEN
+          CASE WHEN (select COUNT(cvetipmat) from exm_ext_ordi x where x.cvetipmat= m.cvetipmat and x.cvemat= m.cvemat and x.grado= m.grado and x.idalu = m.idalu and x.cicescini = m.cicescini and x.promedio >= 6.0) > 1 THEN
+         'ERROR EXAMEN'
+      ELSE (select
+            (CASE mes WHEN 'ENERO'      THEN (case  when  length(TRIM(cast( dia AS char(2) ))) = 1 then  '0' || TRIM(cast( dia AS char(2))) else TRIM(cast( dia AS char(2))) end)||'01'||ANIO
+                      WHEN 'FEBRERO'    THEN (case  when  length(TRIM(cast( dia AS char(2) ))) = 1 then  '0' || TRIM(cast( dia AS char(2))) else TRIM(cast( dia AS char(2))) end)||'02'||ANIO
+                      WHEN 'JULIO'      THEN (case  when  length(TRIM(cast( dia AS char(2) ))) = 1 then  '0' || TRIM(cast( dia AS char(2))) else TRIM(cast( dia AS char(2))) end)||'07'||ANIO
+                      WHEN 'AGOSTO'     THEN (case  when  length(TRIM(cast( dia AS char(2) ))) = 1 then  '0' || TRIM(cast( dia AS char(2))) else TRIM(cast( dia AS char(2))) end)||'08'||ANIO
+                      WHEN 'SEPTIEMBRE' THEN (case  when  length(TRIM(cast( dia AS char(2) ))) = 1 then  '0' || TRIM(cast( dia AS char(2))) else TRIM(cast( dia AS char(2))) end)||'09'||ANIO
+                ELSE
+                    'INDEFINIDA'  END)
+
+
+           from exm_ext_ordi x
+                       where x.cvetipmat= m.cvetipmat
+                       and x.cvemat= m.cvemat
+                       and x.grado= m.grado
+                       and x.idalu = m.idalu
+                       and x.cicescini = m.cicescini
+                       and x.promedio >= 6.0)
+  END
+  ELSE
+           ' '  END) as mesyanio
+
+
+
+ from alumnomaterias m,  materias e, esquemamaterias q
+where  m.cvemat = e.cvemat
+and    m.cvetipmat = e.cvetipmat
+and    m.cvemat = q.cvemat
+and    m.cvetipmat = q.cvetipmat
+and    m.grado = 3
+and    q.grado = 3
+and    m.cveprograma = q.cveprograma
+and    m.IDALU =  $P{idalu}
+--AND    m.cvemat not like 'NAP%'
+
+and    m.cicescini= $P{cicescini3b}
+and    q.cicescini<= $P{cicescini3b}
+and    q.cicescfin>= $P{cicescini3b}
+order by q.ordenimpres]]>
+	</queryString>
+	<field name="ordenimpres" class="java.lang.Short"/>
+	<field name="idalu" class="java.lang.Integer"/>
+	<field name="cicescini" class="java.lang.Short"/>
+	<field name="cveprograma" class="java.lang.String"/>
+	<field name="cvetipmat" class="java.lang.String"/>
+	<field name="cveplan" class="java.lang.Short"/>
+	<field name="grado" class="java.lang.Short"/>
+	<field name="cvemat" class="java.lang.String"/>
+	<field name="desmat" class="java.lang.String"/>
+	<field name="b1a" class="java.lang.Double"/>
+	<field name="b1b" class="java.lang.Double"/>
+	<field name="b2a" class="java.lang.Double"/>
+	<field name="b2b" class="java.lang.Double"/>
+	<field name="b3a" class="java.lang.Double"/>
+	<field name="b3b" class="java.lang.Double"/>
+	<field name="b4a" class="java.lang.Double"/>
+	<field name="b4b" class="java.lang.Double"/>
+	<field name="b5a" class="java.lang.Double"/>
+	<field name="b5b" class="java.lang.Double"/>
+	<field name="promedio" class="java.math.BigDecimal"/>
+	<field name="promtext" class="java.lang.String"/>
+	<field name="prom" class="java.lang.String"/>
+	<field name="eer" class="java.math.BigDecimal"/>
+	<field name="er" class="java.lang.String"/>
+	<field name="mesyanio" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="13">
+			<rectangle>
+				<reportElement x="0" y="0" width="531" height="13" backcolor="#CCCCCC" uuid="16c31fee-3c47-4ee2-840d-51533fa47103"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="341" height="13" uuid="1ca861fa-254c-4735-9d7a-5136d1ed73a3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="8" isBold="true"/>
+					<paragraph firstLineIndent="7"/>
+				</textElement>
+				<text><![CDATA[TERCER GRADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="363" y="0" width="52" height="13" uuid="19415e9c-1569-4457-a8de-dd707314158f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CICLO ESCOLAR:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="415" y="0" width="47" height="13" uuid="25a5cc1f-86c5-4ba7-bce8-5baa1bbe1400"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ciccctprom3}.substring(0,9)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="462" y="0" width="18" height="13" uuid="c28c4c0e-c502-41f5-827b-37b467e2ffc3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CCT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="0" width="51" height="13" uuid="c57adfe8-1706-4a59-a15e-a8d5b3c7a1d7"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ciccctprom3}.substring(9,19)]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="436" y="0" width="63" height="13" isPrintWhenDetailOverflows="true" uuid="e44d24c0-6df5-4302-b3d9-2be21e11dae7"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mesyanio}.equals("ERROR EXAMEN")
+?
+  "<style backcolor='red' forecolor='white' isBold='true'>"+$F{mesyanio}+"</style>"
+: $F{mesyanio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="407" y="0" width="29" height="13" isPrintWhenDetailOverflows="true" uuid="5b0a2050-acbc-48f6-8911-fb60645550ca"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{eer}>0?"EER":" "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="372" y="0" width="33" height="13" isPrintWhenDetailOverflows="true" uuid="382cb118-9a23-4334-9dd7-76bdb8b2d9d0"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{promtext}!=null )
+?(
+   (!$F{promtext}.trim().matches("[A-Z]"))
+   ?(
+       Float.parseFloat($F{promtext})==10
+       ? $P{cicescini3b}==2013 ? "10.0" : "10"
+       :(
+          Float.parseFloat($F{promtext})>=5 && Float.parseFloat($F{promtext})<6
+          ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{promtext}+"</style>"
+          : $F{promtext}
+       )
+   )
+   : $F{promtext}
+ )
+: ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="261" y="0" width="21" height="13" isPrintWhenDetailOverflows="true" uuid="9c480598-8f0d-41b4-b51c-7f499207db2d"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{b5a}!=null
+?(
+   $P{cicescini3b}==2012 && $F{eer}>0
+   ? "---"
+   :(
+      $F{b5a}==10
+      ? $P{cicescini3b}==2013 ? "10.0" : "10"
+      :(
+         $P{cicescini3b}==2012 && (""+$F{b5a}).charAt(2) == '0'
+         ?(
+            $F{b5a}>=5 && $F{b5a}<6
+            ? "<style backcolor='red' forecolor='white' isBold='true'>"+(""+$F{b5a}).charAt(0)+"</style>"
+            : (""+$F{b5a}).charAt(0)
+          )
+         :(
+            $F{b5a}>=5 && $F{b5a}<6
+            ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{b5a}+"</style>"
+            : $F{b5a}
+          )
+       )
+    )
+ )
+:$F{b5a}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="fondoGris" x="326" y="0" width="20" height="13" isPrintWhenDetailOverflows="true" uuid="d618f907-7df1-453e-9ff8-29e00b2bfa56"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cicescini3b} == 2012
+? ""
+:(
+  ( $F{b3b}==null || $F{b3b}==0 )
+  ? "/"
+  :(
+     $F{b3b}==10
+     ? $P{cicescini3b}==2013 ? "10.0" : "10"
+     : ($F{b3b}>=5 && $F{b3b}<6 ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{b3b}+"</style>" : $F{b3b})
+   )
+ )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="209" y="0" width="18" height="13" isPrintWhenDetailOverflows="true" uuid="15b684f6-798e-415c-a1f7-1338e98a6c89"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{b2a}!=null
+?(
+   $F{b2a}==10
+   ? $P{cicescini3b}==2013 ? "10.0" : "10"
+   :(
+      $P{cicescini3b}==2012 && (""+$F{b2a}).charAt(2) == '0'
+      ?(
+         $F{b2a}>=5 && $F{b2a}<6
+         ? "<style backcolor='red' forecolor='white' isBold='true'>"+(""+$F{b2a}).charAt(0)+"</style>"
+         : (""+$F{b2a}).charAt(0)
+       )
+      :(
+         $F{b2a}>=5 && $F{b2a}<6
+         ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{b2a}+"</style>"
+         : $F{b2a}
+       )
+    )
+ )
+:$F{b2a}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="fondoGris" x="346" y="0" width="23" height="13" isPrintWhenDetailOverflows="true" uuid="425255f7-58e8-4523-af7f-99f57a115afd"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cicescini3b} == 2012
+? ""
+:(
+  ( $F{b4b}==null || $F{b4b}==0 )
+  ? "/"
+  :(
+     $F{b4b}==10
+     ? $P{cicescini3b}==2013 ? "10.0" : "10"
+     : ($F{b4b}>=5 && $F{b4b}<6 ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{b4b}+"</style>" : $F{b4b})
+   )
+ )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="192" y="0" width="17" height="13" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="46d2bd57-e3fb-4512-8ef4-cf94b66f924c"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{b1a}!=null
+?(
+   $F{b1a}==10
+   ? $P{cicescini3b}==2013 ? "10.0" : "10"
+   :(
+      $P{cicescini3b}==2012 && (""+$F{b1a}).charAt(2) == '0'
+      ?(
+         $F{b1a}>=5 && $F{b1a}<6
+         ? "<style backcolor='red' forecolor='white' isBold='true'>"+(""+$F{b1a}).charAt(0)+"</style>"
+         : (""+$F{b1a}).charAt(0)
+       )
+      :(
+         $F{b1a}>=5 && $F{b1a}<6
+         ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{b1a}+"</style>"
+         : $F{b1a}
+       )
+    )
+ )
+:$F{b1a}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="fondoGris" x="306" y="0" width="20" height="13" isPrintWhenDetailOverflows="true" uuid="667bd8d3-522d-44a8-80f8-372b53fa2239"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cicescini3b} == 2012
+? ""
+:(
+  ( $F{b2b}==null || $F{b2b}==0 )
+  ? "/"
+  :(
+     $F{b2b}==10
+     ? $P{cicescini3b}==2013 ? "10.0" : "10"
+     : ($F{b2b}>=5 && $F{b2b}<6 ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{b2b}+"</style>" : $F{b2b})
+   )
+ )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="244" y="0" width="17" height="13" isPrintWhenDetailOverflows="true" uuid="2e9ceb97-4d69-4528-a6d4-474f22b48bf9"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{b4a}!=null
+?(
+   $F{b4a}==10
+   ? $P{cicescini3b}==2013 ? "10.0" : "10"
+   :(
+      $P{cicescini3b}==2012 && (""+$F{b4a}).charAt(2) == '0'
+      ?(
+         $F{b4a}>=5 && $F{b4a}<6
+         ? "<style backcolor='red' forecolor='white' isBold='true'>"+(""+$F{b4a}).charAt(0)+"</style>"
+         : (""+$F{b4a}).charAt(0)
+       )
+      :(
+         $F{b4a}>=5 && $F{b4a}<6
+         ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{b4a}+"</style>"
+         : $F{b4a}
+       )
+    )
+ )
+:$F{b4a}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="499" y="0" width="32" height="13" isPrintWhenDetailOverflows="true" uuid="798cd633-eab8-463a-bccc-5befe7ab7ed3"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mesyanio}.equals("ERROR EXAMEN")
+? ""
+: $F{eer}>0?$F{prom}:" "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="227" y="0" width="17" height="13" isPrintWhenDetailOverflows="true" uuid="92ac193a-e0a8-4b51-bf9f-d0d31ba65f3b"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{b3a}!=null
+?(
+   $F{b3a}==10
+   ? $P{cicescini3b}==2013 ? "10.0" : "10"
+   :(
+      $P{cicescini3b}==2012 && (""+$F{b3a}).charAt(2) == '0'
+      ?(
+         $F{b3a}>=5 && $F{b3a}<6
+         ? "<style backcolor='red' forecolor='white' isBold='true'>"+(""+$F{b3a}).charAt(0)+"</style>"
+         : (""+$F{b3a}).charAt(0)
+       )
+      :(
+         $F{b3a}>=5 && $F{b3a}<6
+         ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{b3a}+"</style>"
+         : $F{b3a}
+       )
+    )
+ )
+:$F{b3a}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="192" height="13" isPrintWhenDetailOverflows="true" uuid="e22897d5-fb57-4b13-80f7-1e0e91c60cc4"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6"/>
+					<paragraph firstLineIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desmat}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="fondoGris" x="286" y="0" width="20" height="13" isPrintWhenDetailOverflows="true" uuid="2b24052f-ad86-491c-88ed-d2c036957862"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="ArialReport" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cicescini3b} == 2012
+? ""
+:(
+  ( $F{b1b}==null || $F{b1b}==0 )
+  ? "/"
+  :(
+     $F{b1b}==10
+     ? $P{cicescini3b}==2013 ? "10.0" : "10"
+     : ($F{b1b}>=5 && $F{b1b}<6 ? "<style backcolor='red' forecolor='white' isBold='true'>"+$F{b1b}+"</style>" : $F{b1b})
+  )
+ )]]></textFieldExpression>
+			</textField>
+			<line direction="BottomUp">
+				<reportElement x="192" y="0" width="17" height="13" uuid="b6793e11-7259-40a3-a242-fa887ced246c">
+					<printWhenExpression><![CDATA[$F{b1b}!=null && $F{b1b}>0.0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="209" y="0" width="18" height="13" uuid="d2c984e2-bcbd-47c2-b215-7c0bd86fd455">
+					<printWhenExpression><![CDATA[$F{b2b}!=null && $F{b2b}>0.0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="227" y="0" width="17" height="13" uuid="5aa06cd1-104e-4669-af32-2ba024f368d0">
+					<printWhenExpression><![CDATA[$F{b3b}!=null && $F{b3b}>0.0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="244" y="0" width="17" height="13" uuid="38f782ab-f683-4785-bbf9-c09938b52a56">
+					<printWhenExpression><![CDATA[$F{b4b}!=null && $F{b4b}>0.0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15">
+			<subreport>
+				<reportElement mode="Transparent" x="0" y="2" width="531" height="13" uuid="4965cd70-962b-403b-95c0-20ea18b5298a"/>
+				<subreportParameter name="idalu">
+					<subreportParameterExpression><![CDATA[$P{idalu}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ciccctprom3">
+					<subreportParameterExpression><![CDATA[$P{ciccctprom3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cicescini">
+					<subreportParameterExpression><![CDATA[$P{cicescini3b}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["Kardex_s1c1_Inasis.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</columnFooter>
+</jasperReport>

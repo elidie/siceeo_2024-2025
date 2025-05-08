@@ -1,0 +1,79 @@
+********** DIRECTORIO DE LIBRERIAS TOMCAT **********
+Aquí deben alojarse todas las librerías agregadas en el SICEEO
+----- SERVIDOR 3 -----
+/var/lib/tomcat/tomcat_8_0_18/lib
+----- SERVIDOR 6 -----
+/usr/share/java/tomcat
+
+********** DIRECTORIO DE siceeoConfigs.sco **********
+El directorio está definido de manera fija en SICEEO en la variable pathConfigsSICEEO módulo Password
+----- SERVIDOR 3 -----
+/var/lib/tomcat/siceeoConfigs
+----- SERVIDOR 6 -----
+/var/lib/tomcat/siceeoConfigs
+
+********** DIRECTORIO DE WSDL **********
+----- SERVIDOR 3 -----
+/var/lib/tomcat/siceeoConfigs
+----- SERVIDOR 6 -----
+/var/lib/tomcat/siceeoConfigs
+
+...... Pasos para generar un WSDL y usar en SICEEO
+1. Correr y deployar el proyecto WSFirmaElectrónica.
+2. Click derecho sobre el web service WSGestionFirma del procyecto WSFirmaElectronica
+3. Elegir "Generate and copy WSDL..."
+4. Verificar que no tenga palomita "Do not copy" y elegir el directorio en siceeoConfigs de SICEEO para hacer la copia. Se generará un .wsdl y un .xsd
+5. Ir al wsdl generado y modificar al final del el contenido , en lugar del texto REPLACE_WITH_ACTUAL_URL (esta ruta es la del sistema que brinda el web service) 
+   poner:
+   a) Para el servidor 3 y 6: http://172.16.4.3:8088/WSFirmaElectronica/WSGestionFirma?wsdl
+   b) Para WINDOWS y MAC: http://localhost:8084/WSFirmaElectronica/WSGestionFirma?wsdl
+5a. Si ya está creado el web service client saltar al paso 6 si no hacer:
+   a) Como recomendación, de preferencia crear los directorios y archivos mencionados en el paso 6.
+   b) Click derecho el proyecto SICEEO.
+   b) Seleccionar "New->Web Service Client...". Activar "Local File" y buscar el archivo wsdl generado en los pasos anteriores. 
+   c) Oprimir "Aceptar".
+6. Para trabajar en local o hacer una publicación del SICEEO:
+   Hacer un reemplazo en el archivo "SIEEO.../nbproject/jax-ws.xml" para indicar el directorio del wsdl al que apuntará SICEEO, alojado regularmente en la carpeta 
+   siceeoConfigs definido en este documento en la sección "DIRECTORIO DE WSDL" (hay que reemplazar "file:/var/lib/tomcat/siceeoConfigs/" 
+   o "file:/C:/var/lib/tomcat/siceeoConfigs/" según sea el caso) quedando de la manera siguiente:
+   a) Para servidor 3 y 6 (Se recomienda tener un directorio "/var/lib/tomcat/siceeoConfigs/" definido en este documento en la sección "DIRECTORIO DE WSDL"):
+        file:/var/lib/tomcat/siceeoConfigs/WSGestionFirma.wsdl
+        file:/var/lib/tomcat/siceeoConfigs/WSGestionFirma_schema1.xsd
+   b) Para MAC
+      Opción 1: Se recomienda hacer un directorio "/var/lib/tomcat/siceeoConfigs/" definido en este documento en la sección "DIRECTORIO DE WSDL" 
+                y ahí alojar los archivos. El directorio se vería así:
+                    file:/var/lib/tomcat/siceeoConfigs/WSGestionFirma.wsdl
+                    file:/var/lib/tomcat/siceeoConfigs/WSGestionFirma_schema1.xsd
+   c) Para WINDOWS
+      Opción 1: Se recomienda hacer un directorio "C:\var\lib\tomcat\siceeoConfigs" similar al directorio definido en este documento en la sección 
+                "DIRECTORIO DE WSDL" y ahí alojar los archivos, despues reemplazar en "SIEEO.../nbproject/jax-ws.xml" el texto "file:/" por "file:/C:/". 
+                El directorio debería verse así:
+                    file:/C:/var/lib/tomcat/siceeoConfigs/WSGestionFirma.wsdl
+                    file:/C:/var/lib/tomcat/siceeoConfigs/WSGestionFirma_schema1.xsd
+7. Si al correr SICEEO en local no se establece la comunicación con el web service, se recomienda compilar.
+
+...... Pasos para apuntar a un WSDL de prueba y publicarlo
+1. Renombrar o crear los archivos alojados en el directorio siceeoConfigs
+    a) WSGestionFirma.wsdl por WSGestionFirma_prueba.wsdl
+    b) WSGestionFirma_schema1_prueba.xsd
+2. Reemplazar en el contenido de los archivos anteriores los textos:
+    a) WSGestionFirma.wsdl por WSGestionFirma_prueba.wsdl
+    b) WSGestionFirma_schema1_prueba.xsd
+3. Aplicar el paso "5." del subtema "Pasos para generar un WSDL y usar en SICEEO" para que el wsdl apunte al sistema que brinda el web service.
+4. Click derecho en el web service client WSGestionFirma en SICEEO y seleccionar "Refresh..."
+5. Activar la casilla "Also replace local wsdl file with original wsdl located at" editar la ruta del archivo indicando el de prueba WSGestionFirma_prueba.wsdl.
+6. Oprimir Yes.
+7. NOTA. Verificar si se desea hacer una limpieza, ya que este procedimiento deja basura de otros wsdl al que se haya apuntado anteriormente.
+
+...... Pasos a seguir cuando se modifica el WEB SERVICE
+1. Generar el WSDL (ver pasos del 1 al 4 del tema "Pasos para generar un WSDL y usar en SICEEO").
+2. Cambiar la ruta del webservice a la que apunta el archivo .wsdl (ver paso 6 del tema "Pasos para generar un WSDL y usar en SICEEO").
+3. En el webservice client dar click derecho y elegir refresh y cargar el nuevo .wsdl (ver pasos del 4 al 6 del tema "Pasos para apuntar a un WSDL de prueba y publicarlo").
+4. Corregir los metodos del sistema que tiene el webservice client.
+
+
+********** INSTRUCCIONES PARA LA PUBLICACIÓN DE UNA VERSIÓN DE SICEEO **********
+----- SERVIDOR 3 -----
+rm -r /var/lib/tomcat/tomcat_8_0_18/webapps/siceeo; rm -r /var/lib/tomcat/tomcat_8_0_18/webapps/siceeo.war; rm -r /var/lib/tomcat/tomcat_8_0_18/work/Catalina/localhost/siceeo
+----- SERVIDOR 6 -----
+sudo rm -r /var/lib/tomcat/webapps/siceeo.war; sudo rm -r /var/lib/tomcat/webapps/siceeo

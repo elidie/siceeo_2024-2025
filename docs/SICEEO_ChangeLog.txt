@@ -1,0 +1,325 @@
+SICEEO
+7.5.2
+  - Se corrigi� el m�dulo nuevo ingreso, ya que al guardar mandaba un error de sintaxis al hacer insert en la tabla movimientosAlumno
+  - Se corrigi� el m�dulo CalifSecXBim ya que no dejaba accesar a los usuarios tipo cct modificar el c�rdex de 1o y 2do.
+
+7.5.3
+  - Se corrigi� el m�dulo Principal, para que los superusuarios puedan ver los grados grupo de las dos secciones.
+  - Se corrgi� el m�dulo nuevo ingreso para preescolar, primaria y secundaria para quitarle la gandallez de la secci�n 22 sobre la 59.
+7,5,4
+  - Se cambi� la estructura de archivos para algunos .js y .html
+  - Se corrigi� el m�dulo Nuevo ingreso para que permitiera actualizar los dos �ltimos d�gitos aquellos alumnos que hab�an entrado a la BD por Preinscripci�n.
+7.5.5
+  - Se modific� el m�dulo de Calificaciones extraordinarias para que solo se pudiera entrar a �l desde el m�dulo de calificacion siempre y cuando no tuviera promedio general asignado el alumno.
+7.5.6 (09Jun2016)
+  - Se corrgi� el m�dulo de nuevo ingreso ya que al dar de alta un nuevo alumno que no se encontraba en la base de datos se produc�a un error de null.
+7.5.7 (21Jun2016 11:24:51)
+  - Se modifico el c�digo de logueo para que no accesaran usuarios cuando desde siceeb se deniega el acceso por motivo de impresi�n.
+7.6.0
+  - Se modific� el color de selecci�n de una tabla a color verde as� como el color de hover de dichas tablas a azul claro.
+  - Se implement� el m�dulo de Modificar Curp (ModifiCurp) en el m�dulo de grupo activ�ndose la funcionalidad en el bot�n Correcciones.
+  - Se cambi� el color de textbox, combobox y formularios del m�dulo Nuevo Ingreso para cada nivel.
+  - Se puso en forma de bot�n la opci�n de buscar, ya que antes se ve�a s�lo como una lupa.
+7.6.1 (27Jun16 08:48)
+  - Se corrigi� la exportaci�n a Excel del formulario "Mostrar calificaciones (BimXAlum)" porque las inasistencias estaban desfazadas.
+7.6.2 (29Jun16 14:02)
+  - Combos grupos de la tabla grupos en el m�dulo grupo.
+  - Ocultar m�dulo Calificaciones a Preescolar
+  - Ocultar botones btnCardex y btnFoliosKardex
+7.7.0 (30Jun16 14:53)
+  - Se agreg� un link en el index.html para descargar el manual del siceeo.
+  - Se agreg� c�digo en el m�dulo de modificar curp para validar la introducci�n de datos
+7.7.1 (07Abr16 20:02)
+  - Se corrigió el módulo de Cambio de contraseña, ya que el AJAX no establecía la coneción con el servidor.
+  - Se corrigió el módulo de Cambio de Curp, ya que un query tenía error de sintáxis.
+  - Se implementó en el módulo de Cambio de Curp que actualice también la tabla tblCamDGpo.
+  - Se modificó el mensaje de bloqueo por impresión de Certificados.
+  - En el módulo de Nuevo Ingreso se condicionó el mensaje de Revisar Historial, para que cuando un alumno aun está inscrito y lo quieran ingresar, el sistema ya no los envíe al módulo de historial sino les advierta que la otra escuela debe darlo de baja.
+  - Se modificó el nombre de Cartilla por Reporte de Evaluación, esto implicó cambio de nombre en componenetes, funciones, archivos, directorios y Base de datos.
+7.8.0 (11Jul16 05:25)
+  - Se modificó y corrigió módulo de Reporte de Evaluación, código, query, BD. Se activó el botón Imprimir Regilla y se verificó que el 10.0 se imprima como 10.
+  - Se modificó el módulo de Ventana Principal, para que permitiera hacer la preinscripción sólo a primeros grados.
+  - Se agregó una leyenda en el módulo de Calificaciones, en la tabla de calificaciones para indicar al usuario que con oprimir la tecla Enter en el último renglón podría guardar.
+  - Se modificó un nombre de columna de la tabla AlumCapCalif del módulo de Calificaciones de PdSec a PdNiv
+  - Se modificó el mensaje de "Promovido" que avisa en el módulo Calificaciones si el alumno es promovido o no. Como en este aviso se muestra una ventana con botones "Aceptar" y "Cancelar", se especificó en el mensaje que Aceptar significa "Sí" y Cancelar: "No"
+7.9.0 (19Jul16 07:22)
+  - Se modificó el módulo de Reporte de Evaluación. Se hicieron correcciones al código, mejoras e implementaciones de los botones "Ver rejilla" y "Ver caída de textos". Se agregaron formatos para primaria y primaria indígena.
+  - Se agregó una función en el módulo de calificaciones para que antes de guardar las calificaciones se haga un chequeo de si las calificaciones están bien escritas.
+7.9.0 (19Jul16 11:38)
+  - Se corrigió la función que verifica que las calificaciones estén bien ingresadas al guardar en el módulo de Calificaciones.
+7.9.1 (20Jul16 12:48)
+  - Se volvió a corregir la función que verifica que las calificaciones estén bien ingresadas al guardar en el módulo de Calificaciones.
+7.9.2 (23Jul16 11:31)
+  - 
+7.9.3 (23Jul16 11:34)
+  - 
+7.9.4 (26Jul16 07:31)
+  - Se hizo correción en el módulo de Nuevo Ingreso de Secundaria, ya que una condición no validaba bien cuando un alumno salió de preescolar, estudió fuera y regresó a 3ro de secundaria, y el sistema no lo dejaba ingresar.
+7.9.5 (26Jul16 15:08)
+  - Se corrigió el módulo de calificaciones extraordinarias, debido a que al oprimir el botón guardar en la sección de calificaciones la selección de la fila se hiba a la primer materia, eso provocaba que se equivocaran al seguir capturando, pues el usuario pensaba que seguía en el renglon que originalmente seleccionó.
+7.10.0 (04Ago16 15:40)
+  - Se hizo rediseñó en código y vista el módulo de Reporte de Evaluación.
+7.11.0
+  - Se agregó la funcionalidad de asignar folios a los reportes de evaluación.
+7.11.1 (08Ago16 14:01)
+  - Se corrgió el módulo de Calibrar Caída de textos del Reporte de Evaluación, ya que ante las modificaciones en la versión anterior (7.11.0) se ocacionó el problema.
+7.11.2 (08Ago16 17:30)
+  - Se corrigió el mensaje del módulo Reporte de evaluación, el cual sale cuando se encuentra un folio duplicado.
+7.11.3 (10Ago16 12:42)
+  - 
+7.12.0 (18Ago16 16:30)
+  - Se agrega el botón en el módulo Grupo para imprimir reporte de Historial de Alumno.
+8.0.0 (07Sep18 12:45)
+  - Se cambiaron todos los íconos de sistema de tipo imagen por íconos de tipo caracter.
+  - Se hicieron modificaciones en css en algunas partes del skin del SICEEO
+  - Se corrigió el módulo de Reportes de Evaluación, de tal manera que la inserción de folios sea con commit por cada folio insertado.
+8.2.2 (08Sep18 18:52)
+  - Se corrgió los módulos de "Nuevo Ingreso" y "Preinscripción", ya que al perder el foco el campo fecha y si estaba mal escrita ésta se siclaba mostrando el mensaje de fecha inválida.
+  - Se cambió el mensaje que muestra el sistema en módulo "Nuevo Ingreso", cuando una escuela quiere dar de alta a un alumno y ese alumno aún está inscrito en otra escuela.
+8.3.0 (14Dic16 18:00)
+  - Se modificó el mensaje que aparece al acceder al sistema y está serrado por motivos de impresión de la UDSE.
+  - Se corrgió en los módulos de Preinscripción y ModifCurp el campo de Segundo apellido para que aceptara estar en blanco.
+  - Se agregó en el módulo Grupo la implementación del botón "Rep. Inscripción" para imprimir los Reportes de Inscripción.
+8.3.1 (15Dic16 08:32)
+  - Se corrgió el módulo de Calificaciones, ya que al generar la versión 8.3.0, afectó en algunas líneas de código a este módulo.
+8.3.4 (19Dic16 14:22)
+  - Se agregó la condición en el módulo NuevoIngresoSec, Preinscripción y ModifCurp para que los alumnos que se desea ingresar a secundaria con edad menor a antes del 1ro de Agosto no puedan ser aceptados.
+8.3.5 (21Dic16 02:15)
+  - Se corrgió código en los ifs agregados en los módulos NuevoIngresoSec, Preinscripción y ModifCurp generados en la versión 8.3.4.
+8.3.6 (02Ene17 18:15)
+  - Se le cambiaron los logos al sistema, según el nuevo gobierno en curso.
+8.3.7 (05Feb17 12:28)
+  - Se corrgió el múdulo de Taller, ya que al guardar le faltaba afectar la tabla evaluaciones.
+9.0.0 (11Ene17 17:51)
+  - Se agregó el módulo EvalPreescolar que servirá para capturar las evaluaciones de preescolar.
+9.0.1 (13Ene17 10:59)
+  - Se corrigió el módulo Grupo, ya que cuando habían alumnos sin grupo asignado, SICEEO por default estaba mostrando que los alumnos ya estaban asinados al grupo cuando en la columna grupo debería aparecer '---'
+9.0.2 (16Ene17 09:16)
+  - Se desactivo el funcionamiento de la clase SessionListener, para probar si éste es el causante de que con más de 200 usuario se empiece a alentar considerablemente el sistema.
+9.0.3 (17Ene17 06:24)
+  - Se modificó el módulo de CalifSecXBim para que se pudiera deshabilitar la intruducción de calificaciones según el bimestre.
+  - Se volvió a activar el funcionamiento de la clase SessionListener ya que se demostró que esa clase no es la que afecta la rapidez del sistema.
+9.0.4 (18Ene17 06:35)
+  - Se activó el ingreso de calificaciones para primero y segundo bimestre en el módulo CalifSecXBim.
+9.0.5 (18Ene17 11:29)
+  - Se corrigió la acción de guardar insasistencias pues marcaba error en el módulo EvalPreescolar.
+  - Se modificó el funcionamiento de guardar en el módulo EvalPreescolar, para que al guardar automáticamente se seleccionara el siguiente alumno y el escroll de evaluaciones regresara al principio.
+9.0.6
+  - Se corrigió la sección en módulo Nuevo Ingreso cuando son dos candidatos con curp similares, pues a la hora de escoger al niño, no mostraba el nombre.
+  - En el módulo de EvalPreescolar se implementó una leyenda que advirtiera al usuario que debe guardar por alumno, también se hizo que al momento de guardar el sistema se moviera al siguiente alumno automáticamente.
+9.0.7 (21Ene17 01:33)
+  - Se modificó el funcionamiento en el módulo NvoIngreso para nivel secundaria de tal manera que para modalidades DSN no fuera necesario pedir taller.
+  - Se cambió la forma de trabajo para el archivo main.jsp agregando código para que no guarde caché el navegador.
+9.0.8 (25Ene17 18:04)
+  - Se mejoró e implemento un método en javascript para poder dibujar ventanas modales.
+  - Se modifió el query del módulo EvalPreescolar para que al inicializar incluya la tabla planmodalidad en la lectura del bonche de materias.
+9.0.9 (26Ene17 12:25)
+  - Se modificó el módulo EvalPreescolar en la consulta al obtener el cveprograma de la tabla esquemamaterias, pues antes se obtenía de alumnogrado. Este cveprograma sólo es para las materias.
+10.0.0 (01Feb17 03:51)
+  - Se modificó el codigo para la normatividad de edad a nivel secundaria en los módulos NvoIngreso, Preinsripción y CambioDeCurp.
+  - Se implementó el módulo de Permisos para gestionar los permisos de usuario.
+10.0.1 (01Feb17 12:43)
+  - Se corrigió el query para guardar las evaluaciones de preescolar ya que el usuario ingresaba comillas en sus textos y eso ocacionaba error de query.
+  - Se cambió la leyenda de normatividad de edades para los módulos NvoIngreso, Preinsripción y CambioDeCurp.
+10.0.2 (03Feb17 17:29)
+  - Se quitaron logos de los reportes.
+  - Se cambió los logos de bienvenida del SICEEO.
+  - Se controló el mensaje de error al guardar una preinscripción de un alumno en la misma escuela y ciclo escolar.
+  - Se corrigió el método para verificar la aceptación de caracteres especiales para nombre o apellido.
+  - Se corrigió nuevamente el rango de edad permitida para NvoIngreso, Preinsripción y CambioDeCurp, así como la leyenda enfatizando ahora en el año de nacimiento.
+  - Se cambió el tamaño del recuadro de texto para escribir la fecha de nacimiento en el módulo de preinscripción.
+  - Se corrigió el query para el reporte de Preinscripción.
+10.0.3 (09Feb17 11:06)
+  - Se cambió el logo del ieepo en el index y logueo.
+  - Se hizo un reajuste en el rango de edad para las DTV en los módulos NvoIngreso, Preinsripción y CambioDeCurp.
+10.0.4 (10Feb17 12:54)
+  - Se agregó una excepción en el módulo de Preinscripción para que sólo el campo nombre lleva acento y ya estaba el alumno en la BD se deje pasar.
+10.0.5 (15Feb17 11:01)
+  - Se modificó el reporte de inscripción de secundaria de primer grado, ya que la asignatura estatal no cabía en el espacio donde se muestra el texto.
+  - Se cambió la regla en el método isNombreOApellido para que aceptara a partir de 1 sólo caracter.
+10.0.6 (21Feb17 18:08)
+  - Se modificó el código en el módulo SecHist, ya que aún tenía reestricciones para visualizar datos los de la sección 59.
+10.0.7 (24Feb17 15:33)
+  - Se modificó la parte de creación del query donde se especifica el campo crip al guardar los cambios en curp.
+10.0.8
+  - Se modificó el módulo de mensajes para que en el método General en la etiqueta CONEXION si el mensaje tiene el texto ieepo_tcp4, no muestre el texto que trae la excepción por motivos de seguridad.
+  - Se modificaron los módulos de Preinscripción, Nuevos Ingresos a preescolar, primaria y secundaria y Modificar CURP, para que en el combobox Entidad no muestre la entidad 'ND (No definida)', de la misma manera en el query correspondiente.
+  - Se implementó la aceptación caracteres con tilde en nombres o apellidos.
+10.0.9 (15Mar17 10:51)
+  - Se corrigió el módulo SecHist que permite modificar calificaciones de exámenes extraordinarios, la parte que se corrigió fue hacer operaciones de suma y división de punto flotante, ya que al usar float toma decimales aproximados y eso altera el resultado de las calificaciones.
+10.0.10 (22Mar17 13:04)
+  - Se hizo mejora para el funcionamiento del botón "Corregir materias del alumno".
+10.0.11 (22Mar17 13:32)
+  - Se cambio la variable hacerCommit a true al hacer click el botó de corrección de materias del módulo Calificaciones, esto debido a que por motivos de pruebas se había puesto en false.
+10.0.12 (22Mar17 17:41)
+  - Se corrigó el método para cambiar de grupo en el módulo Calificaciones, ya que por implementación de la versión 10.0.10 se alteró y empezó a funcionar mal.
+10.0.13 (23Mar17 11:02)
+  - Se corrigió el método de guardar calificaciones del módulo Calificaciones, ya que por modificaciones para generar la versión 10.0.10 se alteró el funcionamiento.
+10.0.14 (24Mar17 11:21)
+  - Se corrigió el método global isFecha porque al introducir un mes por su nombre no lo aceptaba.
+11.0.0 (17May17 12:47)
+  - Se incluye el módulo de oficialización.
+  - Se hacen modificaciones en varios módulos para que se bloqueen sus componentes dependiendo de la oficialización.
+  - Se agrega un botón de eliminar alumno en el módulo Grupo para que sólo el usuario que insertó al alumno pueda eliminarlo siempre y cuando no tenga historial.
+  - Se agregó un globo de ayuda para advertir al usuario de un nuevo componente.
+11.0.1 (18May17 10:48)
+  - Se corrigió la acción del botón guardar en el módulo EvalPreescolar, ya que no estaba regiendo bien los datos para ser guardados.
+11.0.2 (18May17 14:07)
+  - Se corrigió el módulo de Grupo ya que tenía un error al mandar a visualizar el reporte de inscripción e historial académico.
+  - Se modificaron todos los reportes de inscripción para implementar una condición de cuando el alumno no tenga la curp completa entonces que no la muestre en el reporte y en observaciones ponga un mensaje al respecto.
+11.0.3 (23May17 19:59)
+  - Se implementó en varios módulos el envío del tblPrincipal_idcct desde cliente, pero con la verificación en el servidor si tiene autorizado el usuario usar ese idcct, esto por motivos de seguridad y evitar que desde el cliente modifiquen el idcct en código cargado en el navegador.
+  - Se modificó el color del hover del puntero sobre las tablas para que ya no coloree la fila por la que pasa el puntero.
+  - Se implementó query en el método btnChekMat_Click, debido a que al darle click al botón para corregir materias repetidas se producía un error en ciertos casos.
+11.0.4 (24May17 06:30)
+  - Se corrgió el archivo reporteDeInscripcion.jsp ya que provocó error debido a la implementación de la versión 11.0.3.
+11.0.5 (27May17 10:45)
+  - Se modificó el módulo de calificaciones para que no se pueda capturar todavía el 5o bimestre, ya que algunas escuelas empezaron a hacerlo y no era fecha.
+11.0.6 (30May17 05:50)
+  - Se corrigió el formulario MostrarCalificaciones del módulo Calificaciones, ya que por cambios anteriores el css no afectaba a la interfaz.
+  - Se corrigieron funciones en el archivo de conxion a la base de datos ya que en varios queryes en el executeQuery no se estaba asignando a un rs.
+11.1.0 (01Jun17 11:37)
+  - Se corrigió e implementó comportamiento de la clase Tabla
+  - Se corrigió el módulo Oficialización para que cuando en la búsqueda regrese más de un turno, pueda seleccionarse cualquier grado-grupo que corresponda al turno a trabajar y con ese oficializar o desoficializar.
+  - Se modificó el funcionamiento del módulo de Oficialización para que IVALLE pueda desoficilizar 5o bim y 3er bim.
+11.1.1 (02Jun17 13:21)
+  - Se hicieron mejoras a los métodos correspondientes a cargarLoading y carrarLoading.
+  - Se cambió la lógica de programación a la hora de guardar calificaciones y evaluaciones y en el método "_changeSelectedItem", para que respondiera de forma asíncrona.
+  - En el método de guardar calificaciones del formulario CalifSecXBim se le agregaron condiciones para verificar que el formato de la calificación ingresada sea la correcta.
+11.1.2 (05Jun17 05:22)
+  - Se le agregaron más condiciones de verificación en el módulo de oficialización en cuanto a si hay calificaciones con formato mal escrito para Primaria y Secundaria y si en preescolar hay evaluaciones en blanco.
+11.1.3 (05Jun17 11:35)
+  - Se corrigieron los queryes de oficialización, ya que se generaron errores debido a la implementación de la versión 11.1.2.
+11.1.4 (06Jun17 12:30)
+  - Se corrigió el método formActivate del módulo de EvalPreescolar, ya que no cargaba bien los datos del alumno.
+11.1.5 (07Jun17 04:09)
+  - Se corrigió el módulo de oficializacion en el query para oficializar preescolar, ya que estaba enviando mal los parámetros al mandar a llamar el método verifPreviaOfic.
+11.1.6 (08Jun17 11:40)
+  - Se corrigió el funcionamiento del botón exportar a Excel en módulo grupo, ya que no accionaba la exportación.
+  - Se corrgieron varios módulos que hacían referencia a la función tblAlumCapCalif_ChangeSelectedItem, ya que por implementación de la versión 11.1.0 estos módulos se vieron afectados en su correcto funcionamiento.
+  - Se modificaron los reportes de evaluación y certificado.
+11.1.7 (13Jun17 13:58)
+  - Se corrigió el módulo de EvalPreesc ya que al cargar el paquete de materias un subquery devolvía más de una materia y marcarcaba error, también al dezplazarse con los botones de siguiente y anterior grupo se agregó que cargue tambien el paquete de materias.
+11.1.8 (14Jun17 06:19)
+  - Se modificó el módulo de calificaciones para reactivar la captura del 5o bimestre, pues fue bloqueado en la versión 11.0.5.
+11.1.9 (15Jun17 12:02)
+  - Se corrigió el módulo de calificaciones, ya que al oprimir enter para guardar la calificaión mandaba error.
+11.1.10 (15Jun17 13:02)
+  - Se corrigió el módulo de calificaciones, en el formulario PromGralSec2012, ya que al oprimir guardar mandaba error.
+12.0.0 (20Jun17 06:20)
+  - Se incluyó en el módulo de Calificaciones de primaria y secundaria la sección para que el usuario pueda ingresar los datos complementarios del reporte de Evaluación.
+  - Se incluyó en el módulo de Evaluaciones de preescolar la sección para que pueda capturar el usuario los datos complementarios del reporte de Evaluación.
+  - Se incluyó el módulo de Personal, donde el usuario podrá capturar los datos del director y del profesor.
+  - Se incluyó el módulo de reportes, donde tiene implementado a la fecha la impresión de Reportes de evaluación.
+12.0.1 (20Jun17 20:00)
+  - Se corrigió el ancho de algunos botones del módulo EvalPreesc.
+  - Se modificó la sección para captura de datos complementarios de Reportes de Evaluacion de tal forma que si el usuario quiere guardar datos en blanco lo pueda hacer.
+12.0.2 (22Jun17 16:38)
+  - Se agregó la funcionalidad de cerrar sesiones de los usuarios en un botón en el módulo de Configuración.
+  - Se corrigió el módulo de calificaciones ya que al generar el Promedio General cuando era 10, el sistema estaba generando 10.0000, entonces se redujo a 10.0.
+12.0.3 (23Jun17 17:05)
+  - En el módulo CapRepEval se modificó el campo Lengua Extranjera agregándole la palabra "(opcional)".
+  - En el módulo Personal se modificó el texto mostrado en color rojo y se activó la captura de profesores únicamente para Primaria y Preescolar.
+12.0.4 ()
+  - 
+12.1.0 (29Jun17 04:56)
+  - Se implementó el en el módulo de Password el funcionamiento para que revise cuántos usuarios hay conectados, en el caso de pasar al máximo indicado desde BD entonces redirecciona al servidor 6.
+12.1.1 (01Jul17 22:15)
+  - En el módulo de CapRepEval se implementó el trontrol del mensaje para advertir al usuario que no puede ingresar saltos de línea al escribir.
+  - Se corrigió el módulo de Password, pues mostraba null cuando se ponía en estatus 'MANTENIMIENTO'.
+12.2.0 (12Jul17 18:35)
+  - Se movió el botón de acuse de oficialziación de preinscripción del módulo Preinscripción al módulo de Reportes
+  - Se implementó la captura de lengua indígena y Concluyó estudios en el módulo EvalPreesc.
+  - Se controló el guardado de calificaciones en el módulo Calificaciones para que no acepte ceros dependiendo de la condición de introducción de datos.
+  - Se hizo una reestructuración a la clase de conexionBD creando las clases QureyesInformix y ConexionInformix.
+12.2.1 (13Jul17 21:49)
+  - Se implementó en el módulo de logueo la lectura de configuraciones desde archivo, para controlar el mensaje que mostrará el sistema cuando el sistema está saturado
+  - Se corrigió la verificación de calificaciones en el módulo de calificaciones a la hora de guardar para permitir sólo calificaciones válidas.
+12.2.2 (14Jul17 03:20)
+  - Se modificó el módulo Password en la lectura de configuraciones desde archivo para controlar el sistema saturado, agregando el parámetro "redirectServer" con el cual se podrá mejor el control de hacia dónde redirigir el inicio de sesión.
+12.2.3 (14Jul17 04:37)
+  - Se corrigieron todos los archivos .jsp que mostraban reportes, ya que en la versión 12.2.0 se modificó el nombre de la clase SICEEO_ConexionBD a SICEEO_QueryesInformix y éste nombre no fue modificado en los .jsp.
+12.2.4 (14Jul17 09:10)
+  - Se corrigió el módulo de calificaciones pues a la hora de guardar y verificarlas no estaba aceptando el 6 y el 10.
+12.2.5 (14Jul17 09:38)
+  - Se corrigió el módulo de calificaciones ya que no estaba dejando generar materias del bimestre porque estaba bloqueando una condición de oficialización.
+12.2.6 (14Jul17 10:48)
+  - Se corrigió el módulo de calificaciones ya que no estaba dejando introducir calificaciones correctamente.
+  - Se corrigió el módulo de EvalPreescolar ya que al guardar inasistensias estaba mostrando un error de null.
+12.3.0 (15Jul17)
+  - Se corrigió el método de buscar alumno en el módulo de NuevoIngreso ya que estaba haciendo referencia a una posición de arreglo que no existía y marcaba error.
+  - Se agregaron los reportes de fin de curso en el módulo Reportes que son IAR, IAE, CREL, R y REL
+12.3.1 ()
+12.4.0 (21Jul17 10:04)
+  - Se incluyó la cancelación de folios y firmado automático en el botón de oficialización del 5to bimestre.
+  - Se modificó la lógica de oficialización realizándoce ahora por grado y grupo.
+  - Se incluyó una ventana de desoficialización por alumno.
+12.4.1
+  - Se redujo el tamaño en vertical de la ventana de desoficialización.
+  - Se corrigió la validación para impresión de documentos de fin de curso, ya que principalmente el certificado marcaba error al momento de mandar a imprimir.
+  - Se corrigió el query del reporte FoliosKardex, ya que se estaban duplicando registros en la visualización de datos.
+12.4.2 (22Jul17 11:10)
+  - Se corrigieron queries para el funcionamiento de oficialización y desoficialización de nivel preescolar.
+  - Se implementó una nueva visualización y forma de trabajo para los botones oficializar.
+12.4.3 (24Jul17 07:48)
+  - Se corrgió el funcionamiento del botón de oficializar en el módulo Oficializaciones ya que se desactivaba y no dejaba oficializar.
+  - Se implementó un mensaje de advertencia de cancelación de folios al oprimir el botón desoficializar en el módulo Oficializaciones.
+  - Se corrigieron queries para validar oficializaciones y desoficializaciones.
+  - Se corrigió el módulo EvalPreesc ya que al oprimir los botones de anterior y sigiente grupo no se actualizaban títulos que correspondían al grado.
+  - Se estandarizó las rutas almacenamiento de los archivos como el WSDL y configsSICEEO.sco a /var/libs/tomcat/siceeoConfigs
+12.5.0 (27Jul17 0913)
+  - Incluye la comunicación con el web service de firmado, quien se encarga enderezar folios actualizando sólo calificaciones y grupos a determinados folios y a cancelar y firmar a quienes según las especificaciones lo amerite.
+  - Se modificó el módulo Grupo para que los botones quedaran personalizados de acuerdo a la oficialización.
+12.5.1 (27Jul17 18:08)
+  - Se liberaron de la oficialización de calificaciones a los módulos de Necesidades Especiales, Taller, Asignatura Estatal y Artes.
+12.5.2
+  - Se implementa la cancelación de folios de Reporte de Evaluación al dar de baja a un alumno en el módulo Grupo.
+  - Se implementa la asignación de foliode Reporte de Evaluación a los alumnos que les hace falta al momento de oficializar.
+12.5.3 (07Ago17 13:17)
+  - Se desactivó el checkbox que de editar promedios del formulario PromGralSec2012.
+12.5.4 (08Ago17 15:34)
+  - Se corrigió el método de cancelar folio al desoficializar, ya que no estaba cancelando el de la firma.
+12.5.5 (08Ago17 16:17)
+  - Se corrigió el método de dar de baja, ya que le faltaba cancelar folio de certificado.
+12.6.0 (11Ago17 13:55)
+  - Se implementaron los botones para trabajar con etapa complementaria en los módulos Oficialización y Reportes
+12.6.1 (11Ago17 14:08)
+  - Se desactivaron los botones de etapa complementaria para los usuarios, ya que necesitan ser evaluados para su publicación.
+12.6.2 (14Ago17 17:57)
+  - Se activaron los botones de etapa complementaria.
+12.6.3 (16Ago17 17:43)
+  - Se corrgió el formulario PromGralSec2012 del módulo de Calificaciones, ya que por deshabilitar el chkEditProm el código dió problemas.
+  - Se corrigió la función de guardaCalifReal del módulo Calificaciones, según modificación hecha también en el SICEEB.
+12.6.4 (21Ago17 20:47)
+  - Se implementó la ventana RevisaGpo que es mostrada cuando hay un problema al cargar el módulo de Calificaciones.
+  - Se hizo implementaciones a la función que crea ventanas modales.
+  - Se agregó la columna "Tot Alum" en la ventana principal.
+(Siguiente versión)
+  - Se implementó el formulario para gestionar avisos.
+  - Implementó un botón para hacer ping al web service de firmado.
+12.7.2 (09Oct17 12:41)
+  - Se corrigió el módulo Grupo, ya que no cambiaba de grupo para los de grupo: '---'
+12.7.3
+  
+13.0.0 (18Oct17 08:51)
+  - Se implementó el módulo Exalumnos, que permite trabajar con alumnos irregulares para introducir calificaiones, foliar y firmar, imprimir certificado y rel complementaria.
+13.0.1 (18Oct17 11:37)
+  - Se desactivó el botón imprimir complementaria del módulo Exalumnos pues se necesitaba hacerle mejoras.
+13.0.2 (19Oct17 08:56)
+  - Se cambió el funcionamiento del botón de imprimir complementaria en el módulo Exalumnos, de manera que al elegir el mes se pueda elegir tambien a determinados alumnos según lo desee el usuario.
+13.0.3 (19Oct17 10:04)
+  - Se corrgigió el funcionamiento en la ventana de imprimir complementaria en el módulo Exalumnos, ya que al dar click en el check de seleccionar alumnos en específico tenía reestricción para escuelas y debería estar libre.
+13.0.5 (19Oct17 13:20)
+  - Se agregaron condiciones para los botones "Foliar y firmar" y "Imp. Certificado" para que notificara al usuario y si ya tiene folio asignado o le falta, si le falta promedio gral, etcc.
+13.0.6 (19Oct17 14:10)
+  - Se activó la funcionalidad del botón "Foliar y firmar" ya que por pruebas había quedado desactivo la función.
+13.0.7 (23Oct17 11:37)
+  - Se implementó en el módulo Exalumnos el botón "Actualiza prom. de folio", para actualizar el promedio de los folios de secundaria que estén con valor null.
+13.0.8 (23Oct17 19:13)
+  - Se agregó una condición al botón "Imp. Certificado" del módulo Exalumnos para que no permita imprimir certificados que no sean de complementaria.
+13.1.0 (30Oct17 06:19)
+  - Se le agregó un combobox para elegir el ciclo con el que desean trabajar en el módulo Reportes. Esta opción sólo está disponible para las UDSE's
+13.1.1 (30Oct17 11:22)
+  - Se quito la condicion que verifica que el ciclo actual sea el mismo para las que estan tratando de imprimir las escuelas en el modulo Reportes.
+13.1.2 (12Ene18 10:55)
+  - Se modificaron los links que apuntaban a la dirección ieepoplaneacion.info por ieepoplaneacionedu.info.

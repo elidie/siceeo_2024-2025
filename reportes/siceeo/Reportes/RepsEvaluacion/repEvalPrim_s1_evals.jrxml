@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repEvalPrim_s1_evals" language="groovy" pageWidth="385" pageHeight="792" columnWidth="385" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="43f7f626-2599-4a74-96df-0e6e0289277a">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="inasistencias" uuid="4033097b-a335-4cee-b916-7bc3514d2145">
+		<queryString>
+			<![CDATA[select * from inasistencias
+where idalu=1643989
+and cicescini=2016
+and cveplan=2
+and grado=1]]>
+		</queryString>
+		<field name="idalu" class="java.lang.Integer"/>
+		<field name="cicescini" class="java.lang.Short"/>
+		<field name="cveplan" class="java.lang.Short"/>
+		<field name="grado" class="java.lang.Short"/>
+		<field name="inst1" class="java.lang.Short"/>
+		<field name="inst2" class="java.lang.Short"/>
+		<field name="inst3" class="java.lang.Short"/>
+		<field name="inst4" class="java.lang.Short"/>
+		<field name="inst5" class="java.lang.Short"/>
+	</subDataset>
+	<parameter name="idalu" class="java.lang.String"/>
+	<parameter name="cicescini" class="java.lang.String"/>
+	<parameter name="grado" class="java.lang.String"/>
+	<parameter name="modalidad" class="java.lang.String"/>
+	<parameter name="cveplan" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT TRIM(m.desmat) AS desmat,
+        (SELECT calif1 FROM evaluaciones WHERE cvetipmat=em.cvetipmat AND cvemat=em.cvemat AND cveplan=em.cveplan
+		AND cveprograma=em.cveprograma AND cicescini=$P{cicescini} AND grado=em.grado AND idalu=$P{idalu} AND numeval=1) AS califb1,
+        (SELECT calif1 FROM evaluaciones WHERE cvetipmat=em.cvetipmat AND cvemat=em.cvemat AND cveplan=em.cveplan
+		AND cveprograma=em.cveprograma AND cicescini=$P{cicescini} AND grado=em.grado AND idalu=$P{idalu} AND numeval=2) AS califb2,
+        (SELECT calif1 FROM evaluaciones WHERE cvetipmat=em.cvetipmat AND cvemat=em.cvemat AND cveplan=em.cveplan
+		AND cveprograma=em.cveprograma AND cicescini=$P{cicescini} AND grado=em.grado AND idalu=$P{idalu} AND numeval=3) AS califb3,
+        (SELECT calif1 FROM evaluaciones WHERE cvetipmat=em.cvetipmat AND cvemat=em.cvemat AND cveplan=em.cveplan
+		AND cveprograma=em.cveprograma AND cicescini=$P{cicescini} AND grado=em.grado AND idalu=$P{idalu} AND numeval=4) AS califb4,
+        (SELECT calif1 FROM evaluaciones WHERE cvetipmat=em.cvetipmat AND cvemat=em.cvemat AND cveplan=em.cveplan
+		AND cveprograma=em.cveprograma AND cicescini=$P{cicescini} AND grado=em.grado AND idalu=$P{idalu} AND numeval=5) AS califb5,
+        (SELECT promedio FROM alumnomaterias WHERE cvetipmat=em.cvetipmat AND cvemat=em.cvemat AND cveprograma=em.cveprograma
+		AND cicescini=$P{cicescini} AND grado=em.grado AND idalu=$P{idalu}) AS promedio
+FROM esquemamaterias em, materias m
+WHERE em.cveplan = $P{cveplan}
+AND em.cveprograma=(SELECT cveprograma
+	FROM planmodalidad
+	WHERE plan=$P{cveplan} AND modalidad=$P{modalidad} AND grado=$P{grado} AND cicescini<=$P{cicescini}
+	AND $P{cicescini}<=cicescfin AND cveentidad=20)
+AND em.cvetipmat=m.cvetipmat
+AND em.cvemat=m.cvemat
+AND em.grado=$P{grado}
+AND em.cicescini <= $P{cicescini}
+AND $P{cicescini} <= em.cicescfin
+AND em.estatus='A'
+AND m.matdefault='t'
+ORDER BY ordenimpres]]>
+	</queryString>
+	<field name="desmat" class="java.lang.String"/>
+	<field name="califb1" class="java.lang.Double"/>
+	<field name="califb2" class="java.lang.Double"/>
+	<field name="califb3" class="java.lang.Double"/>
+	<field name="califb4" class="java.lang.Double"/>
+	<field name="califb5" class="java.lang.Double"/>
+	<field name="promedio" class="java.math.BigDecimal"/>
+	<columnHeader>
+		<band height="22">
+			<staticText>
+				<reportElement mode="Opaque" x="105" y="0" width="230" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="8a1aa57c-6659-4cda-bf1e-346f3a535f41"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[BIMESTRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="151" y="14" width="46" height="8" forecolor="#000000" backcolor="#CCCCCC" uuid="766e691a-d8fd-44dd-94f7-799592031ad6"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[II]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="197" y="14" width="46" height="8" forecolor="#000000" backcolor="#CCCCCC" uuid="c19cced4-15b4-4c32-b12d-042700b3839a"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[III]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="105" y="14" width="46" height="8" forecolor="#000000" backcolor="#CCCCCC" uuid="897a6fd4-5d19-42fe-971e-7acde04c49b6"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[I]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="105" height="22" forecolor="#000000" backcolor="#B0ADAD" uuid="a0951890-3929-4c2c-b7d0-47951ece4c0b"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ASIGNATURAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="335" y="0" width="50" height="22" forecolor="#000000" backcolor="#B0ADAD" uuid="24923edc-fdba-453c-95ea-0d2fa83b36c0"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PROMEDIO FINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="243" y="14" width="46" height="8" forecolor="#000000" backcolor="#CCCCCC" uuid="3c1f179c-4354-45bd-8ac9-782336354d25"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[IV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="289" y="14" width="46" height="8" forecolor="#000000" backcolor="#CCCCCC" uuid="4fada19d-cc04-417e-98b1-a215993967e1"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="289" y="0" width="46" height="16" forecolor="#000000" uuid="92cfb8b9-5408-4d3c-afce-45dc1ebf2cea"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{califb5}.equals( "null" ) || $F{califb5}==0.0)?"":
+    ($F{califb5}==10.0?"10":$F{califb5})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="243" y="0" width="46" height="16" forecolor="#000000" uuid="6ba6affd-8ffa-4ecd-ad6d-5559c8b15f7b"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{califb4}.equals( "null" ) || $F{califb4}==0.0)?"":
+    ($F{califb4}==10.0?"10":$F{califb4})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="0" width="50" height="16" forecolor="#000000" uuid="7ed63231-311f-4b47-8187-c61183277a24"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{promedio}.equals( "null" ) || $F{promedio}==0.0)?"":
+    ($F{promedio}==10.0?"10":$F{promedio})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="105" y="0" width="46" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="c1a394f7-3494-4eaa-a0b7-f37726591bdd"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{califb1}.equals("null") || $F{califb1}==0.0)?"":
+    ($F{califb1}==10.0?"10":$F{califb1})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="197" y="0" width="46" height="16" forecolor="#000000" uuid="d367b13d-c325-4cbd-8dc8-e7765602c86f"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{califb3}.equals( "null" ) || $F{califb3}==0.0)?"":
+    ($F{califb3}==10.0?"10":$F{califb3})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="151" y="0" width="46" height="16" forecolor="#000000" uuid="f3954fa8-2a60-449b-b8fc-6c40e5a9571b"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{califb2}.equals( "null" ) || $F{califb2}==0.0)?"":
+    ($F{califb2}==10.0?"10":$F{califb2})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="105" height="16" forecolor="#000000" uuid="f7d91969-3329-4f1c-9c06-333e772f2afa"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desmat}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

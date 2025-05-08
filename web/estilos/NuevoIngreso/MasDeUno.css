@@ -1,0 +1,82 @@
+/* 
+    Creado el : 4/12/2015, 08:02:14 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlMasDeUno
+{
+    font-size: 0.8em;
+}
+
+#pnlMasDeUno .tituloPanel
+{
+    font-size: 0.9em;
+    padding-top: 4px;
+}
+
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlMasDeUno #pnlCurpsRep
+{
+    margin-top: 10px;
+}
+#pnlMasDeUno #pnlTblCurpsRep
+{
+    height: 100px;
+}
+#pnlMasDeUno #pnlTblHistorialAcad
+{
+    height: 170px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlMasDeUno .buttonBar
+{
+    font-size: 1.2em;
+}
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlMasDeUno th
+{
+    font-size: 0.9em;
+    font-weight: normal;
+}
+#pnlMasDeUno td
+{
+    height: 15px;
+    font-size: 0.9em;
+}
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 360px){
+    #pnlMasDeUno ul li, #pnlConfiguraciones ul li a
+    {
+        display: block;
+        margin: 0 auto;                                                         /*Para centrar los botones*/
+    }
+    #pnlMasDeUno #btnCancelarMDU
+    {
+        margin-top: 5px;
+    }
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repEvalPreesc_G1-3_s1_evals" language="groovy" pageWidth="528" pageHeight="20" columnWidth="528" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="615398f7-625a-4b7c-a85b-170907842785">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cvemat" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cicescini" class="java.lang.String"/>
+	<parameter name="idalu" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select me.descrmeseval,ev.avances
+from ev_catmesevalpree me left join  evalpreesc ev
+                on (me.cvemeseval = ev.numeval and ev.cvemat=$P{cvemat} and ev.cicescini = $P{cicescini} and ev.idalu =  $P{idalu} and ev.cvemat not like 'NAP%') left join materias m
+on (ev.cvemat = m.cvemat
+and ev.cvetipmat=m.cvetipmat)
+order by me.cvemeseval]]>
+	</queryString>
+	<field name="descrmeseval" class="java.lang.String"/>
+	<field name="avances" class="java.lang.String"/>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="45" height="20" forecolor="#000000" uuid="8c3cbb6e-39de-4663-9e55-348ce7104588"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="ArialReport" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descrmeseval}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="0" width="483" height="20" forecolor="#000000" uuid="519ccac0-0b31-4b4b-827d-477e2208e61f"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="ArialReport" size="5" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{avances}.equals( "null" )?"":$F{avances}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

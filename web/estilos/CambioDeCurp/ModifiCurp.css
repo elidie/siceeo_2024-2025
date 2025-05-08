@@ -1,0 +1,206 @@
+/* 
+    Creado el : 21/06/2016, 4:27:05 AM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlModifCurp
+{
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+#pnlModifCurp input
+{
+    font-size: 0.9em;
+}
+#pnlModifCurp select
+{
+    font-size: 0.9em;
+    height: 1.8em;
+    margin-bottom: 3px;
+}
+
+#pnlModifCurp .buttonBar a
+{
+    font-size: 0.9em;
+}
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlModifCurp .anchoFijo
+{
+    padding-right: 5px;
+    text-align: right;
+    width: 160px;
+    /*width: 40%;*/
+} 
+#pnlModifCurp .alinearHoriz
+{
+    vertical-align: baseline;
+}
+
+#pnlModifCurp .tituloPanel
+{
+    font-size: 0.9em;
+    padding-top: 4px;
+}
+
+#pnlModifCurp #pnlNormatividad
+{
+    color: #e97a3d;
+    padding: 0px 20px 10px 40px;
+}
+
+#pnlModifCurp #pnlRenapo
+{
+    background: rgba(159,168,2,0.2);
+    border: 1px solid #d9e1e6;
+    font-size: 0.8em;
+    margin-top: 5px;
+    padding: 8px 0px 8px  5px;
+}
+#pnlModifCurp #pnlRenapo .anchoFijo2
+{
+    padding-right: 5px;
+    text-align: right;
+    width: 160px;
+}
+#pnlModifCurp #pnlRenapo .anchoFijo3
+{
+    padding-right: 5px;
+    text-align: right;
+    width: 180px;
+}
+
+#pnlModifCurp #pnlRenapo #pnlRenapoIzq
+{
+    width: 45%;
+}
+#pnlModifCurp #pnlRenapo #pnlRenapoIzq div, #pnlModifCurp #pnlRenapo #pnlRenapoDer div
+{
+    margin-bottom: 3px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlModifCurp #btnBuskAlum
+{
+    height: 17px;
+    width: 70px;
+}
+
+#pnlModifCurp #ubtnActualizarCerrarLimpiar li a
+{
+    height: 18px;
+    margin-right: 5px;
+    width: 95px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+#pnlModifCurp #cbxProbem
+{
+    width: 220px;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlModifCurp #pnlCurp label, #pnlModifCurp #pnlIdAlu label
+{
+    padding-left: 5px;
+}
+
+#pnlModifCurp #lblCurp
+{
+    color: olive;
+}
+
+#pnlModifCurp #lblEdad
+{
+    color: olive;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+#pnlModifCurp #txtIdalu
+{
+    width: 90px;
+}
+
+#pnlModifCurp #txtCurp16
+{
+    width: 150px;
+    text-transform: uppercase;
+}
+#pnlModifCurp #txtCurp17y18
+{
+    margin-right: 5px;
+    width: 20px;
+    text-transform: uppercase;
+}
+
+#pnlModifCurp #txtApe1, #pnlModifCurp #txtApe2, #pnlModifCurp #txtNombre
+{
+    width: 250px;
+    text-transform: uppercase;
+}
+
+#pnlModifCurp #txtFechaNac
+{
+    width: 70px;
+    margin-right: 5px;
+}
+
+#pnlObservaciones #txaObservaciones
+{
+    vertical-align: middle;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 500px){
+    #pnlModifCurp .anchoFijo
+    {
+        text-align: left;
+        display: block;
+    } 
+    
+    #pnlModifCurp #pnlNormatividad
+    {
+        padding: 15px 10px 15px 10px;
+    }
+    
+    #pnlModifCurp #pnlRenapoIzq, #pnlModifCurp #pnlRenapoDer
+    {
+        display: block;
+        width: auto !important;
+    }
+       
+    #pnlModifCurp .anchoFijo2, #pnlModifCurp .anchoFijo3
+    {
+        text-align: left;
+        width: auto!important;
+    }
+    
+    #pnlModifCurp #ubtnActualizarCerrarLimpiar li
+    {
+        margin-bottom: 5px;
+    }
+}

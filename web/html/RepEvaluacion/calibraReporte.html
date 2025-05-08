@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Calibrador de Reportes</title>
+		<link rel="icon" type="image/gif" href="../../imagenes/generales/2.gif" />
+		<link rel="stylesheet" href="../../estilos/RepEvaluacion/calibraReporte.css"/>
+		<script src="../../js/libs/jq.1.9.1_development.js"></script>
+		<script src="../../js/GlobalJs/Mensajes.js"></script>
+                <script src="../../js/RepEvaluacion/calibraReporte.js"></script>
+	</head>
+	<body>
+		<div id="pnlTituloModulo">
+			<h2>Calibrador para la impresión del Reporte de Evaluación de Educación Básica</h2>
+		</div>
+        <div id="pnlBotonesRegillaYGuardar">
+			<input type="button" class="estiloBoton" value="Ver rejilla" id="btnImprimirRejilla" onClick="btnImprimirRejilla_Click()"/>	
+			<input type="button" class="estiloBoton botonDeshabilitado" value="Ver caída de textos" id="btnImprimirCaidaDeTextosPrueba" onClick="btnImprimirCaidaDeTextosPrueba_Click();"/>
+			<input type="button" class="estiloBoton"  value="Guardar cambios" id="btnGuardarCambios"/>
+			<input type="button" class="estiloBoton"  value="Ayuda" id="btnMostrarAyuda"/>
+			<label id="lblTblPrincipal_grado"></label>
+			<input type="button" class="estiloBoton"  value="X" id="btnCerrar_calibraRepEval" title="Cerrar"/>
+		</div>
+		<div id="pnlAreaDeTrabajo">
+            <div id="pnlHoja">
+                <div class="header" id="pnlEncabezadoDeHoja"> Caidas de los textos</div>
+                <div id="hoja"></div>
+            </div>
+			<div id="pnlCoordenadas">
+                <div class="header" id="pnlEncabezadoDeCoordenadas"> Coordenadas:<br> [ H ][ V ] Texto</div>
+                <div id="pnlMouseCoords"><label id="xPosition"></label> <label id="yPosition"></label></div>
+				<div id="pnlListaDeCoordenadas">
+					<ul id="listaDeCoordenadas"></ul>
+				</div>
+				<div id="pnlAyuda">
+                    <div id="ayuda" class="tipografia">
+                        <h2 class="tituloAyuda">Ayuda para el uso del módulo de calibración</h2>
+                        <p>El módulo de calibración de impresión consta de 3 áreas.</p>
+                        <ul>
+                            <li id="textoControles">Controles</li>
+                            <li id="textoCoordenadas">Coordenadas</li>
+                            <li id="textoCaidas">Caidas de textos</li>
+                        </ul>
+                        <h3 class="formatoFuenteH3">Controles</h3>
+                        <p>El área de controles nos proporciona el uso de 3 botones los cuales se utilizan para realizar las siguientes operaciones.</p><br>
+                        <h4 class="formatoFuenteH4">Imprimir rejilla</h4> 
+                            <p>Este boton nos proporciona la impresión de la rejilla sin las caidas de los textos mostrados. <br></p>
+                        <h4 class="formatoFuenteH4">Imprimir hoja de prueba</h4> 
+                            <p>Este boton nos proporciona la impresión de una hoja de prueba la cual incluye la rejilla y las caidas de los textos mostradas actualmente. <b>Nota:</b> Es Importante haber guardado cambios con anterioridad !!! <br></p>
+                        <h4 class="formatoFuenteH4">Guardar Cambios</h4> 
+                            <p>Con este boton guardamos los cambios actuales que realizamos durante el proceso de calibración. <br></p>
+                        <p>
+                        <h3 class="formatoFuenteH3">Coordenadas</h3>
+                            <p>El área de coordenadas provee una lista de todos los textos requeridos para poder imprimir el Reporte de Evaluación, a la izquierda de cada texto se encuentan sus coordenadas [ H ][ V ] como lo muestra el encabezado de ejemplo; para poder cambiar las coordenadas de algún texto en específico hay que seguir los siguientes pasos: <br>
+                            <b>1.-</b> Seleccionar el texto al que se le quiere modificar sus coordenadas.<br>
+                                (Al realizar esta operación, las coordenadas que tiene actualmente son transferidas a las cajas de texto [ H ][ V ] que se encuentran a la izquierda del boton "Cambiar", así como tambien se remarcaran de color verde las coordenadas actuales dentro de la lista, para que usted sepa a que tipo de texto le esta cambiando las coordenadas).<br>
+                            <b>2.-</b> Cambiar las coordenadas [ H ][ V ] por las que usted desee.<br>
+                            <b>3.-</b> Despúes deberá dar click en el boton "Cambiar", para realizar el cambio de las coordenadas [ H ][ V ].<br>
+                                (Al realizar esta operación usted podrá ver que en el área de "Caidas de los textos" se mostrara en color rojo el texto que usted selecciono con las nuevas coordenadas [ H ][ V ] que definio en el paso 2).<br>
+                            </p>
+                        <h3 class="formatoFuenteH3">Caidas de textos</h3>
+                            <p>En esta área se muestran los textos que se imprimiran en el Reporte de Evaluación en las coordenadas [ H ][ V ] y solo se podrán modificar desde el áera de coordenadas. <br></p>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

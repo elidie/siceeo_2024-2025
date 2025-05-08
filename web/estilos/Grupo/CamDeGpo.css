@@ -1,0 +1,211 @@
+/* 
+    Creado el : 1/09/2015, 10:31:00 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlCamDeGpo #pnlTablaCamDeGpo
+{
+    width: 80%;
+}
+
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlCamDeGpo #pnlDatosGenerales
+{
+    background-color: #804000;
+    color: white;
+    font-size: 0.9em;
+    height: 18px;
+    margin: 5px 0; 
+    padding: 3px 0px 3px 5px;
+}
+
+#pnlCamDeGpo #pnlTblCamDeGpo
+{
+    border: 1px solid black;
+    height: 450px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#pnlCamDeGpo #pnlBotonesDecontrol #pnlbtnsCamTotGpo
+{
+    padding-left: 5px;
+}
+#pnlCamDeGpo #pnlBotonesDecontrol #pnlbtnTotAlum
+{
+    padding-left: 5px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlCamDeGpo #pnlBotonesDecontrol .buttonBar li
+{
+    margin-top: 5px; 
+    display: block;
+}
+#pnlCamDeGpo #pnlBotonesDecontrol .buttonBar li a
+{
+    width: 110px;
+}
+#pnlCamDeGpo #pnlBotonesDecontrol #ulbtnsCambiosIndividuales
+{
+    margin-bottom: 30px;
+}
+
+#pnlCamDeGpo #btnCamTotGpo
+{
+    width: 85px !important;
+}
+
+#pnlCamDeGpo #btnTotAlum
+{
+    width: 35px !important;
+}
+#pnlCamDeGpo #btnTotAlum #ibtnTotAlum 
+{
+    font-size: 1.2em;
+    color: #c13a3b;
+}
+
+#pnlCamDeGpo #btnCamDGpo
+{
+    background: #C1A951;
+    color: white;
+    border: 1px solid #B18B00;
+}
+#pnlCamDeGpo #btnCamDGpo:hover
+{
+    background: #bee6fd;
+    cursor: pointer;
+    border: 1px solid #8ab4ca;
+    color: black;
+}
+#pnlCamDeGpo #btnCamDGpo:active
+{
+    background: #98d1ef;
+    outline: #2c628b solid 1px;
+}
+
+#pnlCamDeGpo #btnExportGrupoAExcel
+{
+    height: 33px;
+    width: 140px;
+    padding-top: 0px;
+    margin-right: 10px;
+}
+#pnlCamDeGpo #btnExportGrupoAExcel #ibtnExportGrupoAExcel
+{
+    color: #10880e;
+    font-size: 2.7em;
+    margin-right: 4px;
+}
+
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+#pnlCamDeGpo .coltblCamDeGpo_col5 select,
+#pnlCamDeGpo .coltblCamDeGpo_col7 select
+{
+    width: 55px;
+}
+#pnlCamDeGpo .coltblCamDeGpo_col8
+{
+    width: 65px;
+}
+#pnlCamDeGpo #cbxGrupo
+{
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlCamDeGpo #lblTblPrincipal_cct
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlCamDeGpo #lblTblPrincipal_grado
+{
+    font-weight:bold;
+    margin-right: 1em;
+}
+#pnlCamDeGpo #lblTblPrincipal_grupo
+{
+    font-weight:bold;
+    margin-right: 3em;
+}
+
+#pnlCamDeGpo #lblCiclo
+{
+    display: block;
+    font-size: 1.5em;
+    margin-top: 3px;
+    text-align: center;
+}
+
+#pnlCamDeGpo #lblTotal
+{
+    font-size: 0.9em;
+    margin-left: 3px;
+    margin-top: 10px;
+}
+
+#pnlCamDeGpo #lblMensajeCamDeGpo
+{
+    color: #808000;
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlCamDeGpo .coltblCamDeGpo_col5, #pnlCamDeGpo .coltblCamDeGpo_col4,
+#pnlCamDeGpo .coltblCamDeGpo_col7, #pnlCamDeGpo .coltblCamDeGpo_col8
+{
+    background: #C1A951;/*rgba(235,138,138,0.5);*/
+    /*opacity: 0.3;*/
+}
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#pnlCamDeGpo #pnlAreaTrabajoCamDeGpo
+{
+    position: relative;
+}
+#pnlCamDeGpo #pnlTablaCamDeGpo
+{
+    width: auto;
+    margin-right: 125px;
+}
+
+#pnlCamDeGpo #pnlBotonesDecontrol
+{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 120px;
+}
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+
+@media screen and (max-width: 430px)
+{
+    #pnlCamDeGpo #lblTblPrincipal_cct
+    {
+        display: none;
+    }
+}
+

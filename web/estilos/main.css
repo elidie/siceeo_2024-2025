@@ -1,0 +1,633 @@
+/* 
+    Creado el : 28/04/2015, 12:05:59 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+#mnuSICEEO {
+    height: auto; 
+    margin: 0 3%;
+    width: auto;
+}
+#mnuSICEEO ul{
+    background: rgba(0,0,0,0.1); /*Gris*/
+    padding: 0;
+    text-align: left;
+}
+#mnuSICEEO ul li{
+    cursor: pointer;
+    display: inline-block;
+    padding: 7px 5px 0px 5px;
+    text-align: center;
+    width: 70px;
+    height: 50px;
+}
+#mnuSICEEO ul li:hover{
+    background: rgba(0,0,0,0.1); /*Gris*/
+    /*border-bottom: 1px solid rgba(0,0,0,0.4);
+    border-radius: 0em 0em 0.5em 0.5em;*/
+    /*line-height: 18px;*/
+}
+#mnuSICEEO ul li a{
+    color: olive;
+    font-size: 0.75em;
+    text-decoration: none; 
+}
+#mnuSICEEO ul li label:hover{ 
+    cursor:pointer;
+}
+
+/* ************************ ÍCONOS DE MENÚ PRINCIPAL ************************ */
+#mnuSICEEO .iconMenu
+{
+    color: white;
+    font-size: 2.2em;
+    padding: 2px 2px 2px 2px;
+}
+#mnuSICEEO #iconPreinscripcion
+{
+    background: #05aed9;
+    padding: 2px 0px 2px 4px;
+}
+#mnuSICEEO #iconNuevoIngreso
+{
+    background: #149611;
+}
+
+#mnuSICEEO #iconGrupo
+{
+    background: #4472a2;
+}
+
+#mnuSICEEO #iconTutor
+{
+    background: #31d0b4;
+}
+
+#mnuSICEEO #iconNecEspeciales
+{
+    background: #bda12b;
+}
+
+#mnuSICEEO #iconTaller
+{
+    background: #f47421;
+}
+
+#mnuSICEEO #iconAsigEstatal
+{
+    background: #ad6b3e;
+}
+
+#mnuSICEEO #iconArtes
+{
+    background: #50824b;
+}
+
+#mnuSICEEO #iconCalificaciones
+{
+    background: #97c024;
+}
+
+#mnuSICEEO #iconUbicar
+{
+    background: #553b8c;
+}
+
+#mnuSICEEO #iconRepEvaluacion
+{
+    background: #318983;
+}
+
+#mnuSICEEO #iconOfics
+{
+    background: #c50412;
+}
+
+#mnuSICEEO #iconPersonal
+{
+    background: #274f67;
+}
+
+#mnuSICEEO #iconReportes
+{
+    background: #ac56bb;
+}
+
+#mnuSICEEO #iconConfigs
+{
+    background: #811b26;
+}
+
+#mnuSICEEO #iconExalumnos
+{
+    background: #3b7dea;
+}
+
+#mnuSICEEO #btnExalumnos .globoayuda_pointup
+{
+    bottom: -80px;
+    margin-left: -135px;
+    width: 250px;
+}
+
+
+/* ************************************************************************** */
+#mnuSICEEO .btnMnuSiCEEBDeshabilitado{
+    cursor: default;
+}
+#mnuSICEEO .btnMnuSiCEEBDeshabilitado:hover{
+    background: rgba(0,0,0,0); /*Gris*/
+    border-bottom: 3px solid rgba(0,0,0,0.0);  /*Quitamos el borde inferior*/
+}
+#mnuSICEEO .btnMnuSiCEEBDeshabilitado label:hover{ 
+    cursor:default;
+}
+#mnuSICEEO .btnMnuSiCEEBDeshabilitado label{
+    color: gray;
+    font-size: 100%;
+    text-decoration: none;
+    text-shadow: #fbfbfb 1px 1px 0px;
+}
+#mnuSICEEO .btnMnuSiCEEBDeshabilitado .iconMenu
+{
+    cursor: default;
+    filter: url('#grayscale'); /* Versión SVG para IE10, Chrome 17, FF3.5, Safari 5.2 and Opera 11.6 */
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%); /* Para cuando es estandar funcione en todos */
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+
+#pnlDatosInfoSistema{
+    padding-right: 3%;
+    text-align: right;
+}
+#pnlDatosInfoSistema ul
+{
+    list-style: none;
+    padding-left: 0;
+}
+#pnlDatosInfoSistema ul li
+{
+    display: inline-block;
+    margin-left: 5px;
+}
+
+#pnlDatosInfoSistema ul li label{
+    color: orange;
+    font-size: 0.7em;
+    margin-bottom: 2px;
+}
+#lblVersionSis 
+{
+    color: greenyellow;
+}
+
+#pnlDatosInfoSistema #lblCicloActivo
+{
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-name: cicloActTitileando;
+    animation-direction: alternate;
+    
+}
+@keyframes cicloActTitileando
+{
+    from {
+        color: orange;
+        font-size: 0.7em;
+        
+    }
+    to{
+        color: red;
+        font-size: 1em;
+    }
+}
+/* ********************** ICONOS DE INFORMACION GENERAL ********************* */
+#pnlDatosInfoSistema ul li .iconInfo
+{
+    font-size: 1em;
+    padding-right: 2px;
+}
+#pnlDatosInfoSistema #iconCicloActivo
+{
+    color: #18a508;
+}
+#pnlDatosInfoSistema #iconUsuario
+{
+    color: #0071bc;
+}
+#pnlDatosInfoSistema #iconUnidad
+{
+    color: #b4a391;
+}
+#pnlDatosInfoSistema #iconFecha
+{
+    color: #4d6882;
+}
+#pnlDatosInfoSistema #iconVersionSis
+{
+    color: #9e7616;
+}
+
+
+#pnlBusquedaCCT{
+    height: 50px;
+    padding-left: 5%;
+    width: 90%;
+    margin-bottom: 8px;
+    color: olive;
+}
+#pnlBusquedaCCT #txtBusquedaCCT{
+    color: olive;
+    font-size: 1em;
+    height: 20px;
+    margin-bottom: 0.5em;
+    margin-top: 8px;
+    text-transform: uppercase;
+    width: 6.4em;
+}
+
+#pnlBusquedaCCT #iconBusquedaPrincipal:hover
+{
+    cursor:pointer;
+}
+
+#pnlBusquedaCCT #btnCalendarioProcesos
+{
+    float: right;
+    margin-left: 1em;
+    padding-top: 8px;
+    text-align: center;
+    position: relative;
+}
+#pnlBusquedaCCT #btnCalendarioProcesos #ibtnCalendarioProcesos
+{
+    color: white;
+    cursor:pointer;
+    font-size: 1.2em;
+    padding: 4px 8px;
+    background-color: #e86e14;
+    border-radius: 18px;
+}
+#pnlBusquedaCCT #btnCalendarioProcesos #lbtnCalendarioProcesos
+{
+    color: #e86e14;
+    cursor:pointer;
+    display: block;
+    margin-top: 3px;
+    font-size: 0.7em;
+    margin-left: 0;
+}
+#pnlBusquedaCCT #btnCalendarioProcesos .globoayuda_pointright
+{
+    top: -20px;
+    margin-left: -310px;
+    width: 250px;
+    height: 60px;
+}
+#pnlBusquedaCCT #btnCalendarioProcesos .globoayuda_pointright:before
+{
+    margin-left: 137px;
+}
+#pnlBusquedaCCT #btnCalendarioProcesos .globoayuda_pointright:after
+{
+    margin-left: 136px;
+}
+
+#pnlBusquedaCCT #btnManual,
+#pnlBusquedaCCT #btnNormatividad,
+#pnlBusquedaCCT #btnCircular,
+#pnlBusquedaCCT #btnAnexos,
+#pnlBusquedaCCT #btnEER
+{
+    float: right;
+    margin-left: 1em;
+    padding-top: 8px;
+    text-align: center;
+}
+#pnlBusquedaCCT #btnManual #ibtnManual
+{
+    color: white;
+    cursor:pointer;
+    font-size: 1.2em;
+    padding: 5px 8px;
+    background-color: #549e80;
+    border-radius: 18px;
+}
+#pnlBusquedaCCT #btnManual #lbtnManual
+{
+    color: #549e80;
+    cursor:pointer;
+    display: block;
+    margin-top: 3px;
+    font-size: 0.7em;
+    margin-left: 0;
+}
+
+#pnlBusquedaCCT #btnNormatividad #ibtnNormatividad
+{
+    color: white;
+    cursor:pointer;
+    font-size: 1.2em;
+    padding: 5px 8px;
+    background-color: #0680E5;
+    border-radius: 18px;
+}
+
+#pnlBusquedaCCT #btnNormatividad #lbtnNormatividad
+{
+    color: #0680E5;
+    cursor:pointer;
+    display: block;
+    margin-top: 3px;
+    font-size: 0.7em;
+    margin-left: 0;
+}
+
+#pnlBusquedaCCT #btnCircular #ibtnCircular
+{
+    color: white;
+    cursor:pointer;
+    font-size: 1.2em;
+    padding: 5px 8px;
+    background-color: #553b8c;
+    border-radius: 18px;
+}
+
+#pnlBusquedaCCT #btnCircular #lbtnCircular
+{
+    color: #553b8c;
+    cursor:pointer;
+    display: block;
+    margin-top: 3px;
+    font-size: 0.7em;
+    margin-left: 0;
+}
+
+#pnlBusquedaCCT #btnAnexos #ibtnAnexos
+{
+    color: white;
+    cursor:pointer;
+    font-size: 1.2em;
+    padding: 5px 8px;
+    background-color: #149611; 
+    border-radius: 18px;
+}
+
+#pnlBusquedaCCT #btnAnexos #lbtnAnexos
+{
+    color: #149611; 
+    cursor:pointer;
+    display: block;
+    margin-top: 3px;
+    font-size: 0.7em;
+    margin-left: 0;
+}
+.ocultarDIV {
+    display:none !important;
+}
+
+#pnlBusquedaCCT #btnEER #ibtnEER
+{
+    color: white;
+    cursor:pointer;
+    font-size: 1.2em;
+    padding: 5px 8px;
+    background-color: #ac56bb;
+    border-radius: 18px;
+}
+#pnlBusquedaCCT #btnEER #lbtnEER
+{
+    color: #ac56bb;
+    cursor:pointer;
+    display: block;
+    margin-top: 3px;
+    font-size: 0.7em;
+    margin-left: 0;
+}
+
+
+#pnlBusquedaCCT #btnContacto
+{
+    float: right;
+    margin-left: 1em;
+    padding-top: 8px;
+    text-align: center;
+}
+#pnlBusquedaCCT #btnContacto #ibtnContacto
+{
+    color: white;
+    cursor:pointer;
+    font-size: 1.2em;
+    padding: 6px;
+    background-color: #a4771d;
+    border-radius: 18px;
+}
+#pnlBusquedaCCT #btnContacto #lbtnContacto
+{
+    color: #a4771d;
+    cursor:pointer;
+    display: block;
+    margin-top: 3px;
+    font-size: 0.7em;
+    margin-left: 0;
+}
+#pnlBusquedaCCT #btnCerrarSesion
+{
+    float: right;
+    margin-left: 0.5em;
+    padding-top: 8px;
+}
+#pnlBusquedaCCT #btnCerrarSesion #ibtnCerrarSesion
+{
+    font-size: 1.2em;
+    color: white;
+    cursor:pointer;
+    padding: 6px;
+    background-color: #b41a1e;
+    border-radius: 18px;
+}
+#pnlBusquedaCCT #btnCerrarSesion #lbtnCerrarSesion
+{
+    color: #b41a1e;
+    cursor:pointer;
+    display: block;
+    margin-top: 3px;
+    font-size: 0.7em;
+    text-align: center;
+}
+
+
+
+#pnlPrincipalWorkArea{
+    width: 96%;
+    border: 0px dashed black;
+    margin-left: 2%;
+    margin-right: 0;
+}
+#gridTable
+{
+    padding: 5px;
+    border: 2px solid #9b9a9a;
+    overflow: auto;
+    border-radius: 7px 7px 7px 7px;
+    margin-bottom: 1em;
+}
+
+#pnlTblPrincipal
+{
+    height: 450px;
+}
+
+
+/* ********** íconos de botón generales usados en todo el sistema ********** */
+#pnlPrincipalWorkArea .iconBtnRedondo
+{
+    font-size: 1.25em;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#pnlPrincipalWorkArea .iconBtnGpoAnt
+{
+    background-color: #245d65;
+    margin-right: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnGpoSig
+{
+    background-color: #245d65;
+    margin-left: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnCicAnt
+{
+    background-color: #806232;
+    margin-right: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnCicSig
+{
+    background-color: #806232;
+    margin-left: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnAlumAnt
+{
+    background-color: #811b26;
+    margin-right: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnAlumSig
+{
+    background-color: #811b26;
+    margin-left: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnBimEvalAnt
+{
+    background-color: #804000;
+    margin-right: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnBimEvalSig
+{
+    background-color: #804000;
+    margin-left: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnGuardar
+{
+    color: #4472a2;
+    margin-right: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnLimpiar
+{
+    color: black;
+    font-size: 1.25em;
+    margin-right: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnMas
+{
+    background-color: #45af2b;
+    margin-right: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnMenos
+{
+    background-color: #e7183a;
+    margin-right: 3px;
+}
+#pnlPrincipalWorkArea .iconBtnSincronizar
+{
+    background-color: #3e6bd6;
+    margin-right: 3px;
+}
+
+
+/******************************************************************************************************************************************/
+/******************************************* E  F  E  C  T  O  S    D E   M E N U *********************************************************/
+/******************************************************************************************************************************************/
+
+#mnuSICEEO ul[data-liffect="slideLeft"] li {
+    opacity: 0;
+    position: relative;
+    -webkit-animation: slideLeft 900ms ease both;
+    -webkit-animation-play-state: paused;
+    -moz-animation: slideLeft 900ms ease both;
+    -moz-animation-play-state: paused;
+    -o-animation: slideLeft 900ms ease both;
+    -o-animation-play-state: paused;
+    animation: slideLeft 900ms ease both;
+    animation-play-state: paused;
+}
+
+#mnuSICEEO ul[data-liffect="slideLeft"].play li {
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -o-animation-play-state: running;
+    animation-play-state: running;
+}
+
+@-webkit-keyframes slideLeft {
+    0% { opacity: 0; left: -30px; }
+    100% { opacity: 1; left: 0; }
+}
+
+@-moz-keyframes slideLeft {
+    0% { opacity: 0; left: -30px; }
+    100% { opacity: 1; left: 0; }
+}
+
+@-o-keyframes slideLeft {
+    0% { opacity: 0; left: -30px; }
+    100% { opacity: 1; left: 0; }
+}
+
+@keyframes slideLeft {
+    0% { opacity: 0; left: -30px; }
+    100% { opacity: 1; left: 0; }
+}
+
+/******************************************************************************************************************************************/
+/************************************************* M E D I A   Q U E R Y S ****************************************************************/
+/******************************************************************************************************************************************/
+													/*main.jsp*/
+@media screen and (max-width: 1000px){
+	#mnuSICEEO ul li .lblBotonMenu{
+		display: none;
+	}
+    #mnuSICEEO ul li{
+        height: 30px;
+        width: 30px;
+    }
+}
+
+@media screen and (max-width: 440px){
+	#pnlBusquedaCCT #btnManual, #pnlBusquedaCCT #btnCalendarioProcesos,
+        #pnlBusquedaCCT #btnNormatividad, #pnlBusquedaCCT #btnCircular, 
+        #pnlBusquedaCCT #btnAnexos, #pnlBusquedaCCT #btnAnexos  {
+		display: none;
+	}
+}

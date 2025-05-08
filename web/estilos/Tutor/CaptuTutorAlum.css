@@ -1,0 +1,280 @@
+/* 
+    Creado el : 27-11-2023
+    Autor     : Ely lópez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlCaptuTutorAlum
+{
+    font-size: 0.9em;
+}
+pnlCaptuTutorAlum .scrollTable table td{
+    border-left: 1px dashed rgba(0,0,0,0.2);
+    border-right: 1px dashed rgba(0,0,0,0.2);
+}
+
+#pnlCaptuTutorAlum #pnlScrlCapturaDeTutores .panel
+{
+    margin-bottom: 25px;
+}
+
+#pnlCaptuTutorAlum .scrollTable select
+{
+    font-family: Arial;
+    font-size: 1.1em;
+}
+
+#pnlCaptuTutorAlum .scrollTable textarea
+{
+    font-family: Arial;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlCaptuTutorAlum #pnlCapturaDeTutores
+{
+    border: 1px solid black;
+}
+#pnlCaptuTutorAlum #pnlScrlCapturaDeTutores {
+    height: 390px;
+    overflow: auto;
+    padding-top: 10px;
+    position: relative;
+    width: 100%;
+}
+
+#pnlCaptuTutorAlum .marco
+{
+    border: 1px solid #a9a9a9;
+    margin: 0;
+    padding: 0;
+}
+#pnlCaptuTutorAlum #pnlDatosGenerales
+{
+    background-color: #804000;
+    color: white;
+    font-size: 0.9em;
+    height: 18px;
+    margin: 5px 0; 
+    padding: 5px 0px 0px 5px;
+}
+
+#pnlCaptuTutorAlum #pnlTblAlumCapTutor
+{
+    border: 1px solid black;
+    height: 470px;
+}
+
+#pnlCaptuTutorAlum .riesgosAlerta
+{
+    margin-right: 5px;
+    padding: 8px 0 8px 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 100px;
+}
+
+#pnlCaptuTutorAlum .riesgosAlerta input
+{
+    margin-top: 5px;
+}
+
+#pnlCaptuTutorAlum #pnlTutoria label
+{
+    padding: 10px;
+}
+
+#pnlCaptuTutorAlum #pnlHabilidades #pnlHabilidades_instrucciones
+{
+    font-size: 0.9em;
+}
+
+#pnlCaptuTutorAlum #pnlRecomendXBimYAsig #pnlRecomendaciones_instrucciones
+{
+    font-size: 0.9em;
+    margin-bottom: 18px;
+}
+
+#pnlCaptuTutorAlum #pnlRecomendGrales #pnlRecomendGrales_instruc
+{
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+#pnlCaptuTutorAlum #pnlComprensionLectora #pnlComprensionLectora_instruc
+{
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlCaptuTutorAlum .tam2Button
+{
+    width: 115px;
+}
+
+#pnlCaptuTutorAlum #pnlBotonesDeGestion li
+{
+    vertical-align: top;
+    margin-right: 5px;
+}
+#pnlCaptuTutorAlum #pnlBotonesDeGestion li a
+{
+        width: 115px;
+}
+
+#pnlCaptuTutorAlum #pnlBotonesDeGestion #btnCargaTutorGpo 
+{
+    width: 170px;
+}
+
+
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+#pnlCaptuTutorAlum #tblObsYRecomXBimYAsig .coltblObsYRecomXBimYAsig_col1 select
+{
+    width: 200px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlCaptuTutorAlum #lblTblPrincipal_cct
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlCaptuTutorAlum #lblTblPrincipal_grado
+{
+    font-weight:bold;
+    margin-right: 1em;
+}
+#pnlCaptuTutorAlum #lblTblPrincipal_grupo
+{
+    font-weight:bold;
+    margin-right: 3em;
+}
+#pnlCaptuTutorAlum #lblTblAlumCapTutor_cveprograma
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlCaptuTutorAlum #lblTblAlumCapTutor_idalu
+{
+    margin-right: 2em;
+}
+
+#pnlCaptuTutorAlum .riesgosAlerta label
+{
+    display: block;
+}
+#pnlCaptuTutorAlum .riesgosAlerta .lblRiesgosAlertaBim
+{
+    font-size: 0.7em;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlCaptuTutorAlum #scrlHabilidades
+{
+    height: 330px;
+}
+#pnlCaptuTutorAlum #pnlHabilidades table td
+{
+    text-align: center;
+}
+#pnlCaptuTutorAlum #pnlHabilidades table .tblHabilidades_col0
+{
+    width: 50px;
+}
+#pnlCaptuTutorAlum #pnlHabilidades table .tblHabilidades_col0 label
+{
+    display: block;
+    width: 50px;
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg); 
+}
+#pnlCaptuTutorAlum #pnlHabilidades table .tblHabilidades_col2
+{
+    width: 60px;
+}
+
+#pnlCaptuTutorAlum #scrlObsYRecomXBimYAsig
+{
+    height: 115px;
+    margin-bottom: 10px;
+    border: 1px solid black
+}
+.tblObsYRecomXBimYAsig_col2
+{
+    width: 200px;
+}
+
+#pnlCaptuTutorAlum #scrlEvalLec
+{
+    height: 140px;
+}
+#pnlCaptuTutorAlum #tblEvalLec #tblEvalLec_titcol0
+{
+    font-weight: lighter;
+}
+#pnlCaptuTutorAlum #tblEvalLec tbody tr:nth-child(odd) 
+{
+    background: #FFFFFF;
+}
+#pnlCaptuTutorAlum #tblEvalLec tbody tr:nth-child(even) 
+{
+    background: #EBEBEB;
+}
+#pnlCaptuTutorAlum #tblEvalLec .checksEvalLec
+{
+    text-align: center;
+}
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+/* #pnlCaptuTutorAlum #pnlScrlCapturaDeEvaluaciones textarea::-webkit-input-placeholder { color: #ffaaaa; }
+/* #pnlCaptuTutorAlum #pnlScrlCapturaDeEvaluaciones textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 18- */
+/* #pnlCaptuTutorAlum #pnlScrlCapturaDeEvaluaciones textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 19+ */
+/* #pnlCaptuTutorAlum #pnlScrlCapturaDeEvaluaciones textarea:-ms-input-placeholder { color: #ffaaaa; } /* IE 10+ */
+
+#pnlCaptuTutorAlum #pnlHabilidades table textarea
+{
+    display: block;
+    height: 70px;
+    width: 97%;
+}
+
+#pnlCaptuTutorAlum #pnlRecomendXBimYAsig textarea
+{
+    width: 98%;
+}
+
+#pnlCaptuTutorAlum #pnlRecomendGrales textarea
+{
+    width: 98%;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#pnlCaptuTutorAlum #pnlListadoAlumnos
+{
+    float: left;
+    width: 550px;
+}
+#pnlCaptuTutorAlum #pnlCapturaDeTutores
+{
+    margin-left: 570px;                                                         /*Si se desea superponer, ajustar al tamaño que tiene por ancho el div izquierdo*/
+}
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */

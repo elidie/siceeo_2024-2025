@@ -1,0 +1,141 @@
+/* 
+    Creado el : 5/06/2017, 05:53:37 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+
+
+
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlPersonal #pnlDatosProfesor, #pnlPersonal #pnlDatosEscuelaYdirector
+{
+    color: #545454;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    padding-top: 15px;
+    position: relative;                                                         /*para poder usar el div pnlMensajeInfo con la propiedad position*/
+}
+#pnlPersonal input[type=text]
+{
+    font-size: 1em;
+    text-transform: uppercase;
+    width: 200px;
+}
+
+#pnlPersonal #pnlProfesores
+{
+    /*height: 100%;*/
+}
+
+#pnlPersonal #pnlDatosEscuela
+{
+    height: 110px;
+    margin-right: 8px;
+}
+
+#pnlPersonal #pnlDatosDirector
+{
+    margin-right: 8px;
+}
+
+#pnlPersonal #pnlDatosProfesor .tituloPanel
+{
+    display: block;
+}
+
+#pnlPersonal #pnlMensajeInfo
+{
+    color: #c72929;
+    height: 50px;
+    position: absolute;                                                         /*Para que se quede siempre a la derecha y tenga de ancho el resto a la derecha*/
+    /*width: 450px;*/
+}
+#pnlPersonal #pnlMensajeInfo label
+{
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlPersonal .buttonBar{
+    margin-top: 5px;
+}
+#pnlPersonal .buttonBar a
+{
+    font-size: 0.9em;
+    height: 22px;
+    line-height: 22px;
+    margin-right: 5px;
+    padding-top: 0px;
+    width: 122px;
+}
+
+#pnlPersonal .buttonBar #btnGuardarDir
+{
+    width: 205px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlPersonal .lblTituloCampos
+{
+    display: inline-block;
+    font-weight:bold;
+    margin-right: 10px;
+    text-align: right;
+    width: 140px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlPersonal #scrlGdosGposPersonal
+{
+    height: 200px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlPersonal .rfc
+{
+    margin-right: 5px;
+    width: 180px!important;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#pnlPersonal #pnlProfesores{
+    position: relative;
+}
+
+#pnlPersonal #pnlListadoGdosGpos
+{
+    /*float: left;*/
+    width: 450px;
+    margin-right: 195px;
+}
+#pnlPersonal #pnlDatosProfesor
+{
+    /*margin-left: 470px;                                                         /*Si se desea superponer, ajustar al tamaño que tiene por ancho el div izquierdo*/
+    position: absolute;
+    left: 470px;																	/*El panel 2 lo mandamos a la derecha usando posisión right*/
+    top: 20px;
+    width: auto;
+    /*border: 1px solid red;*/
+}
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */

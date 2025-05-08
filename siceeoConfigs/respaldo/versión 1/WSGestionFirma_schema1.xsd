@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://webservices/" xmlns:tns="http://webservices/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="EscuelaFirmando" nillable="true" type="tns:escuelaFirmando"/>
+
+  <xs:element name="EscuelaFirmandoResponse" nillable="true" type="tns:escuelaFirmandoResponse"/>
+
+  <xs:element name="Firmar" nillable="true" type="tns:firmar"/>
+
+  <xs:element name="FirmarResponse" nillable="true" type="tns:firmarResponse"/>
+
+  <xs:element name="LoginUser" nillable="true" type="tns:loginUser"/>
+
+  <xs:element name="LoginUserResponse" nillable="true" type="tns:loginUserResponse"/>
+
+  <xs:element name="hello" type="tns:hello"/>
+
+  <xs:element name="helloResponse" type="tns:helloResponse"/>
+
+  <xs:complexType name="firmar">
+    <xs:sequence>
+      <xs:element name="cct" type="xs:string" minOccurs="0"/>
+      <xs:element name="cicescini" type="xs:string" minOccurs="0"/>
+      <xs:element name="cveturno" type="xs:string" minOccurs="0"/>
+      <xs:element name="cveunidad" type="xs:string" minOccurs="0"/>
+      <xs:element name="cvezona" type="xs:string" minOccurs="0"/>
+      <xs:element name="forzarFirmado" type="xs:boolean"/>
+      <xs:element name="grupo" type="xs:string" minOccurs="0"/>
+      <xs:element name="idalus" type="xs:string" minOccurs="0"/>
+      <xs:element name="nivelEducativo" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="firmarResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:wsfirmaDatosReturn" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="wsfirmaDatosReturn">
+    <xs:sequence>
+      <xs:element name="datosReturn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="key" minOccurs="0" type="xs:anyType"/>
+                  <xs:element name="value" minOccurs="0" type="xs:anyType"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="mensaje" type="xs:string" minOccurs="0"/>
+      <xs:element name="returnCase" type="xs:int"/>
+      <xs:element name="tipoMensaje" type="xs:string" minOccurs="0"/>
+      <xs:element name="usuario" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="escuelaFirmando">
+    <xs:sequence>
+      <xs:element name="cicescini" type="xs:string" minOccurs="0"/>
+      <xs:element name="cveplan" type="xs:string" minOccurs="0"/>
+      <xs:element name="grupo" type="xs:string" minOccurs="0"/>
+      <xs:element name="idcct" type="xs:string" minOccurs="0"/>
+      <xs:element name="usuario" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="escuelaFirmandoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:wsfirmaDatosReturn" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginUser">
+    <xs:sequence>
+      <xs:element name="password" type="xs:string" minOccurs="0"/>
+      <xs:element name="user" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginUserResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:wsfirmaDatosReturn" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="hello">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="helloResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

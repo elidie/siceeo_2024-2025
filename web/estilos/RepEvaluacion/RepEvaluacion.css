@@ -1,0 +1,193 @@
+/* 
+    Creado el : 26-jul-2016, 16:23:54
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlRepEvaluacion #pnlTablaRepEvaluacion
+{
+    width: 80%;
+}
+
+#pnlRepEvaluacion .buttonBar
+{
+    font-size: 0.9em;
+    padding-top: 3px;
+}
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlRepEvaluacion #pnlDatosGenerales
+{
+    background-color: #804000;
+    color: white;
+    font-size: 0.9em;
+    height: 18px;
+    margin: 5px 0; 
+    padding: 3px 0px 3px 5px;
+}
+
+#pnlRepEvaluacion #pnlImpreRepEval
+{
+    margin-bottom: 5px;
+}
+
+#pnlRepEvaluacion #pnlVerRepEval
+{
+    background: #908670;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0 3px 3px 3px;
+}
+#pnlRepEvaluacion #pnlVerRepEval #pnlTxtsDesdeHasta
+{
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+#pnlRepEvaluacion #pnlTblRepEvaluacion
+{
+    border: 1px solid black;
+    height: 420px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#pnlRepEvaluacion #pnlTxtsFolioIniFin
+{
+    margin-top: 3px;
+}
+
+#pnlRepEvaluacion #pnlAsignarFolio
+{
+    margin-bottom: 0px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+
+#pnlRepEvaluacion #btnCalibCaidaRepEvaluacion
+{
+    width: 135px;
+}
+
+#pnlRepEvaluacion #btnImprimirRepEvaluacion
+{
+    width: 80px;
+}
+
+#pnlRepEvaluacion #btnGrupoAnterior
+{
+    width: 105px;
+    margin-right: 5px;
+}
+
+#pnlRepEvaluacion #btnSiguienteGrupo
+{
+    width: 105px;
+}
+
+#pnlRepEvaluacion #pnlBotonesFolio .buttonBar li
+{
+    margin-top: 5px; 
+    display: block;
+}
+#pnlRepEvaluacion #pnlBotonesFolio .buttonBar li a
+{
+    width: 110px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlRepEvaluacion #lblTblPrincipal_cct
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlRepEvaluacion #lblTblPrincipal_grado
+{
+    font-weight:bold;
+    margin-right: 1em;
+}
+#pnlRepEvaluacion #lblTblPrincipal_grupo
+{
+    font-weight:bold;
+    margin-right: 3em;
+}
+
+#pnlRepEvaluacion #pnlVerRepEval label
+{
+    font-size: 0.8em;
+}
+
+#pnlRepEvaluacion #pnlTxtsFolioIniFin label
+{
+    font-size: 0.8em;
+    margin-top: 3px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlRepEvaluacion #txtSelDesde
+{
+    width: 20px;
+}
+
+#pnlRepEvaluacion #txtSelHasta
+{
+    width: 20px;
+}
+
+#pnlRepEvaluacion #txtFolioLet
+{
+    width: 15px;
+    margin-left: 2px;
+    margin-right: 2px;
+    text-transform: uppercase;
+}
+
+#pnlRepEvaluacion #txtFolioNum
+{
+    width: 50px;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#pnlRepEvaluacion #pnlAreaTrabajoRepEvaluacion
+{
+    position: relative;
+}
+#pnlRepEvaluacion #pnlTablaRepEvaluacion
+{
+    width: auto;
+    margin-right: 195px;
+}
+
+#pnlRepEvaluacion #pnlBotonesFolio
+{
+    margin-top: 70px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 170px;
+}
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+
+
+

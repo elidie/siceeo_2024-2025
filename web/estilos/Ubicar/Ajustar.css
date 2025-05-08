@@ -1,0 +1,276 @@
+/* 
+    Creado el : 1/12/2015, 09:21:53 AM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+
+#pnlAjustar
+{
+    font-size: 0.8em;
+}
+
+#pnlAjustar .panel .tituloPanel
+{
+    background: #898c51;
+    color: #ffffff;
+    font-size: 0.9em;
+}
+
+#pnlAjustar .buttonBar
+{
+    font-size: 1.2em;
+}
+#pnlAjustar .buttonBar a
+{
+    height: 16px;
+}
+
+#pnlAjustar select
+{
+    color: black;
+    font-size: 0.9em;
+    height: 21px;
+}
+
+#pnlAjustar table
+{
+    font-size: 1.2em;
+}
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlAjustar #pnlOpcBusqueda
+{
+    display: block;
+}
+#pnlAjustar #pnlOpcBusqueda #pnlCurp_Ubicar, #pnlAjustar #pnlOpcBusqueda #pnlIdalu_Ubicar, #pnlAjustar #pnlOpcBusqueda ul
+{
+    display: inline-block;
+    margin-left: 7px;
+    vertical-align: top;
+}
+
+#pnlAjustar #pnlCurpsYNombre
+{
+    display: block;
+    padding-top: 3px;
+    margin-bottom: 1em;
+}
+#pnlAjustar #pnlCurpsYNombre select, #pnlAjustar #pnlCurpsYNombre input, #pnlAjustar #pnlCurpsYNombre div
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#pnlAjustar #pnlCamestatYEliminar label, #pnlAjustar #pnlCamestatYEliminar ul
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#pnlAjustar #pnlMaterias ul
+{
+    display: inline-block;
+}
+
+#pnlAjustar #pnlCertimp label, #pnlAjustar #pnlCertimp ul
+{
+    display: inline-block;
+    vertical-align: top;
+}
+#pnlAjustar #pnlCertificados, #pnlAjustar #pnlComentarios
+{
+    display: inline-block;
+    margin-right: 7px;
+    vertical-align: top;
+    width: 45%;
+}
+
+#pnlAjustar #pnlTblAlumgrado
+{
+    border: 1px solid black;
+    height: 80px;
+    margin-top: 7px;
+}
+#pnlAjustar #pnlTblMaterias
+{
+    border: 1px solid black;
+    height: 100px;
+    margin-top: 7px;
+}
+#pnlAjustar #pnlTblCertificados
+{
+    border: 1px solid black;
+    height: 65px;
+    margin-top: 7px;
+}
+#pnlAjustar #tblCertificados .coltblCertificados_col1, #pnlAjustar #tblCertificados .coltblCertificados_col10
+{
+    white-space: pre;                                                           /*Para que no haga wordrap*/
+}
+#pnlAjustar #pnlTblComentarios
+{
+    border: 1px solid black;
+    height: 65px;
+    margin-top: 7px;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlAjustar #btnBuskAlumA
+{
+    width: 80px;
+}
+
+#pnlAjustar #btnBusFolio
+{
+    width: 85px;
+}
+
+#pnlAjustar #btnCambSituacion
+{
+    width: 160px;
+}
+
+#pnlAjustar #btnEliminaAlu
+{
+    width: 100px;
+}
+
+#pnlAjustar #btnCambEsc
+{
+    width: 160px;
+}
+
+#pnlAjustar #btnRecursarEnOtraEsc
+{
+    width: 100px;
+}
+
+#pnlAjustar #btnAprobo
+{
+    width: 110px;
+}
+
+#pnlAjustar #btnReprobar
+{
+    width: 115px;
+}
+
+#pnlAjustar #btnImpHist
+{
+    width: 100px;
+}
+
+#pnlAjustar #btnCancelaFolio
+{
+    width: 90px;
+}
+
+#pnlAjustar #btnVerSusRodacs
+{
+    width: 100px;
+}
+
+#pnlAjustar #btnComenta
+{
+    width: 85px;
+}
+
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+#pnlAjustar #cbxCurps
+{
+    margin-top: 3px;
+    width: 180px;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlAjustar #pnlEstatusAlu label
+{
+    display: block;
+    text-align: center;
+}
+#pnlAjustar #pnlEstatusAlu #lblEstatusAlu
+{
+    font-weight: bold;
+}
+
+#pnlAjustar #pnlCamestatYEliminar label
+{
+    margin-top: 3px;
+}
+
+#pnlAjustar #pnlCertimp label
+{
+    margin: 3px 7px 0 0;
+}
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlAjustar #txtIdaluA
+{
+    width: 100px;
+}
+#pnlAjustar #txtNombreCompleto
+{
+    margin: 3px 15px 0 0;
+    width: 300px;
+}
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 630px){
+    #pnlAjustar #pnlEstatusAlu
+    {
+        /*display: block !important;*/
+        width: 100%;
+    }
+    #pnlAjustar #txtNombreCompleto
+    {
+        width: 250px;
+        display: block !important;
+        margin: 3px auto;
+    }
+    #pnlAjustar #cbxCurps
+    {
+        width: 256px;
+        display: block !important;
+        margin: 3px auto;
+    }
+}
+@media screen and (max-width: 550px){
+    #pnlAjustar #pnlOpcBusqueda ul
+    {
+        display: block;
+        margin-top: 5px;
+    }
+    #pnlAjustar #txtIdaluA
+    {
+        width: 134px;
+    }
+    #pnlAjustar #txtCurpA
+    {
+        width: 137px;
+    }
+}
+@media screen and (max-width: 480px){
+    #pnlAjustar #pnlCertificados, #pnlAjustar #pnlComentarios
+    {
+        display: block;
+        margin-right: auto;
+        width: auto;
+    }
+}

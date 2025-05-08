@@ -1,0 +1,162 @@
+/* 
+    Creado el : 3/06/2015, 03:20:49 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+#frmfBimXAlum
+{
+    font-size: 0.9em;
+}
+#frmfBimXAlum #pnlCicAct
+{
+    border: 1px solid #bcbcbc;
+    background:  rgba(128,128,0,0.2);
+    /*background: #808000;*/
+    margin-bottom: 5px;
+    /*color: white;*/
+}
+
+#frmfBimXAlum #pnlAlumAntSig
+{
+    padding: 7px;
+    /*background:  rgba(128,128,0,0.3);*/
+}
+#frmfBimXAlum #lblNom_tot, #frmfBimXAlum #pnlAlumAntSig ul, #frmfBimXAlum #lblCct
+{
+    display: inline-block;
+}
+#frmfBimXAlum #lblNom_tot
+{
+    /*margin-right: 25%;*/
+    width: 40%;
+}
+#frmfBimXAlum #pnlAlumAntSig ul
+{
+    margin-right: 5%;
+}
+#frmfBimXAlum #pnlAlumAntSig ul a
+{
+    width: 100px;
+    font-size: 0.8em;
+    height: 18px;
+}
+#frmfBimXAlum #pnlAlumAntSig #lblCct
+{
+    margin-right: 15px;
+}
+
+
+#frmfBimXAlum #pnlCalifBimXAlum
+{
+    height: 200px;
+}
+#frmfBimXAlum #pnlCalifBimXAlum #scrlCalifBimXAlum
+{
+    height: 100%;
+    overflow: auto;
+}
+#frmfBimXAlum #pnlCalifBimXAlum #scrlCalifBimXAlum table
+{
+    background: white;
+    color: black;
+}
+
+#frmfBimXAlum #tblCalifBimXAlum_divth9, #frmfBimXAlum #tblCalifBimXAlum_divth10, #frmfBimXAlum #tblCalifBimXAlum_divth11, #frmfBimXAlum #tblCalifBimXAlum_divth12
+{
+    /*background: #bcbcbc;*/
+    background: #F7F7F7;
+    color: black;
+}
+#frmfBimXAlum .coltblCalifBimXAlum_col9, #frmfBimXAlum .coltblCalifBimXAlum_col10, #frmfBimXAlum .coltblCalifBimXAlum_col11, #frmfBimXAlum .coltblCalifBimXAlum_col12
+{
+    background: #F7F7F7;
+}
+
+
+#frmfBimXAlum #pnl1ro
+{
+    border: 1px solid #bcbcbc;
+    /*background: #808000;*/
+    background:  rgba(128,128,0,0.2);
+    /*color: white;*/
+}
+#frmfBimXAlum #pnl1ro_GrupoCic
+{
+    padding: 7px;
+    /*background:  rgba(128,128,0,0.3);*/
+}
+#frmfBimXAlum #lblGradoGrupo_1ro
+{
+    margin-right: 5px;
+    color: blue;
+}
+#frmfBimXAlum #lblGrupo_1ro
+{
+    margin-right: 10%;
+}
+#frmfBimXAlum #pnl1ro_DelegCct
+{
+    padding: 7px;
+    /*background:  rgba(128,128,0,0.3);*/
+}
+#frmfBimXAlum #lblDeleg_1ro, #frmfBimXAlum #lblCct_1ro
+{
+    display: block;
+}
+#frmfBimXAlum #pnlCalif1ro
+{
+    height: 200px;
+}
+#frmfBimXAlum #pnlCalif1ro #scrlCalif1ro table
+{
+    background: white;
+    color: black;
+}
+
+
+#frmfBimXAlum #pnl2do
+{
+    border: 1px solid #bcbcbc;
+    /*background: #808000;*/
+    background:  rgba(128,128,0,0.2);
+    float: right;
+    /*color: white;*/
+}
+#frmfBimXAlum #pnl2do_GrupoCic
+{
+    padding: 7px;
+    /*background:  rgba(128,128,0,0.3);*/
+}
+#frmfBimXAlum #lblGradoGrupo_2do
+{
+    margin-right: 5px;
+    color: blue;
+}
+#frmfBimXAlum #lblGrupo_2do
+{
+    margin-right: 10%;
+}
+#frmfBimXAlum #pnl2do_DelegCct
+{
+    padding: 7px;
+    /*background:  rgba(128,128,0,0.3);*/
+}
+#frmfBimXAlum #lblDeleg_2do, #frmfBimXAlum #lblCct_2do
+{
+    display: block;
+}
+#frmfBimXAlum #pnlCalif2do
+{
+    height: 200px;
+}
+#frmfBimXAlum #pnlCalif2do #scrlCalif2do table
+{
+    background: white;
+    color: black;
+}
+
+#frmfBimXAlum #pnl1ro, #frmfBimXAlum #pnl2do
+{
+    display: inline-block;
+    width: 49.5%;
+}

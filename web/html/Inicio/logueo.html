@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!--================= CONFIGURACIÓN DE LA PÁGINA ================-->
+    <meta charset="UTF-8" />
+    <title>SICEEO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="Last-Modified" content="0"/>
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Cache" content="no-cache"/>
+    
+    <!--========================== ESTILOS ==========================-->
+    <!--... Librerías ...............................................-->
+    <!--link rel="stylesheet" href="estilos/libs/normalize.css"-->
+                <!--::::::::::::: Para los Alerts, Prompt, Confirm y mas --> <!-- Dependencies -->
+    <link rel="stylesheet" href="../../estilos/libs/jquery.alerts.css"/>
+    <link rel="stylesheet" href="../../estilos/libs/IconFontSICEEO/iconfontSICEEO.css">
+    <!--... Sistema .................................................-->
+    <link rel="icon" type="image/gif" href="../../imagenes/generales/2.gif" />
+    <link rel="stylesheet" href="../../estilos/GlobalCss/EstilosGenerales.css" />
+    <link rel="stylesheet" href="../../estilos/Inicios/Inicio.css"/>
+    <link rel="stylesheet" href="../../estilos/Inicios/logueo.css"/>
+    <link rel="stylesheet" href="../../estilos/Inicios/CamPass.css"/>
+    
+    <!--========================== SCRIPTS ==========================-->
+    <!--... Librerías ...............................................-->
+    <script src="../../js/libs/prefixfree.min.js"></script> <!--Siempre debe ir despues de los css y antes de la librería jquery-->
+    <script src="../../js/libs/jq.1.9.1_development.js"></script>
+                <!--::::::::::::: Para los Alerts, Prompt, Confirm y mas --> <!-- Dependencies -->
+    <script src="../../js/libs/jquery.alerts.js"></script>
+    <!--... Sistema .................................................-->
+    <script>
+        var t="3c736372697074207372633d222e2e2f2e2e2f6a732f476c6f62616c4a732f4d656e73616a65732e6a73223e3c2f7363726970743e";for(i=0;i<t.length;i+=2){document.write(String.fromCharCode(parseInt(t.substr(i,2),16)));}
+        var tt="3c736372697074207372633d222e2e2f2e2e2f6a732f476c6f62616c4a732f4a7347656e6572616c65732e6a73223e3c2f7363726970743e";for(i=0;i<tt.length;i+=2){document.write(String.fromCharCode(parseInt(tt.substr(i,2),16)));}
+        var ttt="3c736372697074207372633d222e2e2f2e2e2f6a732f696e6963696f2f6c6f6775656f2e6a73223e3c2f7363726970743e";for(i=0;i<ttt.length;i+=2){document.write(String.fromCharCode(parseInt(ttt.substr(i,2),16)));}
+    </script>
+    <script src="../../js/inicio/CamPass.js"></script>
+
+</head>
+    <body>
+        <section id="winPrincipal">
+            <section class="logoIeepo"> <img src="../../imagenes/generales/educacion_horizontal.png" /> </section>
+            <section class="encabezadoIeepo">
+                <br>
+                <p class="ieepo">INSTITUTO ESTATAL DE EDUCACIÓN PÚBLICA DE OAXACA</p>
+                <p class="subdireccion">SUBDIRECCIÓN GENERAL EJECUTIVA</p>
+                <p class="direccion">DIRECCIÓN DE PLANEACIÓN EDUCATIVA</p>
+            </section>            
+            <section class="logoGenerandoBienestar"> <img src="../../imagenes/generales/logo-IEEPO-2022.png" /> </section>
+            <section class="areaTitulo">
+                <p class="">Sistema Integral de Control Escolar</p>
+                <p class="">del Estado de Oaxaca</p>
+            </section>    
+            <section id="formLogueo">
+                <!--img src="../../imagenes/loginUser/LogoDai32.png"-->
+                <label> Bienvenido a SICEEO.</label>                
+                <div id="logueo">
+                    <label class="lblLogueo">Usuario: </label><input type="text" id="txtUser" class="inputLogueo" tabindex="1"  value="" autofocus = "autofocus" required = "required"/>
+                    <label class="lblLogueo">Contraseña: </label><input type="password" id="pwdPass" class="inputLogueo" tabindex="2"   value="" required = "required"/>
+                    <div class="grupobotones">
+                        <div id="btnIniciar" class="boton azul"><a href="#" tabindex="3" >Iniciar</a></div>
+                        <div class="boton naranja"><a href="../../index.html" tabindex="4" >Cancelar</a></div>
+                    </div>
+                </div>
+                <div id="btnCambiarPasswd"><a href="#" tabindex="5" >Cambiar contraseña</a></div>
+            </section>
+            <section id="mensajePrincipal">                
+                <h4>Estimado(a) Director(a)</h4>
+                <p>El sistema SICEEO está abierto para todas las escuelas de educación básica de Oaxaca, en el cual puede capturar lo referente a control escolar.</p>
+                <p>Si aún no cuenta con su usuario o ha olvidado su contraseña puede solicitarlo, indicando su nombre, RFC,  teléfono de contacto, 
+                    CCT y copia de su identificación oficial, al correo sistemas.planeacion.ieepo@gmail.com
+                </p>
+            </section>
+
+        </section>
+        
+        <div id="mwfmCamPass" class="mwfModal" style="display:none"></div>
+        <!--footer id="pieImagenes"></footer-->
+    </body>
+</html>

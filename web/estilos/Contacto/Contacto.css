@@ -1,0 +1,229 @@
+/* 
+    Creado el : 28/01/2016, 12:27:07 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+
+#pnlContacto
+{
+    color: whitesmoke;
+}
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlContacto #pnlPanelGris
+{
+    background: #eeeeee;
+    height: 400px;
+    margin: 2%;
+    padding: 2%;
+}
+
+#pnlContacto #pnlIconoOperador
+{
+    width: 117px;
+    float: left;
+}
+#pnlContacto #iconOperador
+{
+    color: #a16238;
+    font-size: 7.3em;
+}
+#pnlContacto .formatoIcono
+{
+    color: white;
+    font-size: 1.5em;
+    margin-right: 5px;
+}
+
+
+#pnlContacto #pnlPanelDatos
+{
+    margin-left: 119px;
+    background: #ae6739;
+    width: auto;
+    height: 100%;
+}
+
+#pnlContacto #pnlTitulo
+{
+    margin-bottom: 20px;
+}
+#pnlContacto #pnlTitulo label
+{
+    margin-left: 20px;
+}
+
+#pnlContacto #pnlLeyenda
+{
+    margin-left: 15px;
+    margin-bottom: 20px;
+}
+
+#pnlContacto #pnlInformacion
+{
+    margin-left: 15px;
+}
+
+
+/* ............................... pnlCorreo ...............................*/
+#pnlContacto #pnlCorreo
+{
+    overflow: hidden;
+}
+#pnlContacto #pnlTituloCorreo
+{
+    width: 200px;
+    float: left;
+    height: 56px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border-right: 5px solid white;
+}
+#pnlContacto #pnlDatosCorreo
+{
+    margin: 10px 0px 10px 202px;
+}
+#pnlContacto #pnlDatosCorreo div
+{
+    display: block;
+}
+#pnlContacto #pnlDatosCorreo .lblNivel
+{
+    width: 114px;
+    margin-right: 20px;
+    text-align: right;
+}
+#pnlContacto #pnlDatosCorreo div label, #pnlContacto #pnlDatosCorreo .lblNivel
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+/* ............................... pnlTelefono ...............................*/
+#pnlContacto #pnlTituloTelefono
+{
+    width: 200px;
+    float: left;
+    height: 40px;
+    margin-right: 10px;
+    border-right: 5px solid white;
+}
+#pnlContacto #pnlDatosTelefono
+{
+    margin: 10px 0px 10px 202px;
+}
+#pnlContacto #pnlDatosTelefono label
+{
+    display: block;
+}
+
+
+/* ............................... pnlJefeDepto ...............................*/
+
+#pnlContacto #pnlTituloJefeDepto
+{
+    width: 200px;
+    float: left;
+    height: 34px;
+    margin-top: 10px;
+    border-right: 5px solid white;
+    margin-right: 10px;
+}
+#pnlContacto #pnlDatosJefeDepto
+{
+    margin: 10px 0px 10px 202px;
+}
+#pnlContacto #pnlJefeDepto #pnlDatosJefeDepto div
+{
+    padding-top: 18px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlContacto #pnlTitulo
+{
+    border-bottom: 4px solid whitesmoke;
+}
+#pnlContacto #pnlTitulo label
+{
+    font-size: 2em;
+}
+
+#pnlContacto #pnlDatosJefeDepto label
+{
+    margin-top: 10px !important;
+}
+
+
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 799px)
+{
+    #pnlContacto #pnlPanelDatos
+    {
+        overflow: scroll;
+    }
+    #pnlContacto #pnlTituloCorreo, #pnlContacto #pnlTituloTelefono, #pnlContacto #pnlTituloJefeDepto
+    {
+        float: none;
+        display: block;
+        border-bottom: 2px solid white;
+        border-right: 0px solid white;
+        height: 35px;
+    }
+    #pnlContacto #pnlDatosCorreo, #pnlContacto #pnlDatosTelefono, #pnlContacto #pnlDatosJefeDepto
+    {
+        display: block;
+        width: 100%;
+        margin: 0 0 10px 15px;
+    }
+}
+
+@media screen and (max-width: 560px)
+{
+    #pnlContacto #pnlIconoOperador
+    {
+        float: none;
+        width: auto;
+        display: block;
+    }
+    #pnlContacto #pnlIconoOperador #iconOperador
+    {
+        font-size: 2.4em;
+    }
+    #pnlContacto #pnlPanelDatos
+    {
+        margin: 0;
+        height: 355px;
+    }
+}

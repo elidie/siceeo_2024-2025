@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/var/lib/tomcat/siceeoConfigs/WSGestionFirma.wsdl" uri="wsdl/WSGestionFirma.wsdl"/>
+    <system systemId="file:/var/lib/tomcat/siceeoConfigs/WSGestionFirma_schema1.xsd" uri="wsdl/WSGestionFirma_schema1.xsd"/>
+    <system systemId="file:/C:/var/lib/tomcat/siceeoConfigs/WSGestionFirma.wsdl" uri="wsdl/WSGestionFirma.wsdl"/>
+    <system systemId="file:/C:/var/lib/tomcat/siceeoConfigs/WSGestionFirma_schema1.xsd" uri="wsdl/WSGestionFirma_schema1.xsd"/>
+</catalog>

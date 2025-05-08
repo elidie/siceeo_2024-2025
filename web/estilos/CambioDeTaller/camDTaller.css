@@ -1,0 +1,183 @@
+/* 
+    Creado el : 20/01/2016, 09:14:29 AM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlCamDTaller #pnlTblCamDTaller
+{
+    border: 1px solid #a9a9a9;
+    height: 300px;
+    margin-top: 6px;
+}
+
+#pnlAsigCbAlumno
+{
+    width: 100%;
+    position: relative;       
+    margin-bottom: 10px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlCamDTaller ul
+{
+    margin-top: 10px;
+}
+#pnlBtnParaAgregar .iconBtnAddClubCt {
+    background-color: #804000;
+    margin-right: 3px;
+}
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+/* ------------------------ CONFIGURACION DEL PANEL PARA NUEVO CLUB CCT ------ */
+#pnlTrabNvoClub
+{
+    /*border: 1px solid #000080;*/
+    padding: 2px;
+    margin-top: 10px;
+    height: 100%;
+}
+#frmAreaTrabClubAgregar{
+    height: 320px;
+}
+.btnInsert li a {
+    width: 250px;
+}
+#frmXClubOax-Ct{
+    width: 100%;
+    position: relative;       
+    margin-bottom: 10px;
+    width: auto;
+}
+
+#frmXClubOax-Ct #pnlBtnParaAgregar {
+    position: relative;
+    float: left;
+    width: 28%;
+    padding-top: 20px;
+}
+
+#frmXClubOax-Ct #pnlTblCctAgregadas,
+#frmXClubOax-Ct #pnlTblClubOaxaca {
+    position: relative;
+    float: left;
+    width: 35%;
+    height: 120px;
+}
+#pnlTblAsigCbAlumno {    
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 120px;
+}
+.txtClTitulo {
+    font-size: 14px;
+    color: #804000;
+    margin:20px;
+}
+#pnlTblClubOaxaca > div ,
+#pnlTblCctAgregadas > div
+{
+    margin: 4px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlCamDTaller #pnlDatosGenerales label
+{
+    color: olive;
+    font-weight: bold;
+    margin-right: 3%;
+}
+
+#pnlInsClubNvoCct div{
+    margin-top: 5px;   
+    margin-left: 2px;
+}
+
+.frmInsClub label,.frmInsClub input,
+.frmInsClub select {
+    font-size: 14px;
+    margin-right: 5px;
+    margin-top: 2px;
+    padding: 2px;
+    display: inline-block;
+}
+
+#pnlAsignarClubAlumno select {
+    width: 80%;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+.btnAlinear{
+    position: relative;    
+}
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+#pnlAreaTrabCamDTaller {
+    position: relative;
+}
+#pnlRepEvaluacion #pnlTablaRepEvaluacion
+{
+    width: 60%;
+}
+
+#pnlAreaTrabCamDTaller #pnlCamDTaller {
+    width: 70%;
+    margin-right: 195px;
+}
+
+#pnlAreaTrabCamDTaller #pnlAsignarClubAlumno {
+    margin-top: 30px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 30%;
+}
+#pnlAsigCbAlumno > div{
+    display: inline-block;
+    margin: 6px;
+    width: 100%;
+}
+
+#pnlRepEvaluacion_ #pnlBotonesFolio_ {
+    margin-top: 70px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 170px;
+}
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 355px)
+{
+    #pnlCamDTaller #btnGuardar
+    {
+        margin-top: 5px;
+    }
+}
+

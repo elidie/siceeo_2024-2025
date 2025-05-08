@@ -1,0 +1,414 @@
+/* 
+    Creado el : 13-dic-2016, 10:15:01
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlEvalPreescolar
+{
+    font-size: 0.9em;
+}
+
+#pnlEvalPreescolar #pnlEvaluaciones .tituloPanel
+{
+    font-size: 0.8em;
+}
+#pnlEvalPreescolar .singleButton
+{
+    font-size: 0.8em;
+}
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+
+#pnlComDocAlum #pnlTblComDocAlum
+{
+    border: 1px solid black;
+    height: 60px;
+    margin-bottom: 5px;
+    width: 395px;
+}
+
+#pnlEvalPreescolar #pnlAlumnos #pnlDatosGenerales
+{
+    background-color: #804000;
+    color: white;
+    font-size: 0.9em;
+    height: 18px;
+    margin: 5px 0; 
+    padding: 5px 0px 0px 5px;
+}
+
+#pnlEvalPreescolar #scrlAlumCapEval
+{
+    border: 1px solid black;
+    height: 740px;
+}
+
+#pnlEvalPreescolar #pnlGestionEval #pnlCambiarEval
+{
+    margin-bottom: 5px; 
+    text-align: center;
+}
+#pnlEvalPreescolar #pnlGestionEval #pnlCambiarEval .alinearHoriz
+{
+    vertical-align: middle;
+}
+
+#pnlEvalPreescolar #pnlMensajeGuardar 
+{
+    animation-duration: 3s;
+    animation-iteration-count: 50;
+    animation-name: MiAnimacion2;
+    animation-direction: alternate;
+    color: #c51111;
+    font-size: 0.8em;
+    overflow:hidden;
+    padding-bottom: 6px;
+    white-space: nowrap;
+    width: 100%;
+}
+@keyframes MiAnimacion2 {
+    from
+    {
+        color: black;
+        display:block;
+    }
+    25% 
+    {
+        color: #c51111;
+    }
+    85% 
+    {
+        color: #c51111;
+    }
+    to
+    {
+        color: white;
+    }
+}
+
+#pnlEvalPreescolar #pnlGestionEval #pnlInasistencias .tituloPanel
+{
+    display: block;
+}
+#pnlEvalPreescolar #pnlGestionEval #pnlInasistencias #pnlTblInasistencias
+{
+    border: 1px solid black;
+    height: 60px;
+    width: 32%;
+}
+
+/*#pnlEvalPreescolar #pnlGestionEval #pnlInasistencias #pnlTblComDocAlum
+{
+    border: 1px solid black;
+    height: 60px;
+    width: 32%;
+}*/
+
+
+#pnlEvalPreescolar #pnlDatosComp
+{
+    position: relative;                                                         /*Esta propiedad sólo es para que el globo ayuda se pueda mostrar superpuesto al botón*/
+}
+#pnlEvalPreescolar #pnlDatosComp .globoayuda_pointdown
+{
+    bottom: initial;
+    left: 30%;
+    top: -80px;
+}
+#pnlEvalPreescolar #pnlGestionEval #pnlDatosComp #pnlLenguaComunicacion>.tituloPanel
+{
+    display: block;
+}
+
+/*#pnlEvalPreescolar #pnlDatosComp #pnlLenguaComunicacion {
+    display: block;    
+}
+
+#pnlEvalPreescolar #pnlDatosComp #pnlLenguaComunicacion #pnlLengua{
+    float: left;
+    width: 40%;
+}
+
+#pnlEvalPreescolar #pnlDatosComp #pnlLenguaComunicacion #pnlComuni{
+    margin-left: 45%;
+}*/
+
+#pnlEvalPreescolar #pnlDatosComp #pnlCriteriosDePromocion
+{
+    margin-top: 8px;
+}
+
+
+#pnlEvalPreescolar .areaEval
+{
+    margin-bottom: 20px;
+    margin-top: 12px;
+}
+
+#pnlEvalPreescolar #pnlBotonesDecontrol
+{
+    margin-top: 10px;
+}
+
+
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlEvalPreescolar .buttonBar li a
+{
+    height: 18px;
+    margin: 2px;
+    padding-top: 3px;
+}
+
+#pnlEvalPreescolar #pnlCambiarEval .buttonBar a
+{
+    width: 75px;
+}
+
+#pnlEvalPreescolar #btnGuardarEvaluaciones
+{
+    width: 188px;
+}
+
+#pnlEvalPreescolar #pnlInasistencias .buttonBar
+{
+    margin-left: 10px;
+}
+#pnlEvalPreescolar #pnlInasistencias .buttonBar li
+{
+    display: block;
+}
+#pnlEvalPreescolar #pnlInasistencias #btnGuardaInasistencias
+{
+    margin-top: 5px;
+    width: 170px; /*9em*/
+}
+#pnlEvalPreescolar #pnlInasistencias #btnGenInasis
+{
+    
+    width: 170px;
+}
+
+
+#pnlEvalPreescolar #btnGuardarDatosComp
+{
+    margin: 5px auto 0px auto;
+    width: 185px;
+}
+#pnlEvalPreescolar #btnGuardarDatosComp .iconButton
+{
+    color: #4472a2;
+}
+
+#pnlEvalPreescolar #pnlBotonesDecontrol .buttonBar li a
+{
+    width: 115px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+
+/* ------------------------ CONFIGURACIÓN DE CHECKBOX ------------------------ */
+#pnlEvalPreescolar #pnlDatosComp #pnlConcluyo #chkConcluyo
+{
+    height: 14px;
+    width: 17px;
+    margin-left: 5px;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlEvalPreescolar #lblTblPrincipal_cct
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlEvalPreescolar #lblTblPrincipal_grado
+{
+    font-weight:bold;
+    margin-right: 1em;
+}
+#pnlEvalPreescolar #lblTblPrincipal_grupo
+{
+    font-weight:bold;
+    margin-right: 3em;
+}
+#pnlEvalPreescolar #lblTblAlumCapEval_cveprograma
+{
+    font-weight:bold;
+    margin-right: 2em;
+}
+#pnlEvalPreescolar #lblTblAlumCapEval_idalu
+{
+    margin-right: 2em;
+}
+
+#pnlEvalPreescolar #lblNumEval
+{
+    width: 8em;
+    /*margin-top: 5px;*/
+    font-size: 0.8em;
+}
+
+#lblComDA {
+    color: #c51111;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlEvalPreescolar #scrlAlumCapEval #tblAlumCapEval td
+{
+    height: 14px;
+}
+
+#pnlEvalPreescolar #scrlAvancesXEval
+{
+    border: 1px solid black;
+    height: 260px;
+    margin-bottom: 5px;
+    overflow: auto;
+    padding: 5px 8px;
+    position: relative;                                                         /*Para que no se desborde la tabla*/
+}
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+#pnlEvalPreescolar #pnlGestionEval #pnlInasistencias #pnlTblInasistencias input
+{
+    /*width: 100%;*/
+    width: 2em;
+}
+
+/*#pnlEvalPreescolar .areaEval textarea,*/
+#pnlEvalPreescolar .areaEval .avances
+{
+    display: block;
+    height: 80px;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+#pnlEvalPreescolar #pnlGestionEval textarea::-webkit-input-placeholder { color: #ffaaaa; }
+#pnlEvalPreescolar #pnlGestionEval textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 18- */
+#pnlEvalPreescolar #pnlGestionEval textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 19+ */
+#pnlEvalPreescolar #pnlGestionEval textarea:-ms-input-placeholder { color: #ffaaaa; } /* IE 10+ */
+
+#pnlEvalPreescolar #txtaRecomendGrales
+{
+    height: 50px;
+    margin-right: 5px;
+    text-transform: uppercase;
+    width: 99%;
+}
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#pnlEvalPreescolar #pnlAlumnos
+{
+    float: left;
+    width: 550px;
+}
+#pnlEvalPreescolar #pnlGestionEval
+{
+    margin-left: 570px;                                                         /*Si se desea superponer, ajustar al tamaño que tiene por ancho el div izquierdo*/
+}
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+
+@media screen and (max-width: 970px)
+{
+    #pnlEvalPreescolar #lblTblAlumCapEval_cveprograma
+    {
+        display: none;
+    }
+    
+    #pnlEvalPreescolar #pnlAlumnos 
+    {
+        float: left;
+        width: 410px;
+    }
+    
+    #pnlEvalPreescolar #pnlGestionEval
+    {
+        margin-left: 430px;                                                     
+    }
+}
+
+@media screen and (max-width: 790px)
+{
+    #pnlEvalPreescolar #pnlGestionEval #lblNumEval 
+    {
+        width: auto;
+    }
+    
+    #pnlEvalPreescolar #ulBtnEvalAnt, #pnlEvalPreescolar #lblNumEval, #pnlEvalPreescolar #ulbtnEvalSig
+    {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 750px)
+{
+    #pnlEvalPreescolar #pnlAlumnos
+    {
+        display: block;
+        float: none;
+        height: 134px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    
+    #pnlEvalPreescolar #lblTblAlumCapEval_cveprograma
+    {
+        display: inline;
+    }
+    
+    #pnlEvalPreescolar #pnlAlumnos #scrlAlumCapEval
+    {
+        height: 72px;
+    }
+   
+    #pnlEvalPreescolar #pnlGestionEval
+    {
+        display: block;
+        float: none;
+        margin-left: 0;
+        margin-top: 10px;
+        padding-left: 0;
+        vertical-align: baseline;
+        width: 100%;
+    }
+    
+    #pnlEvalPreescolar #ulBtnEvalAnt, #pnlEvalPreescolar #lblNumEval, #pnlEvalPreescolar #ulbtnEvalSig
+    {
+        display: inline-block;
+    }
+}
+@media screen and (max-width: 580px)
+{
+    #pnlEvalPreescolar #lblTblAlumCapEval_cveprograma, #pnlEvalPreescolar  #lblTblPrincipal_cct
+    {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 350px)
+{
+    #pnlEvalPreescolar lblTblAlumCapEval_idalu
+    {
+        display: none;
+    }
+}

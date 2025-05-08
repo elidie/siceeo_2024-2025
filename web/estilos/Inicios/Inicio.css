@@ -1,0 +1,140 @@
+/* 
+    Creado el : 28/04/2015, 01:56:27 PM
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+                        /*..... index, logueo .....*/
+.logoIeepo{
+    text-align:right;
+}
+
+.logoIeepo img{
+    margin-top: 20px;
+    width: 280px;
+    margin-right: 30px;
+}
+                        /*..... index, logueo .....*/
+.encabezadoIeepo{
+    text-align:center;
+    width:40%;
+}
+                        /*..... index, logueo .....*/
+.ieepo{
+    font-size: 1.2em;
+}
+                        /*..... index, logueo .....*/
+.subdireccion{
+    font-size: 1em;
+}
+                        /*..... index, logueo .....*/
+.direccion{
+    font-size: 0.8em;
+}
+
+                        /*..... index, logueo .....*/
+.logoGenerandoBienestar{
+    text-align:left;    
+}
+
+.logoGenerandoBienestar img{
+    margin-top: 2px;
+    width: 400px;
+    margin-right: 60px;
+}
+
+
+                        /*..... index  .....*/
+.areaTrabajo{
+    float: none;
+    width: auto;
+    margin: 15%  20% 0% 20%;
+    border: 0px solid orange;
+    text-align: center;
+}
+                     /*..... logueo  .....*/
+.areaTitulo {
+    float: none;
+    /*height: 120px;*/
+    margin: 12%  auto 2% auto;
+    padding: 0.2em 0.2em 0.2em 0.2em;
+    text-align: center;
+    font-size: 1.4em;
+    width: 362px;
+}
+                        /*..... index, logueo .....*/
+.grupobotones { 
+    border: 0px solid #000;
+    float: none;
+    margin: 1% auto;
+    width: auto;
+}
+                        /*..... index, logueo .....*/
+.boton.azul {
+    background-color: #4682B4;
+    border-color: #000080 #000080 #000080 #000080;
+    text-shadow: rgba(0, 0, 0, 0.0976563) 0px 1px 0px;
+}
+                        /*..... index, logueo .....*/
+.boton.azul a {
+    color:#fff;
+    padding: 5px;
+}
+                        /*..... index, logueo .....*/
+.boton.azul:hover {
+    background-color:#7C9AB2;
+}
+
+
+/* ******************************************** */
+
+                        /*..... index, logueo .....*/
+.imagenPie{
+    border: 0px solid #ccc;
+    float: none;
+    margin: 10%  20% 0% 20%;
+    width: auto;
+}
+                        /*..... index, logueo .....*/
+.imagenPie img{
+    width: 100%;
+}
+                        /*..... index, logueo .....*/
+section {
+    float:left;
+    width:30%;
+}
+.saltoDeLinea
+{
+    /*display: none;*/
+}
+
+/******************************************************************************************************************************************/
+/************************************************* M E D I A   Q U E R Y S ****************************************************************/
+/******************************************************************************************************************************************/
+
+@media screen and (max-width: 800px){
+                    /*..... index, logueo .....*/
+    .logoGenerandoBienestar, .logoIeepo{
+        display: none;
+    }
+                    /*..... index, logueo .....*/
+    .encabezadoIeepo{
+        margin-top: 18px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 400px){
+                    /*..... index, logueo .....*/
+    .subdireccion, .direccion{
+        display: none;
+    }
+                    /*..... index, logueo .....*/
+    .encabezadoIeepo{
+        width: 100%;
+    }
+    .saltoDeLinea
+    {
+        display: block;
+    }
+}

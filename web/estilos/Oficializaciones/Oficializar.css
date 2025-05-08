@@ -1,0 +1,338 @@
+/* 
+    Creado el : 09-mar-2017, 9:31:30
+    Autor     : Ing. Maai Nolasco Sánchez
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+#pnlOficializar 
+{
+    padding-top: 0px;
+    margin-top: 0px;
+}
+#pnlOficializar #pnlScrollOficializar
+{
+    height: 500px;
+    margin-top: 15px;
+    overflow: scroll;
+    padding-top: 9px;
+    width: 100%;
+    
+}
+
+#pnlOficializar .panel {
+    box-shadow: 2px 3px 9px 0px #92928e;
+    margin-bottom: 25px;
+    background-color: #e8e8e2;
+    width: 98%;
+}
+
+
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlOficializar #pnlOficializarCalificaciones .panel,
+#pnlOficializar #pnlOficializarEvaluaciones .panel
+{
+    padding: 7px;
+}
+#pnlOficializar #pnlOficializarCalificaciones .panel > label,
+#pnlOficializar #pnlOficializarEvaluaciones .panel > label
+{
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlOficializar .btnOfic
+{
+    /*background-color: #35BC7A;*/
+    color: white;
+    height: 110px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 12px 8px 8px 8px;
+    width: 108px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+#pnlOficializar .btnOfic .btnOfic-obj1
+{
+    background-color: white;
+    border-radius: 18px;
+    color: #35BC7A;
+    margin-left: 0px !important;
+    padding: 6px 11px;
+}
+#pnlOficializar .btnOfic .btnOfic-obj2, 
+#pnlOficializar .btnOfic .btnOfic-obj4
+{
+    display: block;
+}
+#pnlOficializar .btnOfic .btnOfic-obj2
+{
+    font-size: 16px;
+    margin-top: 15px;
+}
+#pnlOficializar .btnOfic .btnOfic-obj4
+{
+    bottom: 31px;
+    left: 21px;
+    /*margin-top: 20px;*/
+    font-size: 0.7em;
+    font-weight: lighter;
+    position: absolute;
+    /*text-align: center;*/
+}
+#pnlOficializar .btnOfic .btnOfic-obj4 span
+{
+    font-weight: bold;
+}
+#pnlOficializar .btnOfic .btnOfic-obj5
+{
+    bottom: 5px;
+    color: #35BC7A;
+    background-color: white;
+    font-size: 0.6em;
+    left: 5px;
+    padding: 6px 0px 4px 0px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    width: 90%;
+}
+
+#pnlOficializar .oficdesofic
+{
+    display: block;
+    
+    bottom: 5px;
+    /*color: #35BC7A;*/
+    background-color: white;
+    font-size: 0.6em;
+    left: 5px;
+    padding: 4px 0px 3px 0px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    width: 90%;
+}
+#pnlOficializar .btnOf
+{
+    margin-right: 3px;
+    background: #0071bc;
+}
+#pnlOficializar .btnDeof
+{
+    background: #2f9664;
+}
+#pnlOficializar .zoom{
+		transition: 0.5s ease;
+ 		-moz-transition: 0.5s ease; /* Firefox */
+ 		-webkit-transition: 0.5s ease; /* Chrome - Safari */
+ 		-o-transition: 0.5s ease; /* Opera */
+        /*background: red;*/
+        width: 48px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+	}
+#pnlOficializar .zoom:hover{
+    transform : scale(1.4);
+    -moz-transform : scale(1.4); /* Firefox */
+    -webkit-transform : scale(1.4); /* Chrome - Safari */
+    -o-transform : scale(1.4); /* Opera */
+    -ms-transform : scale(1.4); /* IE9 */
+}
+    
+#pnlOficializar .btnOfic:hover 
+{
+    /*background: #21b36c;*/
+    cursor: pointer;
+    outline: #31d0b4 solid 3px;
+    /*border: 1px solid #8ab4ca;*/
+}
+#pnlOficializar .btnOfic label:hover 
+{
+    cursor: pointer;
+}
+
+#pnlOficializar .btnOfic-desactivado:hover 
+{
+    /*background: #21b36c;*/
+    cursor: default;
+    outline: #31d0b4 solid 0px;
+    /*border: 1px solid #8ab4ca;*/
+}
+#pnlOficializar .btnOfic-desactivado label:hover 
+{
+    cursor: default;
+}
+
+/* .......................................................................... */
+
+#pnlOficializar .btnOfic-FondoColorPistache { background-color: #35BC7A; }
+#pnlOficializar .btnOfic-FondoColorAzul     { background-color: #117E9E; }
+#pnlOficializar .btnOfic-FondoColorVerde    { background-color: #4C993A; }
+#pnlOficializar .btnOfic-FondoColorNaranja  { background-color: #FE6512; }
+#pnlOficializar .btnOfic-FondoColorAmarillo { background-color: #FEA70F; }
+#pnlOficializar .btnOfic-FondoColorGris     { background-color: #afb3b7; }
+#pnlOficializar .btnOfic-FondoColorTamarindo{ background-color: #7b5217; }
+
+#pnlOficializar .btnOfic .btnOfic-TextColorPistache { color: #35BC7A; }
+#pnlOficializar .btnOfic .btnOfic-TextColorAzul     { color: #117E9E; }
+#pnlOficializar .btnOfic .btnOfic-TextColorVerde    { color: #4C993A; }
+#pnlOficializar .btnOfic .btnOfic-TextColorNaranja  { color: #FE6512; }
+#pnlOficializar .btnOfic .btnOfic-TextColorAmarillo { color: #FEA70F; }
+#pnlOficializar .btnOfic .btnOfic-TextColorGris     { color: #afb3b7; }
+#pnlOficializar .btnOfic .btnOfic-TextColorTamarindo{ color: #7b5217; }
+
+#pnlOficializar #pnlOficializarInscripcion .btnOfic .btnOfic-obj1
+{
+    padding: 6px 13px;
+}
+
+
+#pnlOficializar #btnOficCertCompl{  width: 115px;  }
+#pnlOficializar #btnOficCertCompl .btnOfic-obj1{  padding: 6px 9px;  }
+
+#pnlOficializar #btnSinCertCompl{  width: 115px;  }
+#pnlOficializar #btnSinCertCompl .btnOfic-obj1{  padding: 6px 9px;  }
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlOficializar #lblIndicacionGralOfic
+{
+    color: #5a5a5a;
+    font-size: 1em;
+}
+
+#pnlOficializar .indicacionesOfic
+{
+    /*font-weight:bold;
+    margin-right: 2em;*/
+    color: #5a5a5a;
+    display: block;
+    font-size: 0.9em;
+    /*border: 1px solid red;*/
+}
+
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+#pnlOficializar #pnlAreaTrabajoOficializar
+{
+    position: relative;
+}
+
+#pnlOficializar #pnlTablaOficializar
+{
+    width: auto;
+    margin-right: 195px;
+}
+
+#pnlOficializar #pnlOficializargrafia
+{
+    margin-top: 70px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 170px;
+}
+
+#pnlOficializar #tblOficializar .tblOficializar_col3
+{
+    display: none;
+}
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */
+@media screen and (max-width: 1000px)
+{
+    #pnlOficializar .panel 
+    {
+        width: 96%;
+    }
+}
+@media screen and (max-width: 700px)
+{
+    #pnlOficializar .panel 
+    {
+        width: 93%;
+    }
+    
+    #pnlOficializar #pnlTablaOficializar
+    {
+        margin-right: 130px;
+    }
+    
+    #pnlOficializar #pnlOficializargrafia
+    {
+        width: 100px;
+    }
+    
+    #pnlOficializar #imagen
+    {
+        margin-left: 0px;
+    }
+}
+
+@media screen and (max-width: 500px)
+{
+    #pnlOficializar #tblOficializar .tblOficializar_col1, #pnlOficializar #tblOficializar .tblOficializar_col2
+    {
+        display: none;
+    }
+    
+    #pnlOficializar #tblOficializar .tblOficializar_col3
+    {
+        display: block;
+    }
+    
+    #pnlOficializar #pnlTablaOficializar
+    {
+        margin-right: 90px;
+    }
+    
+    #pnlOficializar #pnlOficializargrafia
+    {
+        width: 60px;
+    }
+    #pnlOficializar #imagen
+    {
+        width: 60px;
+        height: 60px;
+    }
+    
+    #pnlOficializar #tblOficializar .filatblOficializar
+    {
+        height: 40px;
+        vertical-align: middle;
+    }
+}
+
+@media screen and (max-width: 315px){
+    #pnlOficializar #pnlAreaControlOficializar ul
+    {
+        display: inline-block;
+    }
+}
