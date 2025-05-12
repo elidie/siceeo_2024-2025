@@ -12,7 +12,7 @@ function frmfBimXAlum_Show (tblAlumCapCalif_nom_tot, tblPrincipal_cct, tblPrinci
         tblPrincipal_nombre:tblPrincipal_nombre
     };
     object_setVisible (false,'frmfCalifSecXBim');
-    
+    alert("hola");
     frmfBimXAlum_Create();
     //frmfBimXAlum_FormActivate (tblAlumCapCalif_nom_tot, tblPrincipal_cct, tblPrincipal_grado, tblPrincipal_cveplan, tblAlumCapCalif_idalu, tblAlumCapCalif_cicescini);
 }
