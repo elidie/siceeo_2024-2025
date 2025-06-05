@@ -2,11 +2,13 @@ package modelo.Calificaciones;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import modelo.DAO.SICEEO_QueriesInformix;
 import modelo.ClasesGlobales.SICEEO_DataModule;
+import modelo.ClasesGlobales.SICEEO_Excepcion;
 import modelo.ClasesGlobales.SICEEO_HttpServletRequest;
 import modelo.ClasesGlobales.SICEEO_Mensajes;
 
@@ -43,13 +45,27 @@ public class SICEEO_CaptuRepEval {
      *
      * @param metodo Caso de método al que se va a llamar
      */
+    
     public void ejecutarPeticion (String metodo)
     {
         if (metodo.equals("foAc")){
-            formActivate ( r.gP("califCicEscIn"), ""+sesion.getAttribute("userName"), r.gP("cicescin") );
-            FormCreate (r.gP("califCicEscIn"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_cveplan"), r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"));
-        }else if (metodo.equals("btGdCaReEv_Cl"))
-            btnGuardarCapRepEval_Click (r.gP("califCicEscIn"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"), r.gP("idalu"),
+            formActivate ( r.gP("califCicEscIn"), ""+sesion.getAttribute("userName"), r.gP("cicescin"), r.gP("eval") );
+            FormCreate (r.gP("califCicEscIn"), r.gP("tblPrincipal_modalidad"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_cveplan"), r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"), r.gP("eval"));
+        } else if (metodo.equals("btAnNuEv"))
+            btnAnteriorNumEval_Click (r.gP("tblAlumCapEval_cicescini"), r.gP("tblPrincipal_idcct"),  r.gP("tblPrincipal_grado"),r.gP("tblPrincipal_grupo"), 
+                    dm.toInt(r.gP("numeval")), r.gP("tblAlumCapRepEval_idalu"), r.gP("evalMin"), r.gP("evalMax"), r.gP("cveprograma"));
+        else if (metodo.equals("btSiNuEv"))
+            btnSiguienteNumEval_Click (r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_grado"),r.gP("tblPrincipal_grupo"),dm.toInt(r.gP("numeval")), 
+                    r.gP("tblAlumCapRepEval_idalu"), r.gP("tblAlumCapEval_cicescini") ,r.gP("evalMin"), r.gP("evalMax"), r.gP("cveprograma") );
+        else if (metodo.equals("btGdCaReEv_Cl"))
+            btnGuardarCapRepEval_Click (dm.vstrToArrMap(r.gPV("tblAvancesXEvalYMat"), "~", new String[]{"cveprograma","cvetipmat","cvemat","avances"}),
+                    r.gP("califCicEscIn"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"), r.gP("tblAlumCapRepEval_idalu"),
+                        r.gP("cveplan"),r.gP("cvelengua"),r.gP("chkRiesgosAlerta1"), r.gP("chkRiesgosAlerta2"), r.gP("chkRiesgosAlerta3"), r.gP("tutoria"), 
+                        r.gP("txtaHabEscritura"), r.gP("txtaHabLectura"),r.gP("txtaHabMatematica"),                         
+                        r.gP("txtaRecomendGrales_eval1"),r.gP("txtaRecomendGrales_eval2"),r.gP("txtaRecomendGrales_eval3"),                         
+                        r.gP("eval"),""+sesion.getAttribute("userName")
+                    );
+            /*btnGuardarCapRepEval_Click (r.gP("califCicEscIn"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"), r.gP("idalu"),
                         r.gP("cveplan"),r.gP("cvelengua"),r.gP("chkRiesgosAlerta1"), r.gP("chkRiesgosAlerta2"), r.gP("chkRiesgosAlerta3"), r.gP("tutoria"), 
                         r.gP("txtaHabEscritura"), r.gP("txtaHabLectura"),r.gP("txtaHabMatematica"), 
                         dm.vstrToArrMap(r.gPV("chkHabEscritura"), "~", new String[]{"1","2","3","4","5"}),
@@ -58,17 +74,22 @@ public class SICEEO_CaptuRepEval {
                         dm.vstrToArrMap(r.gPV("tblObsYRecomXBimYAsig"), "~", new String[]{"bimestre","cvetipmat","cvemat","obserEsp","apoyo","cvetipmat_oldValue","cvemat_oldValue"}),
                         r.gP("txtaRecomendGrales_eval1"),r.gP("txtaRecomendGrales_eval2"),r.gP("txtaRecomendGrales_eval3"), 
                         dm.vstrToArrMap(r.gPV("tblEvalLec"), "~", new String[]{"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","idpregunta"})
-                    );
+                    ); //Se comento en ciclo escolar 2024-2025 */            
         else if (metodo.equals("tbAlCaReEv_ChSeIt"))
-            tblAlumCapRepEval_ChangeSelectedItem (r.gP("califCicEscIn"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_cveplan"), r.gP("tblPrincipal_grado"), 
-                    r.gP("tblAlumCapRepEval_idalu"));
+            tblAlumCapRepEval_ChangeSelectedItem (r.gP("eval"),r.gP("califCicEscIn"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_cveplan"), r.gP("tblPrincipal_grado"), 
+                    r.gP("tblAlumCapRepEval_idalu"), r.gP("cveprograma"));
         else if (metodo.equals("btAnGp"))
-            btnAnteriorGpo_Click (dm.vstrToArrMap(r.gPV("tblPrincipal"), "~", new String[]{"cct","grado","grupo","idcct","cveplan"}),  dm.toInt(r.gP("posSelActual")),  r.gP("califCicEscIn"));
+            btnAnteriorGpo_Click (dm.vstrToArrMap(r.gPV("tblPrincipal"), "~", new String[]{"cct","grado","grupo","idcct","cveplan"}),  dm.toInt(r.gP("posSelActual")),  r.gP("califCicEscIn"),
+                    r.gP("eval"), r.gP("tblPrincipal_cveprograma"));
         else if (metodo.equals("btSiGp"))
-            btnSiguienteGpo_Click (dm.vstrToArrMap(r.gPV("tblPrincipal"), "~", new String[]{"cct","grado","grupo","idcct","cveplan"}),  dm.toInt(r.gP("posSelActual")) ,  r.gP("califCicEscIn") ,  r.gP("numeval") );
+            btnSiguienteGpo_Click (dm.vstrToArrMap(r.gPV("tblPrincipal"), "~", new String[]{"cct","grado","grupo","idcct","cveplan"}),  dm.toInt(r.gP("posSelActual")) ,  r.gP("califCicEscIn"),
+                    r.gP("eval"), r.gP("tblPrincipal_cveprograma") );
+        else if (metodo.equals("btGuDaCo"))
+            btnGuardarDatosComplementarios_Click (r.gP("califCicEscIn"), r.gP("tblPrincipal_idcct"), r.gP("tblAlumCapRepEval_idalu"), r.gP("cvelengua"), 
+                    ""+sesion.getAttribute("userName"));
     }
     
-    private void formActivate (String califCicEscIn, String txtUsuario, String cicescin)
+    private void formActivate (String califCicEscIn, String txtUsuario, String cicescin, String eval)
     {
         String superUsuario = ""+sesion.getAttribute("superUsuario");
         boolean tipoCambCic1=false, tipoCambCic2=false;
@@ -89,6 +110,10 @@ public class SICEEO_CaptuRepEval {
             dr.put("btnAnteriorCiclo_Visible",false);
             dr.put("btnSiguienteCiclo_Visible",false);
         }
+        
+        if ( eval.equals("1") ) dr.put("lblNumEval","1a EVALUACIÓN");
+        else if ( eval.equals("2") ) dr.put("lblNumEval","2a EVALUACIÓN");
+        else if ( eval.equals("3") ) dr.put("lblNumEval","3a EVALUACIÓN");
 
         if ( !cicescin.equals(califCicEscIn) ) { //handa en otro ciclo menos el actual
            dr.put("btnAnteriorGpo_Enabled",false);
@@ -99,29 +124,35 @@ public class SICEEO_CaptuRepEval {
         }
     }
     
-    private void FormCreate (String CalifCicEscIn, String tblPrincipal_idcct, String tblPrincipal_cveplan, String tblPrincipal_grado, String tblPrincipal_grupo)
+    private void FormCreate (String CalifCicEscIn, String tblPrincipal_modalidad, String tblPrincipal_idcct, String tblPrincipal_cveplan, String tblPrincipal_grado, String tblPrincipal_grupo, String eval)
     {
-        ArrayList<Map> QAlumCapRepEval, QMateriasAlumno = new ArrayList<Map>(), QObsYRecomXBimYAsig = new ArrayList<Map>(), QPreguntasCompLectora = new ArrayList<Map>();
-
+        ArrayList<Map> QAlumCapRepEval, QObsYRecomXBimYMat = new ArrayList<Map>();
+        ArrayList<Map> QPaqueteMatsDefault = new ArrayList<Map>();
         dr.put("paTras", "no");
         try
         {
             dm.isIdcctAutorizada (sesion, tblPrincipal_idcct);
+            if(eval.equals(""))     //agregado para el caso de inactivo los 3 trim
+               eval="0";           //agregado para el caso de inactivo los 3 trim     
             qryIfx.conectar();
-
+            
+            QPaqueteMatsDefault = qryIfx.getPaqueteDeMateriasDeCiclo(CalifCicEscIn, tblPrincipal_modalidad, tblPrincipal_cveplan, tblPrincipal_grado);                            
             QAlumCapRepEval = qryIfx.alumCaptuRepEval(CalifCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo);  //qry de captura de evaluaciones
+            
+            dr.put("eval", 1);
             if (QAlumCapRepEval.size()>0) {
                 dr.putAll(qryIfx.getCaptuRepEval(CalifCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu")));
-                //QMateriasAlumno = qryIfx.getMateriasAlumno(CalifCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu"));
-                //QObsYRecomXBimYAsig = qryIfx.getTablaObsYRecomXBimYAsig (CalifCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu"));
+                
+                // Extraer la información capturada de las recomendaciones por materia
+                QObsYRecomXBimYMat = qryIfx.obsvRecomXMat(eval, ""+QAlumCapRepEval.get(0).get("idalu"), CalifCicEscIn, tblPrincipal_grado, ""+QPaqueteMatsDefault.get(0).get("cveprograma"));
+                /*tblAvancesXEval = qryIfx.MatAvenceXEval(eval, ""+tblAlumCapEval.get(0).get("idalu"), califCicEscIn, tblPrincipal_grado);*/
             }
             //QPreguntasCompLectora = qryIfx.getTablaPreguntasCompLectora (tblPrincipal_cveplan, tblPrincipal_grado);
+            dr.put("paqueteMatsDefault",QPaqueteMatsDefault);
             dr.put("lenguas",qryIfx.getLenguas());
             //dr.put("obsrecgral",qryIfx.getObsRecGral(CalifCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu")));
             dr.put("tblAlumCapRepEval",QAlumCapRepEval);
-            //dr.put("matsAlumno",QMateriasAlumno);
-            //dr.put("tblObsYRecomXBimYAsig",QObsYRecomXBimYAsig);
-            //dr.put("preguntasCompLectora",QPreguntasCompLectora);        
+            dr.put("tblRecomXMat",QObsYRecomXBimYMat);            
             
             //dr.put("capRepOf",qryIfx.isOficializado(tblPrincipal_idcct, CalifCicEscIn,"EVALUACION "+eval));
         } catch (SQLException ex){ this.dr.put("returnCase",-1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
@@ -129,25 +160,37 @@ public class SICEEO_CaptuRepEval {
         finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
     }
     
-    private void btnGuardarCapRepEval_Click (String CalifCicEscIn, String tblPrincipal_idcct, String tblPrincipal_grado, String tblPrincipal_grupo, String idalu,
+    private void btnGuardarCapRepEval_Click (ArrayList<Map> tblAvancesXEvalYMat, String CalifCicEscIn, String tblPrincipal_idcct, String tblPrincipal_grado, String tblPrincipal_grupo, String idalu,
             String cveplan,String cvelengua, String chkRiesgosAlerta1, String chkRiesgosAlerta2, String chkRiesgosAlerta3, String tutoria, 
-            String txtaHabEscritura, String txtaHabLectura, String txtaHabMatematica, ArrayList<Map>chkHabEscritura, ArrayList<Map> chkHabLectura, 
-            ArrayList<Map> chkHabMatematica, ArrayList<Map> tblObsYRecomXBimYAsig, String txtaRecomendGrales_eval1, String txtaRecomendGrales_eval2, 
-            String txtaRecomendGrales_eval3,  ArrayList<Map> tblEvalLec)
+            String txtaHabEscritura, String txtaHabLectura, String txtaHabMatematica, String txtaRecomendGrales_eval1, String txtaRecomendGrales_eval2, 
+            String txtaRecomendGrales_eval3, String numeval, String txtusuario)
     {
-        String txtaRecomedGrales="";
-        int numeval=0;
+        String textoEscrito="";
+        
         boolean hacerCommit = false;
         try
         {
             dm.isIdcctAutorizada (sesion, tblPrincipal_idcct);
+            
+            
+            for (int f=0; f<tblAvancesXEvalYMat.size(); f++){                       //Revisamos que no venga sin datos
+                textoEscrito += (""+tblAvancesXEvalYMat.get(f).get("avances")).trim();
+                if (textoEscrito.length()>2)
+                    break;
+            }
+            if (textoEscrito.equals(""))
+                throw new SICEEO_Excepcion (0,"NADA_QUE_GUARDAR");
             qryIfx.conectarConTransaccion();
-
-            /*qryIfx.guardarCaptuRepEval(CalifCicEscIn, idalu, cvelengua, chkRiesgosAlerta1, chkRiesgosAlerta2, chkRiesgosAlerta3, tutoria, txtaHabEscritura, 
-                    txtaHabLectura, txtaHabMatematica, chkHabEscritura,  chkHabLectura,  chkHabMatematica, tblObsYRecomXBimYAsig, 
-                    txtaRecomendGrales_eval1, txtaRecomendGrales_eval2, txtaRecomendGrales_eval3, 
-                    tblEvalLec, ""+sesion.getAttribute("userName"));*/
-            for(int i=0; i < 3; i++){
+            
+            if (qryIfx.isOficializado(tblPrincipal_idcct, CalifCicEscIn, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION "+numeval))
+                throw new SICEEO_Excepcion (0,"EVAL_OFICIALIZADA");
+            int f=0;
+            
+            for (f=0; f<tblAvancesXEvalYMat.size(); f++)
+                qryIfx.actualizarRecomXEvalYMat ( tblAvancesXEvalYMat.get(f), idalu, CalifCicEscIn, tblPrincipal_grado, numeval, txtusuario );
+            
+            
+            /*for(int i=0; i < 3; i++){
                 numeval = i+1;
                 if(i==0)
                     txtaRecomedGrales = txtaRecomendGrales_eval1;                                    
@@ -157,32 +200,82 @@ public class SICEEO_CaptuRepEval {
                     txtaRecomedGrales = txtaRecomendGrales_eval3;
                 
                 qryIfx.guardarCaptuRepEval (CalifCicEscIn, cveplan, idalu,  numeval, cvelengua, txtaRecomedGrales, ""+sesion.getAttribute("userName"));
-            }                        
+            } //COmentado en el ciclo escolar 2024-2025 */
+            
             hacerCommit = true;
         } catch (SQLException ex){ this.dr.put("returnCase",-1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
+        catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.CaptuRepEval(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
     }
     
-    private void tblAlumCapRepEval_ChangeSelectedItem (String CalifCicEscIn, String tblPrincipal_idcct, String tblPrincipal_cveplan, String tblPrincipal_grado, 
-            String tblAlumCapRepEval_idalu)
+    private void btnSiguienteNumEval_Click (String tblPrincipal_idcct, String tblPrincipal_grado, String tblPrincipal_grupo, 
+            int eval, String idalu, String cicescini, String evalMin, String evalMax, String cveprograma)
     {
-        ArrayList<Map> QMateriasAlumno, QObsYRecomXBimYAsig, QPreguntasCompLectora;
+        ArrayList<Map> QObsYRecomXBimYMat;
+
+        try {
+            dm.isIdcctAutorizada (sesion, tblPrincipal_idcct);
+
+            if ( eval < Integer.parseInt(evalMax) )
+               eval=eval+1; //Comentado para ciclo 2023-2024
+            dr.put("eval", eval);
+
+            if ( eval==1 ) dr.put("lblNumEval","1a EVALUACIÓN");
+            else if ( eval==2 ) dr.put("lblNumEval","2a EVALUACIÓN");
+            else if ( eval==3 ) dr.put("lblNumEval","3a EVALUACIÓN");
+
+            qryIfx.conectar();
+            QObsYRecomXBimYMat = qryIfx.obsvRecomXMat(""+eval, idalu, cicescini, tblPrincipal_grado, cveprograma);
+            dr.put("tblRecomXMat", QObsYRecomXBimYMat);
+            dr.put("evalOf",qryIfx.isOficializado(tblPrincipal_idcct, cicescini, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION "+eval));
+            
+        } catch (SQLException ex){ this.dr.put("returnCase",-1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
+        catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
+        finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
+    }
+
+    private void btnAnteriorNumEval_Click (String tblAlumCapEval_cicescini, String tblPrincipal_idcct, String tblPrincipal_grado, 
+            String tblPrincipal_grupo, int eval, String tblAlumCapRepEval_idalu, String evalMin, String evalMax, String cveprograma)
+    {
+        ArrayList<Map> QObsYRecomXBimYMat;
+
+        try {
+            dm.isIdcctAutorizada (sesion, tblPrincipal_idcct);
+
+            if ( eval > Integer.parseInt(evalMin) )  //Comentado para ciclo 2023-2024, para eval especifico
+                eval=eval-1;
+            dr.put("eval", eval);
+
+            if ( eval==1 ) dr.put("lblNumEval","1a EVALUACIÓN");
+            else if ( eval==2 ) dr.put("lblNumEval","2a EVALUACIÓN");
+            else if ( eval==3 ) dr.put("lblNumEval","3a EVALUACIÓN");
+
+            qryIfx.conectar();
+            
+            QObsYRecomXBimYMat = qryIfx.obsvRecomXMat(""+eval, tblAlumCapRepEval_idalu, tblAlumCapEval_cicescini, tblPrincipal_grado, cveprograma);
+            dr.put("tblRecomXMat", QObsYRecomXBimYMat);
+            dr.put("evalOf",qryIfx.isOficializado(tblPrincipal_idcct, tblAlumCapEval_cicescini, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION "+eval));
+            
+        } catch (SQLException ex){ this.dr.put("returnCase",-1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
+        catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
+        finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
+    }
+    
+    private void tblAlumCapRepEval_ChangeSelectedItem (String eval,String CalifCicEscIn, String tblPrincipal_idcct, String tblPrincipal_cveplan, String tblPrincipal_grado, 
+            String tblAlumCapRepEval_idalu, String cveprograma)
+    {
+        ArrayList<Map> QObsYRecomXBimYMat;
         
         try
         {
             dm.isIdcctAutorizada (sesion, tblPrincipal_idcct);
             qryIfx.conectar();
 
-            dr.putAll(qryIfx.getCaptuRepEval(CalifCicEscIn, tblAlumCapRepEval_idalu));
-            /*QMateriasAlumno = qryIfx.getMateriasAlumno(CalifCicEscIn, tblAlumCapRepEval_idalu);
-            //QObsYRecomXBimYAsig = qryIfx.getTablaObsYRecomXBimYAsig (CalifCicEscIn, tblAlumCapRepEval_idalu);
-            //QPreguntasCompLectora = qryIfx.getTablaPreguntasCompLectora (tblPrincipal_cveplan, tblPrincipal_grado);
-
-            dr.put("matsAlumno",QMateriasAlumno);
-            dr.put("tblObsYRecomXBimYAsig",QObsYRecomXBimYAsig);
-            dr.put("preguntasCompLectora",QPreguntasCompLectora);*/
-            
+            dr.putAll(qryIfx.getCaptuRepEval(CalifCicEscIn, tblAlumCapRepEval_idalu));                                        
+            QObsYRecomXBimYMat = qryIfx.obsvRecomXMat(eval, tblAlumCapRepEval_idalu, CalifCicEscIn, tblPrincipal_grado, cveprograma);
+                        
+            dr.put("tblRecomXMat",QObsYRecomXBimYMat);
             
             //dr.put("capRepOf",qryIfx.isOficializado(tblPrincipal_idcct, CalifCicEscIn,"EVALUACION "+eval));
         } catch (SQLException ex){ this.dr.put("returnCase",-1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
@@ -190,9 +283,9 @@ public class SICEEO_CaptuRepEval {
         finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
     }
     
-    private void btnAnteriorGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual, String califCicEscIn) 
+    private void btnAnteriorGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual, String califCicEscIn, String numeval, String cveprograma) 
 { 
-    ArrayList<Map> QAlumCapRepEval=new ArrayList<Map>(), QMateriasAlumno = new ArrayList<Map>(), QObsYRecomXBimYAsig = new ArrayList<Map>(), QPreguntasCompLectora = new ArrayList<Map>();
+    ArrayList<Map> QAlumCapRepEval=new ArrayList<Map>(), QObsYRecomXBimYMat = new ArrayList<Map>();
     //Map QLenguas = new HashMap();
     
     dr.put("tblPrincipal_selectedRow", posSelActual);
@@ -202,23 +295,15 @@ public class SICEEO_CaptuRepEval {
         qryIfx.conectar();
         posSelActual--;
         while ( posSelActual>=0 && QAlumCapRepEval.isEmpty() )
-        {
+        {   
             QAlumCapRepEval = qryIfx.alumCaptuRepEval(califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"));  //qry de captura de evaluaciones
-            if (QAlumCapRepEval.size()>0){
+            if (QAlumCapRepEval.size()>0) {
                 dr.putAll(qryIfx.getCaptuRepEval(califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu")));
-                //QMateriasAlumno = qryIfx.getMateriasAlumno(califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu"));
-                //QObsYRecomXBimYAsig = qryIfx.getTablaObsYRecomXBimYAsig (califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu"));
-                //QPreguntasCompLectora = qryIfx.getTablaPreguntasCompLectora (""+tblPrincipal.get(posSelActual).get("cveplan"), ""+tblPrincipal.get(posSelActual).get("grado"));
-                //QLenguas = qryIfx.getLenguas();
+                QObsYRecomXBimYMat = qryIfx.obsvRecomXMat(numeval, ""+QAlumCapRepEval.get(0).get("idalu"), califCicEscIn, ""+tblPrincipal.get(posSelActual).get("grado"), cveprograma);
             }
             
-            //dr.put("lenguas",QLenguas);
             dr.put("tblAlumCapRepEval",QAlumCapRepEval);
-            /*
-            dr.put("matsAlumno",QMateriasAlumno);
-            dr.put("tblObsYRecomXBimYAsig",QObsYRecomXBimYAsig);
-            dr.put("preguntasCompLectora",QPreguntasCompLectora);*/
-            
+            dr.put("tblRecomXMat",QObsYRecomXBimYMat);            
             dr.put("tblPrincipal_selectedRow", posSelActual);
             dr.put("tblPrincipal_grado", tblPrincipal.get(posSelActual).get("grado"));
             dr.put("tblPrincipal_grupo", tblPrincipal.get(posSelActual).get("grupo"));
@@ -229,34 +314,27 @@ public class SICEEO_CaptuRepEval {
     finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
 }
 
-private void btnSiguienteGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual, String califCicEscIn, String numeval) 
+private void btnSiguienteGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual, String califCicEscIn, String numeval, String cveprograma) 
 { 
     int numFilas;
-    ArrayList<Map> QAlumCapRepEval=new ArrayList<Map>(), QMateriasAlumno = new ArrayList<Map>(), QObsYRecomXBimYAsig = new ArrayList<Map>(), QPreguntasCompLectora = new ArrayList<Map>();
+    ArrayList<Map> QAlumCapRepEval=new ArrayList<Map>(), QObsYRecomXBimYMat = new ArrayList<Map>();
     //Map QLenguas = new HashMap();
     
     numFilas = tblPrincipal.size();
     try
     {
         qryIfx.conectar();
-        posSelActual++;
+        posSelActual++;        
         while ( posSelActual<numFilas && QAlumCapRepEval.isEmpty()  )
         {
             QAlumCapRepEval = qryIfx.alumCaptuRepEval(califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"));  //qry de captura de evaluaciones
             if (QAlumCapRepEval.size()>0){
                 dr.putAll(qryIfx.getCaptuRepEval(califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu")));
-                //QMateriasAlumno = qryIfx.getMateriasAlumno(califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu"));
-                //QObsYRecomXBimYAsig = qryIfx.getTablaObsYRecomXBimYAsig (califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu"));
-                //QPreguntasCompLectora = qryIfx.getTablaPreguntasCompLectora (""+tblPrincipal.get(posSelActual).get("cveplan"), ""+tblPrincipal.get(posSelActual).get("grado"));
-                //QLenguas = qryIfx.getLenguas();
+                QObsYRecomXBimYMat = qryIfx.obsvRecomXMat(numeval, ""+QAlumCapRepEval.get(0).get("idalu"), califCicEscIn, ""+tblPrincipal.get(posSelActual).get("grado"), cveprograma);
             }
             
-            //dr.put("lenguas",QLenguas);
             dr.put("tblAlumCapRepEval",QAlumCapRepEval);
-            //dr.put("matsAlumno",QMateriasAlumno);
-            //dr.put("tblObsYRecomXBimYAsig",QObsYRecomXBimYAsig);
-            //dr.put("preguntasCompLectora",QPreguntasCompLectora);
-            
+            dr.put("tblRecomXMat",QObsYRecomXBimYMat);            
             dr.put("tblPrincipal_selectedRow", posSelActual);
             dr.put("tblPrincipal_grado", tblPrincipal.get(posSelActual).get("grado"));
             dr.put("tblPrincipal_grupo", tblPrincipal.get(posSelActual).get("grupo"));
@@ -265,11 +343,39 @@ private void btnSiguienteGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual,
         
         if ( posSelActual >= numFilas && QAlumCapRepEval.isEmpty() ) {
             qryIfx.cerrarConexion();
-           btnAnteriorGpo_Click(tblPrincipal, posSelActual, califCicEscIn);
+           btnAnteriorGpo_Click(tblPrincipal, posSelActual, califCicEscIn, numeval, cveprograma);
         }
         
     } catch (SQLException ex){ this.dr.put("returnCase",-1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
     catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
     finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
 }
+
+private void btnGuardarDatosComplementarios_Click (String califCicEscIn, String tblPrincipal_idcct, String idalu,  String cvelengua, 
+            String txtUsuario) //,boolean chkConlcuyo_checked, String recomendaciones, String trim1, String trim2, String trim3
+    {
+        boolean hacerCommit = false;
+        Map isOficBimEval = new HashMap();
+        
+        try{
+            dm.isIdcctAutorizada (sesion, tblPrincipal_idcct);
+            qryIfx.conectarConTransaccion();
+
+            /*if (qryIfx.isConceptoTodoOficializado(tblPrincipal_idcct, califCicEscIn, "EVALUACION"))
+                throw new SICEEO_Excepcion (0,"TODO_OFICIALIZADO");*/
+
+            //qryIfx.guardarRecomendacionesEvalPrescolar (califCicEscIn, idalu, cvelengua, txtUsuario); //chkConlcuyo_checked, recomendaciones,
+            qryIfx.guardarLengua (califCicEscIn, idalu, cvelengua, txtUsuario); 
+            //OJO HAY QUE IMPLEMENTAR ESTO CON ALUMNO DESOFICIALIZADO
+            /*isOficBimEval.put("bimOf1",qryIfx.isOficializado(tblPrincipal_idcct, califCicEscIn, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION 1"));
+            isOficBimEval.put("bimOf2",qryIfx.isOficializado(tblPrincipal_idcct, califCicEscIn, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION 2"));
+            isOficBimEval.put("bimOf3",qryIfx.isOficializado(tblPrincipal_idcct, califCicEscIn, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION 3"));
+            isOficBimEval.put("alDeofB1",false);
+            isOficBimEval.put("alDeofB2",false);
+            isOficBimEval.put("alDeofB3",false);  */
+            hacerCommit = true;
+        } catch (SQLException ex){ this.dr.put("returnCase",-1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }        
+        catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
+        finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
+    }
 }

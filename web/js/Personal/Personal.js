@@ -77,8 +77,8 @@ function frmwPersonal_Create()
                                     //}
                 $('#pnlDatosEscuelaYdirector').append('</div>');
                                                                                                                                                                            
-            if ( jsPersonal.tblPrincipal_cveplan !== "2" )
-            {
+            /*if ( jsPersonal.tblPrincipal_cveplan !== "2" )
+            {*/
                 $('#pnlPersonal').append('<div id="pnlProfesores" class="panel">'
                         +'<div id="pnlTituloProfesores" class="tituloPanel">'+ (jsPersonal.tblPrincipal_cveplan === "2" ? 'Asignación de docente/tutor(a) de grupo' : 'Asignación de profesor a cada grupo' )+'</div></div>');
                     $('#pnlProfesores').append('<div id="pnlListadoGdosGpos"><div id="scrlGdosGposPersonal" class="scrollTable"></div></div>');
@@ -97,7 +97,7 @@ function frmwPersonal_Create()
                                             +'<li><a href="#" id="btnLimpiarDatosProf"><label class="icon-brocha"></label> Limpiar</a></li>'
                                         +'</ul>'
                                 +'</div>');
-            }
+            /*}*/
                             
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------
     

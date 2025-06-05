@@ -363,7 +363,7 @@ public class SICEEO_NewIngresoPre {
             //--Vista--> E_18.Text   :='';
             //--Vista--> E_Apl1.SetFocus;
             
-            //hacerCommit = true; //comentado hoy 28/04/2025
+            hacerCommit = true; //comentado hoy 28/04/2025
         } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("INDISPUESTO", ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.NewIngresoPre(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }

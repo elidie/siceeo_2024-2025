@@ -275,6 +275,6 @@ function btnCapDatosRepEv_Click()
 {
     var tabla = new Tabla();
     object_setVisible (false,'frmwXBimOPromFin');
-    var tblPrincipal = tabla.getSelectedRow("tblPrincipal",["idcct","cct","nombre","grado","grupo","cveplan","cicescini"], null, "JSON");
-    frmwCaptuRepEval_Show(tblPrincipal.cicescini, tblPrincipal.idcct, tblPrincipal.cct, tblPrincipal.cveplan, tblPrincipal.grado, tblPrincipal.grupo);
+    var tblPrincipal = tabla.getSelectedRow("tblPrincipal",["idcct","modalidad","cct","nombre","grado","grupo","cveplan","cicescini","cveprograma"], null, "JSON");
+    frmwCaptuRepEval_Show(tblPrincipal.cicescini, tblPrincipal.modalidad, tblPrincipal.idcct, tblPrincipal.cct, tblPrincipal.cveplan, tblPrincipal.grado, tblPrincipal.grupo, tblPrincipal.cveprograma);
 }

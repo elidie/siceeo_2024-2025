@@ -478,6 +478,17 @@ public class SICEEO_Mensajes {
         
         datosReturn.put("tipoMensaje",tipoMensaje[0]);      datosReturn.put("mensaje",tipoMensaje[1]);
     }
+    
+    public void CaptuRepEval (String tipo, String texto1, String texto2, Map datosReturn)
+    {
+        String [] tipoMensaje = {"",""};
+        
+        if (tipo.equals("EVAL_OFICIALIZADA"))      {  tipoMensaje[0]= this.ERROR;   tipoMensaje[1]= "No podrá editar ni guardar los avances de esta evaluación ya que se encuentra oficializada.\nSi desea desoficializar debe pedir ayuda a su UDR.";  }        
+        else if (tipo.equals("TODO_OFICIALIZADO"))     {  tipoMensaje[0]= this.INFO;      tipoMensaje[1]= "No podrá editar ni guardar ningún dato porque ha oficializado sus tres evaluaciones.\nSi desea desoficializar debe pedir ayuda a su UDR.";  }
+        else if (tipo.equals("NADA_QUE_GUARDAR"))       {  this.General("NADA_QUE_GUARDAR", "", "", datosReturn);  }
+        
+        datosReturn.put("tipoMensaje",tipoMensaje[0]);      datosReturn.put("mensaje",tipoMensaje[1]);
+    }
 //************************************************************************************************************
 //******************************* MENSAJES USADOS EN EL MÓDULO Reportes **************************************
 //************************************************************************************************************

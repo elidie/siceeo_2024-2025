@@ -2974,6 +2974,36 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         return comilla+avance+comilla;
     }
     
+    public void actualizarRecomXEvalYMat (Map tblAvancesXEvalYMat, String idalu, String califCicEscIn, String grado, String numeval, 
+            String txtUsuario) throws SQLException, Exception
+    {
+        String txtaAvances = (""+tblAvancesXEvalYMat.get("avances")).trim().toUpperCase().replace("\n", " ");
+        
+        txtaAvances=gestionarComillas(txtaAvances);
+        
+        try {
+            stm.execute("INSERT INTO ev_obsyrecgralxmat (idalu, cicescini, numeval, cvetipmat, cvemat, grado, obs_rec_gral, "
+                            + "usuario, fecha, hora) "
+                        + "VALUES ("+idalu+", "+califCicEscIn+", " + numeval+", '"
+                            + tblAvancesXEvalYMat.get("cvetipmat")+"', '"+tblAvancesXEvalYMat.get("cvemat")+"'," + grado +", "
+                            + txtaAvances +", "       
+                            + "'"+txtUsuario.toUpperCase()+"', date(current), extend(current, hour to minute) )");
+        }catch (SQLException ex){
+            if (ex == null || ex.getMessage()==null)
+                throw new SQLException(ex);
+            else if (ex.getMessage().toUpperCase().contains("UNIQUE") && ex.getMessage().toUpperCase().contains("EV_OBSYRECGRALXMAT_PK"))
+                stm.execute("UPDATE ev_obsyrecgralxmat SET obs_rec_gral="+txtaAvances+", Usuario='"+txtUsuario.toUpperCase()+"', "
+                                +"Fecha=date(current), Hora=extend(current, hour to minute) "
+                           +"WHERE idalu = "+idalu+" AND cveMat='"+tblAvancesXEvalYMat.get("cvemat")+"' "
+                                +"AND cveTipMat='"+tblAvancesXEvalYMat.get("cvetipmat")+"' AND cicescini="+ califCicEscIn+" "
+                                +"AND grado="+grado+" AND numeval="+ numeval);
+            else                
+                throw new SQLException(ex+"\n\n"+ txtaAvances);
+        }catch (Exception ex){
+            throw new SQLException(ex);
+        }
+    }
+    
     public void actualizarEvalPreescolar (Map tblMatCalifXBim, String idalu, String califCicEscIn, String grado, String numeval, 
             String txtUsuario) throws SQLException, Exception
     {
@@ -3145,22 +3175,22 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     {
         Map QCaptuRepEval = new HashMap();
         
-        rs = stm.executeQuery("SELECT or_escritura, or_lectura, or_mate, tutoria, alerta1, alerta2, alerta3, obsrec_gral "
+        /*rs = stm.executeQuery("SELECT or_escritura, or_lectura, or_mate, tutoria, alerta1, alerta2, alerta3, obsrec_gral "
                             + "FROM ev_caprepeval "
                             + "WHERE idalu="+idalu+" AND cicescini="+cicescini);
-        QCaptuRepEval = qryToMap(rs, null, true, 0);
+        QCaptuRepEval = qryToMap(rs, null, true, 0);*/
         
         rs = stm.executeQuery("SELECT cvelengua FROM alumno WHERE idalu="+idalu);
         if (rs.next())
             QCaptuRepEval.put("cvelengua", rs.getString("cvelengua"));
         
-        rs = stm.executeQuery("SELECT numeval, obs_rec_gral "
+        /*rs = stm.executeQuery("SELECT numeval, obs_rec_gral "
                         + "FROM ev_obsyrecgralxeval "
                         + "WHERE idalu="+idalu+" AND cicescini="+cicescini+" "
                         + "ORDER BY numeval");
         while(rs.next()){            
                 QCaptuRepEval.put("obsrec_gral_eval"+rs.getInt("numeval"), rs.getString("obs_rec_gral"));
-        }
+        }*/
         
         //QCaptuRepEval.put("obsRecGral", qryToArrlmap(rs, null, true, 0));
         
@@ -3177,6 +3207,29 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         QCaptuRepEval.put("tblEvalLec", qryToArrlmap(rs, null, true, 0));*/
         
         return QCaptuRepEval;
+    }
+    
+    public ArrayList<Map> obsvRecomXMat (String numeval, String idalu, String cicescini, String grado, String cveprograma) throws SQLException
+    {
+        rs = stm.executeQuery("SELECT o.cicescini, o.numeval, o.grado, o.idalu, o.cvetipmat, o.cvemat, m.desmat, o.obs_rec_gral AS avances " 
+            + "FROM ev_obsyrecgralxmat o, esquemamaterias e, materias m " 
+            + "WHERE " 
+            + " idalu = " + idalu 
+            + " AND o.grado = " + grado 
+            + " AND o.numeval = " + numeval 
+            + " AND o.cicescini= " + cicescini
+            + " AND o.cvetipmat = e.cvetipmat "
+            + " AND o.cvemat = e.cvemat " 
+            + " AND o.grado = e.grado " 
+            + " AND "+ cicescini + " >= e.cicescini AND " + cicescini +" <= e.cicescfin "
+            + " AND cveplan = 1 " 
+            + " AND cveprograma = '" + cveprograma + "' "
+            + " AND e.cvetipmat = m.cvetipmat "
+            + " AND e.cvemat = m.cvemat "
+            + " AND m.matdefault='t' "
+            + " ORDER BY ordenimpres ");
+        return qryToArrlmap (rs, null, true, 0);
+        
     }
     
     public ArrayList<Map>  getMateriasAlumno (String cicescini, String idalu) throws SQLException
@@ -4490,7 +4543,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
 //************************************************************************************************************    
     public ArrayList<Map> getPaqueteDeMateriasDeCiclo (String cicescini, String modalidad, String cveplan, String grado) throws SQLException
     {
-        rs = stm.executeQuery ("SELECT em.cveprograma, m.cvetipmat, m.cvemat, TRIM(m.desmat) AS desmat, em.ordenimpres " +
+        rs = stm.executeQuery ("SELECT em.cveprograma, m.cvetipmat, m.cvemat, TRIM(m.desmat) AS desmat, em.ordenimpres,'' AS avances " +
                                 "FROM esquemamaterias em, materias m " +
                                 "WHERE em.cvetipmat=m.cvetipmat AND em.cvemat=m.cvemat AND " +
                                 "  "+cicescini+">=em.cicescini AND "+cicescini+"<=em.cicescfin AND em.cveplan="+cveplan+" AND em.grado="+grado+" " +

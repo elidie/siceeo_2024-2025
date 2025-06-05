@@ -664,9 +664,6 @@ function btnGuardarDatosComp_EvalPreesc_Click ()
     else if (jsEvalPree.evalOf1 && jsEvalPree.evalOf2 && jsEvalPree.evalOf3)
         mensaje.EvalPreescolar("TODO_OFICIALIZADO");
     else{
-        //------------------ Establecemos los datos a enviar -------------------
-        /*var filaTblComDocAlum = tabla.getRow ("tblComDocAlum",0,null,"VISIBLES","array");*/
-        
         var datos = {
             modulo:"EvPr", metodo:"btGuDaCo", califCicEscIn:jsEvalPree.califCicEscIn, tblPrincipal_idcct:jsEvalPree.tblPrincipal_idcct, 
             tblAlumCapEval_idalu:jsEvalPree.tblAlumCapEval_idalu, /*chkConlcuyo_checked:document.getElementById('chkConcluyo').checked, */

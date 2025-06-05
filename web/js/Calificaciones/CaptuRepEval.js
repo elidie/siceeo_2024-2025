@@ -5,15 +5,35 @@
 
 var jsCaptuRepEval;
 
-function frmwCaptuRepEval_Show(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_cct, tblPrincipal_cveplan, tblPrincipal_grado, tblPrincipal_grupo)
+function frmwCaptuRepEval_Show(tblPrincipal_cicescini, tblPrincipal_modalidad, tblPrincipal_idcct, tblPrincipal_cct, tblPrincipal_cveplan, tblPrincipal_grado, tblPrincipal_grupo, tblPrincipal_cveprograma)
 {
+
+    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );   
+    var bimMax=0, bimMin=0;
+    if (sisVars){        
+        for (var boton in sisVars.botonesDeCalif) {              
+            if(sisVars.botonesDeCalif[boton]==="btnTrim1"){               
+                bimMin = (bimMin===0 ? 1: bimMin);
+                bimMax = (bimMax===0 ? 1: bimMax);
+            } else if (sisVars.botonesDeCalif[boton]==="btnTrim2") {                
+                bimMin = (bimMin===0 || bimMin > 2 ? 2: bimMin);
+                bimMax = (bimMax===0 || bimMax < 2 ? 2: bimMax);
+            } else if (sisVars.botonesDeCalif[boton]==="btnTrim3") {                
+                bimMin = (bimMin===0 || bimMin > 3 ? 3: bimMin);
+                bimMax = (bimMax===0 || bimMax < 3 ? 3: bimMax);
+            }
+        }    
+    }
+    
     jsCaptuRepEval = {
         tblPrincipal_cicescini: tblPrincipal_cicescini,
         tblPrincipal_idcct: tblPrincipal_idcct,
+        tblPrincipal_modalidad: tblPrincipal_modalidad,
         tblPrincipal_cct: tblPrincipal_cct,
         tblPrincipal_cveplan: tblPrincipal_cveplan,
         tblPrincipal_grado:tblPrincipal_grado,
         tblPrincipal_grupo:tblPrincipal_grupo,
+        tblPrincipal_cveprograma:tblPrincipal_cveprograma,
         
         cicescin:null,
         capRepOf: null,
@@ -22,11 +42,20 @@ function frmwCaptuRepEval_Show(tblPrincipal_cicescini, tblPrincipal_idcct, tblPr
         cbxBimestres:["1","2","3"],
         cbxMateriasAlumno:new Array(),
         cveMats:new Array(),
-        hayCambios:false
+        hayCambios:false,
+        
+        eval:bimMin, //valor original 1                
+        evalOf:false,
+        evalOf1:true,
+        evalOf2:true,
+        evalOf3:true,
+        evalMax: bimMax,
+        evalMin: bimMin,
+        
+        paqueteMatsDefault:null
     };
     object_setVisible (false,"gridTable");                                      // Ocultamos el gridTable
-    $("#frmwCaptuRepEval").css("display", "block");                              // Mostramos el formulario correspondiente
-    
+    $("#frmwCaptuRepEval").css("display", "block");                              // Mostramos el formulario correspondiente    
     frmwCaptuRepEval_Create ();
     frmwCaptuRepEval_FormActivate ();
 }
@@ -55,95 +84,26 @@ function frmwCaptuRepEval_Create()
                     $('#pnlDatosGenerales').append('<label id="lblTblAlumCapRepEval_idalu"> ... </label>');
                     $('#pnlDatosGenerales').append('<label id="lblTblAlumCapRepEval_curp"> ... </label>');
                 $('#pnlListadoAlumnos').append('<div id="pnlTblAlumCapRepEval">  <div id="scrlAlumCapRepEval" class="scrollTable"></div>  </div>');
-                    $('#pnlTblAlumCapRepEval').append('');
-    //..................................................................................................................................................................
-            $('#pnlCaptuRepEval').append('<div id="pnlCapturaDeEvaluaciones" class="panel">'+
-                                            '<div class="panel"><div id="pnlScrlCapturaDeEvaluaciones"></div></div>' +
-                                            '<div id="pnlBotonesDeGestion" ></div>'+
-                                         '</div>');
-                $('#pnlScrlCapturaDeEvaluaciones').append('<div id="pnlLengua" class="panel"><div class="tituloPanel">LENGUA.</div>'
-                                                            //+'<div id="pnlHablaEspañol"> <label id="lblHablaEspañol">Habla Español: <input type="radio" id="rbnSiHablaEspañol" name="rbgHablaEspañol" value="rbnSiHablaEspañol" tabindex="115">Sí <input type="radio" id="rbnNoHablaEspañol" name="rbgHablaEspañol" value="rbnNoHablaEspañol" tabindex="116">No</label> </div>'
-                                                            +'<div id="pnlHablaOtraLengua"> <label id="lblOtraLengua">Lengua indígena (opcional): <select id="cbxOtrasLenguas" name="cbxOtrasLenguas"></select></label> </div>'
-                                                        +'</div>');
-                /*$('#pnlScrlCapturaDeEvaluaciones').append('<div id="pnlRiesgos" class="panel"><div class="tituloPanel">MARQUE SI EL APRENDIZAJE Y/O LA PROMOCIÓN DE GRADO DEL(DE LA) ALUMNO(A) SE ENCUENTRA(N) EN RIESGO.</div></div>');
-                    $('#pnlRiesgos').append('<div id="pnlRiesgos_captura"></div>');
-                        $('#pnlRiesgos_captura').append('<div id="pnlRiesgos_capturaAlerta1" class="riesgosAlerta marco alinearHoriz"></div>');
-                            $('#pnlRiesgos_capturaAlerta1').append('<label>ALERTA</label><label class="lblRiesgosAlertaBim">(BIMESTRE II)</label>');
-                            $('#pnlRiesgos_capturaAlerta1').append('<input type="checkbox" id="chkRiesgosAlerta1" value="chkAlerta1">');
-                        $('#pnlRiesgos_captura').append('<div id="pnlRiesgos_capturaAlerta2"  class="riesgosAlerta marco alinearHoriz"></div>');
-                            $('#pnlRiesgos_capturaAlerta2').append('<label>ALERTA</label><label class="lblRiesgosAlertaBim">(BIMESTRE III)</label>');
-                            $('#pnlRiesgos_capturaAlerta2').append('<input type="checkbox" id="chkRiesgosAlerta2" value="chkAlerta2">');
-                        $('#pnlRiesgos_captura').append('<div id="pnlRiesgos_capturaAlerta3"  class="riesgosAlerta marco alinearHoriz"></div>');
-                            $('#pnlRiesgos_capturaAlerta3').append('<label>ALERTA</label><label class="lblRiesgosAlertaBim">(BIMESTRE IV)</label>');
-                            $('#pnlRiesgos_capturaAlerta3').append('<input type="checkbox" id="chkRiesgosAlerta3" value="chkAlerta3">');
-               $('#pnlScrlCapturaDeEvaluaciones').append('<div id="pnlTutoria" class="panel"><div class="tituloPanel">ASISTIÓ A TUTORÍA.</div></div>');
-                    $('#pnlTutoria').append('<label><input type="radio" name="rbnTutoria" id="rbnSiTutoria" value="SI"> SÍ</label>\n\
-                                             <label><input type="radio" name="rbnTutoria" id="rbnNoTutoria" value="NO"> NO</label>'
-                                            );
-                $('#pnlScrlCapturaDeEvaluaciones').append('<div id="pnlHabilidades" class="panel"><div class="tituloPanel">EVALUACIÓN DE HABILIDADES FUNDAMENTALES PARA EL APRENDIZAJE.</div></div>');
-                    $('#pnlHabilidades').append('<div id="pnlHabilidades_instrucciones">¿Requiere apoyo fuera del horario escolar?</div>');
-                    $('#pnlHabilidades').append('<div id="pnlTblHabilidades"><div id="scrlHabilidades" class="scrollTable" ></div></div>');
-                        $('#scrlHabilidades').append('<table>'+
-                                                            '<tr><th colspan="2">OBSERVACIONES Y/O RECOMENDACIONES</th><th>BIMESTRE</th><th>SI</th></tr>'+
-                                                            '<tr><td rowspan="5" class="tblHabilidades_habilid_f0 tblHabilidades_col0"><label>ESCRITURA</label></td><td rowspan="5"><textarea id="txtaHabEscritura" maxlength="450" placeholder="Escriba máximo 450 caracteres." title="Escriba máximo 450 caracteres."></textarea></td><td class="tblHabilidades_col2">I</td><td><input type="checkbox" id="chkHabEscritura1" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">II</td><td><input type="checkbox" id="chkHabEscritura2" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">III</td><td><input type="checkbox" id="chkHabEscritura3" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">IV</td><td><input type="checkbox" id="chkHabEscritura4" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">V</td><td><input type="checkbox" id="chkHabEscritura5" ></td></tr>'+
-                                                            
-                                                            '<tr><td rowspan="5" class="tblHabilidades_habilid_f1 tblHabilidades_col0"><label>LECTURA</label></td><td rowspan="5"><textarea id="txtaHabLectura" maxlength="450" placeholder="Escriba máximo 450 caracteres." title="Escriba máximo 450 caracteres."></textarea></td><td class="tblHabilidades_col2">I</td><td><input type="checkbox" id="chkHabLectura1" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">II</td><td><input type="checkbox" id="chkHabLectura2" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">III</td><td><input type="checkbox" id="chkHabLectura3" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">IV</td><td><input type="checkbox" id="chkHabLectura4" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">V</td><td><input type="checkbox" id="chkHabLectura5" ></td></tr>'+
-                                                            
-                                                            '<tr><td rowspan="5" class="tblHabilidades_habilid_f2 tblHabilidades_col0"><label>MATEMÁTICA</label></td><td rowspan="5"><textarea id="txtaHabMatematica" maxlength="450" placeholder="Escriba máximo 450 caracteres." title="Escriba máximo 450 caracteres."></textarea></td><td class="tblHabilidades_col2">I</td><td><input type="checkbox" id="chkHabMatematica1" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">II</td><td><input type="checkbox" id="chkHabMatematica2" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">III</td><td><input type="checkbox" id="chkHabMatematica3" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">IV</td><td><input type="checkbox" id="chkHabMatematica4" ></td></tr>'+
-                                                            '<tr><td class="tblHabilidades_col2">V</td><td><input type="checkbox" id="chkHabMatematica5" ></td></tr>'+
-                                                          '</table>');*/
-                    
-                /*$('#pnlScrlCapturaDeEvaluaciones').append('<div id="pnlRecomendXBimYAsig" class="panel"><div class="tituloPanel">OBSERVACIONES Y/O RECOMENDACIONES POR EVALUACIÓN Y ASIGNATURA.</div></div>');
-                    $('#pnlRecomendXBimYAsig').append('<div id="pnlRecomendaciones_instrucciones"><label>El(la) maestro(a) registrará, al concluir el segundo bimestre o en el momento del ciclo escolar en el que observe dificultades en el desempeño del(dela) alumno(a), información acerca de las necesidades de apoyo que éste(a) requiere y, las acciones que la escuela y la familia deben realizar conjuntamente con el educando para favorecer que avance en los aprendizajes esperados, establecidos en los Programas de Estudio. En caso de requerir más espacio, utilice hojas adicionales.</label></div>');
-                    $("#pnlRecomendXBimYAsig").append('<div id="pnlTablaObsYRecomXBimYAsig">  <div id="scrlObsYRecomXBimYAsig" class="scrollTable"></div>  </div>');
-                    $("#pnlRecomendXBimYAsig").append('<div id="pnlBotoneraGestionObsYRecomXBimYAsig">'
-                                                    + '<ul id="ubtnObsYRecomXBimYAsig" class="buttonBar"> '
-                                                        + '<li><a href="#" id="btnInserFila"  class="tam2Button" title="Inserta un renglón en blanco al final de la lista para ingresar datos."><label class="iconBtnMas iconBtnRedondo  middleHoriz icon-plus"></label>Insertar renglón</a></li>'
-                                                        + '<li><a href="#" id="btnQuitarFila"  class="tam2Button" title="Elimina el renglón seleccionado en la lista."><label class="iconBtnMenos iconBtnRedondo  middleHoriz icon-minus"></label>Quitar renglón</a></li>'
-                                                    +'</ul> '
-                                                +'</div>'); */
-                /*$('#pnlScrlCapturaDeEvaluaciones').append('<div id="pnlRecomendXBimYAsig" class="panel"><div class="tituloPanel">OBSERVACIONES Y/O RECOMENDACIONES GENERALES POR EVALUACIÓN</div></div>');
-                    $('#pnlRecomendXBimYAsig').append('<div id="pnlRecomendaciones_instrucciones"><label>El(la) maestro(a) registrará, al concluir el segundo bimestre o en el momento del ciclo escolar en el que observe dificultades en el desempeño del(dela) alumno(a), información acerca de las necesidades de apoyo que éste(a) requiere y, las acciones que la escuela y la familia deben realizar conjuntamente con el educando para favorecer que avance en los aprendizajes esperados, establecidos en los Programas de Estudio. En caso de requerir más espacio, utilice hojas adicionales.</label></div>');
-                    $("#pnlRecomendXBimYAsig").append('<div id="pnlTablaObsYRecomXBimYAsig"><div id="scrlObsYRecomXBimYAsig" class="scrollTable"></div>  </div>');
-                    $("#pnlRecomendXBimYAsig").append('<div id="pnlBotoneraGestionObsYRecomXBimYAsig">'
-                                                    + '<ul id="ubtnObsYRecomXBimYAsig" class="buttonBar"> '
-                                                        + '<li><a href="#" id="btnInserFila"  class="tam2Button" title="Inserta un renglón en blanco al final de la lista para ingresar datos."><label class="iconBtnMas iconBtnRedondo  middleHoriz icon-plus"></label>Insertar renglón</a></li>'
-                                                        + '<li><a href="#" id="btnQuitarFila"  class="tam2Button" title="Elimina el renglón seleccionado en la lista."><label class="iconBtnMenos iconBtnRedondo  middleHoriz icon-minus"></label>Quitar renglón</a></li>'
-                                                    +'</ul> '
-                                                +'</div>'); */
-                if(jsCaptuRepEval.tblPrincipal_cveplan === "1")
-                    $('#pnlScrlCapturaDeEvaluaciones').append('<div id="pnlRecomendGrales" class="panel"><div class="tituloPanel">OBSERVACIONES Y SUGERENCIAS SOBRE LOS APRENDIZAJES.</div></div>');
-                        $('#pnlRecomendGrales').append('<div id="pnlRecomendGrales_instruc"><label>Si es necesario, el(la) maestro(a) registrará las situaciones que interfieren o pueden favorecer el desempeño del(de la) alumno(a) (acoso escolar, comportamiento, valores, interacciones, higiene personal, acompañamiento de la familia en el proceso educativo, etc.).</label></div>');
-                        //$('#pnlRecomendGrales').append('<div id="pnlRecomendGrales_captudatos" clas="panel"><textarea id="txtaRecomendGrales" maxlength="400" placeholder="Escriba máximo 400 caracteres." title="Escriba máximo 400 caracteres."></textarea></div>');
-                        $('#pnlRecomendGrales').append('<div id="pnlRecomendGrales_captudatos" clas="panel"><label>PRIMER PERIODO</label><textarea id="txtaRecomendGrales_eval1" maxlength="400" placeholder="Escriba máximo 400 caracteres." title="Escriba máximo 400 caracteres."></textarea></div>'); 
-                        $('#pnlRecomendGrales').append('<div id="pnlRecomendGrales_captudatos" clas="panel"><label>SEGUNDO PERIODO</label><textarea id="txtaRecomendGrales_eval2" maxlength="400" placeholder="Escriba máximo 400 caracteres." title="Escriba máximo 400 caracteres."></textarea></div>'); 
-                        $('#pnlRecomendGrales').append('<div id="pnlRecomendGrales_captudatos" clas="panel"><label>TERCER PERIODO</label><textarea id="txtaRecomendGrales_eval3" maxlength="400" placeholder="Escriba máximo 400 caracteres." title="Escriba máximo 400 caracteres."></textarea></div>'); 
-
-    
-                /*$('#pnlScrlCapturaDeEvaluaciones').append('<div id="pnlComprensionLectora" class="panel"><div class="tituloPanel">EVALUACIÓN DE LA COMPRENSIÓN LECTORA.</div></div>');
-                    $('#pnlComprensionLectora').append('<div id="pnlComprensionLectora_instruc"><label>El(la) maestro(a) registrará en el momento correspondiente los avances de la Comprensión Lectora, rellenando el circulo quedescriba la situación del(de la) alumno(a). El único objeto de estos aspectos es brindar mayor información sobre este elemento de aprendizaje indispensable para el desempeño académico de los propios educandos. Estos aspectos no deberán condicionar por si mismos la promoción de grado.</label></div>');
-                    $('#pnlComprensionLectora').append('<div id="pnlTblEvalLec"><div id="scrlEvalLec" class="scrollTable"></div></div>');
-                        $('#scrlEvalLec').append('<table id="tblEvalLec">' +
-                                                        '<thead>' +
-                                                            '<tr><th rowspan="2" id="tblEvalLec_titcol0">Los siguientes aspectos se relacionan con el desarrollo de la comprensión al leer y escribir, permitiendo informar si el (la) alumno(a):</th><th colspan="4">SIEMPRE</th><th colspan="4">CASI SIEMPRE</th><th colspan="4">EN OCASIONES</th><th colspan="4">REQUIERE APOYO ADICIONAL</th></tr>' +
-                                                            '<tr><th>Ago</th><th>Nov</th><th>Mar</th><th>Jun</th> <th>Ago</th><th>Nov</th><th>Mar</th><th>Jun</th> <th>Ago</th><th>Nov</th><th>Mar</th><th>Jun</th> <th>Ago</th><th>Nov</th><th>Mar</th><th>Jun</th></tr>' +
-                                                        '</thead>' +
-                                                        '<tbody></tbody>' +
-                                                    '</table>');*/
+            
+    /************************* Fecha: 23-05-2025 ***************************************************************************/        
+    /************************* Agregado para la captura de observaciones por materia para Primaria *************************/            
+            $('#pnlCaptuRepEval').append('<div id="pnlCapturaDeRecomedaciones"></div>'); //pnlCapturaDeEvaluaciones
+            if(jsCaptuRepEval.tblPrincipal_cveplan === "1" ) {
+                $('#pnlCapturaDeRecomedaciones').append('<div id="pnlRecomendaciones" class="panel"></div>');  //pnlEvaluaciones
+                    $('#pnlRecomendaciones').append('<div id="pnlCambiarEval"></div>');
+                        $('#pnlCambiarEval').append('<ul id="ulBtnEvalAnt" class="buttonBar alinearHoriz"> <li><a href="#" id="btnAnteriorNumEval"><label class="iconBtnBimEvalAnt iconBtnRedondo icon-arrow-left4"></label>Eval. Ant.</a></li> </ul>');
+                        $('#pnlCambiarEval').append('<label id="lblNumEval" class="alinearHoriz"> ... </label>');
+                        $('#pnlCambiarEval').append('<ul id="ulbtnEvalSig" class="buttonBar alinearHoriz"> <li><a href="#" id="btnSiguienteNumEval">Sig. Eval.<label class="iconBtnBimEvalSig iconBtnRedondo icon-arrow-right4"></label></a></li> </ul>');
+                    $('#pnlRecomendaciones').append('<div id="scrlRecomXMat"></div>'); // antes scrlAvancesXEval
+                    $('#pnlRecomendaciones').append('<div id="pnlMensajeGuardar">  <label id="lblMensajeGuardar" title="No olvide guardar la evaluación por cada alumno.">No olvide guardar las sugerencias y recomendaciones por cada alumno.<label>  </div>');
+                    $('#pnlRecomendaciones').append('<ul class="buttonBar"> <li><a href="#" id="btnGuardarRecom"><label class="iconBtnGuardar icon-disquete"></label>Guardar captura del alumno</a></li>  </ul>');
+            }   /*era pnlScrlCapturaDeEvaluaciones*/                     
+                $('#pnlCapturaDeRecomedaciones').append('<div id="pnlLengua" class="panel"><div class="tituloPanel">Lengua</div></div>');                    
+                    $('#pnlLengua').append('<div id="pnlHablaOtraLengua"> '
+                                    + '<label id="lblOtraLengua">Lengua indígena (opcional): <select id="cbxOtrasLenguas" name="cbxOtrasLenguas"></select></label> </div>');
+                    $('#pnlLengua').append('<div id="btnGuardarDatosComp" class="singleButton"><label class="alinearHoriz vertMarginable"><span class="iconButton icon-disquete"></span>Guardar lengua</label></div>');
                 
-                $('#pnlBotonesDeGestion').append('<ul class="buttonBar">'+
-                                                    '<li><a href="#" id="btnGuardarCapRepEval"><label class="middleHoriz icon-disquete"></label>Guardar captura</a></li>'+
+                $('#pnlCapturaDeRecomedaciones').append('<ul class="buttonBar">'+                                                    
                                                     '<li><a href="#" id="btnLimpiarCapRepEval"><label class="middleHoriz icon-brocha"></label>Limpiar captura</a></li>'+
                                                     '<li><a href="#" id="btnAnteriorGrupo"><label class="iconBtnGpoAnt middleHoriz iconBtnRedondo icon-arrow-left4"></label>Gpo. anterior</a></li>' +
                                                     '<li><a href="#" id="btnSiguienteGrupo">Siguiente gpo.<label class="iconBtnGpoSig middleHoriz iconBtnRedondo icon-arrow-right4"></label></a></li>' +
@@ -153,9 +113,12 @@ function frmwCaptuRepEval_Create()
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------
     
     $("#btnRegresar_CaptuRepEval").on("click",function(){ frmwCaptuRepEval_Close(); });
-    $("#btnInserFila").on("click",function(){ btnInserFila_Click(); return false; });
-    $("#btnQuitarFila").on("click",function(){ btnQuitarFila_Click(); return false; });
-    $("#btnGuardarCapRepEval").on('click',function(){ btnGuardarCapRepEval_Click ();  return false;});
+    $("#btnAnteriorNumEval").on('click',function(){ btnAnteriorNumEval_RecomPrim_Click(); return false; });
+    $("#btnSiguienteNumEval").on('click',function(){ btnSiguienteNumEval_RecomPrim_Click(); return false; });
+    /*$("#btnInserFila").on("click",function(){ btnInserFila_Click(); return false; });
+    $("#btnQuitarFila").on("click",function(){ btnQuitarFila_Click(); return false; });*/
+    $("#btnGuardarRecom").on('click',function(){ btnGuardarCapRepEval_Click ();  return false;});
+    $("#btnGuardarDatosComp").on('click',function(){ btnGuardarDatosComp_Click(); return false; });
     $("#btnLimpiarCapRepEval").on('click',function(){ limpiarDatosDeCaptura (); });
     $("#btnAnteriorGrupo").on('click',function(){ btnAnteriorGrupo_CapRepEval_Click(); return false; });
     $("#btnSiguienteGrupo").on('click',function(){ btnSiguienteGrupo_CapRepEval_Click();  return false;});
@@ -168,9 +131,10 @@ function frmwCaptuRepEval_FormActivate ()
     
     //------------------ Establecemos los datos a enviar -------------------
     var datos = {
-        modulo:"CaReEv", metodo:"foAc", califCicEscIn:sisVars.cicescin, cicescin:sisVars.cicescin, tblPrincipal_idcct:jsCaptuRepEval.tblPrincipal_idcct,
+        modulo:"CaReEv", metodo:"foAc", califCicEscIn:sisVars.cicescin, cicescin:sisVars.cicescin, 
+        tblPrincipal_idcct:jsCaptuRepEval.tblPrincipal_idcct, tblPrincipal_modalidad:jsCaptuRepEval.tblPrincipal_modalidad,
         tblPrincipal_cveplan:jsCaptuRepEval.tblPrincipal_cveplan, tblPrincipal_grado:jsCaptuRepEval.tblPrincipal_grado, 
-        tblPrincipal_grupo:jsCaptuRepEval.tblPrincipal_grupo
+        tblPrincipal_grupo:jsCaptuRepEval.tblPrincipal_grupo, eval:jsCaptuRepEval.eval
     };
     //------------------------- Hacemos la llamada -------------------------
     cargarLoading();
@@ -189,14 +153,9 @@ function frmwCaptuRepEval_FormActivate ()
                     jsCaptuRepEval.califCicEscIn=datos.califCicEscIn;
                     jsCaptuRepEval.tipoCambCic = result.tipoCambCic;
                     
-                    //for (var i=0; i<result.matsAlumno.length; i++){
-                      //  jsCaptuRepEval.cbxMateriasAlumno[i]=result.matsAlumno[i].desmat;
-                       // jsCaptuRepEval.cveMats[i]=result.matsAlumno[i].cvemats;
-                    //}
+                    jsCaptuRepEval.paqueteMatsDefault = result.paqueteMatsDefault;
                     
                     //----------- Activamos o desactivamos componentes -------------
-                    //if (jsCaptuRepEval.tblPrincipal_cveplan!=="2")
-                        //object_setVisible(false,"pnlTutoria");
                     boton_setVisible(result.btnSiguienteCiclo_Visible,'btnSiguienteCiclo');
                     boton_setVisible(result.btnAnteriorCiclo_Visible,'btnAnteriorCiclo');
                     if (!result.btnAnteriorGpo_Enabled)     boton_setEnabled(result.btnAnteriorGpo_Enabled,'btnAnteriorGpo');
@@ -204,14 +163,20 @@ function frmwCaptuRepEval_FormActivate ()
                     
                     //--------------- Asignamos datos a componentes ----------------
                     $("#lblCiclo").text(result.lblCiclo);
+                    $('#lblNumEval').text(result.lblNumEval);                    
+
                     //Cargamos las lenguas
                     $("#cbxOtrasLenguas").append("<option value='' selected></option>");
                     $.each(result.lenguas,function(clave,valor) {
                            $("#cbxOtrasLenguas").append("<option value='"+clave.trim()+"' title='"+clave.trim()+"-"+valor.trim()+"'>"+valor.trim()+"</option>");                        
                     });
                     
+                    
                     insertarTablaTblAlumCapRepEval (result.tblAlumCapRepEval);
-                    insertarDatosDeCaptura_RepEval (result);
+                    insertarTabla_Recom_EvalPrim(result);
+                    //insertarDatosDeCaptura_RepEval (result);
+                    cerrarLoading();
+                    break;
                 break;
             case 0: case -1:
                     mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
@@ -254,7 +219,7 @@ function insertarDatosDeCaptura_RepEval (result)
     //    document.getElementById('rbnSiTutoria').checked = true;
     //else if (result.tutoria === "N")
     //    document.getElementById('rbnNoTutoria').checked = true;
-    //$("#txtaHabEscritura").val(result.or_escritura);
+    //$("#txtaHabEscritura").val(result.or_escritura);|
     //$("#txtaHabLectura").val(result.or_lectura);
     //$("#txtaHabMatematica").val(result.or_mate);
     //$("#txtaRecomendGrales").val(result.obsrec_gral);
@@ -287,6 +252,55 @@ function insertarTablaTblAlumCapRepEval (tblAlumCapRepEval)
     }, null);
     
     tabla.setSelectedRow ('tblAlumCapRepEval', 0);
+}
+
+function insertarTabla_Recom_EvalPrim(result) //tblRecomXMat
+{
+    var mensaje = new Mensajes();    
+    
+        //--------------- Asignamos datos a componentes ----------------
+    var tblAlumCapRepEval={cveprograma:"", idalu:"", curp:""};
+        
+    if (result.tblAlumCapRepEval.length>0){
+    
+        tblAlumCapRepEval.cveprograma = result.tblAlumCapRepEval[0].cveprograma;
+        tblAlumCapRepEval.idalu = result.tblAlumCapRepEval[0].idalu;
+        tblAlumCapRepEval.curp= result.tblAlumCapRepEval[0].curp;
+    }
+    jsCaptuRepEval.tblAlumCapRepEval_idalu = tblAlumCapRepEval.idalu;
+    setDatosLabel_CapRepEval ("AlumCapRepEval", tblAlumCapRepEval.cveprograma, tblAlumCapRepEval.idalu==="-1"?"":tblAlumCapRepEval.idalu, tblAlumCapRepEval.curp);                        
+    //---------------------- Ponemos los datos de las evaluaciones ----------------------\\
+    insertarTabla_RecomXMat_EvalPrim(result.tblRecomXMat);
+    /******************  Insertamos la lengua del alumno ***********************************/
+    $("#cbxOtrasLenguas").val((result.cvelengua.trim()==="ESP")?"":result.cvelengua.trim());
+    
+    if (jsCaptuRepEval.evalOf)
+        $("#pnlEvalPreescolar .avances").on('click',function(){ mensaje.EvalPreescolar("EVALUACION_OFICIALIZADA"); });
+    $("#scrlRecomXMat").scrollTop (0);
+}
+
+
+function insertarTabla_RecomXMat_EvalPrim(tblRecomXMat)
+{
+    var tablaRecom;
+    var casoObjOfic = "textarea"; //(jsEvalPree.evalOf)?"label":"textarea";
+    var title = "Escriba máximo 300 caracteres.";
+    
+    $("#tblRecomXMat").remove();                                            //Limpiamos los datos
+    $('#scrlRecomXMat').append('<div id="tblRecomXMat"></div>');  //antes tblAvancesXEval
+    
+    tablaRecom =  (tblRecomXMat.length>0)?tblRecomXMat:jsCaptuRepEval.paqueteMatsDefault;
+    
+    
+    for (var i=0; i<tablaRecom.length; i++){
+        title = "Escriba máximo 300 caracteres.";
+        $('#tblRecomXMat').append('<div class="areaEval panel">'
+                                            +'<label class="tituloPanel">'+tablaRecom[i].desmat+'</label>'
+                                            +'<'+casoObjOfic+' id="txa'+tablaRecom[i].cvetipmat+'_'+tablaRecom[i].cvemat+'" name="txa'+tablaRecom[i].cvetipmat+'_'+tablaRecom[i].cvemat+'" class="alinearHoriz avances" maxlength="300" placeholder="'+title+'" title="'+title+'">'
+                                                + tablaRecom[i].avances
+                                            +'</'+casoObjOfic+'>'
+                                     +'</div>');
+    }    
 }
 
 function insertarTablaApoyoHab (apoyoHabXBim)
@@ -368,7 +382,7 @@ function tblAlumCapRepEval_ChangeSelectedItem (index)
     var datos = {
         modulo:"CaReEv", metodo:"tbAlCaReEv_ChSeIt", califCicEscIn:jsCaptuRepEval.califCicEscIn, tblPrincipal_idcct:jsCaptuRepEval.tblPrincipal_idcct, 
         tblPrincipal_cveplan:jsCaptuRepEval.tblPrincipal_cveplan, tblPrincipal_grado:jsCaptuRepEval.tblPrincipal_grado, 
-        tblAlumCapRepEval_idalu:tblAlumCapRepEval_selRow.idalu
+        tblAlumCapRepEval_idalu:tblAlumCapRepEval_selRow.idalu, eval: jsCaptuRepEval.eval, cveprograma: jsCaptuRepEval.tblPrincipal_cveprograma
     };
     //------------------------- Hacemos la llamada -------------------------
     cargarLoading();
@@ -383,20 +397,11 @@ function tblAlumCapRepEval_ChangeSelectedItem (index)
             case 1:
                     //------ Establecemos la selección de la fila en la tabla ------
                     tabla.setSelectedRow ('tblAlumCapRepEval', index);
-                    
-                    //-------------------- Asignamos variables ---------------------
-                    /*for (var i=0; i<result.matsAlumno.length; i++){
-                        jsCaptuRepEval.cbxMateriasAlumno[i]=result.matsAlumno[i].desmat;
-                        jsCaptuRepEval.cveMats[i]=result.matsAlumno[i].cvemats;
-                    }*/
-                    
-                    //--------------- Asignamos datos a componentes ----------------
-                    
-                    limpiarDatosDeCaptura ();
-                    
-                    result.tblAlumCapRepEval = new Array();
-                    result.tblAlumCapRepEval[0] = tblAlumCapRepEval_selRow;
-                    insertarDatosDeCaptura_RepEval (result);
+                    jsCaptuRepEval.tblAlumCapRepEval_idalu=tblAlumCapRepEval_selRow.idalu;
+                    setDatosLabel_CapRepEval ("AlumCapRepEval", tblAlumCapRepEval_selRow.cveprograma, tblAlumCapRepEval_selRow.idalu==="-1"?"":tblAlumCapRepEval_selRow.idalu, tblAlumCapRepEval_selRow.curp);
+                    insertarTabla_RecomXMat_EvalPrim(result.tblRecomXMat);
+                    /******************  Insertamos la lengua del alumno ***********************************/
+                    $("#cbxOtrasLenguas").val((result.cvelengua.trim()==="ESP")?"":result.cvelengua.trim());
                 break;
             case 0: case -1:
                     mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
@@ -444,36 +449,135 @@ function limpiarDatosDeCaptura ()
         tabla.removeRow("tblObsYRecomXBimYAsig",0);
 }
 
+function btnAnteriorNumEval_RecomPrim_Click()
+{
+    var mensaje = new Mensajes();
+    var tabla = new Tabla();
+    
+    if ( tabla.getSelectedIndexRow("tblAlumCapEval") === -1)
+        mensaje.General("NO_SELEC"," alumno","desplazarce entre sus evaluaciones");
+    else{
+        //------------------ Establecemos los datos a enviar -------------------
+        var datos = {
+            modulo:"CaReEv", metodo:"btAnNuEv", tblAlumCapEval_cicescini:jsCaptuRepEval.califCicEscIn, califCicEscIn:jsCaptuRepEval.califCicEscIn, 
+            tblPrincipal_idcct:jsCaptuRepEval.tblPrincipal_idcct, tblPrincipal_cveplan:jsCaptuRepEval.tblPrincipal_cveplan, tblPrincipal_grado:jsCaptuRepEval.tblPrincipal_grado, 
+            tblPrincipal_grupo:jsCaptuRepEval.tblPrincipal_grupo, numeval:jsCaptuRepEval.eval, tblAlumCapRepEval_idalu:jsCaptuRepEval.tblAlumCapRepEval_idalu,
+            evalMin:jsCaptuRepEval.evalMin, evalMax:jsCaptuRepEval.evalMax, cveprograma: jsCaptuRepEval.tblPrincipal_cveprograma
+        };
+        //------------------------- Hacemos la llamada -------------------------
+        cargarLoading();
+        $.ajax({url:"../sis_web/siS1",
+            type:"POST",
+            dataType:"JSON",
+            data: datos,
+            async:true
+        })
+        .done(function(result){
+            switch(result.returnCase){
+                case 1:
+                        $('#lblNumEval').text(result.lblNumEval);
+                        jsCaptuRepEval.eval = result.eval;
+                        jsCaptuRepEval.evalOf = result.evalOf;                                                                                                                               
+                        insertarTabla_RecomXMat_EvalPrim(result.tblRecomXMat);
+                        cerrarLoading();
+                    break;
+                case 0: case -1:
+                        cerrarLoading();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                    break;
+                case -10:
+                        //e.preventDefault();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        btnCerrarSesion_ActionPerformed ();
+                    break;
+                default:break;
+            }
+        })
+        .fail(function() {
+            mensaje.General("ERROR_AJAX", "", "");
+            cerrarLoading();
+        });
+    }
+}
+
+function btnSiguienteNumEval_RecomPrim_Click()
+{
+    var mensaje = new Mensajes();
+    var tabla = new Tabla();
+    
+    if ( tabla.getSelectedIndexRow("tblAlumCapEval") === -1)
+        mensaje.General("NO_SELEC"," alumno","desplazarce entre sus evaluaciones");
+    else{
+        //------------------ Establecemos los datos a enviar -------------------
+        var datos = {
+            modulo:"CaReEv", metodo:"btSiNuEv", tblPrincipal_idcct:jsCaptuRepEval.tblPrincipal_idcct, tblPrincipal_grado:jsCaptuRepEval.tblPrincipal_grado, 
+            tblPrincipal_grupo:jsCaptuRepEval.tblPrincipal_grupo, numeval:jsCaptuRepEval.eval, tblAlumCapRepEval_idalu:jsCaptuRepEval.tblAlumCapRepEval_idalu,
+            tblAlumCapEval_cicescini:jsCaptuRepEval.califCicEscIn, evalMin:jsCaptuRepEval.evalMin, evalMax:jsCaptuRepEval.evalMax, cveprograma: jsCaptuRepEval.tblPrincipal_cveprograma
+        };
+        //------------------------- Hacemos la llamada -------------------------
+        cargarLoading();
+        $.ajax({url:"../sis_web/siS1",
+            type:"POST",
+            dataType:"JSON",
+            data: datos,
+            async:true
+        })
+        .done(function(result){
+            switch(result.returnCase){
+                case 1:
+                        $('#lblNumEval').text(result.lblNumEval);
+                        jsCaptuRepEval.eval = result.eval;
+                        jsCaptuRepEval.evalOf = result.evalOf;
+                        insertarTabla_RecomXMat_EvalPrim(result.tblRecomXMat);
+                        cerrarLoading();
+                    break;
+                case 0: case -1:
+                        cerrarLoading();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                    break;
+                case -10:
+                        //e.preventDefault();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        btnCerrarSesion_ActionPerformed ();
+                    break;
+                default:break;
+            }
+        })
+        .fail(function() {
+            mensaje.General("ERROR_AJAX", "", "");
+            cerrarLoading();
+        });
+    }
+}
+
 function btnGuardarCapRepEval_Click()
 {
     var mensaje = new Mensajes();
     var tabla = new Tabla();
+    var tblAvancesXEvalMat = new Array(), textoEscrito="";
   
-    if (jsCaptuRepEval.capRepOf)
+    /*if (jsCaptuRepEval.capRepOf)
         mensaje.CapRepEval("CAP_REP_OFICIALIZADA");
-    else if ( tabla.getSelectedIndexRow("tblAlumCapRepEval") === -1)
-        mensaje.General("NO_SELEC"," alumno","guardar sus avances");
-    else if (validarEntradas_CapRepEval ()){
-        
-        /*var chkHabEscritura=[document.getElementById('chkHabEscritura1').checked+"~"+document.getElementById('chkHabEscritura2').checked+"~"+document.getElementById('chkHabEscritura3').checked+"~"+document.getElementById('chkHabEscritura4').checked+"~"+document.getElementById('chkHabEscritura5').checked];
-        var chkHabLectura=[document.getElementById('chkHabLectura1').checked+"~"+document.getElementById('chkHabLectura2').checked+"~"+document.getElementById('chkHabLectura3').checked+"~"+document.getElementById('chkHabLectura4').checked+"~"+document.getElementById('chkHabLectura5').checked];
-        var chkHabMatematica=[document.getElementById('chkHabMatematica1').checked+"~"+document.getElementById('chkHabMatematica2').checked+"~"+document.getElementById('chkHabMatematica3').checked+"~"+document.getElementById('chkHabMatematica4').checked+"~"+document.getElementById('chkHabMatematica5').checked]; */
+         else*/ 
+    if ( tabla.getSelectedIndexRow("tblAlumCapRepEval") === -1)
+        mensaje.General("NO_SELEC"," alumno","guardar sus avances");    
+    else{        
+        for (var i=0; i<jsCaptuRepEval.paqueteMatsDefault.length; i++){            
+            tblAvancesXEvalMat[i]=jsCaptuRepEval.paqueteMatsDefault[i].cveprograma+"~"+jsCaptuRepEval.paqueteMatsDefault[i].cvetipmat+"~"+jsCaptuRepEval.paqueteMatsDefault[i].cvemat+"~"+$("#txa"+jsCaptuRepEval.paqueteMatsDefault[i].cvetipmat+"_"+jsCaptuRepEval.paqueteMatsDefault[i].cvemat).val().trim();
+            textoEscrito+=$("#txa"+jsCaptuRepEval.paqueteMatsDefault[i].cvetipmat+"_"+jsCaptuRepEval.paqueteMatsDefault[i].cvemat).val().trim();
+        }
+        if (textoEscrito.trim() === "")
+            return mensaje.General ("NADA_QUE_GUARDAR");
+                
         //------------------ Establecemos los datos a enviar -------------------
         var datos = {
-            modulo:"CaReEv", metodo:"btGdCaReEv_Cl", califCicEscIn:jsCaptuRepEval.califCicEscIn, tblPrincipal_idcct:jsCaptuRepEval.tblPrincipal_idcct,
+            modulo:"CaReEv", metodo:"btGdCaReEv_Cl", tblAvancesXEvalYMat:tblAvancesXEvalMat,califCicEscIn:jsCaptuRepEval.califCicEscIn, 
+            tblPrincipal_idcct:jsCaptuRepEval.tblPrincipal_idcct, eval:jsCaptuRepEval.eval,
             tblPrincipal_grado:jsCaptuRepEval.tblPrincipal_grado, tblPrincipal_grupo:jsCaptuRepEval.tblPrincipal_grupo, 
-            idalu:jsCaptuRepEval.tblAlumCapRepEval_idalu, cveplan: jsCaptuRepEval.tblPrincipal_cveplan,//hablaEspaniol:document.getElementById('rbnSiHablaEspañol').checked, 
-            cvelengua:$('#cbxOtrasLenguas').val()===""?"ESP":$('#cbxOtrasLenguas').val(), 
-            /*
-            chkRiesgosAlerta1:document.getElementById('chkRiesgosAlerta1').checked, chkRiesgosAlerta2:document.getElementById('chkRiesgosAlerta2').checked, 
-            chkRiesgosAlerta3:document.getElementById('chkRiesgosAlerta3').checked, 
-            tutoria:document.getElementById('rbnSiTutoria').checked?'S':(document.getElementById('rbnNoTutoria').checked?'N':'-'), 
-            txtaHabEscritura:$('#txtaHabEscritura').val(), txtaHabLectura:$('#txtaHabLectura').val(), txtaHabMatematica:$('#txtaHabMatematica').val(), 
-            chkHabEscritura:chkHabEscritura,chkHabLectura:chkHabLectura,chkHabMatematica:chkHabMatematica, 
-            tblEvalLec:tabla.getTable("tblEvalLec"), tblObsYRecomXBimYAsig:tabla.getTable("tblObsYRecomXBimYAsig"),*/
-            txtaRecomendGrales_eval1:$('#txtaRecomendGrales_eval1').val(),txtaRecomendGrales_eval2:$('#txtaRecomendGrales_eval2').val(),
-            txtaRecomendGrales_eval3:$('#txtaRecomendGrales_eval3').val()
-            
+            tblAlumCapRepEval_idalu:jsCaptuRepEval.tblAlumCapRepEval_idalu, cveplan: jsCaptuRepEval.tblPrincipal_cveplan,
+            cvelengua:$('#cbxOtrasLenguas').val()===""?"ESP":$('#cbxOtrasLenguas').val()            
+            /*txtaRecomendGrales_eval1:$('#txtaRecomendGrales_eval1').val(),txtaRecomendGrales_eval2:$('#txtaRecomendGrales_eval2').val(),
+            txtaRecomendGrales_eval3:$('#txtaRecomendGrales_eval3').val()*/            
         };
         
         //------------------------- Hacemos la llamada -------------------------
@@ -488,6 +592,10 @@ function btnGuardarCapRepEval_Click()
             switch(result.returnCase){
                 case 1:
                         mensaje.General("GUARDADO_EXITOSO");
+                        var numFilas = tabla.getNumRows ('tblAlumCapRepEval');
+                        var posSelActual = tabla.getSelectedIndexRow ('tblAlumCapRepEval');
+                        if (posSelActual < (numFilas-1))
+                            tblAlumCapRepEval_ChangeSelectedItem (posSelActual+1);  //Seleccionamos la siguiente fila de tblAlumCapRepEval y obtenemos los datos correspondientes
                     break;
                 case 0: case -1:
                         mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
@@ -506,7 +614,7 @@ function btnGuardarCapRepEval_Click()
         })
         .always(function() {
             cerrarLoading();
-        });
+        });    
     }
 }
 
@@ -614,13 +722,14 @@ function btnAnteriorGrupo_CapRepEval_Click()
 {
     var tabla = new Tabla();
     
-    if (jsCaptuRepEval.hayCambios) 
-        btnGuardarCapRepEval_Click ();
+    /*if (jsCaptuRepEval.hayCambios) 
+        btnGuardarCapRepEval_Click ();*/
     
     if ( tabla.getSelectedIndexRow ('tblPrincipal')-1 >= 0 ){
         var datos = { 
             modulo:"CaReEv", metodo:"btAnGp", tblPrincipal:tabla.getTable("tblPrincipal",["cct","grado","grupo","idcct","cveplan"]), 
-            posSelActual:tabla.getSelectedIndexRow ('tblPrincipal'), califCicEscIn:jsCaptuRepEval.califCicEscIn
+            posSelActual:tabla.getSelectedIndexRow ('tblPrincipal'), califCicEscIn:jsCaptuRepEval.califCicEscIn,
+            eval: jsCaptuRepEval.eval, tblPrincipal_cveprograma:jsCaptuRepEval.tblPrincipal_cveprograma
         };
         sigAntGrupo_CapRepEval (datos);
     }
@@ -640,7 +749,8 @@ function btnSiguienteGrupo_CapRepEval_Click()
 
         var datos = { 
             modulo:"CaReEv", metodo:"btSiGp", tblPrincipal:tabla.getTable("tblPrincipal",["cct","grado","grupo","idcct","cveplan"]), 
-            posSelActual:tabla.getSelectedIndexRow ('tblPrincipal'), califCicEscIn:jsCaptuRepEval.califCicEscIn
+            posSelActual:tabla.getSelectedIndexRow ('tblPrincipal'), califCicEscIn:jsCaptuRepEval.califCicEscIn, 
+            eval: jsCaptuRepEval.eval, tblPrincipal_cveprograma:jsCaptuRepEval.tblPrincipal_cveprograma
         };
 
         sigAntGrupo_CapRepEval (datos);
@@ -663,18 +773,13 @@ function sigAntGrupo_CapRepEval (datos)
     .done(function(result){
         switch(result.returnCase){
             case 1:
-                    //-------------------- Asignamos variables ---------------------
                     tabla.setSelectedRow ('tblPrincipal', result.tblPrincipal_selectedRow);
                     jsCaptuRepEval.tblPrincipal_grado = result.tblPrincipal_grado; 
                     jsCaptuRepEval.tblPrincipal_grupo = result.tblPrincipal_grupo;
-                    /*for (var i=0; i<result.matsAlumno.length; i++){
-                        jsCaptuRepEval.cbxMateriasAlumno[i]=result.matsAlumno[i].desmat;
-                        jsCaptuRepEval.cveMats[i]=result.matsAlumno[i].cvemats;
-                    }*/
-                    
+                    //jsCaptuRepEval.paqueteMatsDefault = result.paqueteMatsDefault;       
                     insertarTablaTblAlumCapRepEval (result.tblAlumCapRepEval);
-                    insertarDatosDeCaptura_RepEval (result);
-                    //cerrarLoading();
+                    insertarTabla_Recom_EvalPrim(result);                                        
+                    cerrarLoading();
                 break;
             case 0: case -1:
                     //cerrarLoading();
@@ -695,4 +800,57 @@ function sigAntGrupo_CapRepEval (datos)
     .always(function() {
         cerrarLoading();
     });
+}
+
+function btnGuardarDatosComp_Click ()
+{
+    var mensaje = new Mensajes();
+    var tabla = new Tabla();
+    
+    if ( tabla.getSelectedIndexRow("tblAlumCapEval") === -1)
+        mensaje.General("NO_SELEC"," alumno","guardar sus recomendaciones");
+    /*else if (jsCaptuRepEval.evalOf1 && jsCaptuRepEval.evalOf2 && jsCaptuRepEval.evalOf3)
+        mensaje.EvalPreescolar("TODO_OFICIALIZADO");*/
+    else{
+        var datos = {
+            modulo:"CaReEv", metodo:"btGuDaCo", califCicEscIn:jsCaptuRepEval.califCicEscIn, tblPrincipal_idcct:jsCaptuRepEval.tblPrincipal_idcct, 
+            tblAlumCapRepEval_idalu:jsCaptuRepEval.tblAlumCapRepEval_idalu, 
+            cvelengua:$('#cbxOtrasLenguas').val()===""?"ESP":$('#cbxOtrasLenguas').val(), 
+            tblPrincipal_grado:jsCaptuRepEval.tblPrincipal_grado, tblPrincipal_grupo:jsCaptuRepEval.tblPrincipal_grupo
+            
+        };
+        //------------------------- Hacemos la llamada -------------------------
+        cargarLoading();
+        $.ajax({url:"../sis_web/siS1",
+            type:"POST",
+            dataType:"JSON",
+            data: datos,
+            async:true
+        })
+        .done(function(result){
+            switch(result.returnCase){
+                case 1:
+                        //cerrarLoading();
+                        mensaje.General("GUARDADO_EXITOSO");
+                    break;
+                case 0: case -1:
+                        //cerrarLoading();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                    break;
+                case -10:
+                        //e.preventDefault();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        btnCerrarSesion_ActionPerformed ();
+                    break;
+                default:break;
+            }
+        })
+        .fail(function() {
+            mensaje.General("ERROR_AJAX", "", "");
+            //cerrarLoading();
+        })
+        .always(function() {
+            cerrarLoading();
+        });
+    }
 }

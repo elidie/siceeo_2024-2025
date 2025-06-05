@@ -148,8 +148,8 @@ public class SICEEO_EvalPreescolar {
             /*if(superUsuario.trim().equals("") && (""+sesion.getAttribute("seccion")).equals("PVD"))            
                 throw new SICEEO_Excepcion (-11,"PVD_SIN_PERMISO_CAPTURA");*/
             
-             if(eval.equals(""))     //agregado para el caso de inactivo los 3 trim
-                    eval="0";           //agregado para el caso de inactivo los 3 trim        
+            if(eval.equals(""))     //agregado para el caso de inactivo los 3 trim
+                eval="0";           //agregado para el caso de inactivo los 3 trim        
             qryIfx.conectar();                        
             QPaqueteMatsDefault = qryIfx.getPaqueteMats_EvalPree(califCicEscIn, tblPrincipal_modalidad, tblPrincipal_grado);
             tblAlumCapEval = qryIfx.alumCapEvalPree(califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo);  //qry de captura de evaluaciones

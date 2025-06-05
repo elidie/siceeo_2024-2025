@@ -15,10 +15,48 @@
     border-right: 1px dashed rgba(0,0,0,0.2);
 }
 
-#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones .panel
+#pnlCaptuRepEval .panel  /* Elimine #pnlScrlCapturaDeEvaluaciones*/
 {
     margin-bottom: 25px;
 }
+
+#pnlCaptuRepEval #pnlCapturaDeRecomedaciones #pnlCambiarEval
+{
+    margin-bottom: 5px; 
+    margin-top: 5px; 
+    text-align: center;
+}
+
+#pnlCaptuRepEval #pnlCapturaDeRecomedaciones #pnlCambiarEval .alinearHoriz
+{
+    vertical-align: middle;
+}
+
+#pnlCaptuRepEval #scrlAlumCapRepEval
+{
+    border: 1px solid black;
+    height: 640px;
+}
+
+#pnlCaptuRepEval #pnlMensajeGuardar 
+{
+    animation-duration: 3s;
+    animation-iteration-count: 50;
+    animation-name: MiAnimacion2;
+    animation-direction: alternate;
+    color: #c51111;
+    font-size: 0.8em;
+    overflow:hidden;
+    padding-bottom: 6px;
+    white-space: nowrap;
+    width: 100%;
+}
+
+#pnlCaptuRepEval #pnlCambiarEval .buttonBar a
+{
+    width: 75px;
+}
+
 
 #pnlCaptuRepEval .scrollTable select
 {
@@ -37,10 +75,11 @@
 /* ******************** P A R A   C A D A   E L E M E N T O ****************** */
 /* =========================================================================== */
 /* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
-#pnlCaptuRepEval #pnlCapturaDeEvaluaciones
+/*#pnlCaptuRepEval #pnlCapturaDeRecomedaciones //#pnlCapturaDeEvaluaciones
 {
     border: 1px solid black;
-}
+} */
+
 #pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones {
     height: 390px;
     overflow: auto;
@@ -65,11 +104,6 @@
     padding: 5px 0px 0px 5px;
 }
 
-#pnlCaptuRepEval #pnlTblAlumCapRepEval
-{
-    border: 1px solid black;
-    height: 470px;
-}
 
 #pnlCaptuRepEval .riesgosAlerta
 {
@@ -195,11 +229,14 @@
     width: 60px;
 }
 
-#pnlCaptuRepEval #scrlObsYRecomXBimYAsig
+#pnlCaptuRepEval #scrlRecomXMat
 {
-    height: 115px;
-    margin-bottom: 10px;
-    border: 1px solid black
+    border: 1px solid black;
+    height: 360px;
+    margin-bottom: 5px;
+    overflow: auto;
+    padding: 15px 8px;
+    position: relative;    
 }
 .tblObsYRecomXBimYAsig_col2
 {
@@ -227,12 +264,19 @@
     text-align: center;
 }
 
+#pnlCaptuRepEval .areaEval .avances
+{
+    display: block;
+    height: 80px;
+    text-transform: uppercase;
+    width: 100%;
+}
 
 /* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
-#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones textarea::-webkit-input-placeholder { color: #ffaaaa; }
-#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 18- */
-#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 19+ */
-#pnlCaptuRepEval #pnlScrlCapturaDeEvaluaciones textarea:-ms-input-placeholder { color: #ffaaaa; } /* IE 10+ */
+#pnlCaptuRepEval scrlRecomXMat textarea::-webkit-input-placeholder { color: #ffaaaa; }
+#pnlCaptuRepEval scrlRecomXMat textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 18- */
+#pnlCaptuRepEval scrlRecomXMat textarea::-moz-placeholder { color: #ffaaaa; } /* Firefox 19+ */
+#pnlCaptuRepEval scrlRecomXMat textarea:-ms-input-placeholder { color: #ffaaaa; } /* IE 10+ */
 
 #pnlCaptuRepEval #pnlHabilidades table textarea
 {
@@ -261,7 +305,7 @@
     float: left;
     width: 550px;
 }
-#pnlCaptuRepEval #pnlCapturaDeEvaluaciones
+#pnlCaptuRepEval #pnlCapturaDeRecomedaciones /*#pnlCapturaDeEvaluaciones*/
 {
     margin-left: 570px;                                                         /*Si se desea superponer, ajustar al tamaño que tiene por ancho el div izquierdo*/
 }
