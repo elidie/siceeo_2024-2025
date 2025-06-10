@@ -182,25 +182,13 @@ public class SICEEO_CaptuRepEval {
                 throw new SICEEO_Excepcion (0,"NADA_QUE_GUARDAR");
             qryIfx.conectarConTransaccion();
             
-            if (qryIfx.isOficializado(tblPrincipal_idcct, CalifCicEscIn, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION "+numeval))
-                throw new SICEEO_Excepcion (0,"EVAL_OFICIALIZADA");
+            /*if (qryIfx.isOficializado(tblPrincipal_idcct, CalifCicEscIn, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION "+numeval))
+                throw new SICEEO_Excepcion (0,"EVAL_OFICIALIZADA");*/ /* Checar si esta oficializado num de eval */
+            
             int f=0;
             
             for (f=0; f<tblAvancesXEvalYMat.size(); f++)
                 qryIfx.actualizarRecomXEvalYMat ( tblAvancesXEvalYMat.get(f), idalu, CalifCicEscIn, tblPrincipal_grado, numeval, txtusuario );
-            
-            
-            /*for(int i=0; i < 3; i++){
-                numeval = i+1;
-                if(i==0)
-                    txtaRecomedGrales = txtaRecomendGrales_eval1;                                    
-                else if(i==1)
-                    txtaRecomedGrales = txtaRecomendGrales_eval2;                
-                else if(i==2)
-                    txtaRecomedGrales = txtaRecomendGrales_eval3;
-                
-                qryIfx.guardarCaptuRepEval (CalifCicEscIn, cveplan, idalu,  numeval, cvelengua, txtaRecomedGrales, ""+sesion.getAttribute("userName"));
-            } //COmentado en el ciclo escolar 2024-2025 */
             
             hacerCommit = true;
         } catch (SQLException ex){ this.dr.put("returnCase",-1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }

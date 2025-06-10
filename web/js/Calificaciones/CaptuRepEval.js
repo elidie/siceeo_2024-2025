@@ -86,9 +86,15 @@ function frmwCaptuRepEval_Create()
                 $('#pnlListadoAlumnos').append('<div id="pnlTblAlumCapRepEval">  <div id="scrlAlumCapRepEval" class="scrollTable"></div>  </div>');
             
     /************************* Fecha: 23-05-2025 ***************************************************************************/        
+        
     /************************* Agregado para la captura de observaciones por materia para Primaria *************************/            
-            $('#pnlCaptuRepEval').append('<div id="pnlCapturaDeRecomedaciones"></div>'); //pnlCapturaDeEvaluaciones
-            if(jsCaptuRepEval.tblPrincipal_cveplan === "1" ) {
+            $('#pnlCaptuRepEval').append('<div id="pnlCapturaDeRecomedaciones"></div>'); //pnlCapturaDeEvaluaciones                
+                $('#pnlCapturaDeRecomedaciones').append('<div id="pnlLengua" class="panel"><div class="tituloPanel">Lengua</div></div>');                    
+                    $('#pnlLengua').append('<div id="pnlHablaOtraLengua"> '
+                                    + '<label id="lblOtraLengua">Lengua indígena (opcional): <select id="cbxOtrasLenguas" name="cbxOtrasLenguas"></select></label> </div>');
+                    $('#pnlLengua').append('<div id="btnGuardarDatosComp" class="singleButton"><label class="alinearHoriz vertMarginable"><span class="iconButton icon-disquete"></span>Guardar lengua</label></div>');
+                
+            if(jsCaptuRepEval.tblPrincipal_cveplan === "1" ) {                    
                 $('#pnlCapturaDeRecomedaciones').append('<div id="pnlRecomendaciones" class="panel"></div>');  //pnlEvaluaciones
                     $('#pnlRecomendaciones').append('<div id="pnlCambiarEval"></div>');
                         $('#pnlCambiarEval').append('<ul id="ulBtnEvalAnt" class="buttonBar alinearHoriz"> <li><a href="#" id="btnAnteriorNumEval"><label class="iconBtnBimEvalAnt iconBtnRedondo icon-arrow-left4"></label>Eval. Ant.</a></li> </ul>');
@@ -98,13 +104,10 @@ function frmwCaptuRepEval_Create()
                     $('#pnlRecomendaciones').append('<div id="pnlMensajeGuardar">  <label id="lblMensajeGuardar" title="No olvide guardar la evaluación por cada alumno.">No olvide guardar las sugerencias y recomendaciones por cada alumno.<label>  </div>');
                     $('#pnlRecomendaciones').append('<ul class="buttonBar"> <li><a href="#" id="btnGuardarRecom"><label class="iconBtnGuardar icon-disquete"></label>Guardar captura del alumno</a></li>  </ul>');
             }   /*era pnlScrlCapturaDeEvaluaciones*/                     
-                $('#pnlCapturaDeRecomedaciones').append('<div id="pnlLengua" class="panel"><div class="tituloPanel">Lengua</div></div>');                    
-                    $('#pnlLengua').append('<div id="pnlHablaOtraLengua"> '
-                                    + '<label id="lblOtraLengua">Lengua indígena (opcional): <select id="cbxOtrasLenguas" name="cbxOtrasLenguas"></select></label> </div>');
-                    $('#pnlLengua').append('<div id="btnGuardarDatosComp" class="singleButton"><label class="alinearHoriz vertMarginable"><span class="iconButton icon-disquete"></span>Guardar lengua</label></div>');
+                
                 
                 $('#pnlCapturaDeRecomedaciones').append('<ul class="buttonBar">'+                                                    
-                                                    '<li><a href="#" id="btnLimpiarCapRepEval"><label class="middleHoriz icon-brocha"></label>Limpiar captura</a></li>'+
+                                                    /*'<li><a href="#" id="btnLimpiarCapRepEval"><label class="middleHoriz icon-brocha"></label>Limpiar captura</a></li>'+*/
                                                     '<li><a href="#" id="btnAnteriorGrupo"><label class="iconBtnGpoAnt middleHoriz iconBtnRedondo icon-arrow-left4"></label>Gpo. anterior</a></li>' +
                                                     '<li><a href="#" id="btnSiguienteGrupo">Siguiente gpo.<label class="iconBtnGpoSig middleHoriz iconBtnRedondo icon-arrow-right4"></label></a></li>' +
                                                 '</ul>');
@@ -119,7 +122,7 @@ function frmwCaptuRepEval_Create()
     $("#btnQuitarFila").on("click",function(){ btnQuitarFila_Click(); return false; });*/
     $("#btnGuardarRecom").on('click',function(){ btnGuardarCapRepEval_Click ();  return false;});
     $("#btnGuardarDatosComp").on('click',function(){ btnGuardarDatosComp_Click(); return false; });
-    $("#btnLimpiarCapRepEval").on('click',function(){ limpiarDatosDeCaptura (); });
+    /*$("#btnLimpiarCapRepEval").on('click',function(){ limpiarDatosDeCaptura (); });*/
     $("#btnAnteriorGrupo").on('click',function(){ btnAnteriorGrupo_CapRepEval_Click(); return false; });
     $("#btnSiguienteGrupo").on('click',function(){ btnSiguienteGrupo_CapRepEval_Click();  return false;});
 }
@@ -829,9 +832,15 @@ function btnGuardarDatosComp_Click ()
         })
         .done(function(result){
             switch(result.returnCase){
-                case 1:
-                        //cerrarLoading();
+                case 1:                                                
                         mensaje.General("GUARDADO_EXITOSO");
+                        if(jsCaptuRepEval.tblPrincipal_cveplan==="2") {
+                            var numFilas = tabla.getNumRows ('tblAlumCapRepEval');
+                            var posSelActual = tabla.getSelectedIndexRow ('tblAlumCapRepEval');
+                            if (posSelActual < (numFilas-1))
+                                tblAlumCapRepEval_ChangeSelectedItem (posSelActual+1);  //Seleccionamos la siguiente fila de tblAlumCapRepEval y obtenemos los datos correspondientes
+                        }
+                        //cerrarLoading();    
                     break;
                 case 0: case -1:
                         //cerrarLoading();
