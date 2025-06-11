@@ -43,7 +43,7 @@
 
         /********** ASIGNACIÓN DE VARIABLES **************/
         cicescini=request.getParameter("cicescini");
-        cicescinilib=request.getParameter("cicescinilib");
+        cicescinilib= (request.getParameter("cicescinilib")==null?cicescini:request.getParameter("cicescinilib"));
         cveplan=request.getParameter("cveplan");
         idcct=request.getParameter("idcct");
         grado=Integer.parseInt(""+request.getParameter("grado"));
