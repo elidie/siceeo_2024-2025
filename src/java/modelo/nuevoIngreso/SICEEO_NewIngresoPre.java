@@ -363,7 +363,7 @@ public class SICEEO_NewIngresoPre {
             //--Vista--> E_18.Text   :='';
             //--Vista--> E_Apl1.SetFocus;
             
-            hacerCommit = true; //comentado hoy 28/04/2025
+            hacerCommit = true; //comentado hoy 17/06/2025
         } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("INDISPUESTO", ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.NewIngresoPre(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
@@ -431,7 +431,7 @@ public class SICEEO_NewIngresoPre {
             else if (qryIfx.isCalEvalGradoGrupoOficializado(tblPrincipal_idcct, tblPrincipal_cicescini, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION"))
                 throw new SICEEO_Excepcion (-11,"ULTBIM_OFICIALIZADO","3ra evaluación");
             else if(!qryIfx.isValidaCapacidadGpo(""+tblPrincipal_cicescini, ""+tblPrincipal_cicescini, ""+tblPrincipal_idcct, ""+tblPrincipal_grado, tblPrincipal_grupo))     //agregado para validad la capacidad limite del grupo                   
-                throw new SICEEO_Excepcion (-11,"CAPGPO_INVALIDA");    //agregado para validad la capacidad limite del grupo
+                throw new SICEEO_Excepcion (-11,"CAPGPO_INVALIDA",tblPrincipal_grupo);    //agregado para validad la capacidad limite del grupo
             
             QPlanMod = qryIfx.getPlanMod(tblPrincipal_cveplan, tblPrincipal_grado, tblPrincipal_modalidad, tblPrincipal_cicescini,"20");
             if (!QPlanMod.isEmpty())

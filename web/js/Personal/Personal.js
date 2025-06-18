@@ -50,7 +50,7 @@ function frmwPersonal_Create()
                                                         +'<div><label class="lblTituloCampos">Domicilio:</label><label id="lblDomicilio"></label></div>'
                                                         +'<div><label class="lblTituloCampos">Colonia:</label><label id="lblColonia"></label></div>'                                                           
                                                     +'</div>');
-            /*if((""+jsPersonal.tblPrincipal_modalidad).substr(0,1)!=='P' && ""+jsPersonal.tblPrincipal_cambioDir==="1"){
+            if(""+jsPersonal.tblPrincipal_cambioDir==="1") {
                 $('#pnlDatosEscuelaYdirector').append('<div id="pnlDatosDirector" class="panel alinearHoriz"><div class="tituloPanel">Director</div>'
                                                         +'<div>'
                                                             //+'<label class="lblTituloCampos">CURP:</label>'
@@ -66,7 +66,7 @@ function frmwPersonal_Create()
                                                             +'<li><a href="#" id="btnLimpiarDatosDir"><label class="icon-brocha"></label> Limpiar</a></li>'
                                                         +'</ul>'
                                                     +'</div>');
-            }*/
+            }
             
                 $('#pnlDatosEscuelaYdirector').append('<div id="pnlMensajeInfo" class="alinearHoriz">');
                                     //$('#pnlMensajeInfo').append('<label id="pnlMensajeInfo_lbl1">Es importante que los datos del personal los ingrese correctamente (sin abreviaturas).<br></label>');

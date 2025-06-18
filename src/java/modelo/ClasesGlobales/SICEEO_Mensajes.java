@@ -134,7 +134,7 @@ public class SICEEO_Mensajes {
     private void NewIngreso (String tipo, String texto1, String texto2, String [] tipoMensaje)
     {
         if (tipo.equals("EDAD_INVALIDA"))           { tipoMensaje[0]= this.ERROR;     tipoMensaje[1]= "La edad no es válida."; }
-        else if (tipo.equals("CAPGPO_INVALIDA")){ tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Ha alcanzado el límite máximo de alumnos por grupo.\n\nPara más información pida ayuda a su UDR.";  }
+        else if (tipo.equals("CAPGPO_INVALIDA")){ tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Ha alcanzado el límite máximo de alumnos en el grupo:" +texto1+".\n\nPara más información pida ayuda a su UDR.";  }
         else if (tipo.equals("ESPACIO_BLANCO"))     { tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Más de un espacio en el "+texto1+"."; }
         else if (tipo.equals("EXISTE_ESPACIO"))     { tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Existe un espacio en blanco en "+texto1+", el cual no es permitido ."; }
         else if (tipo.equals("CARACTER_INVALIDO"))  { tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Caracter no válido en el "+texto1+"."; }
@@ -273,7 +273,7 @@ public class SICEEO_Mensajes {
         else if (tipo.equals("USUARIO_NO_PUEDE_ELIMINAR")){ tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Sólo el usuario que dio de alta al alumno puede eliminarlo.\nSe ha detectectado que su usuario no dio de alta a este alumno.";  }
         else if (tipo.equals("ALUMNO_CON_HISTORIAL")){ tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se podrá eliminar a este alumno porque ya tiene historial registrado.";  }
         //agregado para validad la capacidad limite del grupo
-        else if (tipo.equals("CAPGPO_INVALIDA")){ tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Ha alcanzado el límite máximo de alumnos por grupo.\n\nPara más información pida ayuda a su UDR.";  }
+        else if (tipo.equals("CAPGPO_INVALIDA")){ tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Ha alcanzado el límite máximo de alumnos en el grupo: "+texto1+".\n\nPara más información pida ayuda a su UDR.";  }
         else if (tipo.equals("PROMEDIO_INVALIDO")){ tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Verifique que el promedio de los alumnos seleccionados sea un valor entre 6.0 y 7.0, de no ser asi no podrá utilizar esta opción.";  }
         else if (tipo.equals("CBIO_INSC_INVALIDO")){ tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El alumno no se le puede cambiar a Inscrito debido a que se encuentra con estatus "+texto1+".";  }
         else if (tipo.equals("EVAL3_CAPTURADA")){ tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El alumno con id = ["+texto1 +"] no es posible darlo de Baja Definitiva debido a que ya cuenta con calificaciones en su 3era Evaluación.";  }

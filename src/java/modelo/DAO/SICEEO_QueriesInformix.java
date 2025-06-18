@@ -371,11 +371,11 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                 throw new SICEEO_Excepcion (0,"DISCAPACIDAD");
         }
 
-        //chekar si esta dado de baja en en ciclo actual
-        //o si es de la 59
-        ArrayList<Map> QSusEstudR;
-        QSusEstudR = susEstudR(1,idalu,""+cicescini);
-        if (QSusEstudR.size() == 1 && (QSusEstudR.get(0).get("estatusgrado").equals("BD") /*|| (""+QSusEstudR.get(0).get("grupo")).contains("_")*/ ) ) //11/03/2016
+        // chekar si esta dado de baja en en ciclo actual
+        // o si es de la 59
+        ArrayList<Map> QSusEstudR;        
+        QSusEstudR = susEstudR(1,idalu,""+cicescini);        
+        if ( QSusEstudR.size() == 1 && (QSusEstudR.get(0).get("estatusgrado").equals("BD") ) ) //11/03/2016
         {
             stm.execute("INSERT INTO movimientosAlumno(idalu, cicescini, cicescfin, fecmov, estatusag, cctant, camcct, usuario, fecha, hora) "
                     + "values ("+idalu+","+cicescini+","+(cicescini+1)+",date(current),'TN', '"+QSusEstudR.get(0).get("cct")+"', '"+tblPrincipal_cct+"', "
@@ -396,7 +396,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         stm.execute("INSERT INTO AlumnoGrado values ("+ idalu+", "+cicescini+" ,"+(cicescini+1)+" ,"+ grado+", 0, 0, 0, "                   //   /---El 1 en peso, será un distintivo para indicar que el ingreso fue por SiCEEO
                     + "'"+cveturno+"', "+idcct+", 'INS','I',"+cveplan+",'"+cveprograma+"','"+grupo+"', "+ "'SIN REGISTRAR', '00000', null, null, 1, 0.00, "+edad+", "
                     + "0.0, "+calif+",null, null,'P','NA','N', 1,'E', 0, 0, 0, null, null, null, '"+cveDis+"', '"+usuario.trim().toUpperCase()+"', date(current), extend(current, hour to minute),TO_DATE('"+fechaIng+"','%Y/%m/%d'))" );
-
+        updateGposAdd(""+cicescini, idcct, ""+grado, grupo);
         if (!cveplan.equals("3"))
         {
             if (cveplan.equals("2"))
@@ -410,7 +410,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                 + "WHERE CVEPLAN= "+ cveplan+" AND GRADO = "+ grado+" AND CVEPROGRAMA = '"+cveprograma+"' AND estatus= 'A' "
                 + "AND CICESCINI <= " + cicescini + " AND CICESCFIN >= " + cicescini
                 + qurySec);
-        }
+        }                
     }
     
     
@@ -1046,7 +1046,8 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
             stm.execute("UPDATE alumno SET estatusalu = 'BD', usuario='"+usuario.toUpperCase()+"', fecha = date(current), hora = extend(current, hour to minute) WHERE idalu = "+idalu);
         stm.execute("UPDATE alumnoGrado SET estatusgrado = 'BD', usuario='"+usuario.toUpperCase()+"', fecha = date(current), hora = extend(current, hour to minute) WHERE cicescini ="+califCicEscIn+" AND idalu = "+idalu);
         stm.execute("INSERT INTO bajasvit VALUES ("+idalu+", "+idcct+", "+grado+", '"+grupo+"', '"+usuario.toUpperCase()+"', date(current), extend(current, hour to minute), "+cicescini+" )");
-        /*stm.execute("UPDATE escuelagpos SET gruposal = (CASE WHEN gruposal>0 THEN gruposal-1 ELSE 0 END) WHERE idcct = "+idcct+" AND cicescini ="+califCicEscIn+" AND grado = "+grado+" AND grupo='"+grupo+"' AND estatus='A' ");*/
+        //Disminuimos el dato de total en el grupo
+        updateGposSubtract(cicescini,idcct,grado, grupo); 
         // Cancelamos el folio de Reporte de Evaluación
         cancelarFolioRepEval (califCicEscIn, idalu, usuario);
         if (tblPrincipal_cveplan.equals("1") && grado.equals("6") || tblPrincipal_cveplan.equals("2") && grado.equals("3"))
@@ -1083,29 +1084,45 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
             stm.execute("UPDATE alumnoGrado SET estatusgrado = 'I', usuario='"+usuario.toUpperCase()+"', fecha = date(current), hora = extend(current, hour to minute)  WHERE cicescini ="+califCicEscIn+" AND idalu = "+idalu);
         }else
             stm.execute("UPDATE alumnoGrado SET estatusgrado = 'RE', usuario='"+usuario.toUpperCase()+"', fecha = date(current), hora = extend(current, hour to minute) WHERE cicescini ="+califCicEscIn+" AND idalu = "+idalu);
-        
         //agregado para validad la capacidad limite del grupo
-        /*stm.execute("UPDATE escuelagpos SET gruposal = gruposal+1 WHERE idcct = "+idcct+" AND cicescini ="+califCicEscIn+" AND grado = "+grado+" AND grupo='"+grupo+"' AND estatus='A' "); */
+        updateGposAdd(califCicEscIn,idcct,grado, grupo);                
     }
     public void setRevocacionGdoAAlumno (String califCicEscIn, String cicescin, String idalu, String usuario, String idcct,String grado, String grupo) throws SQLException
     {
         stm.execute("UPDATE alumnoGrado SET estatusgrado = 'RG', usuario='"+usuario.toUpperCase()+"', fecha = date(current), hora = extend(current, hour to minute) WHERE cicescini ="+califCicEscIn+" AND idalu = "+idalu);        
     }
     
-    public void setCamDGpo (String cicescini, String idcct, String grado,  String grupo, String idalu, String cvedefsuf, String usuario, String cvelengua, String etnia) throws SQLException
+    public void setCamDGpo (String cicescini, String idcct, String grado,  String grupo, String idalu, String cvedefsuf, String usuario, String cvelengua, String etnia, String grupo_oldValue) throws SQLException
     {
-        String afromexicana="";
+        String afromexicana = "";
         if(cvelengua.isEmpty())
             cvelengua="ESP";        
-        afromexicana = " afromexicana = "+(etnia.isEmpty() ? "null, ": "'"+etnia+"', ");
+        afromexicana = " afromexicana = "+(etnia.isEmpty() ? "null, ": "'"+etnia+"', ");        
         stm.execute("UPDATE alumno SET "+afromexicana+"cvelengua='"+cvelengua+"', usuario='"+usuario.toUpperCase().trim()
                 +"', fecha = date(current) , hora = extend(current, hour to minute) WHERE idalu="+idalu);
         stm.execute("UPDATE alumnoGrado SET grupo = '"+grupo+"', cvedefsuf='"+cvedefsuf+"', usuario='"+usuario.toUpperCase().trim()
                 +"', fecha = date(current) , hora = extend(current, hour to minute) WHERE idalu="+idalu+" AND cicescini = "+cicescini);
         if ("t".equals(getData("SELECT ofic_caleval_b5 FROM escuelagpos WHERE cicescini="+cicescini+" AND idcct="+idcct+" AND grado="+grado+" AND grupo='"+grupo+"'")))
             stm.execute("UPDATE desoficializacion SET grupo='"+grupo+"', usuario='"+usuario.toUpperCase().trim()+"', fecha = extend(current, YEAR TO SECOND) WHERE cicescini="+cicescini+" AND idcct="+idcct+" AND grado="+grado+" AND idalu="+idalu);
+        updateGposAdd(cicescini,idcct,grado, grupo);
+        updateGposSubtract(cicescini,idcct,grado, grupo_oldValue);
+        
     }
-
+    
+    public void updateGposAdd(String cicescini, String idcct, String grado,  String grupo) throws SQLException
+    {
+        stm.execute("UPDATE escuelagpos SET gruposal = gruposal+1 "
+                + " WHERE cicescini = "+cicescini+" AND idcct = " + idcct + " AND grado = " + grado 
+                + " AND grupo = '" +grupo+"' AND estatus='A' ");
+    }
+    
+    public void updateGposSubtract(String cicescini, String idcct, String grado,  String grupo) throws SQLException 
+    {
+        stm.execute("UPDATE escuelagpos SET gruposal = (CASE WHEN gruposal > 0 THEN gruposal-1 ELSE 0 END)"
+                + " WHERE cicescini = "+cicescini+" AND idcct = " + idcct + " AND grado = " + grado 
+                + " AND grupo = '" +grupo+"' AND estatus='A' ");
+    }
+    
     public void setCamTotGpo (String idalu, String grupo, String califCicEscIn, String usuario) throws SQLException
     {
         stm.execute("UPDATE alumnoGrado SET grupo = '"+grupo+"', usuario='"+usuario.toUpperCase().trim()+"', fecha = date(current) , hora = extend(current, hour to minute) WHERE idalu="+idalu+" AND cicescini = "+califCicEscIn);

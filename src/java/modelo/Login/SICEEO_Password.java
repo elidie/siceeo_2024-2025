@@ -136,6 +136,7 @@ public class SICEEO_Password {
             this.dr.put("fecha", dm.getFechaHoy("dd/MM/yyyy h:mm a"));
             
             permisos (request.getParameter("usuario").toUpperCase().trim(), ""+dr.get("tipo_usuario"), ""+dr.get("QEscuela_cveplan"), ""+dr.get("QEscuela_cveunidad"), ""+dr.get("seccion"));
+                        
         }
     }
     
@@ -251,7 +252,7 @@ public class SICEEO_Password {
                         this.dr.put("eunidad", QUsuario.get("cveunidad"));
                                     
                         if (QUsuario.get("seccion").equals("22") && ((""+QUsuario.get("cveunidad")).substring(0,3).equals("CCT") || (""+QUsuario.get("modulos")).contains(",29,")) )
-                           this.dr.put("cambioDir", 1); 
+                           this.dr.put("permisoDir", 1); 
                         if (QUsuario.get("usertipo").equals("1") && (""+QUsuario.get("modulos")).contains(",26,"))
                            this.dr.put("puedeDesof","si");
                         
@@ -342,16 +343,18 @@ public class SICEEO_Password {
     
     private void permisos (String usuario, String tipo_usuario, String QEscuela_cveplan, String QEscuela_cveunidad, String seccion)
     {
-        ArrayList<String> QPermisos, QPermisosCalif=null;                
+        ArrayList<String> QPermisos, QPermisosCalif=null;   
+        String strTipoUsuario = tipo_usuario;
         try {
             qryIfx.conectar();
             
             if (usuario.toUpperCase().equals("IVALLE") || usuario.toUpperCase().equals("ELYLOPEZ") || usuario.toUpperCase().equals("MRAMIREZ"))
-            {
+            {   strTipoUsuario = "ADMIN";
                 crearBotonesDeMenu (qryIfx.getPermisos ("ADMIN",usuario,"PRINCIPAL",QEscuela_cveplan ).toArray());
                 crearBotonesDeGpo (qryIfx.getPermisos ("ADMIN",usuario,"GRUPO", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos ("ADMIN",usuario, "CALIFICACIONES", QEscuela_cveplan);                
             }else if (seccion.equals("59")){
+                strTipoUsuario = "CCT 59";
                 crearBotonesDeMenu (qryIfx.getPermisos ("CCT 59",usuario,"PRINCIPAL", QEscuela_cveplan).toArray());
                 crearBotonesDeGpo (qryIfx.getPermisos ("CCT 59",usuario,"GRUPO", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos ("CCT 59",usuario,"CALIFICACIONES", QEscuela_cveplan);
@@ -359,6 +362,7 @@ public class SICEEO_Password {
             //Apagar botones para usuarios tipo CCT
             }else if (!tipo_usuario.equals(" ") && !tipo_usuario.equals("consulta") && !tipo_usuario.equals("captura") && !tipo_usuario.equals("mesa") )   // cuando es un usuario tipo CCT
             {
+                strTipoUsuario = "CCT";
                 QPermisos = qryIfx.getPermisos ("CCT",usuario,"PRINCIPAL", QEscuela_cveplan);
                 QPermisosCalif = qryIfx.getPermisos ("CCT",usuario,"CALIFICACIONES", QEscuela_cveplan); 
                 if (!QEscuela_cveplan.equals("2"))
@@ -369,24 +373,26 @@ public class SICEEO_Password {
                 crearBotonesDeGpo (qryIfx.getPermisos ("CCT",usuario,"GRUPO", QEscuela_cveplan).toArray());
             }
             //tipo usuario region
-            else if (tipo_usuario.equals(" ") ){
+            else if (tipo_usuario.equals(" ") ){                
                 crearBotonesDeMenu (qryIfx.getPermisos (tipo_usuario,usuario,"PRINCIPAL", QEscuela_cveplan).toArray());
                 crearBotonesDeGpo (qryIfx.getPermisos (tipo_usuario,usuario,"GRUPO", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan);
-            }else if ( tipo_usuario.equals("consulta") ) {
+            }else if ( tipo_usuario.equals("consulta") ) {                
                 crearBotonesDeMenu (qryIfx.getPermisos (tipo_usuario,usuario,"PRINCIPAL", QEscuela_cveplan).toArray());
                 crearBotonesDeGpo (qryIfx.getPermisos (tipo_usuario,usuario,"GRUPO", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan);
-            }else if ( tipo_usuario.equals("mesa") ) {
+            }else if ( tipo_usuario.equals("mesa") ) {                
                 crearBotonesDeMenu (qryIfx.getPermisos (tipo_usuario,usuario,"PRINCIPAL", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan);
                 crearBotonesDeGpo (qryIfx.getPermisos (tipo_usuario,usuario,"GRUPO", QEscuela_cveplan).toArray());
-            }else if ( tipo_usuario.equals("captura") ) {
+            }else if ( tipo_usuario.equals("captura") ) {                
                 crearBotonesDeMenu (qryIfx.getPermisos (tipo_usuario,usuario,"PRINCIPAL", QEscuela_cveplan).toArray());    
                 crearBotonesDeGpo (qryIfx.getPermisos (tipo_usuario,usuario,"GRUPO", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan);
             }
-                                                
+            if(dr.get("permisoDir")!=null && dr.get("permisoDir").equals(1))
+                QPermisoDirector(qryIfx.getPermisos (strTipoUsuario,usuario,"OTROS", QEscuela_cveplan).toArray());                                    
+            
             dr.put("botonesDeCalif", QPermisosCalif);
             
         }catch (SQLException ex){ dr.put("returnCase",-1); mensaje.General("CONEXION",ex.getMessage(),"", dr); }
@@ -475,6 +481,12 @@ public class SICEEO_Password {
                 botonesPermitidos.put(permiso, dato);
 
         dr.put("botonesDeGpo", botonesPermitidos);
+    }
+    
+    private void QPermisoDirector(Object []permisos){
+        for (Object permiso : permisos)
+            if(permiso.toString().equals("cambioDir"))
+                dr.put("cambioDir",1);
     }
     
     private void setTipoConexion (HttpServletRequest request) throws Exception

@@ -267,7 +267,7 @@ public class SICEEO_CambioDeGrupo {
                         qryIfx.setBajaAAlumno (califCicEscIn,cicescin,""+tblCamDeGpo.get(i).get("idalu"), tblPrincipal_cveplan, ""+tblCamDeGpo.get(i).get("idcct"), ""+tblCamDeGpo.get(i).get("grado"), ""+tblCamDeGpo.get(i).get("grupo"), ""+tblCamDeGpo.get(i).get("cicescini"), txtUsuario);
                     }
                 }
-                hacerCommit = true; //Comentado hoy 14-01-2025
+                hacerCommit = true; //Comentado hoy 18-06-2025
             } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("ACTUALIZACION_INCOMPLETA", "Verifique e intente de nuevo la operación.\n" + ex.getMessage(), "", this.dr);  }
             catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.CambioDeGrupo(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
             catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
@@ -386,15 +386,20 @@ public class SICEEO_CambioDeGrupo {
                 cvedefsuf=""+tblCamDeGpo.get(i).get("cvedefsuf");
                 cvelengua=""+tblCamDeGpo.get(i).get("cvelengua");
                 etnia=""+tblCamDeGpo.get(i).get("etnia");
-                if (/*!tblCamDeGpo.get(i).get("grupo").equals(tblPrincipal_grupo) || */
-                    !tblCamDeGpo.get(i).get("grupo").equals(tblCamDeGpo.get(i).get("grupo_oldvalue")) || !cvedefsuf.equals(tblCamDeGpo_cvedefsuf.get(i).get("cvedefsuf_oldValue"))
-                        || !cvelengua.equals(tblCamDeGpo_cvelengua.get(i).get("cvelengua_oldValue")) || !etnia.equals(tblCamDeGpo_etnia.get(i).get("etnia_oldValue")))
-                    qryIfx.setCamDGpo (califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, ""+tblCamDeGpo.get(i).get("grupo"), ""+tblCamDeGpo.get(i).get("idalu"), cvedefsuf, txtUsuario,cvelengua,etnia);
+                /*!tblCamDeGpo.get(i).get("grupo").equals(tblPrincipal_grupo) || */
+                if(!tblCamDeGpo.get(i).get("grupo").equals(tblCamDeGpo.get(i).get("grupo_oldvalue")) 
+                        && !qryIfx.isValidaCapacidadGpo(califCicEscIn, califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, ""+tblCamDeGpo.get(i).get("grupo")))
+                    throw new SICEEO_Excepcion (0,"CAPGPO_INVALIDA",""+tblCamDeGpo.get(i).get("grupo"));
+                else if (!tblCamDeGpo.get(i).get("grupo").equals(tblCamDeGpo.get(i).get("grupo_oldvalue")) ||                        
+                    (!cvedefsuf.equals(tblCamDeGpo_cvedefsuf.get(i).get("cvedefsuf_oldValue"))
+                        || !cvelengua.equals(tblCamDeGpo_cvelengua.get(i).get("cvelengua_oldValue")) || !etnia.equals(tblCamDeGpo_etnia.get(i).get("etnia_oldValue"))))
+                    qryIfx.setCamDGpo (califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, ""+tblCamDeGpo.get(i).get("grupo"), ""+tblCamDeGpo.get(i).get("idalu"), cvedefsuf, txtUsuario,cvelengua,etnia, ""+tblCamDeGpo.get(i).get("grupo_oldvalue"));
+                
             }
             dr.put("tblCamDeGpo",qryIfx.getCamDgpo(califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo));
             
             //dr.put("ofs", qryIfx.oficYDesoficEnCalif(califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"),  QAlumCapCalif.isEmpty()?"":""+QAlumCapCalif.get(0).get("idalu"), cbxBim_SelItem));
-            hacerCommit = true;
+            hacerCommit = true; //hoy 17-06-2025
         } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("ACTUALIZACION_INCOMPLETA", "Verifique e intente de nuevo la operación.\n" + ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.CambioDeGrupo(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
