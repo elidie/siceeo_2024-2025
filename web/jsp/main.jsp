@@ -82,7 +82,7 @@
                     <li title="Usuario"><label id="iconUsuario" class="icon-usuarios iconInfo"></label><label id="lblUsuario"> ... </label>  </li>
                     <li title="Región administrativa"><label id="iconUnidad" class="icon-oaxaca iconInfo"></label><label id="lblUnidad"> ... </label>  </li>
                     <li title="Hora de ingreso a SICEEO"><label id="iconFecha" class="icon-calendreloj iconInfo"></label><label id="lblFecha"> ... </label></li>
-                    <li title="Versión"><label id="iconVersionSis" class="icon-engrane iconInfo"></label><label id="lblVersionSis"> Versión 15.7.2 </label></li>
+                    <li title="Versión"><label id="iconVersionSis" class="icon-engrane iconInfo"></label><label id="lblVersionSis"> Versión 15.7.4 </label></li>
                 </ul>
             </div>
             <div id="pnlBusquedaCCT">

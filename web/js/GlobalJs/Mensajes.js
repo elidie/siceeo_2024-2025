@@ -29,6 +29,8 @@ function Mensajes ()
             alert ("PRECAUCIÓN\n\nPrimero seleccione un"+texto1+" de la lista para poder "+texto2+".");
         else if (tipo === "ESPECIFIQUE_DATO")
             alert("PRECAUCIÓN\n\nEspecifique "+texto1+".");
+        else if (tipo === "ESPECIFIQUE_DATO_CORRECTO")
+            alert("PRECAUCIÓN\n\nEspecifique "+texto1+" válido.");
         else if (tipo === "ERROR_AJAX")
             alert( "ERROR\n\nLa comunicación con el servidor no se ha podido establecer o se perdió.\nEs probable que la velocidad de su internet esté baja o el servidor esté ocupado.\n\nPorfavor intente de nuevo.");
         else if (tipo === "CAMPO_VACIO")

@@ -51,7 +51,7 @@
         
                 
         if (!dr.get("returnCase").equals(1))
-            throw new Exception (""+dr.get("mensaje"));
+            throw new Exception (""+dr.get("mensaje")); //OJO - Comentado para prueba hoy 01-07-2025
        
         /********** ASIGNACIÓN DE VARIABLES **************/
         /*parameters.put("cicescinilib", 0 ); 
@@ -80,8 +80,10 @@
         parameters.put("sqryIdalus", (idalus=request.getParameter("idalus"))==null ? "" : "AND fi.idalu IN ("+idalus+")" ); 
         
         
-        /*if(cveplan.equals("2") && cicescinilib.equals("2023"))
-            r+="_123789978";*/
+        /*if(cicescinilib.equals("2024")){  //Agregado para prueba 2024-2025
+            r+="_p2425";
+            parameters.put("cicescinilib", 2023);
+        }*/
         
         qryIfx = new SICEEO_QueriesInformix();
         qryIfx.conectar();

@@ -119,9 +119,9 @@
         
         qryIfx = new SICEEO_QueriesInformix();
         qryIfx.conectar();
-        statusIngles = qryIfx.getIngles(cicescini, ""+grado, idcct, grupo);
+        /*statusIngles = qryIfx.getIngles(cicescini, ""+grado, idcct, grupo);
         if((""+statusIngles).equals("f") || (""+statusIngles).equals("null"))
-                strQry = " AND cvemat NOT IN ('084','ING','087','088') ";
+                strQry = " AND cvemat NOT IN ('084','ING','087','088') ";*/
         parameters.put("strQry", strQry);
         /******** SE CREA EL DOCUMENTO PDF Y SE LE INSERTAN LOS DATOS **************/
         reportFile = new File(application.getRealPath("")+"/../reportes/siceeo/"+r+".jasper");

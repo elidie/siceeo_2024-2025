@@ -2225,13 +2225,13 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                 
         rs = stm.executeQuery("SELECT idalu, cveplan, grado, cicescini, cvetipmat, cvemat, " +
                         "( SELECT "
-                                + "CASE WHEN CALIF1 >=6.0 THEN calif1 "
+                                + "CASE WHEN calif1 >=6.0 THEN calif1 "
                                 + "ELSE "
                                     + "CASE WHEN calif2>=6.0 THEN calif2 "
                                     + "ELSE calif1 "
                                     + "END "
                                 +"END " 
-                        + ((!cicescini_act.isEmpty() && Integer.parseInt(cicescini) > Integer.parseInt(cicescini_act)) ? //agregado para caso de modulo de extraordinarios
+                        + ((!cicescini_act.isEmpty() && Integer.parseInt(cicescini) < Integer.parseInt(cicescini_act)) ? //agregado para caso de modulo de extraordinarios
                         " FROM evaluaciones_historial e " : " FROM evaluaciones e " )
                         + "WHERE e.idalu = m.idalu "
                                 + "AND   e.cicescini = m.cicescini "
@@ -2247,7 +2247,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                                     + "ELSE calif1 "
                                     + "END "
                                 + "END "
-                        + ((!cicescini_act.isEmpty() && Integer.parseInt(cicescini) > Integer.parseInt(cicescini_act)) ?  //agregado para caso de modulo de extraordinarios
+                        + ((!cicescini_act.isEmpty() && Integer.parseInt(cicescini) < Integer.parseInt(cicescini_act)) ?  //agregado para caso de modulo de extraordinarios
                         " FROM evaluaciones_historial e " : " FROM evaluaciones e " )
                                 + "WHERE e.idalu     = m.idalu "
                                 + "AND   e.cicescini = m.cicescini "
@@ -2263,7 +2263,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                                     + "ELSE calif1 "
                                     + "END "
                                 + "END "
-                        + ((!cicescini_act.isEmpty() && Integer.parseInt(cicescini) > Integer.parseInt(cicescini_act)) ?  //agregado para caso de modulo de extraordinarios
+                        + ((!cicescini_act.isEmpty() && Integer.parseInt(cicescini) < Integer.parseInt(cicescini_act)) ?  //agregado para caso de modulo de extraordinarios
                         " FROM evaluaciones_historial e " : " FROM evaluaciones e " )
                                 + "WHERE e.idalu     = m.idalu "
                                 + "AND   e.cicescini = m.cicescini "
@@ -2337,7 +2337,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
             if((""+QPromXMatBim.get("califbim1")).trim().equals("0.0") || (""+QPromXMatBim.get("califbim2")).trim().equals("0.0") || (""+QPromXMatBim.get("califbim3")).trim().equals("0.0"))
                 QPromXMatBim.put("nobim","3");
         }
-}
+    }
      
     public ArrayList<Map> matCalifXBim (String numeval, String idalu, String cicescini, String cveplan) throws SQLException
     {
@@ -5641,7 +5641,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                 if((""+rs2.getString("folio")).equals("null") || rs2.getString("folio")==null) {
                     stm.execute(
                               "INSERT INTO fol_re_elec (idalu, cveplan, foliolet, folionum, idcct, grado, cicescini, usuario, fecha, hora, estatus, nivelmod, fecha_expedicion) "
-                            + "SELECT idalu, cveplan, 'BE', "+folionum+", idcct, grado, cicescini, '"+usuario+"', date(current), extend(current, hour to minute), 'A', '"+nivelmod+"','2024-07-16' "
+                            + "SELECT idalu, cveplan, 'BE', "+folionum+", idcct, grado, cicescini, '"+usuario+"', date(current), extend(current, hour to minute), 'A', '"+nivelmod+"','2025-07-16' "
                             + "FROM alumnogrado "
                             + "WHERE cicescini="+cicescini+" AND idalu="+rs2.getString("idalu")+" ");
                     folionum ++;

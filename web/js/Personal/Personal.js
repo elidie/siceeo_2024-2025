@@ -524,10 +524,14 @@ function validarEntradas_Personal (caso)
         }*/
     } else if (caso === "PROFESOR")
     {        
-        if ($('#txtNombreProf').val().trim() === ""){
+        if ($('#txtNombreProf').val().trim() === "" ) {
             mensaje.General ("ESPECIFIQUE_DATO","nombre del profesor");    $("#txtNombreProf").focus();  return false;
-        }else if ($('#txtPrimerApeProf').val().trim() === ""){
+        } else if ($('#txtNombreProf').val().trim().length <= 2 || $('#txtNombreProf').val().trim().indexOf("..")>=0) {
+            mensaje.General ("ESPECIFIQUE_DATO_CORRECTO","nombre del profesor");    $("#txtNombreProf").focus();  return false;
+        } else if ($('#txtPrimerApeProf').val().trim() === "" ){
             mensaje.General ("ESPECIFIQUE_DATO","primer apellido del profesor");    $("#txtPrimerApeProf").focus();  return false;
+        } else if ($('#txtPrimerApeProf').val().trim().length <= 2 || $('#txtPrimerApeProf').val().trim().indexOf("..")>=0){
+            mensaje.General ("ESPECIFIQUE_DATO_CORRECTO","primer apellido del profesor");    $("#txtPrimerApeProf").focus();  return false;
         }/*else if ($('#txtCurpProf').val().trim() === ""){            
             mensaje.General ("ESPECIFIQUE_DATO","CURP del profesor");    $("#txtRfcProf").focus();  return false;
         }else if($('#txtCurpProf').val().trim().length > 0 && !formatoCURP.test($('#txtCurpProf').val().trim().toUpperCase())){

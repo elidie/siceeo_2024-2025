@@ -398,18 +398,27 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
                         } else
                             prom="0.0";
                     }*/  //Secomento para ciclo 2023-2024 ya no es necesario
-
+                    
                     //if ( tblAlumCapCalif.get("grado").equals("6") )     //para 6to debe pasar todas las materias, ciclo anterior al 2023
                     if ( !tblAlumCapCalif.get("grado").equals("1") )      // De 2 a 6to debe de tener promedio de materia aprobatoria para calcularle su promedio
                     {
-                        if ( v.get("matRepGdo").equals(0) && dm.toFloat(prom)>=6.0 ) { // si reprueba max 2 materias y alcanza un prom de 6
+                        /* Agregado para el ciclo 2024-2025 */
+                        if( !v.get("matRepGdo").equals(0) && dm.toFloat(prom)<6.0) { // si tiene todas o una materia reprobada y su promedio es menor a 6,                                                                   
+                                prom=prom.substring(0,3);                       // se le asigna su promedio calculado  
+                        }
+                        else if(!v.get("matRepGdo").equals(0) && dm.toFloat(prom)>=6.0) {
+                            prom = "5.0";
+                        }                            
+                        /* fin para el ciclo 2024-2025 */
+                        else if ( v.get("matRepGdo").equals(0) && dm.toFloat(prom)>=6.0 ) { // si reprueba max 2 materias y alcanza un prom de 6
                             if ( dm.toFloat(prom)<10 )
                                 prom=prom.substring(0,3);
-                        } else
+                        }                                                
+                        else
                             prom="0.0";
                     }
 
-                    if ( dm.toFloat(prom)>=6.0 ) {
+                    if ( dm.toFloat(prom)>=5.0 ) {
                         if ( Float.parseFloat(prom)<10 )
                             prom=prom.substring(0,3);
                     } else
@@ -435,7 +444,7 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
             v.put("aluSolicitud",qryIfx.alumnoSolicitudCerti(califCicEscIn, ""+tblAlumCapCalif.get("idalu")));   //PAra saber si se encuentra en la tabla de solicitudes.            
             dr.put("tblAlumCapCalif_c_rep", tblAlumCapCalif.get("c_rep"));
             throw new SICEEO_Excepcion (1,"PASAR_A_NUMLLAMADA=1","");
-        }
+        }// Fin de llamada = 0
         
          //actualizamos AlumnoGRADO------------------------------------------------------------------
         matRepNiv = dm.toInt(v.get("matRepGdo")) + (tblAlumCapCalif.get("matrepensecu").equals("null")?0:dm.toInt(tblAlumCapCalif.get("matrepensecu")));
@@ -468,7 +477,10 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
 //para primaria
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && dm.toFloat(prom)>=6.0 && (Integer)v.get("matRepGdo")>0 && (Integer)v.get("matRepGdo")<=2 && ( tblAlumCapCalif.get("grado").equals("4") || tblAlumCapCalif.get("grado").equals("5") ) && dr.get("todasSusMat").equals("SI") ) //para 4to y 5to puede pasar  con condicion si su promed es minimo de 6 y solo reprueba 2 materias
-        else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && dm.toFloat(prom)>=6.0 && (Integer)v.get("matAprobGdo")>=4 && ( tblAlumCapCalif.get("grado").equals("2") || tblAlumCapCalif.get("grado").equals("3") || tblAlumCapCalif.get("grado").equals("4") || tblAlumCapCalif.get("grado").equals("5") ) && dr.get("todasSusMat").equals("SI") ) //para 3ro, 4to y 5to puede pasar  con condicion si su promed es minimo de 6 y solo reprueba 2 materias
+        else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) 
+            && dm.toFloat(prom)>=6.0 && (Integer)v.get("matAprobGdo")>=4 
+            && ( tblAlumCapCalif.get("grado").equals("2") || tblAlumCapCalif.get("grado").equals("3") || tblAlumCapCalif.get("grado").equals("4") || tblAlumCapCalif.get("grado").equals("5") ) 
+            && dr.get("todasSusMat").equals("SI") ) //para 3ro, 4to y 5to puede pasar  con condicion si su promed es minimo de 6 y solo reprueba 2 materias
         {
             if ( respAlumProCond.equals("YES") )
             {
@@ -484,34 +496,55 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
 
         //}else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && (dm.toFloat(prom)<6.0 || (Integer)v.get("matRepGdo")>2) && ( tblAlumCapCalif.get("grado").equals("3") || tblAlumCapCalif.get("grado").equals("4") || tblAlumCapCalif.get("grado").equals("5") ) && dr.get("todasSusMat").equals("SI") ) //para 4to y 5to no pasa si su prom es 5 o  reprueba +2 materias
         //falta agregar sus inasistenacias    
-        }else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && ((dm.toFloat(prom)<6.0 && dm.toFloat(prom)>=5.0) || ((Integer)v.get("matRepGdo")>0 && (Integer)v.get("matAprobGdo")<4) ) && ( !tblAlumCapCalif.get("grado").equals("1") ) && dr.get("todasSusMat").equals("SI") ) //para 3ro, 4to y 5to no pasa si su prom es 5 o  reprueba +2 materias    
+        }else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) 
+            && ((dm.toFloat(prom)<6.0 && dm.toFloat(prom)>=5.0) || 
+                ((Integer)v.get("matRepGdo")>0 && (Integer)v.get("matAprobGdo")<4) ) 
+            && ( !tblAlumCapCalif.get("grado").equals("1") ) 
+            && dr.get("todasSusMat").equals("SI") ) //para 3ro, 4to y 5to no pasa si su prom es 5 o  reprueba +2 materias    
+        {
+            //qryIfx.alumGdo ("0","NP","NP");
+            promovido="NP";            
+            estGdo="NP";
+        }else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) 
+            && (dm.toFloat(prom)>=6.0 ) && dr.get("todasSusMat").equals("SI") 
+            && v.get("matRepGdo").equals(0) && tblAlumCapCalif.get("grado").equals("6") )   //si es sexto grado  y aprueba Y PASA TODAS SUS MATERIAS        
+        {            
+            promovido="P";
+            estGdo="C";
+        }else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) 
+            && dm.toFloat(prom)>=6.0 && dr.get("todasSusMat").equals("SI") 
+            && v.get("matRepGdo").equals(0) 
+            && dm.toInt(tblAlumCapCalif.get("grado")) <= 5 )   //si pasa de 1 a 5 normal, y sin reprobar nunguna materia
+        {
+            //qryIfx.alumGdo (prom,"P","P");
+            promovido="P";
+            estGdo="P";
+        } else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) 
+            && (dm.toFloat(prom)<6.0 || (Integer)v.get("matRepGdo")>0 ) 
+            && dr.get("todasSusMat").equals("SI") && !tblAlumCapCalif.get("grado").equals("1") )   //si es sexto grado  y reprueba
         {
             //qryIfx.alumGdo ("0","NP","NP");
             promovido="NP";
             prom="0.0";
             estGdo="NP";
-        }else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && (dm.toFloat(prom)>=6.0 ) && dr.get("todasSusMat").equals("SI") && v.get("matRepGdo").equals(0) && tblAlumCapCalif.get("grado").equals("6") )   //si es sexto grado  y aprueba Y PASA TODAS SUS MATERIAS        
-        {
-            //qryIfx.alumGdo (prom,"C","P");
-            promovido="P";
-            estGdo="C";
-        }else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && dm.toFloat(prom)>=6.0 && dr.get("todasSusMat").equals("SI") && v.get("matRepGdo").equals(0) && dm.toInt(tblAlumCapCalif.get("grado")) <= 5 )   //si pasa de 1 a 5 normal, y sin reprobar nunguna materia
-        {
-            //qryIfx.alumGdo (prom,"P","P");
-            promovido="P";
-            estGdo="P";
-        }/*else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && dm.toFloat(prom)==0.0 && dr.get("todasSusMat").equals("SI") && v.get("matRepGdo").equals(0) && (Integer)v.get("porcAsist")>=80 && dm.toInt(tblAlumCapCalif.get("grado")) <= 5 )   //si pasa de 1 a 5 normal, y sin reprobar nunguna materia
+        }//hasta aki todos los grados con calif aprobatoria
+        
+        /*else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && dm.toFloat(prom)==0.0 && dr.get("todasSusMat").equals("SI") && v.get("matRepGdo").equals(0) && (Integer)v.get("porcAsist")>=80 && dm.toInt(tblAlumCapCalif.get("grado")) <= 5 )   //si pasa de 1 a 5 normal, y sin reprobar nunguna materia
         {
             //qryIfx.alumGdo (prom,"P","P");
             promovido="P";
             estGdo="P";
         } //comentado por mi 28-06-2023 */  
-        else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && (v.get("esp").equals("A") && v.get("mat").equals("A")) && (Integer)v.get("matRepGdo")>0 && dm.toFloat(prom)>=6.0 && ( tblAlumCapCalif.get("grado").equals("1") || tblAlumCapCalif.get("grado").equals("2")) && dr.get("todasSusMat").equals("SI") ) //logra su promedio pero reprueba una materia diferente de español o matematicas
+        /*else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) // ya no esta vigente, codigo cancelado en 2024-2025
+            && (v.get("esp").equals("A") && v.get("mat").equals("A")) 
+            && (Integer)v.get("matRepGdo")>0 && dm.toFloat(prom)>=6.0 
+            && ( tblAlumCapCalif.get("grado").equals("1") || tblAlumCapCalif.get("grado").equals("2")) 
+            && dr.get("todasSusMat").equals("SI") ) //logra su promedio pero reprueba una materia diferente de español o matematicas
         {
             //qryIfx.alumGdo (prom,"P","P");                                    //todos pasa de 1ro a 2do aun con 5
             promovido="P";
             estGdo="P";
-        } /*else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && ( v.get("esp").equals("R") || v.get("mat").equals("R")) && ( tblAlumCapCalif.get("grado").equals("1") || tblAlumCapCalif.get("grado").equals("2") ) && dr.get("todasSusMat").equals("SI") ) // la norma dice k 1ro, 2do y 3ro pasa xk pasa Sofi dice k hay k dejar k el profesor decida si pasa o no pasa
+        } else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && ( v.get("esp").equals("R") || v.get("mat").equals("R")) && ( tblAlumCapCalif.get("grado").equals("1") || tblAlumCapCalif.get("grado").equals("2") ) && dr.get("todasSusMat").equals("SI") ) // la norma dice k 1ro, 2do y 3ro pasa xk pasa Sofi dice k hay k dejar k el profesor decida si pasa o no pasa
         {
             if ( tblAlumCapCalif.get("c_rep").equals("R") )  //si se encuentra repitiendo el grado, pasa x k pasa
             {
@@ -540,14 +573,7 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
                 }
             }
         }// Ya no se aplica para este ciclo*/ 
-        else if ( tblPrincipal_cveplan.equals("1") && califCicEscIn.equals(cicescin) && (dm.toFloat(prom)<6.0 || (Integer)v.get("matRepGdo")>0 ) && dr.get("todasSusMat").equals("SI") && !tblAlumCapCalif.get("grado").equals("1") )   //si es sexto grado  y reprueba
-        {
-            //qryIfx.alumGdo ("0","NP","NP");
-            promovido="NP";
-            prom="0.0";
-            estGdo="NP";
-        }//hasta aki todos los grados con calif aprobatoria
-        
+                
 //FIN PRIMARIA--------------
         else if ( dr.get("todasSusMat").equals("NO"))
         {
@@ -563,13 +589,17 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
 // para 6To grado---------------------------
         if ( tblPrincipal_grado.equals("6") && tblPrincipal_cveplan.equals("1") )
         {
-            if ( dr.get("todasSusMat").equals("SI") && ( (
+            if ( dr.get("todasSusMat").equals("SI") 
+                && ( 
+                    (
                       ( dm.toFloat(tblAlumCapCalif.get("promd1rop")) != -11 ) &&
                       ( dm.toFloat(tblAlumCapCalif.get("promd2dop")) != -11 ) &&
                       ( dm.toFloat(tblAlumCapCalif.get("promd3rop")) != -11 ) &&
                       ( dm.toFloat(tblAlumCapCalif.get("promd4top")) != -11 ) &&
                       ( dm.toFloat(tblAlumCapCalif.get("promd5top")) != -11 ) &&
-                      ( dm.toFloat(prom) != -11 )) || ( dm.toInt(v.get("aluSolicitud"))>0 && (dm.toFloat(prom) != -11 )) ) )
+                      ( dm.toFloat(prom) != -11 )) || 
+                    ( dm.toInt(v.get("aluSolicitud"))>0 && (dm.toFloat(prom) != -11 )) 
+                   ) )
             {
                 //    Dm.Q_AlumGdo.SQL.Add(' PromedioGral = '+Vprom+' , ');
 
@@ -600,7 +630,7 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
                     promGral=dm.toFloat(dato7);
                 }
                 else {
-                    promGral=(float)0.0;
+                    promGral=(float)5.0;
                     
                 }
                 //+++++++++++++++++++++++
