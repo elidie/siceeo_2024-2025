@@ -149,7 +149,7 @@ public class SICEEO_CalifSecXBim {
     
     
 private void formActivate (String califCicEscIn, String txtUsuario, String cicescin, String calProm, String bim, String tblAlumCapCalif_grado, 
-        String tblPrincipal_cveplan )
+        String tblPrincipal_cveplan)
 {
     String superUsuario = ""+sesion.getAttribute("superUsuario");
     String tipo_usuario = ""+sesion.getAttribute("tipo_usuario");

@@ -91,7 +91,7 @@
         }
         
         
-        r += ""+cicescinilib+"/";
+        r += ""+cicescinilib+"_p/";
         /******** SE CREA EL DOCUMENTO PDF Y SE LE INSERTAN LOS DATOS **************/        
         //r += ""+(caso.equals("REL") || caso.equals("RELc") ? "_p/" : "/");
         /*if(cveplan.equals("1") && cicescini.equals("2023") && (caso.equals("CREL") || caso.equals("CRELc")))

@@ -39,8 +39,8 @@ public class SICEEO_Password {
         this.mensaje = new SICEEO_Mensajes();
         this.dr = datosReturn;
         this.dm = new SICEEO_DataModule ();
-        this.pathConfigsSICEEO = "/opt/tomcat/siceeoConfigs/configsSICEEO.sco";  // puerto 88
-        //this.pathConfigsSICEEO = "/var/lib/tomcat/siceeoConfigs/configsSICEEO.sco";  // puerto 80 
+        //this.pathConfigsSICEEO = "/opt/tomcat/siceeoConfigs/configsSICEEO.sco";  // puerto 88
+        this.pathConfigsSICEEO = "/var/lib/tomcat/siceeoConfigs/configsSICEEO.sco";  // puerto 80 
     }
 /*******************************************************************************/
 /****************************** ÁREA PARA EL CONTROLADOR ***********************/

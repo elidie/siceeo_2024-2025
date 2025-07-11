@@ -2354,6 +2354,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                 + " AND v.numeval="+numeval
                 + " AND v.idalu="+idalu
                 + " AND v.cicescini="+cicescini
+                /*+ " AND v.grado="+grado*/
                 + " AND v.cvemat NOT LIKE 'NAP%' " // + sinIngles
             + "ORDER BY q.ordenimpres");
         
