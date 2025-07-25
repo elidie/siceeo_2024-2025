@@ -128,7 +128,7 @@ private void btnXBim_Click(String rbgXBimOPromOVal_Checked, String chkCalProm_is
                 dr.put("bim", cbxBim_SelItem);  
                 
                 if (tblAlumCapCalif.size()>0 && !cbxBim_SelItem.equals("0") ) // && !cbxBim_SelItem.equals("0") agregado para el caso de inactivo los 3 trim
-                    tblMatCalifXBim = qryIfx.matCalifXBim(""+dr.get("bim"), ""+tblAlumCapCalif.get(0).get("idalu"), ""+dr.get("califCicEscIn"),""+tblPrincipal_cveplan);
+                    tblMatCalifXBim = qryIfx.matCalifXBim(""+dr.get("bim"), ""+tblAlumCapCalif.get(0).get("idalu"), ""+dr.get("califCicEscIn"),""+tblPrincipal_cveplan, tblPrincipal_grado);
                 if(/*tblMatCalifXBim.size()==0 &&*/ !tblPrincipal_cveplan.equals("2") && (""+dr.get("bim")).equals("1"))
                     ingles = true;
                 dr.put("alertaIngles", ingles);                

@@ -2339,7 +2339,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         }
     }
      
-    public ArrayList<Map> matCalifXBim (String numeval, String idalu, String cicescini, String cveplan) throws SQLException
+    public ArrayList<Map> matCalifXBim (String numeval, String idalu, String cicescini, String cveplan, String grado) throws SQLException
     {
         ArrayList<Map> QMatCalifXBim = new ArrayList<Map>();
         Map fila;
@@ -2354,7 +2354,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                 + " AND v.numeval="+numeval
                 + " AND v.idalu="+idalu
                 + " AND v.cicescini="+cicescini
-                /*+ " AND v.grado="+grado*/
+                + (grado.isEmpty()?"":" AND v.grado="+grado)
                 + " AND v.cvemat NOT LIKE 'NAP%' " // + sinIngles
             + "ORDER BY q.ordenimpres");
         
@@ -5983,7 +5983,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                     try{                    
 
                         stm.execute("INSERT INTO desoficializacion (idcct, cicescini, grado, grupo, idalu, cveoficializacion, usuario, fecha)"
-                                    + "VALUES ("+tblPrincipal_idcct+", "+tblPrincipal_cicescini+", "+grado+", '"+grupo+"',"+tblAlumnos.get(i).get("idalu")+", "+cveoficializacion+",'"+txtUsuario+"', extend(current, YEAR TO SECOND) )");
+                                     + "VALUES ("+tblPrincipal_idcct+", "+tblPrincipal_cicescini+", "+grado+", '"+grupo+"',"+tblAlumnos.get(i).get("idalu")+", "+cveoficializacion+",'"+txtUsuario+"', extend(current, YEAR TO SECOND) )");
 
                         //----------------- Cancelamos folios de certificado -----------------
                         if (tblPrincipal_cveplan.equals("1") && grado.equals("6") || tblPrincipal_cveplan.equals("2") && grado.equals("3"))

@@ -47,7 +47,7 @@ public class SICEEO_SecHist
         if (metodo.equals("foAc"))
             FormActivate (r.gP("tblAlumCapCalif_idalu"), r.gP("tblAlumCapCalif_frma"), r.gP("usuarioNo22"), r.gP("txtUsuario"), r.gP("cicescini"));
         else if (metodo.equals("tbCa_ChSeIt"))
-            tblCalif_ChangeSelectedItem ( r.gP("tblAlumCapCalif_idalu"), dm.toInt(r.gP("grado")), r.gP("cvetipmat"), r.gP("cvemat") );
+            tblCalif_ChangeSelectedItem ( r.gP("tblAlumCapCalif_idalu"), dm.toInt(r.gP("grado")), r.gP("cvetipmat"), r.gP("cvemat"), r.gP("msgExmExt") );
 //..................................................................................................................................................................................................................
         else if (metodo.equals("btGdCa1"))
             btnGdaCalif1ro_Click(dm.vstrToArrMap(r.gPV("tblCalif1ro"), "~", new String[]{"cvemat","cvetipmat","califant","promedio","promedio_oldValue"}), 
@@ -106,6 +106,7 @@ public class SICEEO_SecHist
         ArrayList<String> ccts1, idccts1, ccts2, idccts2, ccts3, idccts3, meses1, meses2, meses3, meses;
         Map QUsuario;
         ArrayList<Map> mesesExmExt;
+        int matrepact1ro = 0, matrepact2do = 0, matrepact3ro = 0;
         try
         {
             if(!tblAlumCapCalif_frma.equals("null") && !tblAlumCapCalif_frma.equals("false")){
@@ -142,38 +143,18 @@ public class SICEEO_SecHist
             {
                 ccts1.add(""+QCalif1ro.get(0).get("cct"));
                 idccts1.add(""+QCalif1ro.get(0).get("idcct"));                
-                //no mostrar si es de la 5nueve
-                /*if ( (""+QCalif1ro.get(0).get("grupo")).contains("_") )
-                {
-                    //      if (f_password.E_Usuario.Text='IVALLE') or
-                    //         (f_password.E_Usuario.Text='MARIOCIMM')
-                    if ( (""+QUsuario.get("modulos")).contains(",4,") || usuarioNo22.equals("si") )
-                        dr.put("pnlExamExtraord1ro_Visible", true); //mostrar a estos usuarios
-                    else
-                        dr.put("pnlExamExtraord1ro_Visible", false);
-                }else*/
-                dr.put("pnlExamExtraord1ro_Visible", true); //mostrar si es 22
                 
-                /*
-                    if (dm2.q_Calif1rocicescini.AsInteger<=2006) then
-                    {
-                       meses1.Add('AGOSTO');
-                       meses1.Add('SEPTIEMBRE');
-                       meses1.Add('FEBRERO')
-                    }
-                    if (dm2.q_Calif1rocicescini.AsInteger=2007) then
-                    {
-                       meses1.Add('AGOSTO');
-                       meses1.Add('SEPTIEMBRE');
-                       meses1.Add('ENERO')
-                    }
-                    if dm2.q_Calif1rocicescini.AsInteger>=2008 then
-                    {
-                       meses1.Add('AGOSTO');
-                       meses1.Add('SEPTIEMBRE');
-                       meses1.Add('ENERO')
-                    }
-                */
+                dr.put("pnlExamExtraord1ro_Visible", true); //mostrar si es 22      
+                matrepact1ro = Integer.parseInt(""+QCalif1ro.get(0).get("matrepact"));
+                if(matrepact1ro ==0 || matrepact1ro>=5){                    
+                    dr.put("tblCalif1ro_editable","");
+                    dr.put("pnlExamenes1ro_visible",false);
+                    dr.put("msgExm1ro",(matrepact1ro==0 ? "No tiene materias reprobadas":"Tiene más de 4 materias reprobadas"));
+                } else {
+                    dr.put("pnlExamenes1ro_visible",true);
+                    dr.put("tblCalif1ro_editable","textbox");
+                    dr.put("msgExm1ro","");
+                }                                                
             }
             else
                 dr.put("pnlExamExtraord1ro_Visible", false);
@@ -198,7 +179,18 @@ public class SICEEO_SecHist
                     else
                         dr.put("pnlExamExtraord2do_Visible", false);
                 }else*/
-                    dr.put("pnlExamExtraord2do_Visible", true); //mostrar si es 22
+                dr.put("pnlExamExtraord2do_Visible", true); //mostrar si es 22
+                matrepact2do = Integer.parseInt(""+QCalif2do.get(0).get("matrepact"));
+                if(matrepact2do==0 ||matrepact2do>=5){
+                    dr.put("pnlExamenes2do_visible",false);
+                    dr.put("tblCalif2do_editable","");
+                    dr.put("msgExm2do",(matrepact2do==0 ? "No tiene materias reprobadas":"Tiene más de 4 materias reprobadas"));
+                } else {
+                    dr.put("pnlExamenes2do_visible",true);
+                    dr.put("tblCalif2do_editable","textbox");
+                    dr.put("msgExm2do","");
+                }
+                    
 
                 /*if (dm2.q_Calif2docicescini.AsInteger<=2006) then
                     {
@@ -246,7 +238,18 @@ public class SICEEO_SecHist
                       dr.put("pnlExamExtraord3ro_Visible", false);
                 }
                 else*/
-                    dr.put("pnlExamExtraord3ro_Visible", true); //mostrar si es 22
+                dr.put("pnlExamExtraord3ro_Visible", true); //mostrar si es 22
+                matrepact3ro = Integer.parseInt(""+QCalif3ro.get(0).get("matrepact"));
+                if(matrepact3ro==0 || matrepact3ro>=5){
+                    dr.put("pnlExamenes3ro_visible",false);
+                    dr.put("tblCalif3ro_editable","");
+                    dr.put("msgExm3ro",(matrepact3ro==0 ? "No tiene materias reprobadas":"Tiene más de 4 materias reprobadas"));
+                } else {
+                    dr.put("pnlExamenes3ro_visible",true);
+                    dr.put("tblCalif3ro_editable","textbox");
+                    dr.put("msgExm3ro","");
+                }    
+                    
 
 
                //3RO manda a 2do y a 1ro
@@ -321,7 +324,8 @@ public class SICEEO_SecHist
             dr.put("cbxTExm3ro_idccts",idccts3);
             
             for(int i=0; i<mesesExmExt.size(); i++){
-                meses.add(""+mesesExmExt.get(i).get("mes"));
+                if(!meses.contains(""+mesesExmExt.get(i).get("mes")))
+                    meses.add(""+mesesExmExt.get(i).get("mes"));
             }
             
             dr.put("mesesExmExt",mesesExmExt);                                    
@@ -334,7 +338,7 @@ public class SICEEO_SecHist
         
     }
     
-    private void tblCalif_ChangeSelectedItem (String tblAlumCapCalif_idalu, int grado, String cvetipmat, String cvemat)
+    private void tblCalif_ChangeSelectedItem (String tblAlumCapCalif_idalu, int grado, String cvetipmat, String cvemat, String msgExmExt)
     {
         try {
             qryIfx.conectar();
@@ -344,6 +348,7 @@ public class SICEEO_SecHist
                 dr.put("tblExmExt",qryIfx.exmExt2do_onSelect (tblAlumCapCalif_idalu, cvetipmat, cvemat));
             else if (grado == 3)
                 dr.put("tblExmExt",qryIfx.exmExt3ro_onSelect (tblAlumCapCalif_idalu, cvetipmat, cvemat));
+            dr.put("msgExmExt",msgExmExt);
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
@@ -401,7 +406,7 @@ public class SICEEO_SecHist
                 this.dr.put("returnCase", 0); 
                 mensaje.SecHist("SIN_CALC_PROM_GRAL", "", "", this.dr);
             }
-            hacerCommit = true; //Comentado hoy 19-06-2025
+            //hacerCommit = true; //Comentado hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         //catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",-1);  mensaje.SecHist(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
@@ -422,7 +427,7 @@ public class SICEEO_SecHist
                         ""+tblCalif1ro.get(i).get("cvetipmat"), ""+tblCalif1ro.get(i).get("exm"), dm.toInt(""+tblCalif1ro.get(i).get("eer")), 
                         ""+tblCalif1ro.get(i).get("promedio"), txtUsuario, ""+ciclo.get("cicescini"));
             dr.put("tblCalif1ro",qryIfx.calif1ro (tblCalif1ro_idalu));
-            //hacerCommit = true; //Comentando el hoy 19-06-2025
+            //hacerCommit = true; //Comentando el hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
@@ -459,7 +464,7 @@ public class SICEEO_SecHist
                         cvetipmat_oldValue, ""+tblExmExt1ro_OldValues.get(i).get("dia"), ""+tblExmExt1ro_OldValues.get(i).get("mes"), 
                         ""+tblExmExt1ro_OldValues.get(i).get("anio"), ""+tblExmExt1ro_OldValues.get(i).get("promedio"));
             dr.put("tblExmExt1ro",qryIfx.exmExt1ro_onSelect (idalu_oldValue, cvetipmat_oldValue, cvemat_oldValue) );
-            hacerCommit = true;  //Comentado hoy 19-06-2025
+            //hacerCommit = true;  //Comentado hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
@@ -487,7 +492,7 @@ public class SICEEO_SecHist
                 this.dr.put("returnCase", 0); 
                 mensaje.SecHist("SIN_CALC_PROM_GRAL", "", "", this.dr);
             }
-            hacerCommit = true; //Comentado hoy 19-06-2025
+            //hacerCommit = true; //Comentado hoy 22-07-2025
        } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
@@ -508,7 +513,7 @@ public class SICEEO_SecHist
                         ""+tblCalif2do.get(i).get("cvetipmat"), ""+tblCalif2do.get(i).get("exm"), dm.toInt(""+tblCalif2do.get(i).get("eer")), 
                         ""+tblCalif2do.get(i).get("promedio"), txtUsuario, ""+ciclo.get("cicescini"));
             dr.put("tblCalif2do",qryIfx.calif2do (tblCalif2do_idalu));
-            hacerCommit = true; //comentado hoy 19-06-2025
+            //hacerCommit = true; //comentado hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
@@ -545,7 +550,7 @@ public class SICEEO_SecHist
                         cvetipmat_oldValue, ""+tblExmExt2do_OldValues.get(i).get("dia"), ""+tblExmExt2do_OldValues.get(i).get("mes"), 
                         ""+tblExmExt2do_OldValues.get(i).get("anio"), ""+tblExmExt2do_OldValues.get(i).get("promedio"));
             dr.put("tblExmExt2do",qryIfx.exmExt2do_onSelect (idalu_oldValue, cvetipmat_oldValue, cvemat_oldValue) );
-            hacerCommit = true; // comentado hoy 19-06-2025
+            //hacerCommit = true; // comentado hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
@@ -574,7 +579,7 @@ public class SICEEO_SecHist
                 this.dr.put("returnCase", 0); 
                 mensaje.SecHist("SIN_CALC_PROM_GRAL", "", "", this.dr);
             }
-            hacerCommit = true; // comentado hoy 19-06-2025
+            //hacerCommit = true; // comentado hoy 22-07-2025
        } catch (SQLException ex) { 
            this.dr.put("returnCase", -1);
            if(ex.getMessage().contains("alumnogrado_ckprom"))           
@@ -600,7 +605,7 @@ public class SICEEO_SecHist
                         ""+tblCalif3ro.get(i).get("cvetipmat"), ""+tblCalif3ro.get(i).get("exm"), dm.toInt(""+tblCalif3ro.get(i).get("eer")), 
                         ""+tblCalif3ro.get(i).get("promedio"), txtUsuario, ""+ciclo.get("cicescini"));
             dr.put("tblCalif3ro",qryIfx.calif3ro (tblCalif3ro_idalu));
-            hacerCommit = true; // Comentado hoy 19-06-2025
+            //hacerCommit = true; // Comentado hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
@@ -639,7 +644,7 @@ public class SICEEO_SecHist
                         cvetipmat_oldValue, ""+tblExmExt3ro_OldValues.get(i).get("dia"), ""+tblExmExt3ro_OldValues.get(i).get("mes"), 
                         ""+tblExmExt3ro_OldValues.get(i).get("anio"), ""+tblExmExt3ro_OldValues.get(i).get("promedio"));
             dr.put("tblExmExt3ro",qryIfx.exmExt3ro_onSelect (idalu_oldValue, cvetipmat_oldValue, cvemat_oldValue) );
-            hacerCommit = true; //Comentado hoy 19-06-2025
+            //hacerCommit = true; //Comentado hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
@@ -653,7 +658,7 @@ public class SICEEO_SecHist
             qryIfx.conectarConTransaccion();
             actualizaReprobadas (qryIfx, tblAlumCapCalif_idalu, tblCalif2do_cicescini, tblCalif3ro_cicescini, 
                                 tblCalif1ro_matrepact, tblCalif2do_matrepact, tblCalif1ro_size, tblCalif2do_size, tblCalif3ro_size);
-            hacerCommit = true; //Comentado hoy 19-06-2025
+            //hacerCommit = true; //Comentado hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }

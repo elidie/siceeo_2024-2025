@@ -166,23 +166,33 @@ public class SICEEO_ValidarCurp {
     //** QUITA JOSE Y MARIA
     private String P9(String VPASO)
     {
-        if (VPASO.length()==4 && VPASO.contains("JOSE")) return VPASO;
+        if (VPASO.length()==4 && (VPASO.contains("JOSE") || VPASO.contains("JOSÉ"))) return VPASO;
         if (VPASO.length()==1 && VPASO.contains("J")) return VPASO;
         if (VPASO.length()==2 && VPASO.contains("J ")) return VPASO;
-        if (VPASO.length()==5 && VPASO.contains("MARIA")) return VPASO;
+        if (VPASO.length()==5 && (VPASO.contains("MARIA") || VPASO.contains("MARÍA"))) return VPASO;
         if (VPASO.length()==1 && VPASO.contains("M")) return VPASO;
         if (VPASO.length()==2 && VPASO.contains("M ")) return VPASO;
         if (VPASO.length()==2 && VPASO.contains("MA")) return VPASO;
         if (VPASO.length()==3 && VPASO.contains("MA ")) return VPASO;
         
-        if (VPASO.length()>=5 && VPASO.substring(0,5).equals("JOSE ")) VPASO =  VPASO.substring(5);
-        else if (VPASO.length()>=3 && VPASO.substring(0,3).equals("J  ")) VPASO =  VPASO.substring(3);
-        else if (VPASO.length()>=2 && VPASO.substring(0,2).equals("J ")) VPASO =  VPASO.substring(2);
-        else if (VPASO.length()>=6 && VPASO.substring(0,6).equals("MARIA ")) VPASO =  VPASO.substring(6);
-        else if (VPASO.length()>=3 && VPASO.substring(0,3).equals("M  ")) VPASO =  VPASO.substring(3);
-        else if (VPASO.length()>=2 && VPASO.substring(0,2).equals("M ")) VPASO =  VPASO.substring(2);
-        else if (VPASO.length()>=4 && VPASO.substring(0,4).equals("MA  ")) VPASO =  VPASO.substring(4);
-        else if (VPASO.length()>=3 && VPASO.substring(0,3).equals("MA ")) VPASO =  VPASO.substring(3);
+        if (VPASO.length()>=5 && (VPASO.substring(0,5).equals("JOSE ") || 
+                VPASO.substring(0,5).equals("JOSÉ "))) 
+            VPASO =  VPASO.substring(5);
+        else if (VPASO.length()>=3 && VPASO.substring(0,3).equals("J  ")) 
+            VPASO =  VPASO.substring(3);
+        else if (VPASO.length()>=2 && VPASO.substring(0,2).equals("J ")) 
+            VPASO =  VPASO.substring(2);
+        else if (VPASO.length()>=6 && (VPASO.substring(0,6).equals("MARIA ") ||
+                VPASO.substring(0,6).equals("MARÍA "))) 
+            VPASO =  VPASO.substring(6);
+        else if (VPASO.length()>=3 && VPASO.substring(0,3).equals("M  ")) 
+            VPASO =  VPASO.substring(3);
+        else if (VPASO.length()>=2 && VPASO.substring(0,2).equals("M ")) 
+            VPASO =  VPASO.substring(2);
+        else if (VPASO.length()>=4 && VPASO.substring(0,4).equals("MA  ")) 
+            VPASO =  VPASO.substring(4);
+        else if (VPASO.length()>=3 && VPASO.substring(0,3).equals("MA ")) 
+            VPASO =  VPASO.substring(3);
         
         return VPASO;
     }

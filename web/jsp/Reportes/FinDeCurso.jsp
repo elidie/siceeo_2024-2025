@@ -29,6 +29,7 @@
     Map parameters = new HashMap();
     int cicescinilib_int = Integer.parseInt(""+request.getParameter("cicescinilib"));
     File reportFile;
+    boolean str_of= false;
     
     try{
         /********** ANTES DE CUALQUIER COSA VERIFICAMOS QUE TENGA SESIÓN INICIADA **************/
@@ -91,7 +92,7 @@
         }
         
         
-        r += ""+cicescinilib+"_p/";
+        r += ""+cicescinilib+"/";
         /******** SE CREA EL DOCUMENTO PDF Y SE LE INSERTAN LOS DATOS **************/        
         //r += ""+(caso.equals("REL") || caso.equals("RELc") ? "_p/" : "/");
         /*if(cveplan.equals("1") && cicescini.equals("2023") && (caso.equals("CREL") || caso.equals("CRELc")))
@@ -119,7 +120,8 @@
         else if (caso.equals("RELP") && grado.equals("3"))
             r+="RELPPrees"; 
         else if (caso.equals("Ra")){  // Para reporte de avances 2023-2024
-            parameters.put("str_of", ""+dr.get("returnCase"));
+            str_of = qryIfx.isCalEvalGradoGrupoOficSinAlusDesofic(idcct, cicescini, grado, grupo, cveplan.equals("3")?"EVALUACION":"CALIFS BIM");
+            parameters.put("str_of", (str_of==true ? 1 : 0));
             if(cveplan.equals("1") ) {                
                 r+= "RepAvaPrimG1-6";
             } else {

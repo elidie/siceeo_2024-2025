@@ -139,19 +139,21 @@ function ValidarCurp(nombre,ape1,ape2,anioNac,mesNac,diaNac,sexo,entidad){
     // QUITA JOSE Y MARIA
     ValidarCurp.prototype.P9 = function(VPASO){
         
-        if( VPASO.length===4 && VPASO.indexOf("JOSE") >= 0 ) return VPASO;
+        if( VPASO.length===4 && (VPASO.indexOf("JOSE") >= 0 || VPASO.indexOf("JOSÉ") >= 0) ) return VPASO;
         if( VPASO.length===1 && VPASO.indexOf("J") >= 0 ) return VPASO;
         if( VPASO.length===2 && VPASO.indexOf("J ") >= 0 ) return VPASO;
-        if( VPASO.length===5 && VPASO.indexOf("MARIA") >= 0 ) return VPASO;
+        if( VPASO.length===5 && (VPASO.indexOf("MARIA") >= 0 || VPASO.indexOf("MARÍA") >= 0)) return VPASO;
         if( VPASO.length===1 && VPASO.indexOf("M") >= 0 ) return VPASO;
         if( VPASO.length===2 && VPASO.indexOf("M ") >= 0 ) return VPASO;
         if( VPASO.length===2 && VPASO.indexOf("MA") >= 0 ) return VPASO;
         if( VPASO.length===3 && VPASO.indexOf("MA ") >= 0 ) return VPASO;
         
-        if (VPASO.length>=5 && VPASO.substring(0,5) === "JOSE ") VPASO =  VPASO.substring(5);
+        if (VPASO.length>=5 && (VPASO.substring(0,5) === "JOSE " || VPASO.substring(0,5) === "JOSÉ "))
+            VPASO =  VPASO.substring(5);
         else if (VPASO.length>=3 && VPASO.substring(0,3) === "J  ") VPASO =  VPASO.substring(3);
         else if (VPASO.length>=2 && VPASO.substring(0,2) === "J ") VPASO =  VPASO.substring(2);
-        else if (VPASO.length>=6 && VPASO.substring(0,6) === "MARIA ") VPASO =  VPASO.substring(6);
+        else if (VPASO.length>=6 && (VPASO.substring(0,6) === "MARIA " || VPASO.substring(0,6) === "MARÍA ")) 
+            VPASO =  VPASO.substring(6);
         else if (VPASO.length>=3 && VPASO.substring(0,3) === "M  ") VPASO =  VPASO.substring(3);
         else if (VPASO.length>=2 && VPASO.substring(0,2) === "M ") VPASO =  VPASO.substring(2);
         else if (VPASO.length>=4 && VPASO.substring(0,4) === "MA  ") VPASO =  VPASO.substring(4);

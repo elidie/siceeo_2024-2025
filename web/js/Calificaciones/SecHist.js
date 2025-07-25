@@ -31,6 +31,10 @@ function frmwSecHist_Show (tblPrincipal_cicescini, tblAlumCapCalif_idalu, tblAlu
         cbxTExm2do_idccts:null,
         cbxTExm3ro_idccts:null,
         
+        tblCalif1ro_matrepact:null,
+        tblCalif2do_matrepact:null,
+        tblCalif3ro_matrepact:null,
+        
         tblExmExt1ro_OldValues: null,
         tblExmExt2do_OldValues: null,
         tblExmExt3ro_OldValues: null,
@@ -278,6 +282,7 @@ function frmwSecHist_FormActivate()
                     
                     jsSeHi.cbxTExm_mesesExmExt = result.mesesExmExt;
                     jsSeHi.cbxTExm_meses = result.meses;
+                    alert(result.tblCalif3ro.length);
                     
                     if (result.tblCalif1ro.length > 0){
                         $("#lblTCalif1ro_grupo").text(result.tblCalif1ro[0].grupo);
@@ -289,11 +294,12 @@ function frmwSecHist_FormActivate()
                         $("#lblTCalif1ro_promgdo").text(result.tblCalif1ro[0].promgdo);
                         
                         $("#lblTCalif1ro_matrepact").text(result.tblCalif1ro[0].matrepact);
-                        
+                        jsSeHi.tblCalif1ro_matrepact = result.tblCalif1ro[0].matrepact;
                         jsSeHi.cbxTExm1ro_Column1=result.cbxTExm1ro_Column1;
                         jsSeHi.cbxTExm1ro_Column3=result.cbxTExm1ro_Column3;
                         
-                        jsSeHi.cbxTExm1ro_idccts=result.cbxTExm1ro_idccts;                        
+                        jsSeHi.cbxTExm1ro_idccts=result.cbxTExm1ro_idccts;
+                        //object_setVisible(result.pnlExamenes1ro_visible,"pnlExamenes1ro");                        
                     }
 
                     if (result.tblCalif2do.length > 0){
@@ -312,6 +318,9 @@ function frmwSecHist_FormActivate()
                         jsSeHi.cbxTExm2do_Column3=result.cbxTExm2do_Column3;
                         
                         jsSeHi.cbxTExm2do_idccts=result.cbxTExm2do_idccts;                        
+                        jsSeHi.tblCalif2do_matrepact = result.tblCalif2do[0].matrepact;
+                        initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, result.tblCalif2do_editable);
+                        initTablaExmExt ("tblExmExt2do", result.tblExmExt2do, result.cbxTExm2do_Column1, result.cbxTExm2do_Column3, result.cbxTExm2do_idccts, result.desmat2do, result.msgExm2do);
                     }
                 
                     if (result.tblCalif3ro.length > 0){
@@ -331,16 +340,12 @@ function frmwSecHist_FormActivate()
                         jsSeHi.cbxTExm3ro_Column3=result.cbxTExm3ro_Column3;
                         
                         jsSeHi.cbxTExm3ro_idccts=result.cbxTExm3ro_idccts;                        
+                        jsSeHi.tblCalif3ro_matrepact = result.tblCalif3ro[0].matrepact;
+                        initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, result.tblCalif3ro_editable, result.msgExm3ro);
+                        initTablaExmExt ("tblExmExt3ro", result.tblExmExt3ro, result.cbxTExm3ro_Column1, result.cbxTExm3ro_Column3, result.cbxTExm3ro_idccts, result.desmat3ro, result.msgExm3ro);
                     }
-                    
-                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1);
-                    initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2);
-                    initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3);
-                    
-                    initTablaExmExt ("tblExmExt1ro", result.tblExmExt1ro, result.cbxTExm1ro_Column1, result.cbxTExm1ro_Column3, result.cbxTExm1ro_idccts, result.desmat1ro);
-                    initTablaExmExt ("tblExmExt2do", result.tblExmExt2do, result.cbxTExm2do_Column1, result.cbxTExm2do_Column3, result.cbxTExm2do_idccts, result.desmat2do);
-                    initTablaExmExt ("tblExmExt3ro", result.tblExmExt3ro, result.cbxTExm3ro_Column1, result.cbxTExm3ro_Column3, result.cbxTExm3ro_idccts, result.desmat3ro);
-                    
+                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, result.tblCalif1ro_editable);
+                    initTablaExmExt ("tblExmExt1ro", result.tblExmExt1ro, result.cbxTExm1ro_Column1, result.cbxTExm1ro_Column3, result.cbxTExm1ro_idccts, result.desmat1ro, result.msgExm1ro);                                                                                                                                                             
                     cerrarLoading();
                 break;
             case 0:case -1:
@@ -361,7 +366,7 @@ function frmwSecHist_FormActivate()
         cerrarLoading();
     });
 }
-function initTablaCalif (nombreTablaCalif, tblCalif, nombreTablaExmExt, jsSeHi_TblCalif_promedio_oldValue, grado)
+function initTablaCalif (nombreTablaCalif, tblCalif, nombreTablaExmExt, jsSeHi_TblCalif_promedio_oldValue, grado, tblCalif_edit, msgExm)
 {
     var tabla = new Tabla();
     var posSel;
@@ -373,8 +378,8 @@ function initTablaCalif (nombreTablaCalif, tblCalif, nombreTablaExmExt, jsSeHi_T
             for (var i=0; i<tblCalif.length; i++) 
                 jsSeHi_TblCalif_promedio_oldValue[i]=tblCalif[i].promedio;
         posSel = tabla.getSelectedIndexRow(nombreTablaCalif);                                                                                          //, ["", "textbox","textbox"]  se le quito la forma editable de columna de calificaciones    
-        tabla.create(nombreTablaCalif.replace("tbl","scrl"),nombreTablaCalif,tblCalif, ["Materia","Prom","Calif. Ant."], ["desmat","promedio","califant"], ["","textbox","textbox"], ["","center","center"], true, null, function(f){
-                tblCalif_ChangeSelectedItem (nombreTablaCalif,nombreTablaExmExt,grado,f);
+        tabla.create(nombreTablaCalif.replace("tbl","scrl"),nombreTablaCalif,tblCalif, ["Materia","Prom","Calif. Ant."], ["desmat","promedio","califant"], ["",tblCalif_edit,tblCalif_edit], ["","center","center"], true, null, function(f){
+                tblCalif_ChangeSelectedItem (nombreTablaCalif,nombreTablaExmExt,grado,msgExm, f);
         }, function(f,c){
             $("#"+nombreTablaCalif+"_txt_f"+f+"_c1").on("change",function () { tblMatCalif_ApplyCellAttribute (nombreTablaCalif); });
         });
@@ -385,87 +390,107 @@ function initTablaCalif (nombreTablaCalif, tblCalif, nombreTablaExmExt, jsSeHi_T
             $("#lblTCalif3ro_promediogral").text(tblCalif[0].promediogral);
     }
 }
-function initTablaExmExt (nombreTablaExmExt, tblExmExt, cbxTExm_Column1, cbxTExm_Column3, cbxTExm_idccts, desmat)
-{
+function initTablaExmExt (nombreTablaExmExt, tblExmExt, cbxTExm_Column1, cbxTExm_Column3, cbxTExm_idccts, desmat, msgExm)
+{    
+    
     var tabla = new Tabla ();
-    //******** Como es probable que las tablas de exámenes extraordinarios cambien, les asignamos un id a cada renglón y las respaldamos **********\\
-
-    //-------- Les asignamos un id --------
-    for (var i=0; i<tblExmExt.length; i++)
-        tblExmExt[i].idarray = i;
-    //-------- Las respaldamos -----------
-    if (nombreTablaExmExt === "tblExmExt1ro"){        
-        jsSeHi.tblExmExt1ro_OldValues=tblExmExt;                
-        $("#lblTCalif1ro_desmat").text(desmat);
-    }
-    else if (nombreTablaExmExt === "tblExmExt2do"){
-        jsSeHi.tblExmExt2do_OldValues=tblExmExt;        
-        $("#lblTCalif2do_desmat").text(desmat);
-    }
-    else if (nombreTablaExmExt === "tblExmExt3ro"){
-        jsSeHi.tblExmExt3ro_OldValues=tblExmExt;        
-        $("#lblTCalif3ro_desmat").text(desmat);
-    }
-    /*********** Creamos la tabla ***********/
-    tabla.create(nombreTablaExmExt.replace("tbl","scrl"),nombreTablaExmExt,tblExmExt, ["dia","mes","año","cct","prom."], ["dia","mes","anio","cct","promedio"], ["textbox","combobox","textbox","combobox", "textbox"], null, true, null, null, null);
-    /*********** Insertamos el catálogo para los combos mes ***********/
-    tabla.setDataToComboboxCol (nombreTablaExmExt, 1, null, cbxTExm_Column1);  //Comentado 06-03-2025
-    /*********** Insertamos el catálogo para los combos cct ***********/
-    tabla.setDataToComboboxCol (nombreTablaExmExt, 3, cbxTExm_Column3, cbxTExm_idccts); //Comentado 06-03-2025
-    //A cada materia le seleccionamos su dato de mes y cct en su combo correspondiente
-    for (var i=0; i<tblExmExt.length; i++){              
-        $("#pnlSecHist #"+nombreTablaExmExt+"_cbx_f"+i+"_c1").val(tblExmExt[i].mes);
-        $("#pnlSecHist #"+nombreTablaExmExt+"_cbx_f"+i+"_c3").val(tblExmExt[i].idcct_apl);
-    }
+    if(typeof(tblExmExt) !== "undefined" && tblExmExt!==null) {
+        
+        /*if(typeof(msgExm) === "undefined" || msgExm===null)
+            msgExm="";*/
+        
+        if($("#"+nombreTablaExmExt).length>0)
+            $("#"+nombreTablaExmExt).remove();
+        
+        if(typeof(msgExm) !== "undefined" && msgExm!==null && msgExm.length>0){
+            $("#"+nombreTablaExmExt.replace("tbl","scrl")).append("<label id='lbl"+nombreTablaExmExt.replace("tbl","")+"'>"+msgExm+"</label>");
+        }
+        else {
+            if($("#lbl"+nombreTablaExmExt.replace("tbl","")).length>0)
+                $("#lbl"+nombreTablaExmExt.replace("tbl","")).remove();
+            alert("init tblEx: "+msgExm);
+            //******** Como es probable que las tablas de exámenes extraordinarios cambien, les asignamos un id a cada renglón y las respaldamos **********\\            
+            //-------- Les asignamos un id --------
+            for (var i=0; i<tblExmExt.length; i++)
+                tblExmExt[i].idarray = i;
+            //-------- Las respaldamos -----------
+            if (nombreTablaExmExt === "tblExmExt1ro"){        
+                jsSeHi.tblExmExt1ro_OldValues=tblExmExt;                
+                $("#lblTCalif1ro_desmat").text(desmat);
+            }
+            else if (nombreTablaExmExt === "tblExmExt2do"){
+                jsSeHi.tblExmExt2do_OldValues=tblExmExt;        
+                $("#lblTCalif2do_desmat").text(desmat);
+            }
+            else if (nombreTablaExmExt === "tblExmExt3ro"){
+                jsSeHi.tblExmExt3ro_OldValues=tblExmExt;        
+                $("#lblTCalif3ro_desmat").text(desmat);
+            }
+            /*********** Creamos la tabla ***********/            
+            tabla.create(nombreTablaExmExt.replace("tbl","scrl"),nombreTablaExmExt,tblExmExt, ["dia","mes","año","cct","prom."], ["dia","mes","anio","cct","promedio"], ["textbox","combobox","textbox","combobox", "textbox"], null, true, null, null, null);
+            /*********** Insertamos el catálogo para los combos mes ***********/
+            tabla.setDataToComboboxCol (nombreTablaExmExt, 1, null, cbxTExm_Column1);  //Comentado 06-03-2025
+            /*********** Insertamos el catálogo para los combos cct ***********/
+            tabla.setDataToComboboxCol (nombreTablaExmExt, 3, cbxTExm_Column3, cbxTExm_idccts); //Comentado 06-03-2025
+            //A cada materia le seleccionamos su dato de mes y cct en su combo correspondiente
+            for (var i=0; i<tblExmExt.length; i++){              
+                $("#pnlSecHist #"+nombreTablaExmExt+"_cbx_f"+i+"_c1").val(tblExmExt[i].mes);
+                $("#pnlSecHist #"+nombreTablaExmExt+"_cbx_f"+i+"_c3").val(tblExmExt[i].idcct_apl);
+            }
+        }
+    }    
 }
-function tblCalif_ChangeSelectedItem (nombreTablaCalif, nombreTablaExmExt, grado, index)
+function tblCalif_ChangeSelectedItem (nombreTablaCalif, nombreTablaExmExt, grado, msg, index)
 {
     var mensaje = new Mensajes();
     var tabla = new Tabla();
     var Column1 = jsSeHi.cbxTExm1ro_Column1, Column3 = jsSeHi.cbxTExm1ro_Column3, idccts = jsSeHi.cbxTExm1ro_idccts;
-    //tabla.setSelectedRow (nombreTabla, index);
-    var filaConDatos = tabla.getRow (nombreTablaCalif, index, ['cvetipmat','cvemat','desmat'], null, "JSON");
-    //------------------ Establecemos los datos a enviar -------------------
-    var datos = {
-        modulo:"SeHi", metodo:"tbCa_ChSeIt", tblAlumCapCalif_idalu:jsSeHi.tblAlumCapCalif_idalu, grado: grado, cvetipmat:filaConDatos.cvetipmat, 
-        cvemat:filaConDatos.cvemat
-    };
-    //------------------------- Hacemos la llamada -------------------------
-    cargarLoading();
-    $.ajax({url:"../sis_web/siS1",
-        type:"POST",
-        dataType:"JSON",
-        data: datos,
-        async:false                                                                                                                                        //Sí es forsoso que no sea asíncrono, para que espere a que se carguen todas las materias
-    })
-    .done(function(result){
-        switch(result.returnCase){
-            case 1:                    
-                    if(jsSeHi.cbxTExm1ro_Column1==="null" || jsSeHi.cbxTExm1ro_Column3 === null){                        
-                        Column1 = jsSeHi.cbxTExm2do_Column1;
-                        Column3 = jsSeHi.cbxTExm2do_Column3;
-                        idccts = jsSeHi.cbxTExm2do_idccts;
-                    }
-                    
-                    initTablaExmExt (nombreTablaExmExt, result.tblExmExt, Column1, Column3, idccts, filaConDatos.desmat);
-                    cerrarLoading();
-                break;
-            case 0: case -1:
-                    cerrarLoading();
-                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
-                break;
-            case -10:
-                    //e.preventDefault();
-                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
-                    btnCerrarSesion_ActionPerformed ();
-                break;
-            default:break;
-        }
-    })
-    .fail(function() {
-        mensaje.General("ERROR_AJAX", "", "");
-        cerrarLoading();
-    });
+    alert("--"+msg);
+    //tabla.setSelectedRow (nombreTabla, index);        
+/*    if(msgExm.length===0) {*/
+        var filaConDatos = tabla.getRow (nombreTablaCalif, index, ['cvetipmat','cvemat','desmat'], null, "JSON");
+        //------------------ Establecemos los datos a enviar -------------------    
+        var datos = {
+            modulo:"SeHi", metodo:"tbCa_ChSeIt", tblAlumCapCalif_idalu:jsSeHi.tblAlumCapCalif_idalu, grado: grado, cvetipmat:filaConDatos.cvetipmat, 
+            cvemat:filaConDatos.cvemat, msgExmExt: msg
+        };
+        //------------------------- Hacemos la llamada -------------------------    
+        cargarLoading();
+        $.ajax({url:"../sis_web/siS1",
+            type:"POST",
+            dataType:"JSON",
+            data: datos,
+            async:false                                                                                                                                        //Sí es forsoso que no sea asíncrono, para que espere a que se carguen todas las materias
+        })
+        .done(function(result){
+            switch(result.returnCase){
+                case 1:                    
+                        if(jsSeHi.cbxTExm1ro_Column1==="null" || jsSeHi.cbxTExm1ro_Column3 === null){                        
+                            Column1 = jsSeHi.cbxTExm2do_Column1;
+                            Column3 = jsSeHi.cbxTExm2do_Column3;
+                            idccts = jsSeHi.cbxTExm2do_idccts;
+                        }
+                        alert("change:-- "+filaConDatos.desmat);
+                        initTablaExmExt (nombreTablaExmExt, result.tblExmExt, Column1, Column3, idccts, filaConDatos.desmat, msg);
+                        cerrarLoading();
+                    break;
+                case 0: case -1:
+                        cerrarLoading();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                    break;
+                case -10:
+                        //e.preventDefault();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        btnCerrarSesion_ActionPerformed ();
+                    break;
+                default:break;
+            }
+        })
+        .fail(function() {
+            mensaje.General("ERROR_AJAX", "", "");
+            cerrarLoading();
+        });
+    /*}*/
 }
 
 function btnAnteriorAlumSH_Click()

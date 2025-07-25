@@ -80,9 +80,9 @@
         parameters.put("sqryIdalus", (idalus=request.getParameter("idalus"))==null ? "" : "AND fi.idalu IN ("+idalus+")" ); 
         
         
-        if(cicescinilib.equals("2024")){  //Agregado para prueba 2024-2025
+        /*if(cicescinilib.equals("2024")){  //Agregado para prueba 2024-2025
             r+="_p2425";            
-        }
+        }*/
         
         qryIfx = new SICEEO_QueriesInformix();
         qryIfx.conectar();

@@ -114,8 +114,8 @@ public class SICEEO_CalifSecXBim {
         else if (metodo.equals("btGeIn")) // Para ciclo 2020-2021 no se aplicará, activado para 2023-2024
             btnGenInasis_Click(dm.vstrToArrMap(r.gPV("tblAlumCapCalif"), "~", new String[]{"idalu"}), r.gP("tblAlumCapCalif_cicescini"), r.gP("tblPrincipal_idcct"), 
                     r.gP("tblPrincipal_cveplan"), r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo") );
-        else if (metodo.equals("chToMa"))
-            chkTotMat_Click (r.gP("tblAlumCapCalif_idalu"), r.gP("tblAlumCapCalif_cicescini") ) ;
+        /*else if (metodo.equals("chToMa"))
+            chkTotMat_Click (r.gP("tblAlumCapCalif_idalu"), r.gP("tblAlumCapCalif_cicescini") ) ;*/
         else if (metodo.equals("btGdCaRe")){
             /*btnGdaCalifReal_Click (r.gP("numLlamada"), dm.toInt(r.gP("tblMatCalifXBim_size")), 
                     dm.vstrToArrMap(r.gPV("tblMatCalifXBim_calif1_OldValue"), "~", new String[]{"OldValue"}), r.gP("existeCalif2"), 
@@ -670,7 +670,7 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
                 mensaje.CalifSecxBim("SICANT_NOCALC_PROM", "", "", this.dr);
             }
 
-        hacerCommit=true;
+        //hacerCommit=true; //Comentado hoy 15-07-2025
     
         //--Vista--> g_Matcalif.EnableScroll;
         if ( califCicEscIn.equals(cicescin) ) //solo para ciclo actual
@@ -688,7 +688,7 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
         
         if (!tblAlumCapCalif_changeToidalu.equals("-1"))
         {            
-            dr.put("tblMatCalifXBim",qryIfx.matCalifXBim(cbxBim_SelItem, tblAlumCapCalif_changeToidalu, califCicEscIn,tblPrincipal_cveplan));
+            dr.put("tblMatCalifXBim",qryIfx.matCalifXBim(cbxBim_SelItem, tblAlumCapCalif_changeToidalu, califCicEscIn,tblPrincipal_cveplan, tblPrincipal_grado));
             dr.put("tblInasistencias", qryIfx.inasistencias (califCicEscIn, tblPrincipal_grado, tblAlumCapCalif_changeToidalu));
             dr.put("tblComDocAlum", qryIfx.comunicacionAlumDoc(califCicEscIn, tblAlumCapCalif_changeToidalu));
         }
@@ -707,10 +707,10 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
             dr.put("tblAlumCapCalif_c_rep", tblAlumCapCalif.get("c_rep"));
             dr.put("todasSusMat", dr.get("todasSusMat"));
             dr.put("aluSolicitud",v.get("aluSolicitud"));
-            hacerCommit=true;
+            //hacerCommit=true;  //comentado hoy 15-07-2025
             mensaje.General(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);
         }else{ 
-            hacerCommit=true;
+            //hacerCommit=true; //comentado hoy 15-07-2025
             mensaje.CalifSecxBim(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);
         }
     } catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
@@ -904,7 +904,7 @@ private void btnChekMat_Click (String tblMatCalifXBim_isEmpty, String califCicEs
         //------------------------------
         //------------------------------
             QMatCalif=qryIfx.matCalif (tblAlumCapCalif_idalu, califCicEscIn);
-            tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan); //sin tomar en cuenta si lleva o no ingles
+            tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan, tblAlumCapCalif_grado); //sin tomar en cuenta si lleva o no ingles
             numFilas = QMatCalif.size();
             for (int i=0; i<numFilas; i++)
             {
@@ -930,7 +930,7 @@ private void btnChekMat_Click (String tblMatCalifXBim_isEmpty, String califCicEs
                     qryIfx.eliminarEvaluaciones (tblAlumCapCalif_idalu, califCicEscIn, ""+QMatKSobran.get(i).get("cvetipmat"), ""+QMatKSobran.get(i).get("cvemat"), ""+QMatKSobran.get(i).get("cveprograma"), "", "");
                     //    MessageDlg('Materia Eliminada!', mtInformation, [mbOK], 0);
         //*************************************************************************************************************************
-            tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan);  //false sin tomar en cuenta si lleva o no ingles
+            tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan, tblAlumCapCalif_grado);  //false sin tomar en cuenta si lleva o no ingles
             numFilas = tblMatCalifXBim.size();
             for (int i=0; i<numFilas; i++)
                 if ( !tblMatCalifXBim.get(i).get("grado").equals(tblAlumCapCalif_grado) )
@@ -938,7 +938,7 @@ private void btnChekMat_Click (String tblMatCalifXBim_isEmpty, String califCicEs
                     //  MessageDlg('Materia Eliminada!', mtInformation, [mbOK], 0);
         }
 //***************************************************************************************************************************
-        tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan);  //true para tomar en cuenta si lleva o no ingles
+        tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan, tblAlumCapCalif_grado);  //true para tomar en cuenta si lleva o no ingles
         dr.put("tblMatCalifXBim", tblMatCalifXBim);        
         //hacerCommit = true;
     } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
@@ -1011,7 +1011,7 @@ private void btnSiguienteBimestre_Click (int bim, String idalu, String tblPrinci
         Map oficYdesofic = qryIfx.oficYDesoficEnCalifEval(""+califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, idalu, "CALIFS BIM", ""+bim);
         dr.put("ofs", oficYdesofic);
         if(bim > 0)
-            tblMatCalifXBim = qryIfx.matCalifXBim (""+bim, idalu, cicescini, tblPrincipal_cveplan);// en secundarias hay k abir este qry x materia x bimestre
+            tblMatCalifXBim = qryIfx.matCalifXBim (""+bim, idalu, cicescini, tblPrincipal_cveplan, tblPrincipal_grado);// en secundarias hay k abir este qry x materia x bimestre
         
         dr.put("tblMatCalifXBim", tblMatCalifXBim);
         //tblComDocAlumn = qryIfx.comunicacionAlumDoc(""+califCicEscIn,idalu);  //qry de captura de calificaciones
@@ -1058,7 +1058,7 @@ private void btnAnteriorBimestre_Click (int bim, String tblAlumCapCalif_idalu, S
         Map oficYdesofic = qryIfx.oficYDesoficEnCalifEval(""+califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, tblAlumCapCalif_idalu, "CALIFS BIM", ""+bim);
         dr.put("ofs", oficYdesofic);
         if(bim>0)
-            tblMatCalifXBim = qryIfx.matCalifXBim (""+bim, tblAlumCapCalif_idalu, tblAlumCapCalif_cicescini, tblPrincipal_cveplan);// en secundarias hay k abir este qry x materia x bimestre
+            tblMatCalifXBim = qryIfx.matCalifXBim (""+bim, tblAlumCapCalif_idalu, tblAlumCapCalif_cicescini, tblPrincipal_cveplan, tblPrincipal_grado);// en secundarias hay k abir este qry x materia x bimestre
         /*if ((""+bim).equals("1") && tblPrincipal_cveplan.equals("1"))
             ingles = true;*/
         dr.put("tblMatCalifXBim", tblMatCalifXBim);
@@ -1112,7 +1112,7 @@ private void btnElimBim_Click (String tblPrincipal_idcct, String tblPrincipal_gr
             throw new SICEEO_Excepcion (0,"BLOQUEADO_POR_OFICIALIZACION");
         
         qryIfx.eliminaBimestre ("", califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo);
-        tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblPrincipal_cveplan);
+        tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblPrincipal_cveplan, tblPrincipal_grado);
         /*if (tblMatCalifXBim.size() == 0 && !tblPrincipal_cveplan.equals("2"))
             ingles = true;*/
         dr.put("tblMatCalifXBim", tblMatCalifXBim);
@@ -1138,7 +1138,7 @@ private void btnElimBimAlum_Click (String tblPrincipal_idcct, String tblPrincipa
             throw new SICEEO_Excepcion (0,"BLOQUEADO_POR_OFICIALIZACION");
         
         qryIfx.eliminaBimestre (tblAlumCapCalif_idalu, califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo);
-        tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblPrincipal_cveplan);
+        tblMatCalifXBim=qryIfx.matCalifXBim (bim, tblAlumCapCalif_idalu, califCicEscIn, tblPrincipal_cveplan, tblPrincipal_grado);
         /*if (tblMatCalifXBim.size() == 0 && !tblPrincipal_cveplan.equals("2"))
             ingles = true;*/
         
@@ -1168,7 +1168,7 @@ private void btnAnteriorGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual, 
             QAlumCapCalif = qryIfx.alumCapCalif("I", califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"));  //qry de captura de calificaciones
             
             if (QAlumCapCalif.size()>0)
-                tblMatCalifXBim = qryIfx.matCalifXBim(cbxBim_SelItem, ""+QAlumCapCalif.get(0).get("idalu"),califCicEscIn, ""+tblPrincipal.get(posSelActual).get("cveplan"));
+                tblMatCalifXBim = qryIfx.matCalifXBim(cbxBim_SelItem, ""+QAlumCapCalif.get(0).get("idalu"),califCicEscIn, ""+tblPrincipal.get(posSelActual).get("cveplan"), ""+QAlumCapCalif.get(0).get("grado"));
             /*if (tblMatCalifXBim.size()==0 && !(""+tblPrincipal.get(posSelActual).get("cveplan")).equals("2"))
                 ingles = true;*/
             
@@ -1208,7 +1208,7 @@ private void btnSiguienteGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual,
             Map ofs = qryIfx.oficYDesoficEnCalifEval(califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"), "", "CALIFS BIM", cbxBim_SelItem);
             QAlumCapCalif = qryIfx.alumCapCalif("I", califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"));  //qry de captura de calificaciones
             if (QAlumCapCalif.size()>0)
-                tblMatCalifXBim = qryIfx.matCalifXBim(cbxBim_SelItem, ""+QAlumCapCalif.get(0).get("idalu"), califCicEscIn, ""+tblPrincipal.get(posSelActual).get("cveplan"));
+                tblMatCalifXBim = qryIfx.matCalifXBim(cbxBim_SelItem, ""+QAlumCapCalif.get(0).get("idalu"), califCicEscIn, ""+tblPrincipal.get(posSelActual).get("cveplan"), ""+QAlumCapCalif.get(0).get("grado"));
             /*if (tblMatCalifXBim.size() == 0 && !(""+tblPrincipal.get(posSelActual).get("cveplan")).equals("2"))
             ingles = true;*/
             
@@ -1302,7 +1302,7 @@ private void FormCreate (String cicescin, String tblPrincipal_cicescini, String 
         Map ofs = qryIfx.oficYDesoficEnCalifEval(""+dr.get("califCicEscIn"), tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, idalu, "CALIFS BIM", bim);
         tblAlumCapCalif = qryIfx.alumCapCalif("I", tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo);  //qry de captura de calificaciones
         if (tblAlumCapCalif.size()>0  && !bim.equals("0")) // && && !bim.equals("0") agregado para el caso de inactivo los 3 trim
-            tblMatCalifXBim = qryIfx.matCalifXBim(bim, ""+tblAlumCapCalif.get(0).get("idalu"), tblPrincipal_cicescini, tblPrincipal_cveplan);
+            tblMatCalifXBim = qryIfx.matCalifXBim(bim, ""+tblAlumCapCalif.get(0).get("idalu"), tblPrincipal_cicescini, tblPrincipal_cveplan, tblPrincipal_grado);
         //if (tblMatCalifXBim.size() == 0 && !tblPrincipal_cveplan.equals("2"))
         /*if (!tblPrincipal_cveplan.equals("2") && bim.equals("1"))
             ingles = true;*/
@@ -1378,7 +1378,7 @@ private boolean btnAnteriorCiclo_Click (Map tblPrincipal, String tblAlumCapCalif
                 dr.put("tblAlumCapCalif", tblAlumCapCalif);                         //qry de captura de calificaciones
                 if (!tblAlumCapCalif.isEmpty())  {
                     idalu = ""+tblAlumCapCalif.get(0).get("idalu");
-                    tblMatCalifXBim=qryIfx.matCalifXBim (numeval, ""+tblAlumCapCalif.get(0).get("idalu"), ""+califCicEscIn, ""+tblPrincipal.get("cveplan"));
+                    tblMatCalifXBim=qryIfx.matCalifXBim (numeval, ""+tblAlumCapCalif.get(0).get("idalu"), ""+califCicEscIn, ""+tblPrincipal.get("cveplan"), ""+tblAlumCapCalif.get(0).get("grado"));
                     tblInasistencias=qryIfx.inasistencias (""+tblAlumCapCalif.get(0).get("cicescini"), ""+tblAlumCapCalif.get(0).get("grado"), ""+tblAlumCapCalif.get(0).get("idalu"));
                     tblComDocAlum = qryIfx.comunicacionAlumDoc(""+tblAlumCapCalif.get(0).get("cicescini"),""+tblAlumCapCalif.get(0).get("idalu"));
                 }
@@ -1421,7 +1421,7 @@ private void btnSiguienteCiclo_Click (Map tblPrincipal, String numeval, int cali
             ofs = qryIfx.oficYDesoficEnCalifEval(""+califCicEscIn, ""+tblPrincipal.get("idcct"), ""+tblPrincipal.get("grado"), ""+tblPrincipal.get("grupo"), idalu, "CALIFS BIM", numeval);
             if (!tblAlumCapCalif.isEmpty()) {
                 idalu = ""+tblAlumCapCalif.get(0).get("idalu");
-                tblMatCalifXBim = qryIfx.matCalifXBim (numeval, ""+tblAlumCapCalif.get(0).get("idalu"), ""+califCicEscIn,""+tblPrincipal.get("cveplan"));
+                tblMatCalifXBim = qryIfx.matCalifXBim (numeval, ""+tblAlumCapCalif.get(0).get("idalu"), ""+califCicEscIn,""+tblPrincipal.get("cveplan"), ""+tblAlumCapCalif.get(0).get("grado"));
                 tblInasistencias = qryIfx.inasistencias (""+tblAlumCapCalif.get(0).get("cicescini"), ""+tblAlumCapCalif.get(0).get("grado"), ""+tblAlumCapCalif.get(0).get("idalu"));
                 tblComDocAlum = qryIfx.comunicacionAlumDoc(""+tblAlumCapCalif.get(0).get("cicescini"),""+tblAlumCapCalif.get(0).get("idalu"));
             }
@@ -1476,7 +1476,7 @@ private void btnGenBim_Click (String califCicEscIn, String tblPrincipal_idcct, S
         proceso = "OBTENIENDO_tblMatCalifXBim";
         if (!idalu.equals("")) {
             oficYDesofic = qryIfx.oficYDesoficEnCalifEval (califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, idalu, "CALIFS BIM", bim);        
-            tblMatCalifXBim = qryIfx.matCalifXBim(bim, idalu, califCicEscIn,tblPrincipal_cveplan);
+            tblMatCalifXBim = qryIfx.matCalifXBim(bim, idalu, califCicEscIn,tblPrincipal_cveplan, tblPrincipal_grado);
         }
         /*if (tblPrincipal_cveplan.equals("1") && bim.equals("1"))
             ingles = true;*/
@@ -1494,7 +1494,7 @@ private void btnGenBim_Click (String califCicEscIn, String tblPrincipal_idcct, S
                 qryIfx.generaEvaluaciones (2, bim, txtUsuario, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, califCicEscIn);                
                 if (!idalu.equals("")){
                     oficYDesofic = qryIfx.oficYDesoficEnCalifEval (califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, idalu, "CALIFS BIM", bim); 
-                    tblMatCalifXBim = qryIfx.matCalifXBim(bim, idalu, califCicEscIn, tblPrincipal_cveplan);
+                    tblMatCalifXBim = qryIfx.matCalifXBim(bim, idalu, califCicEscIn, tblPrincipal_cveplan, tblPrincipal_grado);
                 }
                 /*if (tblPrincipal_cveplan.equals("1") && bim.equals("1"))
                     ingles = true;*/
@@ -1520,7 +1520,7 @@ private void tblAlumCapCalif_ChangeSelectedItem (String cbxBim_SelItem, String t
     {
         qryIfx.conectar();
         Map ofs = qryIfx.oficYDesoficEnCalifEval(""+califCicEscIn, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, tblAlumCapCalif_idalu, "CALIFS BIM", cbxBim_SelItem);
-        tblMatCalifXBim = qryIfx.matCalifXBim(cbxBim_SelItem, tblAlumCapCalif_idalu, califCicEscIn, tblPrincipal_cveplan); // en secundarias hay k abir este qry x materia x bimestre
+        tblMatCalifXBim = qryIfx.matCalifXBim(cbxBim_SelItem, tblAlumCapCalif_idalu, califCicEscIn, tblPrincipal_cveplan, tblPrincipal_grado); // en secundarias hay k abir este qry x materia x bimestre
         /*if (tblMatCalifXBim.size() == 0 && !tblPrincipal_cveplan.equals("2"))
             ingles = true;*/
         dr.put("tblMatCalifXBim",tblMatCalifXBim);

@@ -267,7 +267,7 @@ public class SICEEO_NewIngresoSec {
                     else  {                    
                         qryIfx.actualizaSusEvaluaciones(QSusMaterias, QSusEval, this.dm, ""+bim, txtUsuario);     
                         QMatCalif=qryIfx.matCalif (idalu, cicescini);
-                        tblMatCalifXBim=qryIfx.matCalifXBim (""+bim, idalu, cicescini, "2"); //sin tomar en cuenta si lleva o no ingles
+                        tblMatCalifXBim=qryIfx.matCalifXBim (""+bim, idalu, cicescini, "2", ""+tblPrincipal_grado); //sin tomar en cuenta si lleva o no ingles
                         numFilas = QMatCalif.size();
                         for (int i=0; i<numFilas; i++)
                         {
@@ -356,7 +356,7 @@ public class SICEEO_NewIngresoSec {
                 //------------------------------
                 //------------------------------
                 QMatCalif=qryIfx.matCalif (tblAlumCapCalif_idalu, califCicEscIn);
-                tblMatCalifXBim=qryIfx.matCalifXBim (""+bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan); //sin tomar en cuenta si lleva o no ingles
+                tblMatCalifXBim=qryIfx.matCalifXBim (""+bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan, tblAlumCapCalif_grado); //sin tomar en cuenta si lleva o no ingles
                 numFilas = QMatCalif.size();
                 for (int i=0; i<numFilas; i++)
                 {
@@ -382,7 +382,7 @@ public class SICEEO_NewIngresoSec {
                         qryIfx.eliminarEvaluaciones (tblAlumCapCalif_idalu, califCicEscIn, ""+QMatKSobran.get(i).get("cvetipmat"), ""+QMatKSobran.get(i).get("cvemat"), ""+QMatKSobran.get(i).get("cveprograma"), "", "");
                         //    MessageDlg('Materia Eliminada!', mtInformation, [mbOK], 0);
                 //*************************************************************************************************************************
-                tblMatCalifXBim=qryIfx.matCalifXBim (""+bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan);  //false sin tomar en cuenta si lleva o no ingles
+                tblMatCalifXBim=qryIfx.matCalifXBim (""+bim, tblAlumCapCalif_idalu, califCicEscIn, tblAlumCapCalif_cveplan, "");  //grado en vacio para saber si tiene materias que no le corresponde, se añadio grado al query para ciclo 2024-2025
                 numFilas = tblMatCalifXBim.size();
                 for (int i=0; i<numFilas; i++)
                     if ( !tblMatCalifXBim.get(i).get("grado").equals(tblAlumCapCalif_grado) )

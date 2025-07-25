@@ -134,13 +134,13 @@ function frmwCalifSecXBim_Create ()
                                                                 //+'<li><a href="#" id="btnFoliosKardex">Folios Kárdex</a></li>'
                                                                 //+'<li><a href="#" id="btnAlumnosConPromXMat">Alum. con prom. por mat.</a></li>'
                                                             +'</ul>');
-                $('#pnlGestionBim').append('<div id="pnlTotMatYDeudas"></div>');
+                /*$('#pnlGestionBim').append('<div id="pnlTotMatYDeudas"></div>');
                     $('#pnlTotMatYDeudas').append('<label id="lblTotMat"> <input id="chkTotMat" type="checkbox" name="chkTotMat" value="totMat">Total de materias</label>');
                     $('#pnlTotMatYDeudas').append('<label id="lblTblAlumCapCalif_debe1ro">...</label>');
                     $('#pnlTotMatYDeudas').append('<label id="lblTblAlumCapCalif_debe2do">...</label>');
-                $('#pnlGestionBim').append('<div id="pnlTblTotMat">  <div id="scrlTotMat" class="scrollTable"></div>  </div>');
+                $('#pnlGestionBim').append('<div id="pnlTblTotMat">  <div id="scrlTotMat" class="scrollTable"></div>  </div>');*/
     
-    object_setVisible (false,'pnlTblTotMat');
+    //object_setVisible (false,'pnlTblTotMat');
     
     //------------------------------------- DECLARACIÓN DE VENTANAS MODALES --------------------------------------------
     $("#frmfCalifSecXBim").append('<div id="mwfmRevisaGpo" class="mwfModal" style="display:none"></div>');  
@@ -297,8 +297,8 @@ function setDatosLabel (caso, cveprograma, idalu, curp, debe1ro, debe2do)
         $('#lblTblAlumCapCalif_cveprograma').text(cveprograma);
         $('#lblTblAlumCapCalif_idalu').text(idalu);
         $('#lblTblAlumCapCalif_curp').text(curp);
-        $('#lblTblAlumCapCalif_debe1ro').text(debe1ro==="null"?"0":debe1ro);
-        $('#lblTblAlumCapCalif_debe2do').text(debe2do==="null"?"0":debe2do);
+        //$('#lblTblAlumCapCalif_debe1ro').text(debe1ro==="null"?"0":debe1ro);
+        //$('#lblTblAlumCapCalif_debe2do').text(debe2do==="null"?"0":debe2do);
     } else if (caso==="MatCalifXBim"){
         var filaConDatos = tabla.getSelectedRow ("tblMatCalifXBim", ['cvemat']);
         if(filaConDatos)
