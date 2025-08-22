@@ -116,6 +116,7 @@ function frmwReportes_Create()
                         crearBotonReporte ("pnlReportes","btnR", "R", "Fin de curso", "Reporte R", "", gradoGrupo);
                         crearBotonReporte ("pnlReportes","btnRc", "Rc", "Fin de curso", "Reporte R complementaria", "", gradoGrupo);
                         crearBotonReporte ("pnlReportes","btnKardex", "KX", "Fin de Curso", "Kardex", "", gradoGrupo);  
+                        crearBotonReporte ("pnlReportes","btnCER", "CER", "Constancia de", "Regularización", "", gradoGrupo);  
                     break;
             }
         $("#frmfReportes").append('<div id="mwfmSelMesCompl" class="mwfModal" style="display:none"></div>');  
@@ -140,6 +141,7 @@ function frmwReportes_Create()
     $("#btnRELc").on("click", function(){ elegirMesCertComplem ("RELc"); });
     $("#btnR").on("click", function(){ finDeCurso ("R"); });
     $("#btnRc").on("click", function(){ elegirComplementaria ("Rc"); });
+    $("#btnCER").on("click", function(){ generarConstancias ("CER"); });        
 }
 
 function frmwReportes_FormActivate ()
@@ -173,17 +175,7 @@ function frmwReportes_FormActivate ()
                     if (!result.cbxCambioDeCiclo_setVisible)
                         $('#pnlReportes #pnlCambioDeCiclo').remove();
                     else {
-                        $("#pnlReportes #cbxCambioDeCiclo").append(result.cbxCambioDeCiclo);
-                        /*var cicescini = parseInt(jsReportes.tblPrincipal_cicescini);
-                        var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
-                        var cicescini_aux=0;
-                        if(sisVars.usuario.toUpperCase()==="IVALLE")
-                            cicescini_aux = cicescini-2;
-                        else 
-                            cicescini_aux = cicescini-1;
-                        
-                        for (var i=cicescini; i>=cicescini_aux; i--)
-                            $("#pnlReportes #cbxCambioDeCiclo").append("<option value='"+i+"'>"+i+' - '+(i+1)+"</option>");*/
+                        $("#pnlReportes #cbxCambioDeCiclo").append(result.cbxCambioDeCiclo);                        
                     }
                     
                 break;
@@ -274,6 +266,15 @@ function finDeCurso (caso)
     
     mensaje.General("REPORTE_EN_CREACION","","","");
     showReport ("frmfReportes", "Reportes/FinDeCurso.jsp", {cicescini:jsReportes.cicescini,cicescinilib:jsReportes.cicescinilib, cveplan:jsReportes.tblPrincipal_cveplan, 
+                                                            idcct:jsReportes.tblPrincipal_idcct, modalidad:jsReportes.tblPrincipal_modalidad, 
+                                                            grado:jsReportes.tblPrincipal_grado, grupo:jsReportes.tblPrincipal_grupo, caso:caso});
+}
+
+function generarConstancias(caso){
+var mensaje = new Mensajes();
+    
+    mensaje.General("REPORTE_EN_CREACION","","","");
+    showReport ("frmfReportes", "Reportes/Constancias.jsp", {cicescini:jsReportes.cicescini,cicescinilib:jsReportes.cicescinilib, cveplan:jsReportes.tblPrincipal_cveplan, 
                                                             idcct:jsReportes.tblPrincipal_idcct, modalidad:jsReportes.tblPrincipal_modalidad, 
                                                             grado:jsReportes.tblPrincipal_grado, grupo:jsReportes.tblPrincipal_grupo, caso:caso});
 }

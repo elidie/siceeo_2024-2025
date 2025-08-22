@@ -12,7 +12,8 @@
     font-size: 0.8em;
 }
 
-#pnlSecHist .buttonBar
+#pnlSecHist .buttonBar,
+#pnlExmExtraordinarios .buttonBar
 {
     font-size: 1.2em;
 }
@@ -21,6 +22,44 @@
 {
     font-size: 0.9em;
 }
+#pnlExmExtraordinarios #pnlDatosGeneralesExmExt {
+    background-color: #804000;
+    color: white;
+    font-size: 0.9em;
+    height: 18px;
+    margin: 7px 7px 15px 7px;
+}
+
+#pnlExmExtraordinarios #pnlListadoDeExmXMat
+{
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+/* ==================  CONFIRGURACION DE LABELS ===============================*/
+#pnlExmExtraordinarios #pnlDatosGeneralesExmExt label
+{
+    font-weight:bold;
+}
+
+#pnlExmExtraordinarios #lblTblExmExt_idalu
+{
+    margin-right: 2em;
+}
+#pnlExmExtraordinarios #lblTblExmExt_curp
+{
+    margin-right: 1em;
+}
+#pnlExmExtraordinarios #lblTblExmExt_cicescini
+{
+    margin-right: 3em;
+}
+
+#pnlExmExtraordinarios #scrlExmExtXMat
+{
+    height: 280px;
+}
+
 
 /* =========================================================================== */
 /* ******************** P A R A   C A D A   E L E M E N T O ****************** */
@@ -70,7 +109,8 @@
 
 
 /* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
-#pnlSecHist .buttonBar li
+#pnlSecHist .buttonBar li,
+#pnlExmExtraordinarios .buttonBar li
 {
     padding-right: 5px;
 }
@@ -96,7 +136,8 @@
     width: 93px;
 }
 
-#pnlSecHist .buttonBar li
+#pnlSecHist .buttonBar li,
+#pnlExmExtraordinarios .buttonBar li
 {
     margin-bottom: 3px;
 }

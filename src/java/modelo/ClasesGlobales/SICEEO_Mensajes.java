@@ -356,7 +356,16 @@ public class SICEEO_Mensajes {
         
         if (tipo.equals("SIN_CALC_PROM_GRAL"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No es posible calcular su promedio general.";  }
         else if (tipo.equals("ALUM_CON_CERTIFICADO"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El alumno ya tiene un certificado.";  }
-        else if (tipo.equals("ALUM_SIN_REGISTRO_EXTRA"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El alumno no tiene registro de su extraordinario.";  }
+        else if (tipo.equals("ALUM_SIN_REGISTRO_EXTRA"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El alumno no tiene registro de su(s) extraordinario(s) "+texto1+".\nPara realizar esta actualización deberá realizar primero su captura.";  }
+        else if (tipo.equals("FECHA_INVALIDA"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "La fecha ingresada no corresponde a las fechas programadas para examenes extraordinarios. Revise su calendario.";  }
+        else if (tipo.equals("MAT_SIN_REPROB"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se guardo el registro.\nEsta materia [" +texto1+"] ya cuenta con un promedio aprobatorio.";  }
+        else if (tipo.equals("EXM_EXT_SIN_APROB"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "¡No se guardo el dato!.\n\nPara una calificación REPROBATORIA no es necesario realizar la capturar.\nSolo el registro de calificaciones aprobadas.";  }
+        else if (tipo.equals("CALIF_SIN_ACTUAL"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "La calificación de la materia que intenta guardar es reprobatoria  ["+texto1+"], no es necesaria la actualización.";  }        
+        else if (tipo.equals("MAT_CALIF_SIN_CAMBIO"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El cambio de calificación para la materia con clave[" +texto1+"], no esta permitida.\nConsultelo con su UDR.";  }
+        else if (tipo.equals("SIN_MAT_X_OFIC"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El alumno no cuenta con ningún examen extraordinario del periodo por oficializar.";  }
+        else if (tipo.equals("SIN_MAT_SEL"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No seleccionó ningun registro para oficializar.";  }
+        else if (tipo.equals("SIN_COINC"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se encontraron coincidencias para oficializar.";  }
+        else if (tipo.equals("EXM_EXT_OFIC"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se eliminó el examen de la materia de clave "+texto1+", debido a que ya se encuentra oficializada.\n\nComuniquese con su UDR."; }
         
         datosReturn.put("tipoMensaje",tipoMensaje[0]);      datosReturn.put("mensaje",tipoMensaje[1]);
     }

@@ -80,6 +80,10 @@
 #pnlReportes #btnAcuseOfic .logo{  color: #3b8cd2;  }
 #pnlReportes #btnAcuseOfic .bandaInferior{  color: #3b8cd2;  }
 
+#pnlReportes #btnRepInsc{  background-color: #bda12b;  width: 120px;  }
+#pnlReportes #btnRepInsc .logo{  color: #bda12b;  }
+#pnlReportes #btnRepInsc .bandaInferior{  color: #bda12b;  }
+
 #pnlReportes #btnRepEval{  background-color: #F86924;  width: 120px;  }
 #pnlReportes #btnRepEval .logo{  color: #F86924;  }
 #pnlReportes #btnRepEval .bandaInferior{  color: #F86924;  }
@@ -124,6 +128,13 @@
 #pnlReportes #btnIAEc .logo{  color: #a01d70;  padding: 17px 8px!important; }
 #pnlReportes #btnIAEc .bandaInferior{  color: #a01d70;  }
 
+#pnlReportes #btnKardex{  background-color: #274F67;  width: 120px;  }
+#pnlReportes #btnKardex .logo{  color: #274F67;  }
+#pnlReportes #btnKardex .bandaInferior{  color: #274F67;  }
+
+#pnlReportes #btnCER{  background-color: #811B26; width: 160px; }
+#pnlReportes #btnCER .logo{  color: #811B26;  padding: 17px 8px!important; }
+#pnlReportes #btnCER .bandaInferior{  color: #811B26;  }
 
 
 

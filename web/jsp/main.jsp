@@ -133,6 +133,7 @@
                 <div id="mwfmPermisos" class="mwfModal" style="display:none"></div>
                 <div id="mwfmDesoficializar" class="mwfModal" style="display:none"></div>
                 <div id="mwfmComplementaria" class="mwfModal" style="display:none"></div>
+                <div id="mwfmExmExtraordinarios" class="mwfModal" style="display:none"></div>
                 <div id="mwfmAvisos" class="mwfModal" style="display:none"></div>
             </div>
             
