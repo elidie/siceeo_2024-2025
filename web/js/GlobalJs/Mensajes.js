@@ -15,6 +15,10 @@ function Mensajes ()
             return confirm("¿Confirma que desea eliminar "+texto1+" seleccionado?");//, "Pregunta emergente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         else if (tipo==="GUARDAR_SALIR")
             return confirm("Ha efectuado cambios en los datos ¿Desea guardarlos antes de que se cierre la ventana?");//, "Pregunta emergente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (tipo==="OFIC_EXTRAOR")
+            return confirm("Antes de dar clic en 'Aceptar' la oficialización, verifique sus datos y asegurese que esten correctos.\n"
+            + "Una vez oficializadas, el sistema ya no le permitirá realizar correcciones o desoficializar el examen.\n\n"
+            + "¿Confirma que desea oficializar los "+texto1+" seleccionados?"); 
     };
     
     this.General = function(tipo, texto1, texto2)

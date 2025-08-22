@@ -52,13 +52,10 @@
         qryIfx = new SICEEO_QueriesInformix();
         qryIfx.conectar();
         
-        /* *********************** PROCESAMIENTO DE DATOS *********************** */
+        /************************* PROCESAMIENTO DE DATOS ****************************/
         SICEEO_Reportes re = new SICEEO_Reportes(dr, request);
-        re.isCalEvalGradoGrupoOficializado (cicescini, idcct, grado, grupo, cveplan,"reporte", qryIfx );
-        if (!dr.get("returnCase").equals(1) && !caso.equals("Ra"))  // caso=Ra para reporte de avances 2023-2024
-                throw new Exception (""+dr.get("mensaje"));
-        
-        
+        /******* Verificar si existen Alumnos con Examenes Extraordinarios ***********/
+        re.isAluConExmExtOfic(parameters, cicescini, cveplan, grado, qryIfx);
         r += ""+cicescinilib+"/";
         /******** SE CREA EL DOCUMENTO PDF Y SE LE INSERTAN LOS DATOS **************/        
         

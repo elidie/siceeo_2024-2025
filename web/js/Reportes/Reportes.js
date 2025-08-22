@@ -116,7 +116,7 @@ function frmwReportes_Create()
                         crearBotonReporte ("pnlReportes","btnR", "R", "Fin de curso", "Reporte R", "", gradoGrupo);
                         crearBotonReporte ("pnlReportes","btnRc", "Rc", "Fin de curso", "Reporte R complementaria", "", gradoGrupo);
                         crearBotonReporte ("pnlReportes","btnKardex", "KX", "Fin de Curso", "Kardex", "", gradoGrupo);  
-                        crearBotonReporte ("pnlReportes","btnCER", "CER", "Constancia de", "Regularización", "", gradoGrupo);  
+                        /*crearBotonReporte ("pnlReportes","btnCER", "CER", "Constancia de", "Regularización", "", gradoGrupo);  */
                     break;
             }
         $("#frmfReportes").append('<div id="mwfmSelMesCompl" class="mwfModal" style="display:none"></div>');  
@@ -141,7 +141,7 @@ function frmwReportes_Create()
     $("#btnRELc").on("click", function(){ elegirMesCertComplem ("RELc"); });
     $("#btnR").on("click", function(){ finDeCurso ("R"); });
     $("#btnRc").on("click", function(){ elegirComplementaria ("Rc"); });
-    $("#btnCER").on("click", function(){ generarConstancias ("CER"); });        
+    /*$("#btnCER").on("click", function(){ generarConstancias ("CER"); });        */
 }
 
 function frmwReportes_FormActivate ()

@@ -554,4 +554,20 @@ public class SICEEO_DataModule
         
         return jsonObj;
     }
+    public String convertirPromedioALetra (String promedioNum)
+    {
+        String numeros [] = {"CERO","UNO","DOS","TRES","CUATRO","CINCO","SEIS","SIETE","OCHO","NUEVE"};
+        String promLetra = "";
+        if (promedioNum.equals("10"))
+            promLetra = "DIEZ";
+        else if (promedioNum.toUpperCase().equals("A"))
+            promLetra = "ACREDITADO";
+        else if (promedioNum.length() == 3)                                      //Tiene formato N.N
+            promLetra = numeros [Integer.parseInt(promedioNum.substring(0, 1))] + " PUNTO " + numeros [Integer.parseInt(promedioNum.substring(2, 3))];
+        else if (promedioNum.length() == 2)                                 //Tiene formato NN
+            promLetra = numeros [Integer.parseInt(promedioNum.substring(0, 1))] + " PUNTO " + numeros [Integer.parseInt(promedioNum.substring(1, 2))];
+        else if (promedioNum.length() == 1)                                 //Tiene formato N
+            promLetra = numeros [Integer.parseInt(promedioNum)];
+        return promLetra;
+    }
 }

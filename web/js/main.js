@@ -102,7 +102,7 @@ function initInformacion ()
     $('#lblUnidad').text(sisVars.unidad);
     $('#lblIp').text(sisVars.ip);
     $('#lblFecha').text(sisVars.fecha);
-    if ( $('#lblVersionSis').html().trim().indexOf(sisVars.versionSis) === -1  || sisVars.versionSis!=="15.7.5") {
+    if ( $('#lblVersionSis').html().trim().indexOf(sisVars.versionSis) === -1  || sisVars.versionSis!=="15.7.6") {
         $("#lblVersionSis").css("color","red");
         mensaje.Principal("VERSION_NO_ACTUALIZADA",sisVars.versionSis);
     } else {

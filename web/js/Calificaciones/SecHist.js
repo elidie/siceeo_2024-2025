@@ -1471,19 +1471,20 @@ function btnOficExmExt_Click()
     var tabla = new Tabla();
     var reglon="";
     
-    var tblExmExtXMat = tabla.getTable("tblExmExtXMat",["selec","idalu","grado","cvemat","cvetipmat","cicescini","idperexmext"], null,"JSON");
+    var tblExmExtXMat = tabla.getTable("tblExmExtXMat",["selec","idalu","grado","cvemat","cvetipmat","desmat","cicescini","promedio","idperexmext"], null,"JSON");
     for (var i=0; i<tblExmExtXMat.length; i++)
         if (tblExmExtXMat[i].selec === "true") {
             reglon += (reglon===""?"":", ") + tblExmExtXMat[i].idalu+"~"+tblExmExtXMat[i].grado+"~"+tblExmExtXMat[i].cvetipmat;
-            reglon += "~"+tblExmExtXMat[i].cvemat+"~"+tblExmExtXMat[i].cicescini+"~"+tblExmExtXMat[i].idperexmext;  
+            reglon += "~"+tblExmExtXMat[i].cvemat+"~"+tblExmExtXMat[i].desmat+"~"+tblExmExtXMat[i].cicescini+"~"+tblExmExtXMat[i].promedio+"~"+tblExmExtXMat[i].idperexmext;  
         }
     if (reglon === "")
         mensaje.General("ESPECIFIQUE_DATO","por lo menos un registro para la oficialización");
-    else {
+    else if ( mensaje.confirmDialog("OFIC_EXTRAOR","examenes extraordinarios") ){
+        var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
         //------------------ Establecemos los datos a enviar -------------------
         var datos = {
             modulo:"SeHi", metodo:"btOfExmExt_cl", 
-            matsel:reglon, tblExmExtXMat: tblExmExtXMat
+            matsel:reglon, tblExmExtXMat: tblExmExtXMat, txtUsuario:sisVars.usuario
         };
         //------------------------- Hacemos la llamada -------------------------
         cargarLoading();

@@ -6454,17 +6454,23 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         return qryToArrlmap(rs, null, true, 2);
     }        
     
-    public void oficExmExtXMat (String idalu,String grado,String cvetipmat,String cvemat,String cicescini,String idperexmext ) 
-            throws SQLException, SICEEO_Excepcion {
+    public void oficExmExtXMat (String idalu,String grado,String cvetipmat,String cvemat,String desmat,String cicescini,String idperexmext, String promedioLetra, String usuario ) 
+            throws SQLException, SICEEO_Excepcion {        
         rs = stm.executeQuery("SELECT count(*) as num FROM exm_ext_ordi "            
             + "WHERE idalu ="+idalu+" AND grado="+grado+" AND cvemat='"+cvemat+"' AND cvetipmat='"+cvetipmat+"' "
             + " AND cicescini="+cicescini+" AND idperexmext="+idperexmext + " AND oficializado='f' ");
             
         if(rs.next() && rs.getInt("num")==1)            
+            
             stm.execute("UPDATE exm_ext_ordi SET "
-                + "oficializado = 't' "
+                + "oficializado = 't', "
+                + "desmat = '"+desmat+"', "
+                + "promedioLetra='"+promedioLetra+"', "
+                + "usuario = '"+usuario+"', "
+                + "fecha = date(current), "
+                + "hora = extend(current, hour to minute) "
                 + "WHERE idalu ="+idalu+" AND grado="+grado+" AND cvemat='"+cvemat+"' AND cvetipmat='"+cvetipmat+"' "
-                + " AND cicescini="+cicescini+" AND idperexmext="+idperexmext);
+                + "AND cicescini="+cicescini+" AND idperexmext="+idperexmext);
         else
             throw new SICEEO_Excepcion(0,"SIN_COINC");
     }

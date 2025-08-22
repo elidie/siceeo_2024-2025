@@ -272,6 +272,45 @@ public class SICEEO_Reportes {
         }finally { try { if (qryIfx2 == null) qryIfx.cerrarConexion();} catch (SQLException ex) { } }
     }
     
+    public void isAluConExmExtOfic (Map parameters, String cicescini, String cveplan, String grado, SICEEO_QueriesInformix qryIfx2) throws SQLException
+    {
+        ArrayList<Map> paqueteDeMaterias;
+        int numMats, i, numObjsEnReporte=10;         //tenia 9                 //Ojo: Verificar el número en numObjsEnReporte, ya que es la cantidad de objetos estáticos en el reporte
+        String subquery="";
+        
+        try{
+            if (qryIfx2 == null)
+                qryIfx.conectar();
+            else
+                qryIfx = qryIfx2;
+            paqueteDeMaterias = qryIfx.getPaqueteDeMateriasDeCiclo (cicescini, "", cveplan, grado);
+
+            numMats = paqueteDeMaterias.size();
+
+            for (i=0; i<numMats; i++)
+            {   
+                parameters.put("nombreMat"+(i+1), ""+paqueteDeMaterias.get(i).get("desmat"));
+                
+                subquery += "( SELECT (case when califant>0.0 then califant else promedio end) FROM alumnomaterias WHERE idalu=a.idalu AND cicescini=g.cicescini AND cveplan=g.cveplan AND grado=g.grado AND "
+                            + "cvetipmat='"+paqueteDeMaterias.get(i).get("cvetipmat")+"'";
+                if ("CBA, LEX, FA, DPS, CF1, CF2, CF3, CF4".contains(""+paqueteDeMaterias.get(i).get("cvetipmat")))
+                    subquery += " AND cvemat='"+paqueteDeMaterias.get(i).get("cvemat")+"'";
+
+                subquery += " ) AS prommat"+(i+1);
+                subquery += (i < numMats-1)?", ":" ";
+            }
+
+            //Si las materias no fueron el total especificados en numObjsEnReporte, entonces terminamos de rellenar
+            if (i < numObjsEnReporte)
+                for (;i<numObjsEnReporte; i++){
+                    parameters.put("nombreMat"+(i+1), "mat"+(i+1));
+                    subquery += ", -1 AS prommat"+(i+1);
+                }
+
+            parameters.put("sqryMaterias", subquery);
+        }finally { try { if (qryIfx2 == null) qryIfx.cerrarConexion();} catch (SQLException ex) { } }
+    }
+    
     public void selMesCompl (String tblPrincipal_cicescini, String tblPrincipal_idcct, String tblPrincipal_grado, String tblPrincipal_grupo, String mes, 
             String idalusPorAgregar, String idalusPorFiltrar, SICEEO_QueriesInformix qryIfx2)
     {

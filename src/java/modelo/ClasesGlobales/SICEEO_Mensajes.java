@@ -366,6 +366,7 @@ public class SICEEO_Mensajes {
         else if (tipo.equals("SIN_MAT_SEL"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No seleccionó ningun registro para oficializar.";  }
         else if (tipo.equals("SIN_COINC"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se encontraron coincidencias para oficializar.";  }
         else if (tipo.equals("EXM_EXT_OFIC"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se eliminó el examen de la materia de clave "+texto1+", debido a que ya se encuentra oficializada.\n\nComuniquese con su UDR."; }
+        else if (tipo.equals("DATOS_INCOMP"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se pudo realizar el proceso debido a que la captura fue realizada antes de la fechas establecidas.\n\nComuniquese con su UDR."; }
         
         datosReturn.put("tipoMensaje",tipoMensaje[0]);      datosReturn.put("mensaje",tipoMensaje[1]);
     }
