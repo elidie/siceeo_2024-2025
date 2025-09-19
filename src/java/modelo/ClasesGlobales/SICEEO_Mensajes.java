@@ -354,7 +354,7 @@ public class SICEEO_Mensajes {
     {
         String [] tipoMensaje = {"",""};
         
-        if (tipo.equals("SIN_CALC_PROM_GRAL"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No es posible calcular su promedio general.";  }
+        if (tipo.equals("SIN_CALC_PROM_GRAL"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No es posible calcular su promedio general del nivel.\n\nEste se calculará al momento en que se oficialicen las calificaciones de los examenes de regularización.";  }
         else if (tipo.equals("ALUM_CON_CERTIFICADO"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El alumno ya tiene un certificado.";  }
         else if (tipo.equals("ALUM_SIN_REGISTRO_EXTRA"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El alumno no tiene registro de su(s) extraordinario(s) "+texto1+".\nPara realizar esta actualización deberá realizar primero su captura.";  }
         else if (tipo.equals("FECHA_INVALIDA"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "La fecha ingresada no corresponde a las fechas programadas para examenes extraordinarios. Revise su calendario.";  }
@@ -367,6 +367,12 @@ public class SICEEO_Mensajes {
         else if (tipo.equals("SIN_COINC"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se encontraron coincidencias para oficializar.";  }
         else if (tipo.equals("EXM_EXT_OFIC"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se eliminó el examen de la materia de clave "+texto1+", debido a que ya se encuentra oficializada.\n\nComuniquese con su UDR."; }
         else if (tipo.equals("DATOS_INCOMP"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se pudo realizar el proceso debido a que la captura fue realizada antes de la fechas establecidas.\n\nComuniquese con su UDR."; }
+        else if (tipo.equals("REG_DUPLICADO"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Existe ya un registro con los mismos datos principales, debe eliminarlo para poder insertar nuevamente."; }
+        else if (tipo.equals("CALIF_DIF"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "El promedio que esta ingresando de la materia con claves "+texto1+" no corresponde con el que reporto en el examen extraordinario.\n\nIngrese la calificación correcta."; }
+        else if (tipo.equals("EXM_EXT_SIN_OF"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "La actualización del promedio de nivel no se realizó.\nExisten calif. de examenes de regularización sin oficializar.\n\nDebe realizar la oficialización para poder calcular el promedio de nivel."; }
+        else if (tipo.equals("EXISTEN_REP"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No es posible realizar esta actualización, el alumno tiene materias reprobadas en: "+texto1+"\n\nDeberá realizar el proceso correspondiente para sus examenes de regularización."; }
+        else if (tipo.equals("MAT_OF_OK"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "¡No se guardo el dato!. El registro del examen ya se encuentra oficializado.\n\nConsulte con la UDR correspondiente.";  }
+        else if (tipo.equals("EXM_EXT_CORR_REP"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Calificaciones reprobatorias no estan permitidas. En este caso si la calificación correcta es reprobatoria deberá eliminar el registro de su examen de Regularización.";  }
         
         datosReturn.put("tipoMensaje",tipoMensaje[0]);      datosReturn.put("mensaje",tipoMensaje[1]);
     }

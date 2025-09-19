@@ -80,7 +80,7 @@ public class SICEEO_Reportes {
             dr.put ("cbxCambioDeCiclo_setVisible", this.tienePrivilegios);
             QCiclo = qryIfx.Ciclo();
             cicescini_aux = Integer.parseInt(""+QCiclo.get("cicescini"));
-            if(usuario.equals("IVALLE") || usuario.equals("ELYLOPEZ") || usuario.equals("POBLETEVL") || usuario.equals("FLALUISSA")
+            if(usuario.equals("IVALLE") || usuario.equals("ELYLOPEZ") || usuario.equals("POBLETEVL") || usuario.equals("VICTORPS")
                     || usuario.equals("MRAMIREZ") || usuario.equals("HZAVALA"))
                 cicescini_aux -= 7;
             if(usuario.equals("DCEPUERTO"))

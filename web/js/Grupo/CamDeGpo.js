@@ -70,7 +70,7 @@ function frmwCamDeGpo_Create()
                                                         '<li id="libtnInscrito"><a href="#" id="btnInscrito">Camb Inscrito</a></li>'+                                                        
                                                         //'<li id="libtnCorrecciones"><a href="#" id="btnCorrecciones">Correcciones</a></li>'+
                                                         '<li id="libtnCamDGpo"><a href="#" id="btnCamDGpo">Guardar cambios</a></li>'+
-                                                        '<li id="libtnEliminarAlu" title="Elimina de la Base de Datos al alumno seleccionado"><a href="#" id="btnEliminarAlu">Eliminar</a></li>'+
+                                                        //'<li id="libtnEliminarAlu" title="Elimina de la Base de Datos al alumno seleccionado"><a href="#" id="btnEliminarAlu">Eliminar</a></li>'+
                                                     '</ul>');
                     
                     $('#pnlBotonesDecontrol').append('<ul class="buttonBar">'+

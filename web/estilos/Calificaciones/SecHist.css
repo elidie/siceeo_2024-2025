@@ -133,15 +133,27 @@
 }
 #pnlSecHist #btnActualizaReprobadas
 {
-    width: 93px;
+    width: 130px;
 }
 
+#pnlSecHist #btnActualizaPromNivel
+{
+    width: 110px;
+}
 #pnlSecHist .buttonBar li,
 #pnlExmExtraordinarios .buttonBar li
 {
     margin-bottom: 3px;
 }
 
+.btnDisabled {
+    pointer-events:none; 
+    opacity:0.4;     
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;     
+}
 /* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
 #pnlSecHist #tblExmExt1ro select, #pnlSecHist #tblExmExt2do select, #pnlSecHist #tblExmExt3ro select
 {

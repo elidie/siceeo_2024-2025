@@ -33,7 +33,7 @@ function inicioDeMain ()
 }
 
 function initEventsMain()
-{
+{        
     $("#txtBusquedaCCT").bind("keydown", function(e){ if(e.which === 13)  btnBusquedaCCT_Click (e); });
     $("#btnBusquedaCCT").bind("keydown", function(e){ if(e.which === 13)  btnBusquedaCCT_Click (e); });
     // Eventos de la barra de navegación  (---MOUSE----)
@@ -97,12 +97,13 @@ function initInformacion ()
 {
     var mensaje = new Mensajes();
     var sisVars = JSON.parse( sessionStorage.getItem("sistemVars"));
+    $('#lblCalendario').text('de actividades de Control Escolar ciclo '+sisVars.cicescini+'-'+(parseInt(sisVars.cicescini)+1)+".");
     $('#lblCicloActivo').text(sisVars.cicescini+' - '+(parseInt(sisVars.cicescini)+1));
     $('#lblUsuario').text(sisVars.usuario.toUpperCase());
     $('#lblUnidad').text(sisVars.unidad);
     $('#lblIp').text(sisVars.ip);
     $('#lblFecha').text(sisVars.fecha);
-    if ( $('#lblVersionSis').html().trim().indexOf(sisVars.versionSis) === -1  || sisVars.versionSis!=="15.7.6") {
+    if ( $('#lblVersionSis').html().trim().indexOf(sisVars.versionSis) === -1  || sisVars.versionSis!=="15.8.5") {
         $("#lblVersionSis").css("color","red");
         mensaje.Principal("VERSION_NO_ACTUALIZADA",sisVars.versionSis);
     } else {
@@ -610,6 +611,8 @@ function btnCalendarioProcesos_Click ()
     var mensaje = new Mensajes();
     var tabla = new Tabla();
     var nombreArchivo=""; 
+    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars"));
+    
     
     if($('#tblPrincipal').length){ // Verificando si la tabla ya existe
         var tblPrincipal_selRow = tabla.getRow("tblPrincipal",0,["cveplan"], null, "JSON");
@@ -619,7 +622,8 @@ function btnCalendarioProcesos_Click ()
             case '2': nombreArchivo="Sec"; break;
             case '3': nombreArchivo="Pree"; break;
         }
-        window.open('http://ieepoplaneacionedu.info/descargas/siceeo/calendarioProcesos/CalendarioProcesos2024-2025.pdf');
+        var NomCalendario = 'CalendarioProcesos'+sisVars.cicescini+'-'+(parseInt(sisVars.cicescini)+1);
+        window.open('http://ieepoplaneacionedu.info/descargas/siceeo/calendarioProcesos/'+NomCalendario+'.pdf');
     }else // La tabla no existe
         mensaje.Principal("SN_BUSQ", "");           
 }

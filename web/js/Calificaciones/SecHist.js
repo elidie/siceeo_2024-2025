@@ -87,7 +87,7 @@ function frmwSecHist_Close()
 }
 
 function frmwSecHist_Create() 
-{
+{    
     if($('#frmfSecHist').length)                                                // Verificando si la tabla Existe
         $('#frmfSecHist').remove();
     $('#frmwSecHist').append('<fieldset id="frmfSecHist"><legend>Exámenes extraordinarios</legend><div id="btnRegresar_SH" class="divBtnRegresar" title="Regresar a la ventana anterior" tabindex="90"><label id="ibtnRegresar" class="icon-regresar"></label></div> </fieldset>');
@@ -127,8 +127,7 @@ function frmwSecHist_Create()
                                                     + '<label class="colorDeResalte">Debe en 1ro: </label><label id="lblTCalif1ro_matrepact"></label>'
                                                     + '<ul id="ubtnGuardaYCalif1ro" class="buttonBar"> '
                                                         + '<li><a href="#" id="btnGdaCalif1ro" class="tam1Button" tabindex="201" title="Guardar"><label class="iconBtnGuardar icon-disquete"></label>Guardar</a></li>'
-                                                        + '<li><a href="#" id="btnCalifDBim1ro" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>'
-                                                        + '<li><a href="#" id="btnOfExmExt1ro" tabindex="203" title="Oficialización de examenes extraordinarios" class="icon-sello">Oficializar Exm.Ext. 1ro</a></li>'
+                                                        /*+ '<li><a href="#" id="btnCalifDBim1ro" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>'*/                                                        
                                                     + '</ul> '
                                                 +'</div>');
                 $('#pnlExamExtraord1ro').append('<div id="pnlExamenes1ro" class="panel"><label class="tituloPanel">Exámenes por materia</label></div>');
@@ -139,8 +138,7 @@ function frmwSecHist_Create()
                     $("#pnlExamenes1ro").append('<div id="pnlBotonGuardaExm1ro">'
                                                     + '<ul id="ubtnGuardaOport1ro" class="buttonBar"> '
                                                         + '<li><a href="#" id="btnInserFila1ro"  class="tam2Button" tabindex="202" title="Inserta un renglón en blanco al final de la lista para que ingrese sus datos de examen."><label class="iconBtnMas iconBtnRedondo  middleHoriz icon-plus"></label>Insertar renglón</a></li>'
-                                                        + '<li><a href="#" id="btnQuitarFila1ro"  class="tam2Button" tabindex="202" title="Elimina el renglón seleccionado en la lista."><label class="iconBtnMenos iconBtnRedondo  middleHoriz icon-minus"></label>Quitar renglón</a></li>'
-                                                      //+ '<li><a href="#" id="btnGuardaOpotunidad1ro"  class="tam1Button" tabindex="202" title="Guardar"><label class="iconBtnGuardar  middleHoriz icon-disquete"></label>Guardar</a></li>'
+                                                        + '<li><a href="#" id="btnQuitarFila1ro"  class="tam2Button" tabindex="202" title="Elimina el renglón seleccionado en la lista."><label class="iconBtnMenos iconBtnRedondo  middleHoriz icon-minus"></label>Quitar renglón</a></li>'                                                      
                                                         + '<li><a href="#" id="btnGuardaOpotunidad1ro"  class="tam1Button" tabindex="202" title="Guardar"><label class="iconBtnGuardar middleHoriz icon-disquete"></label>Guardar</a></li>'
                                                     +'</ul> '
                                                 +'</div>');
@@ -165,10 +163,9 @@ function frmwSecHist_Create()
                     $("#pnlCalifsFinales2do").append('<div id="pnlBotones2doGuardaYCalif">'
                                                     +'<div><label class="colorDeResalte">Debe en 2do: </label><label id="lblTCalif2do_matrepact"></label></div>'
                                                     +'<div><label class="colorDeResalte">Debe en grado anterior: </label><label id="lblTCalif2do_matrepant"></label></div>'
-                                                    + '<ul id="ubtnGuardaYCalif2do" class="buttonBar"> '
+                                                    +'<ul id="ubtnGuardaYCalif2do" class="buttonBar"> '
                                                         + '<li><a href="#" id="btnGdaCalif2do"  class="tam1Button" tabindex="201" title="Guardar"><label class="iconBtnGuardar icon-disquete"></label>Guardar</a></li>'
-                                                        + '<li><a href="#" id="btnCalifDBim2do" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>'
-                                                        + '<li><a href="#" id="btnOfExmExt2do" tabindex="203" title="Oficialización de examenes extraordinarios" class="icon-sello">Oficializar Exm.Ext. 2do</a></li>'
+                                                        /*+ '<li><a href="#" id="btnCalifDBim2do" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>'*/                                                        
                                                     +'</ul> '
                                                 +'</div>');
                 $('#pnlExamExtraord2do').append('<div id="pnlExamenes2do" class="panel"><label class="tituloPanel">Exámenes por materia</label></div>');
@@ -207,13 +204,12 @@ function frmwSecHist_Create()
                                                         +'<div><label class="colorDeResalte">Debe en 3ro: </label><label id="lblTCalif3ro_matrepact"></label></div>'
                                                         +'<div><label class="colorDeResalte">Debe en grados anteriores: </label><label id="lblTCalif3ro_matrepant"></label></div>'
                                                     +'</div>'
-                                                    + '<ul class="buttonBar alinearHoriz"> '
-                                                        + '<li><a href="#" id="btnActualizaReprobadas"  tabindex="201" title="Actualizar"><label class="iconBtnSincronizar iconBtnRedondo  middleHoriz icon-plus"></label>Actualizar</a></li>'
+                                                    + '<ul id="ubtnGuardaPromNivel" class="buttonBar alinearHoriz"> '                                                        
+                                                        + '<li><a href="#" id="btnActualizaReprobadas"  tabindex="201" title="Actualizar numero de materias reprobadas grados anteriores."><label class="iconBtnSincronizar iconBtnRedondo  middleHoriz "></label>Actualizar reprobadas</a></li>'
                                                     +'</ul> '
                                                     + '<ul id="ubtnGuardaYCalif3ro" class="buttonBar"> '
                                                         + '<li><a href="#" id="btnGdaCalif3ro"  class="tam1Button" tabindex="201" title="Guardar"><label class="iconBtnGuardar icon-disquete"></label>Guardar</a></li>'
-                                                        + '<li><a href="#" id="btnCalifDBim3ro" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>'
-                                                        + '<li><a href="#" id="btnOfExmExt3ro" tabindex="203" title="Oficialización de examenes extraordinarios" class="icon-sello">Oficializar Exm.Ext. 3ro</a></li>'
+                                                        /*+ '<li><a href="#" id="btnCalifDBim3ro" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>'*/                                                        
                                                     +'</ul> '
                                                 +'</div>');
                 $('#pnlExamExtraord3ro').append('<div id="pnlExamenes3ro" class="panel"><label class="tituloPanel">Exámenes por materia</label></div>');
@@ -228,7 +224,7 @@ function frmwSecHist_Create()
                                                         + '<li><a href="#" id="btnGuardaOpotunidad3ro"  class="tam1Button" tabindex="202" title="Guardar"><label class="iconBtnGuardar middleHoriz icon-disquete"></label>Guardar</a></li>'
                                                     +'</ul> '
                                                 +'</div>');
-    
+    insertarBotonOficial();
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------
     $("#btnRegresar_SH").on("click",function(){ frmwSecHist_Close(); return false; });
     $("#btnAnteriorAlum").on("click",function(){ btnAnteriorAlumSH_Click(); return false; });
@@ -249,12 +245,26 @@ function frmwSecHist_Create()
     $("#btnOfExmExt2do").on("click",function(){ mwfExmExtraordinarios_Show(2); return false; });    
     
     $("#btnActualizaReprobadas").on("click",function(){ btnActualizaReprobadas_Click(); return false; });
+    $("#btnActualizaPromNivel").on("click",function(){ btnActualizaPromNivel_Click(); return false; });
     $("#btnGdaCalif3ro").on("click",function(){ btnGdaCalif3ro_Click(); return false; });
     $("#btnCalifDBim3ro").on("click",function(){ btnCalifDBim3ro_Click(); return false; });
     $("#btnInserFila3ro").on("click",function(){ btnInserFila3ro_Click(); return false; });
     $("#btnQuitarFila3ro").on("click",function(){ btnQuitarFila3ro_Click(); return false; });
     $("#btnGuardaOpotunidad3ro").on("click",function(){ btnGuardaExamExt3ro_Click(); return false; });
     $("#btnOfExmExt3ro").on("click",function(){ mwfExmExtraordinarios_Show(3); return false; });    
+}
+
+function insertarBotonOficial()
+{
+    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
+    if(sisVars.btnOfExmExt1ro){
+        $("#ubtnGuardaYCalif1ro").append(sisVars.btnOfExmExt1ro);
+        $("#ubtnGuardaYCalif2do").append(sisVars.btnOfExmExt2do);
+        $("#ubtnGuardaYCalif3ro").append(sisVars.btnOfExmExt3ro);
+    } 
+    
+    if(sisVars.btnActualizaPromNivel)
+        $("#ubtnGuardaPromNivel").append(sisVars.btnActualizaPromNivel);
 }
 
 function frmwSecHist_FormActivate() 
@@ -315,11 +325,15 @@ function frmwSecHist_FormActivate()
                         jsSeHi.cbxTExm1ro_idccts=result.cbxTExm1ro_idccts;
                         jsSeHi.tblCalif1ro_editable = result.tblCalif1ro_editable;
                         //object_setVisible(result.pnlExamenes1ro_visible,"pnlExamenes1ro");                                                
+                        
                         initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, result.tblCalif1ro_editable, result.msgExm1ro);
-                        initTablaExmExt ("tblExmExt1ro", result.tblExmExt1ro, result.cbxTExm1ro_Column1, result.cbxTExm1ro_Column3, result.cbxTExm1ro_idccts, result.desmat1ro, result.msgExm1ro);
+                        var exmExtOf1 = result.exmExtOf1;
+                        if(parseFloat(""+result.tblCalif1ro[0].promedio)>=6.0 && parseFloat(""+result.tblCalif1ro[0].califant)===0.0)
+                             exmExtOf1 = true;
+                        initTablaExmExt ("tblExmExt1ro", result.tblExmExt1ro, result.cbxTExm1ro_Column1, result.cbxTExm1ro_Column3, result.cbxTExm1ro_idccts, result.desmat1ro, result.msgExm1ro, exmExtOf1, result.tblCalif1ro[0].promedio);                        
                     }
 
-                    if (result.tblCalif2do.length > 0){
+                    if (result.tblCalif2do.length > 0) {
                         $("#lblTCalif2do_grupo").text(result.tblCalif2do[0].grupo);
                         $("#lblTCalif2do_cicescini").text(result.tblCalif2do[0].cicescini);
                         $("#lblTCalif2do_deleg").text(result.tblCalif2do[0].deleg);
@@ -337,8 +351,13 @@ function frmwSecHist_FormActivate()
                         jsSeHi.cbxTExm2do_idccts=result.cbxTExm2do_idccts;                        
                         jsSeHi.tblCalif2do_matrepact = result.tblCalif2do[0].matrepact;
                         jsSeHi.tblCalif2do_editable = result.tblCalif2do_editable;
+                        
                         initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, result.tblCalif2do_editable,result.msgExm2do);
-                        initTablaExmExt ("tblExmExt2do", result.tblExmExt2do, result.cbxTExm2do_Column1, result.cbxTExm2do_Column3, result.cbxTExm2do_idccts, result.desmat2do, result.msgExm2do);
+                        var exmExtOf2 = result.exmExtOf2;
+                        if(parseFloat(""+result.tblCalif2do[0].promedio)>=6.0 && parseFloat(""+result.tblCalif2do[0].califant)===0.0)
+                             exmExtOf2 = true;
+                        initTablaExmExt ("tblExmExt2do", result.tblExmExt2do, result.cbxTExm2do_Column1, result.cbxTExm2do_Column3, result.cbxTExm2do_idccts, result.desmat2do, result.msgExm2do, exmExtOf2, result.tblCalif2do[0].promedio);
+                        
                     }
                 
                     if (result.tblCalif3ro.length > 0){
@@ -360,8 +379,13 @@ function frmwSecHist_FormActivate()
                         jsSeHi.cbxTExm3ro_idccts=result.cbxTExm3ro_idccts;                        
                         jsSeHi.tblCalif3ro_matrepact = result.tblCalif3ro[0].matrepact;
                         jsSeHi.tblCalif3ro_editable = result.tblCalif3ro_editable;
+                        
                         initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, result.tblCalif3ro_editable, result.msgExm3ro);
-                        initTablaExmExt ("tblExmExt3ro", result.tblExmExt3ro, result.cbxTExm3ro_Column1, result.cbxTExm3ro_Column3, result.cbxTExm3ro_idccts, result.desmat3ro, result.msgExm3ro);
+                        var exmExtOf3 = result.exmExtOf3;
+                        if(parseFloat(""+result.tblCalif3ro[0].promedio)>=6.0 && parseFloat(""+result.tblCalif3ro[0].califant)===0.0)
+                             exmExtOf3 = true;
+                        initTablaExmExt ("tblExmExt3ro", result.tblExmExt3ro, result.cbxTExm3ro_Column1, result.cbxTExm3ro_Column3, result.cbxTExm3ro_idccts, result.desmat3ro, result.msgExm3ro, exmExtOf3, result.tblCalif3ro[0].promedio);
+                        
                     }                                                                                                                                                                                 
                     cerrarLoading();
                 break;
@@ -407,21 +431,20 @@ function initTablaCalif (nombreTablaCalif, tblCalif, nombreTablaExmExt, jsSeHi_T
             $("#lblTCalif3ro_promediogral").text(tblCalif[0].promediogral);
     }
 }
-function initTablaExmExt (nombreTablaExmExt, tblExmExt, cbxTExm_Column1, cbxTExm_Column3, cbxTExm_idccts, desmat, msgExm)
-{    
-    
+function initTablaExmExt (nombreTablaExmExt, tblExmExt, cbxTExm_Column1, cbxTExm_Column3, cbxTExm_idccts, desmat, msgExm, exmExtOf, promedio)
+{
     var tabla = new Tabla ();
     if(typeof(tblExmExt) !== "undefined" && tblExmExt!==null) {
-        
         if($("#"+nombreTablaExmExt).length>0)
             $("#"+nombreTablaExmExt).remove();
-        
-        
-        if(typeof(msgExm) !== "undefined" && msgExm!==null && msgExm.length>0){
+                
+        if(typeof(msgExm) !== "undefined" && msgExm!==null && msgExm.length>0){            
             $("#lbl"+nombreTablaExmExt.replace("tbl","")).remove();
             $("#"+nombreTablaExmExt.replace("tbl","scrl")).append("<label id='lbl"+nombreTablaExmExt.replace("tbl","")+"'>"+msgExm+"</label>");
+            habDesBtnExmExt(nombreTablaExmExt,exmExtOf, promedio);
         }
         else {
+            
             if($("#lbl"+nombreTablaExmExt.replace("tbl","")).length>0)
                 $("#lbl"+nombreTablaExmExt.replace("tbl","")).remove();
             
@@ -433,14 +456,17 @@ function initTablaExmExt (nombreTablaExmExt, tblExmExt, cbxTExm_Column1, cbxTExm
             if (nombreTablaExmExt === "tblExmExt1ro") {        
                 jsSeHi.tblExmExt1ro_OldValues=tblExmExt;                
                 $("#lblTCalif1ro_desmat").text(desmat);
+                habDesBtnExmExt(nombreTablaExmExt,exmExtOf, promedio);
             }
             else if (nombreTablaExmExt === "tblExmExt2do") {
                 jsSeHi.tblExmExt2do_OldValues=tblExmExt;        
                 $("#lblTCalif2do_desmat").text(desmat);
+                habDesBtnExmExt(nombreTablaExmExt,exmExtOf, promedio);
             }
             else if (nombreTablaExmExt === "tblExmExt3ro"){
                 jsSeHi.tblExmExt3ro_OldValues=tblExmExt;        
                 $("#lblTCalif3ro_desmat").text(desmat);
+                habDesBtnExmExt(nombreTablaExmExt,exmExtOf, promedio);
             }
             /*********** Creamos la tabla ***********/            
             tabla.create(nombreTablaExmExt.replace("tbl","scrl"),nombreTablaExmExt,tblExmExt, ["dia","mes","año","cct","prom."], ["dia","mes","anio","cct","promedio"], ["textbox","combobox","textbox","combobox", "textbox"], null, true, null, null, null);
@@ -456,6 +482,17 @@ function initTablaExmExt (nombreTablaExmExt, tblExmExt, cbxTExm_Column1, cbxTExm
         }
     }    
 }
+
+function habDesBtnExmExt (nombreTabla,exmExtOf, promedio)
+{    
+    var n_grado = nombreTabla.replace("tblExmExt","");
+    
+    if(typeof(exmExtOf) !== "undefined" && exmExtOf!==null && exmExtOf && parseFloat(promedio)>=6.0)                                        
+        $("#pnlBotonGuardaExm"+n_grado).addClass("btnDisabled");
+    else
+        $("#pnlBotonGuardaExm"+n_grado).removeClass("btnDisabled");
+}
+
 function tblCalif_ChangeSelectedItem (nombreTablaCalif, nombreTablaExmExt, grado, msg, index)
 {
     var mensaje = new Mensajes();
@@ -464,11 +501,11 @@ function tblCalif_ChangeSelectedItem (nombreTablaCalif, nombreTablaExmExt, grado
     
     //tabla.setSelectedRow (nombreTabla, index);        
 /*    if(msgExm.length===0) {*/
-        var filaConDatos = tabla.getRow (nombreTablaCalif, index, ['cvetipmat','cvemat','desmat'], null, "JSON");
+        var filaConDatos = tabla.getRow (nombreTablaCalif, index, ['cvetipmat','cvemat','desmat','promedio','cicescini','califant'], null, "JSON");
         //------------------ Establecemos los datos a enviar -------------------    
         var datos = {
             modulo:"SeHi", metodo:"tbCa_ChSeIt", tblAlumCapCalif_idalu:jsSeHi.tblAlumCapCalif_idalu, grado: grado, cvetipmat:filaConDatos.cvetipmat, 
-            cvemat:filaConDatos.cvemat, msgExmExt: msg
+            cvemat:filaConDatos.cvemat, msgExmExt: msg, "tblAlumCapCalif_cicescini": filaConDatos.cicescini
         };
         //------------------------- Hacemos la llamada -------------------------    
         cargarLoading();
@@ -488,8 +525,10 @@ function tblCalif_ChangeSelectedItem (nombreTablaCalif, nombreTablaExmExt, grado
                         }
                         
                         msg = (grado===1 ? jsSeHi.msgExm1ro : (grado===2 ? jsSeHi.msgExm2do : (grado===3 ? jsSeHi.msgExm3ro : "") ) );
-                        
-                        initTablaExmExt (nombreTablaExmExt, result.tblExmExt, Column1, Column3, idccts, filaConDatos.desmat, msg);
+                        var exmExtOf = result.exmExtOf;
+                        if(parseFloat(filaConDatos.promedio)>=6.0 && parseFloat(filaConDatos.califant)===0.0)
+                            exmExtOf = true;
+                        initTablaExmExt (nombreTablaExmExt, result.tblExmExt, Column1, Column3, idccts, filaConDatos.desmat, msg, exmExtOf, filaConDatos.promedio);
                         cerrarLoading();
                     break;
                 case 0: case -1:
@@ -564,14 +603,14 @@ function btnGdaCalif1ro_Click()
     var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
     var tabla = new Tabla ();
     
-    var tablaCalif1ro=tabla.getRow("tblCalif1ro",0,["idalu","cicescini","almextrj","matrepact"],null,"JSON");
-    var tblCalif2do=tabla.getRow("tblCalif2do",0,["cicescini","matrepact"],null,"JSON");
-    var tblCalif3ro=tabla.getRow("tblCalif3ro",0,["cicescini"],null,"JSON");
+    var tablaCalif1ro=tabla.getRow("tblCalif1ro",0,["idalu","cicescini","almextrj","matrepact","promedio"],null,"JSON");
+    var tblCalif2do=tabla.getRow("tblCalif2do",0,["cicescini","matrepact","promedio"],null,"JSON");
+    var tblCalif3ro=tabla.getRow("tblCalif3ro",0,["cicescini","promedio"],null,"JSON");
     
     var tblCalif1ro=tabla.getTable("tblCalif1ro",["cvemat","cvetipmat","califant","promedio"]);
     for (var i=0; i<tblCalif1ro.length; i++)                                    //Agregamos a tblCalif1ro la columna de promedio respaldado inicialmente
         tblCalif1ro[i] += "~"+jsSeHi.tblCalif1ro_promedio_oldValue[i];
-    
+        
     var datos = { 
             modulo:"SeHi", metodo:"btGdCa1", tblCalif1ro:tblCalif1ro, cicescin:sisVars.cicescin, tblCalif1ro_cicescini:tablaCalif1ro.cicescini, 
             tblPrincipal_cveplan:jsSeHi.tblPrincipal_cveplan, tblCalif1ro_idalu:tablaCalif1ro.idalu, tblCalif1ro_almextrj:tablaCalif1ro.almextrj,
@@ -582,69 +621,79 @@ function btnGdaCalif1ro_Click()
             txtUsuario:sisVars.usuario
     };
     
+    if(validarCambiosDeCaptura(tblCalif1ro) && mensaje.confirmDialog("GUARDAR_CALIF","") )
+    {
     //------------------------- Hacemos la llamada -------------------------
-    cargarLoading();
-    $.ajax({url:"../sis_web/siS1",
-        type:"POST",
-        dataType:"JSON",
-        data: datos,
-        async:true
-    })
-    .done(function(result){
-        switch(result.returnCase){
-            case 1:
-                    jsSeHi.msgExm1ro = result.msgExm1ro;
-                    jsSeHi.tblCalif1ro_editable = result.tblCalif1ro_editable; 
-                    $("#lblTCalif1ro_promgdo").text(result.tblCalif1ro[0].promgdo);
-                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue,1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
-                    initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue,2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
-                    initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue,3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
-                    
-                    if (typeof(result.tblCalif2do_matrepant)!=="undefined")
-                        $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
-                    if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
-                        $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
-                    
-                    mensaje.General("GUARDADO_EXITOSO");
-                    cerrarLoading();
-                break;
-            case 0:case -1:
-                    $("#lblTCalif1ro_promgdo").text(result.tblCalif1ro[0].promgdo);
-                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue,1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
-                    initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue,2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
-                    initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue,3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
-                    
-                    if (typeof(result.tblCalif2do_matrepant)!=="undefined")
-                        $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
-                    if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
-                        $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
-                    
-                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
-                    cerrarLoading();
-                break;
-            case -10:
-                    //e.preventDefault();
-                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
-                    btnCerrarSesion_ActionPerformed ();
-                    cerrarLoading();
-                break;
-            case -11:   
-                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
-                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");                    
-                    cerrarLoading();
-                break;        
-            default:break;
-        }
-    })
-    .fail(function() {
-        mensaje.General("ERROR_AJAX", "", "");
-        cerrarLoading();
-    });
+        cargarLoading();
+        $.ajax({url:"../sis_web/siS1",
+            type:"POST",
+            dataType:"JSON",
+            data: datos,
+            async:true
+        })
+        .done(function(result){
+            switch(result.returnCase){
+                case 1:
+                        jsSeHi.msgExm1ro = result.msgExm1ro;
+                        jsSeHi.tblCalif1ro_editable = result.tblCalif1ro_editable; 
+                        $("#lblTCalif1ro_promgdo").text(result.tblCalif1ro[0].promgdo);
+                        initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue,1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
+                        initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue,2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
+                        initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue,3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
+
+                        if (typeof(result.tblCalif2do_matrepant)!=="undefined")
+                            $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
+                        if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
+                            $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
+
+                        mensaje.General("GUARDADO_EXITOSO");
+                        cerrarLoading();
+                    break;
+                case 0:case -1:
+                        $("#lblTCalif1ro_promgdo").text(result.tblCalif1ro[0].promgdo);
+                        initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue,1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
+                        initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue,2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
+                        initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue,3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
+
+                        if (typeof(result.tblCalif2do_matrepant)!=="undefined")
+                            $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
+                        if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
+                            $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
+
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        cerrarLoading();
+                    break;
+                case -10:
+                        //e.preventDefault();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        btnCerrarSesion_ActionPerformed ();
+                        cerrarLoading();
+                    break;
+                case -11:   
+                        initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");                    
+                        cerrarLoading();
+                    break;        
+                default:break;
+            }
+        })
+        .fail(function() {
+            mensaje.General("ERROR_AJAX", "", "");
+            cerrarLoading();
+        });
+    } else if(!validarCambiosDeCaptura(tblCalif1ro))
+        mensaje.General("GENERAL", "No hay cambios que guardar", "");     
 }
 
-function btnOfExmsExt1ro_Click()
+function validarCambiosDeCaptura(tblCalif)
 {
-    
+    var reglon, cad;
+    for (var i=0; i<tblCalif.length; i++){           
+        reglon = (tblCalif[i]).split("~");
+        if(reglon[3]!==reglon[4])
+            return true;
+    }    
+    return false;
 }
 
 function btnCalifDBim1ro_Click()
@@ -671,7 +720,7 @@ function btnCalifDBim1ro_Click()
     .done(function(result){
         switch(result.returnCase){
             case 1:
-                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable,);
+                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable,"");
                     cerrarLoading();
                 break;
             case 0:case -1:
@@ -727,13 +776,13 @@ function btnGuardaExamExt1ro_Click()
                 +jsSeHi.tblExmExt1ro_OldValues[i].anio+"~"+jsSeHi.tblExmExt1ro_OldValues[i].promedio+"~"+jsSeHi.tblExmExt1ro_OldValues[i].cct+"~"
                 +jsSeHi.tblExmExt1ro_OldValues[i].idcct_apl;
 
-        var tblCalif1ro=tabla.getSelectedRow("tblCalif1ro",["idalu","cicescini","cvetipmat","cvemat"],null,"JSON");
+        var tblCalif1ro=tabla.getSelectedRow("tblCalif1ro",["idalu","cicescini","cvetipmat","cvemat","promedio","califant"],null,"JSON");
         var tblExmExt1ro=tabla.getTable("tblExmExt1ro",["idarray","dia","mes","anio","promedio","cct_opt","cct"]);
 
         var datos = { 
             modulo:"SeHi", metodo:"btGuOp1", tblExmExt1ro:tblExmExt1ro, tblExmExt1ro_OldValues:tblExmExt1ro_OldValues, idalu_oldValue:tblCalif1ro.idalu, 
             tblCalif1ro_cicescini:tblCalif1ro.cicescini, grado_oldValue:"1", cvetipmat_oldValue:tblCalif1ro.cvetipmat, cvemat_oldValue:tblCalif1ro.cvemat, 
-            txtUsuario:sisVars.usuario
+            cicescin:sisVars.cicescin, txtUsuario:sisVars.usuario
         };
 
         //------------------------- Hacemos la llamada -------------------------
@@ -747,18 +796,24 @@ function btnGuardaExamExt1ro_Click()
         .done(function(result){
             switch(result.returnCase){
                 case 1:
-                        //Respaldamos los cambios
+                        //Respaldamos los cambios                        
                         tblExmExt1ro = tabla.getTable("tblExmExt1ro",["idarray","dia","mes","anio","promedio","cct_opt","cct"],null,"JSON");
                         jsSeHi.tblExmExt1ro_OldValues = new Array();
                         for (var i=0; i<tblExmExt1ro.length; i++)
                             jsSeHi.tblExmExt1ro_OldValues[i]={ idarray:i, dia:tblExmExt1ro[i].dia, mes:tblExmExt1ro[i].mes, anio:tblExmExt1ro[i].anio, 
                                 promedio: tblExmExt1ro[i].promedio, cct:tblExmExt1ro[i].cct_opt, idcct_apl:tblExmExt1ro[i].cct };
                         
+                        if (typeof(result.reCaProm)!=="undefined" && result.reCaProm) {
+                            $("#lblTCalif1ro_promgdo").text(result.tblCalif1ro[0].promgdo);
+                            $("#lblTCalif1ro_matrepact").text(result.tblCalif1ro[0].matrepact);
+                            jsSeHi.tblCalif1ro_matrepact = result.tblCalif1ro[0].matrepact;
+                            initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue,1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
+                        }
                         mensaje.General("GUARDADO_EXITOSO");
                         cerrarLoading();
                     break;
                 case 0:case -1:
-                        initTablaExmExt ("tblExmExt1ro", result.tblExmExt1ro, jsSeHi.cbxTExm1ro_Column1, jsSeHi.cbxTExm1ro_Column3, jsSeHi.cbxTExm1ro_idccts,tblCalif1ro.desmat,"");
+                        initTablaExmExt ("tblExmExt1ro", result.tblExmExt1ro, jsSeHi.cbxTExm1ro_Column1, jsSeHi.cbxTExm1ro_Column3, jsSeHi.cbxTExm1ro_idccts,tblCalif1ro.desmat,"",result.exmExtOf1, tblCalif1ro.promedio);
                         mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
                         cerrarLoading();
                     break;
@@ -791,7 +846,7 @@ function btnGdaCalif2do_Click()
     var tblCalif2do=tabla.getTable("tblCalif2do",["cvemat","cvetipmat","califant","promedio"]);
     for (var i=0; i<tblCalif2do.length; i++)                                    //Agregamos a tblCalif2do la columna de promedio respaldado inicialmente
         tblCalif2do[i] += "~"+jsSeHi.tblCalif2do_promedio_oldValue[i];
-    
+
     var datos = { 
             modulo:"SeHi", metodo:"btGdCa2", tblCalif2do:tblCalif2do, cicescin:sisVars.cicescin, tblCalif2do_cicescini:tablaCalif2do.cicescini, 
             tblPrincipal_cveplan:jsSeHi.tblPrincipal_cveplan, tblCalif2do_idalu:tablaCalif2do.idalu, tblCalif2do_almextrj:tablaCalif2do.almextrj,
@@ -801,61 +856,65 @@ function btnGdaCalif2do_Click()
             txtUsuario:sisVars.usuario
     };
     
-    //------------------------- Hacemos la llamada -------------------------
-    cargarLoading();
-    $.ajax({url:"../sis_web/siS1",
-        type:"POST",
-        dataType:"JSON",
-        data: datos,
-        async:true
-    })
-    .done(function(result){
-        switch(result.returnCase){
-            case 1:
-                    jsSeHi.msgExm2do = result.msgExm2do;
-                    jsSeHi.tblCalif2do_editable = result.tblCalif2do_editable;
-                    $("#lblTCalif2do_promgdo").text(result.tblCalif2do[0].promgdo);
-                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
-                    initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
-                    initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
-                    
-                    if (typeof(result.tblCalif2do_matrepant)!=="undefined")
-                        $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
-                    if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
-                        $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
-                    mensaje.General("GUARDADO_EXITOSO");
-                    cerrarLoading();
-                break;
-            case 0:case -1:
-                    $("#lblTCalif2do_promgdo").text(result.tblCalif2do[0].promgdo);
-                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
-                    initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
-                    initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
-                    
-                    if (typeof(result.tblCalif2do_matrepant)!=="undefined")
-                        $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
-                    if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
-                        $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
-                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
-                    cerrarLoading();
-                break;
-            case -10:                    
-                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
-                    btnCerrarSesion_ActionPerformed ();
-                    cerrarLoading();
-                break;
-            case -11:   
-                    initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
-                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");                    
-                    cerrarLoading();
-                break;    
-            default:break;
-        }
-    })
-    .fail(function() {
-        mensaje.General("ERROR_AJAX", "", "");
-        cerrarLoading();
-    });
+    if(validarCambiosDeCaptura(tblCalif2do) && mensaje.confirmDialog("GUARDAR_CALIF","") )
+    {    
+        //------------------------- Hacemos la llamada -------------------------
+        cargarLoading();
+        $.ajax({url:"../sis_web/siS1",
+            type:"POST",
+            dataType:"JSON",
+            data: datos,
+            async:true
+        })
+        .done(function(result){
+            switch(result.returnCase){
+                case 1:
+                        jsSeHi.msgExm2do = result.msgExm2do;
+                        jsSeHi.tblCalif2do_editable = result.tblCalif2do_editable;
+                        $("#lblTCalif2do_promgdo").text(result.tblCalif2do[0].promgdo);
+                        initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
+                        initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
+                        initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
+
+                        if (typeof(result.tblCalif2do_matrepant)!=="undefined")
+                            $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
+                        if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
+                            $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
+                        mensaje.General("GUARDADO_EXITOSO");
+                        cerrarLoading();
+                    break;
+                case 0:case -1:
+                        $("#lblTCalif2do_promgdo").text(result.tblCalif2do[0].promgdo);
+                        initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
+                        initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
+                        initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
+
+                        if (typeof(result.tblCalif2do_matrepant)!=="undefined")
+                            $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
+                        if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
+                            $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        cerrarLoading();
+                    break;
+                case -10:                    
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        btnCerrarSesion_ActionPerformed ();
+                        cerrarLoading();
+                    break;
+                case -11:   
+                        initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");                    
+                        cerrarLoading();
+                    break;    
+                default:break;
+            }
+        })
+        .fail(function() {
+            mensaje.General("ERROR_AJAX", "", "");
+            cerrarLoading();
+        });
+    } else if(!validarCambiosDeCaptura(tblCalif2do))
+        mensaje.General("GENERAL", "No hay cambios que guardar", "");     
 }
 function btnCalifDBim2do_Click()
 {
@@ -936,13 +995,13 @@ function btnGuardaExamExt2do_Click()
                 +jsSeHi.tblExmExt2do_OldValues[i].anio+"~"+jsSeHi.tblExmExt2do_OldValues[i].promedio+"~"+jsSeHi.tblExmExt2do_OldValues[i].cct+"~"
                 +jsSeHi.tblExmExt2do_OldValues[i].idcct_apl;
 
-        var tblCalif2do=tabla.getSelectedRow("tblCalif2do",["idalu","cicescini","cvetipmat","cvemat"],null,"JSON");
+        var tblCalif2do=tabla.getSelectedRow("tblCalif2do",["idalu","cicescini","cvetipmat","cvemat","promedio","califant"],null,"JSON");
         var tblExmExt2do=tabla.getTable("tblExmExt2do",["idarray","dia","mes","anio","promedio","cct_opt","cct"]);
 
         var datos = { 
             modulo:"SeHi", metodo:"btGuOp2", tblExmExt2do:tblExmExt2do, tblExmExt2do_OldValues:tblExmExt2do_OldValues, idalu_oldValue:tblCalif2do.idalu, 
             tblCalif2do_cicescini:tblCalif2do.cicescini, grado_oldValue:"2", cvetipmat_oldValue:tblCalif2do.cvetipmat, cvemat_oldValue:tblCalif2do.cvemat, 
-            txtUsuario:sisVars.usuario
+            cicescin:sisVars.cicescin, txtUsuario:sisVars.usuario
         };
 
         //------------------------- Hacemos la llamada -------------------------
@@ -955,14 +1014,23 @@ function btnGuardaExamExt2do_Click()
         })
         .done(function(result){
             switch(result.returnCase){
-                case 1:
-                        initTablaExmExt ("tblExmExt2do", result.tblExmExt2do, jsSeHi.cbxTExm2do_Column1, jsSeHi.cbxTExm2do_Column3, jsSeHi.cbxTExm2do_idccts,tblCalif2do.desmat,"");
-                        mensaje.General("GUARDADO_EXITOSO");
-                        cerrarLoading();
+                case 1:                    
+                    if (typeof(result.reCaProm)!=="undefined" && result.reCaProm) {
+                        $("#lblTCalif2do_promgdo").text(result.tblCalif2do[0].promgdo);
+                        initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue,2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
+                        $("#lblTCalif2do_matrepact").text(result.tblCalif2do[0].matrepact);
+                        jsSeHi.tblCalif2do_matrepact = result.tblCalif2do[0].matrepact;
+                    }
+                    var exmExtOf = result.exmExtOf2;
+                    if(parseFloat(tblCalif2do.promedio)>=6.0 && parseFloat(tblCalif2do.califant)===0.0)
+                        exmExtOf = true;
+                    initTablaExmExt ("tblExmExt2do", result.tblExmExt2do, jsSeHi.cbxTExm2do_Column1, jsSeHi.cbxTExm2do_Column3, jsSeHi.cbxTExm2do_idccts,tblCalif2do.desmat,"", exmExtOf, tblCalif2do.promedio);                    
+                    mensaje.General("GUARDADO_EXITOSO");
+                    cerrarLoading();
                     break;
                 case 0:case -1:
                         mensaje.General ("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
-                        initTablaExmExt ("tblExmExt2do", result.tblExmExt2do, jsSeHi.cbxTExm2do_Column1, jsSeHi.cbxTExm2do_Column3, jsSeHi.cbxTExm2do_idccts,tblCalif2do.desmat,"");                        
+                        initTablaExmExt ("tblExmExt2do", result.tblExmExt2do, jsSeHi.cbxTExm2do_Column1, jsSeHi.cbxTExm2do_Column3, jsSeHi.cbxTExm2do_idccts,tblCalif2do.desmat,"", result.exmExtOf2, tblCalif2do.promedio);                        
                         cerrarLoading();
                     break;
                 case -10:
@@ -995,9 +1063,101 @@ function btnGdaCalif3ro_Click()
     var tblCalif3ro=tabla.getTable("tblCalif3ro",["cvemat","cvetipmat","califant","promedio"]);
     for (var i=0; i<tblCalif3ro.length; i++)                                    //Agregamos a tblCalif3ro la columna de promedio respaldado inicialmente
         tblCalif3ro[i] += "~"+jsSeHi.tblCalif3ro_promedio_oldValue[i];
-    
+
     var datos = { 
             modulo:"SeHi", metodo:"btGdCa3", tblCalif3ro:tblCalif3ro, cicescin:sisVars.cicescin, tblCalif3ro_cicescini:tablaCalif3ro.cicescini, 
+            tblPrincipal_cveplan:jsSeHi.tblPrincipal_cveplan, tblCalif3ro_idalu:tablaCalif3ro.idalu, tblCalif3ro_almextrj:tablaCalif3ro.almextrj,
+            tblCalif3ro_matrepact:(typeof tablaCalif3ro.matrepact==="undefined" || tablaCalif3ro.matrepact.indexOf("Undefined")>-1)?-1:tablaCalif3ro.matrepact,
+            tblCalif1ro_matrepact: (typeof tblCalif1ro.matrepact==="undefined" || tblCalif1ro.matrepact.indexOf("Undefined")>-1)?-1:tblCalif1ro.matrepact,
+            tblCalif1ro_cicescini:tblCalif1ro.cicescini,
+            tblCalif2do_cicescini:tblCalif2do.cicescini, tblCalif1ro_size: tabla.getNumRows("tblCalif1ro"), tblCalif2do_size:tabla.getNumRows("tblCalif2do"),
+            txtUsuario:sisVars.usuario
+    };
+    
+    if(validarCambiosDeCaptura(tblCalif3ro) && mensaje.confirmDialog("GUARDAR_CALIF","") )
+    {                
+    //------------------------- Hacemos la llamada -------------------------
+        cargarLoading();
+        $.ajax({url:"../sis_web/siS1",
+            type:"POST",
+            dataType:"JSON",
+            data: datos,
+            async:true
+        })
+        .done(function(result){        
+            switch(result.returnCase){
+                case 1:
+                        jsSeHi.msgExm3ro = result.msgExm3ro;
+                        jsSeHi.tblCalif3ro_editable = result.tblCalif3ro_editable; 
+
+                        $("#lblTCalif3ro_promgdo").text(result.tblCalif3ro[0].promgdo);
+                        initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
+                        initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
+                        initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
+
+                        if (typeof(result.tblCalif2do_matrepant)!=="undefined")
+                            $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
+                        if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
+                            $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
+                        mensaje.General("GUARDADO_EXITOSO");
+                        cerrarLoading();
+                    break;
+                case 0:case -1:                    
+                        if(result.tipoMensaje==="ERROR")
+                            mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        else {
+                            $("#lblTCalif3ro_promgdo").text(result.tblCalif3ro[0].promgdo);
+                            initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
+                            initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
+                            initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
+
+                            if (typeof(result.tblCalif2do_matrepant)!=="undefined")
+                                $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
+                            if (typeof(result.tblCalif3ro_matrepant)!=="udefined")
+                                $("#lblTCalif3ro_matrepant").text(result.tblCalif3ro_matrepant);
+                            mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        }
+                        cerrarLoading();
+                    break;
+                case -10:
+                        //e.preventDefault();
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                        btnCerrarSesion_ActionPerformed ();
+                        cerrarLoading();
+                    break;
+                case -11:   
+                        initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
+                        mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");                    
+                        cerrarLoading();
+                    break;
+                default:break;
+            }
+        })
+        .fail(function() {
+            mensaje.General("ERROR_AJAX", "", "");
+            cerrarLoading();
+        });
+    }
+    else if(!validarCambiosDeCaptura(tblCalif3ro))
+        mensaje.General("GENERAL", "No hay cambios que guardar", "");                    
+}
+
+function btnActualizaPromNivel_Click()
+{
+    var mensaje = new Mensajes ();
+    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
+    var tabla = new Tabla ();
+    
+    var tblCalif1ro=tabla.getRow("tblCalif1ro",0,["cicescini","matrepact"],null,"JSON");
+    var tblCalif2do=tabla.getRow("tblCalif2do",0,["cicescini","matrepact"],null,"JSON");
+    var tablaCalif3ro=tabla.getRow("tblCalif3ro",0,["idalu","cicescini","almextrj"],null,"JSON");
+    
+    var tblCalif3ro=tabla.getTable("tblCalif3ro",["cvemat","cvetipmat","califant","promedio"]);
+    for (var i=0; i<tblCalif3ro.length; i++)                                    //Agregamos a tblCalif3ro la columna de promedio respaldado inicialmente
+        tblCalif3ro[i] += "~"+jsSeHi.tblCalif3ro_promedio_oldValue[i];
+    
+    var datos = { 
+            modulo:"SeHi", metodo:"btnActPromNiv", tblCalif3ro:tblCalif3ro, cicescin:sisVars.cicescin, tblCalif3ro_cicescini:tablaCalif3ro.cicescini, 
             tblPrincipal_cveplan:jsSeHi.tblPrincipal_cveplan, tblCalif3ro_idalu:tablaCalif3ro.idalu, tblCalif3ro_almextrj:tablaCalif3ro.almextrj,
             tblCalif3ro_matrepact:(typeof tablaCalif3ro.matrepact==="undefined" || tablaCalif3ro.matrepact.indexOf("Undefined")>-1)?-1:tablaCalif3ro.matrepact,
             tblCalif1ro_matrepact: (typeof tblCalif1ro.matrepact==="undefined" || tblCalif1ro.matrepact.indexOf("Undefined")>-1)?-1:tblCalif1ro.matrepact,
@@ -1021,9 +1181,9 @@ function btnGdaCalif3ro_Click()
                     jsSeHi.tblCalif3ro_editable = result.tblCalif3ro_editable; 
                     
                     $("#lblTCalif3ro_promgdo").text(result.tblCalif3ro[0].promgdo);
-                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.msgExm1ro);
-                    initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.msgExm2do);
-                    initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, jsSeHi.msgExm3ro);
+                    initTablaCalif ("tblCalif1ro", result.tblCalif1ro, "tblExmExt1ro", jsSeHi.tblCalif1ro_promedio_oldValue, 1, jsSeHi.tblCalif1ro_editable, jsSeHi.msgExm1ro);
+                    initTablaCalif ("tblCalif2do", result.tblCalif2do, "tblExmExt2do", jsSeHi.tblCalif2do_promedio_oldValue, 2, jsSeHi.tblCalif2do_editable, jsSeHi.msgExm2do);
+                    initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue, 3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
                     
                     if (typeof(result.tblCalif2do_matrepant)!=="undefined")
                         $("#lblTCalif2do_matrepant").text(result.tblCalif2do_matrepant);
@@ -1068,6 +1228,7 @@ function btnGdaCalif3ro_Click()
         cerrarLoading();
     });
 }
+
 function btnCalifDBim3ro_Click ()
 {
     var mensaje = new Mensajes ();
@@ -1147,13 +1308,13 @@ function btnGuardaExamExt3ro_Click()
                 +jsSeHi.tblExmExt3ro_OldValues[i].anio+"~"+jsSeHi.tblExmExt3ro_OldValues[i].promedio+"~"+jsSeHi.tblExmExt3ro_OldValues[i].cct+"~"
                 +jsSeHi.tblExmExt3ro_OldValues[i].idcct_apl;
 
-        var tblCalif3ro=tabla.getSelectedRow("tblCalif3ro",["idalu","cicescini","cvetipmat","cvemat"],null,"JSON");
+        var tblCalif3ro=tabla.getSelectedRow("tblCalif3ro",["idalu","cicescini","cvetipmat","cvemat","desmat","promedio","califant"],null,"JSON");
         var tblExmExt3ro=tabla.getTable("tblExmExt3ro",["idarray","dia","mes","anio","promedio","cct_opt","cct"]);
 
         var datos = { 
             modulo:"SeHi", metodo:"btGuOp3", tblExmExt3ro:tblExmExt3ro, tblExmExt3ro_OldValues:tblExmExt3ro_OldValues, idalu_oldValue:tblCalif3ro.idalu, 
             tblCalif3ro_cicescini:tblCalif3ro.cicescini, grado_oldValue:"3", cvetipmat_oldValue:tblCalif3ro.cvetipmat, cvemat_oldValue:tblCalif3ro.cvemat, 
-            txtUsuario:sisVars.usuario
+            cicescin:sisVars.cicescin, txtUsuario:sisVars.usuario
         };
 
         //------------------------- Hacemos la llamada -------------------------
@@ -1167,12 +1328,21 @@ function btnGuardaExamExt3ro_Click()
         .done(function(result){
             switch(result.returnCase){
                 case 1:
-                        initTablaExmExt ("tblExmExt3ro", result.tblExmExt3ro, jsSeHi.cbxTExm3ro_Column1, jsSeHi.cbxTExm3ro_Column3, jsSeHi.cbxTExm3ro_idccts,tblCalif3ro.desmat,"");
+                        if (typeof(result.reCaProm)!=="undefined" && result.reCaProm) {
+                            $("#lblTCalif3ro_promgdo").text(result.tblCalif3ro[0].promgdo);
+                            initTablaCalif ("tblCalif3ro", result.tblCalif3ro, "tblExmExt3ro", jsSeHi.tblCalif3ro_promedio_oldValue,3, jsSeHi.tblCalif3ro_editable, jsSeHi.msgExm3ro);
+                            $("#lblTCalif3ro_matrepact").text(result.tblCalif3ro[0].matrepact);
+                            jsSeHi.tblCalif3ro_matrepact = result.tblCalif3ro[0].matrepact;
+                        }
+                        var exmExtOf = result.exmExtOf3;
+                        if(parseFloat(tblCalif3ro.promedio)>=6.0 && parseFloat(tblCalif3ro.califant)===0.0)
+                            exmExtOf = true;
+                        initTablaExmExt ("tblExmExt3ro", result.tblExmExt3ro, jsSeHi.cbxTExm3ro_Column1, jsSeHi.cbxTExm3ro_Column3, jsSeHi.cbxTExm3ro_idccts,tblCalif3ro.desmat,"", exmExtOf, tblCalif3ro.promedio);
                         mensaje.General("GUARDADO_EXITOSO");
                         cerrarLoading();
                     break;
                 case 0:case -1:
-                        initTablaExmExt ("tblExmExt3ro", result.tblExmExt3ro, jsSeHi.cbxTExm3ro_Column1, jsSeHi.cbxTExm3ro_Column3, jsSeHi.cbxTExm3ro_idccts,tblCalif3ro.desmat,"");
+                        initTablaExmExt ("tblExmExt3ro", result.tblExmExt3ro, jsSeHi.cbxTExm3ro_Column1, jsSeHi.cbxTExm3ro_Column3, jsSeHi.cbxTExm3ro_idccts,tblCalif3ro.desmat,"", result.exmExtOf3, tblCalif3ro.promedio);
                         mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
                         cerrarLoading();
                     break;
@@ -1483,7 +1653,7 @@ function btnOficExmExt_Click()
         var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
         //------------------ Establecemos los datos a enviar -------------------
         var datos = {
-            modulo:"SeHi", metodo:"btOfExmExt_cl", 
+            modulo:"SeHi", metodo:"btnOfExmExt", 
             matsel:reglon, tblExmExtXMat: tblExmExtXMat, txtUsuario:sisVars.usuario
         };
         //------------------------- Hacemos la llamada -------------------------
@@ -1498,6 +1668,7 @@ function btnOficExmExt_Click()
             switch(result.returnCase){
                 case 1:                                                
                         mensaje.General("PROCESO_EXITOSO");                       
+                        mwfExmExtraordinarios_Close();
                     break;
                 case 0: case -1:
                         mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");

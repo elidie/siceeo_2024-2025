@@ -352,11 +352,13 @@ public class SICEEO_Password {
             {   strTipoUsuario = "ADMIN";
                 crearBotonesDeMenu (qryIfx.getPermisos ("ADMIN",usuario,"PRINCIPAL",QEscuela_cveplan ).toArray());
                 crearBotonesDeGpo (qryIfx.getPermisos ("ADMIN",usuario,"GRUPO", QEscuela_cveplan).toArray());
+                crearBotonesDeExmExt (qryIfx.getPermisos ("ADMIN",usuario,"CALIFICACIONES", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos ("ADMIN",usuario, "CALIFICACIONES", QEscuela_cveplan);                
             }else if (seccion.equals("59")){
                 strTipoUsuario = "CCT 59";
                 crearBotonesDeMenu (qryIfx.getPermisos ("CCT 59",usuario,"PRINCIPAL", QEscuela_cveplan).toArray());
                 crearBotonesDeGpo (qryIfx.getPermisos ("CCT 59",usuario,"GRUPO", QEscuela_cveplan).toArray());
+                crearBotonesDeExmExt (qryIfx.getPermisos ("CCT 59",usuario,"CALIFICACIONES", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos ("CCT 59",usuario,"CALIFICACIONES", QEscuela_cveplan);
                 dr.put("btnBusquedaCCT_Click", true);
             //Apagar botones para usuarios tipo CCT
@@ -371,23 +373,28 @@ public class SICEEO_Password {
                 crearBotonesDeMenu (QPermisos.toArray());
                 dr.put("btnBusquedaCCT_Click", true);
                 crearBotonesDeGpo (qryIfx.getPermisos ("CCT",usuario,"GRUPO", QEscuela_cveplan).toArray());
+                crearBotonesDeExmExt (qryIfx.getPermisos ("CCT",usuario,"CALIFICACIONES", QEscuela_cveplan).toArray());
             }
             //tipo usuario region
             else if (tipo_usuario.equals(" ") ){                
                 crearBotonesDeMenu (qryIfx.getPermisos (tipo_usuario,usuario,"PRINCIPAL", QEscuela_cveplan).toArray());
                 crearBotonesDeGpo (qryIfx.getPermisos (tipo_usuario,usuario,"GRUPO", QEscuela_cveplan).toArray());
+                crearBotonesDeExmExt (qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan);
             }else if ( tipo_usuario.equals("consulta") ) {                
                 crearBotonesDeMenu (qryIfx.getPermisos (tipo_usuario,usuario,"PRINCIPAL", QEscuela_cveplan).toArray());
                 crearBotonesDeGpo (qryIfx.getPermisos (tipo_usuario,usuario,"GRUPO", QEscuela_cveplan).toArray());
+                crearBotonesDeExmExt (qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan);
             }else if ( tipo_usuario.equals("mesa") ) {                
                 crearBotonesDeMenu (qryIfx.getPermisos (tipo_usuario,usuario,"PRINCIPAL", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan);
                 crearBotonesDeGpo (qryIfx.getPermisos (tipo_usuario,usuario,"GRUPO", QEscuela_cveplan).toArray());
+                crearBotonesDeExmExt (qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan).toArray());
             }else if ( tipo_usuario.equals("captura") ) {                
                 crearBotonesDeMenu (qryIfx.getPermisos (tipo_usuario,usuario,"PRINCIPAL", QEscuela_cveplan).toArray());    
                 crearBotonesDeGpo (qryIfx.getPermisos (tipo_usuario,usuario,"GRUPO", QEscuela_cveplan).toArray());
+                crearBotonesDeExmExt (qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan).toArray());
                 QPermisosCalif = qryIfx.getPermisos (tipo_usuario,usuario,"CALIFICACIONES", QEscuela_cveplan);
             }
             if(dr.get("permisoDir")!=null && dr.get("permisoDir").equals(1))
@@ -475,12 +482,30 @@ public class SICEEO_Password {
                       
         boton.put("btnRevGdo", "<li id='libtnRevGdo' title='Para alumnos con promedio de 6 y 7'><a href='#' id='btnRevocacionGdo'>Revocación Gdo</a></li>");
         boton.put("btnConstancia", "<li id='libtnConstancia' title='Para alumnos dados de baja con calificación oficializada'><a href='#' id='btnConstancia'>Const.De Baja</a></li>");
+        boton.put("btnEliminarAlu", "<li id='libtnEliminarAlu' title='Elimina de la Base de Datos al alumno seleccionado'><a href='#' id='btnEliminarAlu'>Eliminar</a></li>");
 
         for (Object permiso : permisos)
             if ((dato = boton.get(permiso))!=null)
                 botonesPermitidos.put(permiso, dato);
 
         dr.put("botonesDeGpo", botonesPermitidos);
+    }
+    
+    private void crearBotonesDeExmExt (Object []permisos)
+    {
+        Map boton = new LinkedHashMap();
+        Object dato;        
+        /*******************  btnOfExmExt1ro, btnOfExmExt2do, btnOfExmExt3ro  *****************************/                      
+        if(dr.get("superUsuario").equals("si")) {
+            boton.put("btnOfExmExt1ro", "<li><a href='#' id='btnOfExmExt1ro' tabindex='203' title='Oficialización de examenes extraordinarios de 1er grado.' class='icon-sello'>Oficializar Exm.Ext. 1ro</a></li>");
+            boton.put("btnOfExmExt2do", "<li><a href='#' id='btnOfExmExt2do' tabindex='203' title='Oficialización de examenes extraordinarios de 2do grado.' class='icon-sello'>Oficializar Exm.Ext. 2do</a></li>");
+            boton.put("btnOfExmExt3ro", "<li><a href='#' id='btnOfExmExt3ro' tabindex='203' title='Oficialización de examenes extraordinarios de 3er grado.' class='icon-sello'>Oficializar Exm.Ext. 3ro</a></li>");
+            boton.put("btnActualizaPromNivel", "<li><a href='#' id='btnActualizaPromNivel'  tabindex='201' title='Calcula y actualiza el promedio del nivel.'><label class='iconBtnSincronizar iconBtnRedondo  middleHoriz '></label>Promedio de Nivel</a></li>");
+
+            for (Object permiso : permisos)
+                if ((dato = boton.get(permiso))!=null)
+                    dr.put(permiso, dato);        
+        }
     }
     
     private void QPermisoDirector(Object []permisos){

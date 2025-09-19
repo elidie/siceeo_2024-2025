@@ -106,11 +106,11 @@ public class SICEEO_NewIngresoPre {
                 if ( txtApe2.contains("  ") )
                     throw new SICEEO_Excepcion (0,"ESPACIO_BLANCO","segundo apellido");
                 //++++++++++++++++++++++++++++++++
-                if ( txtNombre.contains("|") || txtNombre.contains("/") || txtNombre.contains("*") || txtNombre.contains("`") || txtNombre.contains("_") || txtNombre.contains(".") )
+                if ( txtNombre.contains("|") || txtNombre.contains("/") || txtNombre.contains("*") || txtNombre.contains("`") || txtNombre.contains("_")) // || txtNombre.contains(".") 
                     throw new SICEEO_Excepcion (0,"CARACTER_INVALIDO","nombre");
-                if ( txtApe1.contains("|") || txtApe1.contains("/") || txtApe1.contains("*") || txtApe1.contains("`") || txtApe1.contains("_") || txtApe1.contains(".")  )
+                if ( txtApe1.contains("|") || txtApe1.contains("/") || txtApe1.contains("*") || txtApe1.contains("`") || txtApe1.contains("_")) // || txtApe1.contains(".")  
                     throw new SICEEO_Excepcion (0,"CARACTER_INVALIDO","primer apellido");
-                if ( txtApe2.contains("|") || txtApe2.contains("/") || txtApe2.contains("*") || txtApe2.contains("`") || txtApe2.contains("_") || txtApe2.contains(".")  )
+                if ( txtApe2.contains("|") || txtApe2.contains("/") || txtApe2.contains("*") || txtApe2.contains("`") || txtApe2.contains("_")) // || txtApe2.contains(".")  
                     throw new SICEEO_Excepcion (0,"CARACTER_INVALIDO","segundo apellido");
                 //++++++++++++++++++++++++++++++++
                 if ( txtNombre.trim().length()<=1 )

@@ -6,8 +6,7 @@
 var jsOficializar;
 
 function frmwOficializar_Show(tblPrincipal_selRow)
-{
-    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
+{        
     jsOficializar = {
         tblPrincipal_cicescini: tblPrincipal_selRow.cicescini,
         tblPrincipal_cveplan: tblPrincipal_selRow.cveplan,
@@ -21,8 +20,24 @@ function frmwOficializar_Show(tblPrincipal_selRow)
         ofsCal: null,
         ofsEval:null,
         
+        ofTrim1: false,
+        ofTrim2: false,
+        ofTrim3: false,
+        
         lockClickInBimEv:[false, false, false, false, false, false]
     };
+    
+    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );    
+    
+    for (var boton in sisVars.botonesDeCalif) {              
+            if(sisVars.botonesDeCalif[boton]==="btnTrim1")                
+                jsOficializar.ofTrim1 = true;
+            else if (sisVars.botonesDeCalif[boton]==="btnTrim2")                
+                jsOficializar.ofTrim2 = true;
+            else if (sisVars.botonesDeCalif[boton]==="btnTrim3")                
+                jsOficializar.ofTrim3 = true;
+    }
+    
     object_setVisible (false,"gridTable");                                      // Ocultamos el gridTable
     $("#frmwOficializar").css("display", "block");                              // Mostramos el formulario correspondiente
     
@@ -39,7 +54,7 @@ function frmwOficializar_Create()
     var mensaje = new Mensajes ();
     var tabindexIni = 50, tabindexReturn=35;
     var gradoGrupo = jsOficializar.tblPrincipal_grado +"º "+jsOficializar.tblPrincipal_grupo;
-    
+        
     if($('#frmfOficializar').length)
         $('#frmfOficializar').remove();
     $('#frmwOficializar').append('<fieldset id="frmfOficializar"><legend>Oficializaciones</legend><div id="btnRegresar_Oficializar" class="divBtnRegresar" title="Regresar a la ventana anterior" tabindex="90"><label id="ibtnRegresar" class="icon-regresar"></label></div> </fieldset>');
@@ -53,20 +68,25 @@ function frmwOficializar_Create()
                                                             + getCodeBtnOfic ("btnDesoficInscripcion", (tabindexIni++), "Al desoficializar permitirá que se pueda continuar ingresando datos de Inscripción.", "I", "Inscripción", "desoficializar", "Gris",gradoGrupo)
                                                         );*/
                 
-                if (jsOficializar.tblPrincipal_cveplan==="1" || jsOficializar.tblPrincipal_cveplan==="2"){
+                if (jsOficializar.tblPrincipal_cveplan==="1" || jsOficializar.tblPrincipal_cveplan==="2"
+                        && (jsOficializar.ofTrim1===true || jsOficializar.ofTrim2===true || jsOficializar.ofTrim3===true) )
+                {
                     $('#pnlScrollOficializar').append('<div id="pnlOficializarCalificaciones" class="panel"><label class="tituloPanel">Calificaciones</label></div>');
                         //$('#pnlOficializarCalificaciones').append('<label class="indicacionesOfic">Conforme vaya terminando la etapa de captura bimestral de calificaciones, así oficialice el bimestre corresponediente. NOTA IMPORTANTE: Sólo al oficializar el 5to bimestre ya no se podrá desoficializar posteriormente ningún bimestre.</label>'
                         $('#pnlOficializarCalificaciones').append('<label class="indicacionesOfic">Oficialice la calificación de la evaluación que hasta el momento haya terminado de capturar. NOTA IMPORTANTE: Sólo al oficializar la 3ra evaluación ya no se podrá desoficializar posteriormente ningúna evaluación.</label>'
-
-                                                                + getCodeBtnOfic ("btnOficCalifBim1", (tabindexIni++), "Oficializa calificaciones de la 1ra evaluación.", "1", "1ra evaluación", "oficializar ", "Azul", gradoGrupo)
+                                                            + ( jsOficializar.ofTrim1===true ? (
+                                                                 getCodeBtnOfic ("btnOficCalifBim1", (tabindexIni++), "Oficializa calificaciones de la 1ra evaluación.", "1", "1ra evaluación", "oficializar ", "Azul", gradoGrupo)
                                                                 + getCodeBtnOfic ("btnDesoficCalifBim1", (tabindexIni++), "Al desoficializar permitirá que se pueda continuar ingresando calificaciones de la 1ra evaluación.", "1", "1ra evaluación", "desoficializar ", "Gris", gradoGrupo)
-
-                                                                + getCodeBtnOfic ("btnOficCalifBim2", (tabindexIni++), "Oficializa calificaciones de la 2da evaluación.", "2", "2da evaluación", "oficializar ", "Azul", gradoGrupo)
+                                                                ) :"") 
+                                                            + ( jsOficializar.ofTrim2===true ? (   
+                                                                 getCodeBtnOfic ("btnOficCalifBim2", (tabindexIni++), "Oficializa calificaciones de la 2da evaluación.", "2", "2da evaluación", "oficializar ", "Azul", gradoGrupo)
                                                                 + getCodeBtnOfic ("btnDesoficCalifBim2", (tabindexIni++), "Al desoficializar permitirá que se pueda continuar ingresando calificaciones de la 2da evaluación.", "2", "2da evaluación", "desoficializar ", "Gris", gradoGrupo)
-                                                                
-                                                                + getCodeBtnOfic ("btnOficCalifBim3", (tabindexIni++), "Oficializa calificaciones de la 3ra evaluación.", "3", "3ra evaluación", "oficializar ", "Azul", gradoGrupo)
-                                                                + getCodeBtnOfic ("btnDesoficCalifBim3", (tabindexIni++), "Al desoficializar permitirá que se pueda continuar ingresando calificaciones de la 3ra evaluación.", "3", "3ra evaluación", "desoficializar ", "Gris", gradoGrupo)
-                                                            );
+                                                                ) :"") 
+                                                            + ( jsOficializar.ofTrim3===true ? (       
+                                                                 getCodeBtnOfic ("btnOficCalifBim3", (tabindexIni++), "Oficializa calificaciones de la 3ra evaluación.", "3", "3ra evaluación", "oficializar ", "Azul", gradoGrupo)
+                                                                + getCodeBtnOfic ("btnDesoficCalifBim3", (tabindexIni++), "Al desoficializar permitirá que se pueda continuar ingresando calificaciones de la 3ra evaluación.", "3", "3ra evaluación", "desoficializar ", "Gris", gradoGrupo)                                                                                                                    
+                                                            ) : "")
+                                                        );
                     if (jsOficializar.tblPrincipal_cveplan==="2"){
                         $('#pnlScrollOficializar').append('<div id="pnlOficializarCertComplementaria" class="panel"><label class="tituloPanel">Complementaria</label></div>');
                             $('#pnlOficializarCertComplementaria').append('<label class="indicacionesOfic">Oficialice la etapa complementaria para alumnos aprobados por examen extraordinario de regularización. Al oficializar le permitirá foliar y firmar los certificados con la fecha de acuerdo al período de presentación del examen.</label>'
@@ -74,21 +94,23 @@ function frmwOficializar_Create()
                                                                     + getCodeBtnOfic ("btnSinCertCompl", (tabindexIni++), "No hay alumnos para complementaria en este grupo.", "C", "Complementaria", "vacío ", "Gris", gradoGrupo)
                                                                 );
                     }
-                } else if (jsOficializar.tblPrincipal_cveplan==="3") {
+                } else if (jsOficializar.tblPrincipal_cveplan==="3" && (jsOficializar.ofTrim1 || jsOficializar.ofTrim2 || jsOficializar.ofTrim3)) {
                     $('#pnlScrollOficializar').append('<div id="pnlOficializarEvaluaciones" class="panel"><label class="tituloPanel">Evaluaciones</label></div>');
                         //$('#pnlOficializarEvaluaciones').append('<label class="indicacionesOfic">Conforme vaya terminando la etapa de captura de cada evaluación, así oficialice la evaluación correspondiente. NOTA IMPORTANTE: Sólo al oficializar la 3ra evaluación ya no se podrá desoficializar posteriormente ninguna evaluación.</label>'
                         $('#pnlOficializarEvaluaciones').append('<label class="indicacionesOfic">Oficialice la evaluación que hasta el momento haya terminado de capturar. NOTA IMPORTANTE: Sólo al oficializar la 3ra evaluación ya no se podrá desoficializar posteriormente ninguna evaluación.</label>'
-
-                                                                + getCodeBtnOfic ("btnOficEval1", (tabindexIni++), "Oficializa 1ra. evaluación.", "1", "1ra evaluación", "oficializar ", "Azul", gradoGrupo)
+                                                            + ( jsOficializar.ofTrim1===true ? (
+                                                                 getCodeBtnOfic ("btnOficEval1", (tabindexIni++), "Oficializa 1ra. evaluación.", "1", "1ra evaluación", "oficializar ", "Azul", gradoGrupo)
                                                                 + getCodeBtnOfic ("btnDesoficEval1", (tabindexIni++), "Al desoficializar permitirá que se pueda continuar ingresando avances para la 1ra. evaluación.", "1", "1ra evaluación", "desoficializar ", "Gris", gradoGrupo)
-
-                                                                + getCodeBtnOfic ("btnOficEval2", (tabindexIni++), "Oficializa 2da. evaluación.", "2", "2da evaluación", "oficializar ", "Azul", gradoGrupo)
+                                                            ) :"")     
+                                                            + ( jsOficializar.ofTrim2===true ? (   
+                                                                 getCodeBtnOfic ("btnOficEval2", (tabindexIni++), "Oficializa 2da. evaluación.", "2", "2da evaluación", "oficializar ", "Azul", gradoGrupo)
                                                                 + getCodeBtnOfic ("btnDesoficEval2", (tabindexIni++), "Al desoficializar permitirá que se pueda continuar ingresando avances para la 2da. evaluación.", "2", "2da evaluación", "desoficializar ", "Gris", gradoGrupo)
-                                                                
-                                                                + getCodeBtnOfic ("btnOficEval3", (tabindexIni++), "Oficializa 3ra. evaluación.", "3", "3ra evaluación", "oficializar ", "Azul", gradoGrupo)
+                                                            ) :"")     
+                                                            + ( jsOficializar.ofTrim3===true ? (       
+                                                                 getCodeBtnOfic ("btnOficEval3", (tabindexIni++), "Oficializa 3ra. evaluación.", "3", "3ra evaluación", "oficializar ", "Azul", gradoGrupo)
                                                                 + getCodeBtnOfic ("btnDesoficEval3", (tabindexIni++), "Al desoficializar permitirá que se pueda continuar ingresando avances para la 3ra. evaluación.", "3", "3ra evaluación", "desoficializar ", "Gris", gradoGrupo)
-
-                                                            );
+                                                            ) :"")         
+                                                        );
                 }
                 
                 $('#pnlScrollOficializar').append('<div id="pnlOficializarPreinscripcion" class="panel"><label class="tituloPanel">Preinscripciones '+((parseInt(jsOficializar.tblPrincipal_cicescini)+1) + '-'+ (parseInt(jsOficializar.tblPrincipal_cicescini)+2) )+'</label></div>');
@@ -173,7 +195,7 @@ function getCodeBtnOfic (id, tabindex, title, icono, titulo, estado, color, grad
         estado = 'OFICIALIZADO';
         obj3Visible = 'style="display:none"';
         btnDesactivado = "btnOfic-desactivado";
-        title = "Para desoficializar pida ayuda a su UDSE.";
+        title = "Para desoficializar pida ayuda a su UDR.";
     }else if (estado.indexOf('vacío')>=0){
         estado = 'VACÍO';
         obj3Visible = 'style="display:none"';

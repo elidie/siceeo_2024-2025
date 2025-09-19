@@ -82,7 +82,7 @@
                     <li title="Usuario"><label id="iconUsuario" class="icon-usuarios iconInfo"></label><label id="lblUsuario"> ... </label>  </li>
                     <li title="Región administrativa"><label id="iconUnidad" class="icon-oaxaca iconInfo"></label><label id="lblUnidad"> ... </label>  </li>
                     <li title="Hora de ingreso a SICEEO"><label id="iconFecha" class="icon-calendreloj iconInfo"></label><label id="lblFecha"> ... </label></li>
-                    <li title="Versión"><label id="iconVersionSis" class="icon-engrane iconInfo"></label><label id="lblVersionSis"> Versión 15.7.6 </label></li>
+                    <li title="Versión"><label id="iconVersionSis" class="icon-engrane iconInfo"></label><label id="lblVersionSis"> Versión 15.8.5 </label></li>
                 </ul>
             </div>
             <div id="pnlBusquedaCCT">
@@ -94,7 +94,7 @@
                 <!--div id="btnManual" tabindex="53" title="Manual de operación del SICEEO"><label id="ibtnManual" >M</label><label id="lbtnManual">Manual</label></div-->
                 <div id="btnCalendarioProcesos" tabindex="52" title="Calendario de actividades de Control Escolar">
                     <label id="ibtnCalendarioProcesos" >C</label><label id="lbtnCalendarioProcesos">Calendario</label>
-                    <div id='globoAyudaCalenProc' class='globoayuda_pointright'><div class='btnCerrarGlobo'>X</div>CONOZCA EL CALENDARIO<BR>de actividades de Control Escolar ciclo 2024-2025.</div>
+                    <div id='globoAyudaCalenProc' class='globoayuda_pointright'><div class='btnCerrarGlobo'>X</div>CONOZCA EL CALENDARIO<BR><label id="lblCalendario"></label></div>
                 </div>
                 <div id="btnNormatividad" tabindex="56" title="Normatividad del SICEEO"><label id="ibtnNormatividad" >N</label><label id="lbtnNormatividad">Normatividad</label></div>
                 <div id="btnCircular" tabindex="56" title="Circular"><label id="ibtnCircular" >Ci</label><label id="lbtnCircular">Circular</label></div>

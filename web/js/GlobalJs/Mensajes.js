@@ -19,6 +19,9 @@ function Mensajes ()
             return confirm("Antes de dar clic en 'Aceptar' la oficialización, verifique sus datos y asegurese que esten correctos.\n"
             + "Una vez oficializadas, el sistema ya no le permitirá realizar correcciones o desoficializar el examen.\n\n"
             + "¿Confirma que desea oficializar los "+texto1+" seleccionados?"); 
+        if (tipo==="GUARDAR_CALIF")
+            return confirm("\n\nCorrobore que su captura realizada sean los correctos y correspondientes al alumno, grado y materia; el boton 'Guardar' calculará el promedio de grado si todas las materias han sido aprobadas, y ya no podrá realizar correcciones."
+            + "\n\n¿Confirma que desea actualizar los promedios de sus materias?");     
     };
     
     this.General = function(tipo, texto1, texto2)

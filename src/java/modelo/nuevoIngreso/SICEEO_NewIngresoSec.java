@@ -114,16 +114,16 @@ public class SICEEO_NewIngresoSec {
             if ( txtApe2.indexOf("  ")>0 )
                 throw new SICEEO_Excepcion (0,"ESPACIO_EXTRA","apellido");
             //++++++++++++++++++++++++++++++++
-            if ( txtNombre.contains("|") || txtNombre.contains("*") || txtNombre.contains("/") || txtNombre.contains("-") || txtNombre.contains("_") || txtNombre.contains(".") )
+            if ( txtNombre.contains("|") || txtNombre.contains("*") || txtNombre.contains("/") || txtNombre.contains("_") || txtNombre.contains("`") ) //|| txtNombre.contains(".")  || txtNombre.contains("-")
                 throw new SICEEO_Excepcion (0,"CARACTER_INVALIDO","nombre");
-            if ( txtApe1.contains("|") || txtApe1.contains("*") || txtApe1.contains("/") || txtApe1.contains("-") || txtApe1.contains("_") || txtApe1.contains(".") )
+            if ( txtApe1.contains("|") || txtApe1.contains("*") || txtApe1.contains("/") || txtApe1.contains("_") || txtApe1.contains("`") ) //|| txtApe1.contains("-") || txtApe1.contains(".") 
                 throw new SICEEO_Excepcion (0,"CARACTER_INVALIDO","primer apellido");
-            if ( txtApe2.contains("|") || txtApe2.contains("*") || txtApe2.contains("/") || txtApe2.contains("-") || txtApe2.contains("_") || txtApe2.contains(".") )
+            if ( txtApe2.contains("|") || txtApe2.contains("*") || txtApe2.contains("/") || txtApe2.contains("_") || txtApe2.contains("`") ) //  || txtApe2.contains(".")   || txtApe2.contains("-")
                 throw new SICEEO_Excepcion (0,"CARACTER_INVALIDO","segundo apellido");
             //++++++++++++++++++++++++++++++++
-            if ( txtNombre.trim().length()<=1 )
+            if ( txtNombre.trim().length()<=2 )
                 throw new SICEEO_Excepcion (0,"SIN_DATO","nombre");
-            if ( txtApe1.trim().length()<=1 )
+            if ( txtApe1.trim().length()<=2 )
                 throw new SICEEO_Excepcion (0,"SIN_DATO","apellido");
             //++++++++++++++++++++++++++++++++                                  //Condición agregada en SICEEO
             if ( !dm.isNombreOApellido (txtNombre.trim(),40) )
@@ -310,7 +310,7 @@ public class SICEEO_NewIngresoSec {
                 //--Vista--> l_idalu.Caption:='';
             }
             //*******************************************termina validar k no exista el alumno
-            hacerCommit = true;   // comentado hoy 17-06-2025
+            hacerCommit = true;   // comentado hoy 05-09-2025
         } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("INDISPUESTO", ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.NewIngresoSec(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){  this.dr.put("returnCase", -1);   mensaje.General("GENERAL", ex.getMessage(), "", this.dr);   }

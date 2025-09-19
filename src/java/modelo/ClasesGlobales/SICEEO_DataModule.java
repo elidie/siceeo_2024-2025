@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 public class SICEEO_DataModule 
 {
     public int cicescini, tiempoEspera;
-    
+    public boolean recalcularPromGdo;
     //Controlador de mensajes de error, warnings y success
    //public int returnCase=1;                                                      //-1:Error de sistema, 0:El sistema no permite seguir, 1: Todo bien, 2:Todo bien con mensaje informativo, 3:Todo bien pero hay que pedir dato, 10:Mostrar mensaje y despues mostrar una ventana, 11:Mostrar una ventana  
     //public String  casoRequerido="";                                            //Es asignado dependiendo del número de returnCase; con 3: debe mencionar que dato se pide, con 10: debe llevar el nombre de la ventana
@@ -70,8 +70,7 @@ public class SICEEO_DataModule
     String Esp, Mat;                                                            // por si reprueba espaÒol o matematicas
 
     String v_CambiarUsuario, v_cvetaller;
-    boolean SuspenderTiempo;
-        
+    boolean SuspenderTiempo;    
     String kmpo0,kmpo1,kmpo2,valor, valor1, valor2, elwhere;
     
    // public ArrayList<Object[]> tabla;        
@@ -287,7 +286,7 @@ public class SICEEO_DataModule
         float flotante;
         if (dato==null)
             dato = 0;
-        else if ((""+dato).trim().equals("") || dato.equals("null"))
+        else if ( (""+dato).trim().equals("") || dato.equals("null") )
             dato = 0;
         flotante = Float.parseFloat(""+dato);
         return flotante;
@@ -558,7 +557,7 @@ public class SICEEO_DataModule
     {
         String numeros [] = {"CERO","UNO","DOS","TRES","CUATRO","CINCO","SEIS","SIETE","OCHO","NUEVE"};
         String promLetra = "";
-        if (promedioNum.equals("10"))
+        if (promedioNum.equals("10.0") || promedioNum.equals("10"))
             promLetra = "DIEZ";
         else if (promedioNum.toUpperCase().equals("A"))
             promLetra = "ACREDITADO";
