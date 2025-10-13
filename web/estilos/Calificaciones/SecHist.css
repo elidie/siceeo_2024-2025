@@ -35,6 +35,13 @@
     margin-left: 7px;
     margin-right: 7px;
 }
+#pnlExmExtraordinarios #pnlListadoDeExmXMat #pnlSelAlumCons
+{
+    margin-left: 7px;
+    margin-right: 7px;
+    font-size: 0.9em;
+    color: blue;
+}
 
 /* ==================  CONFIRGURACION DE LABELS ===============================*/
 #pnlExmExtraordinarios #pnlDatosGeneralesExmExt label

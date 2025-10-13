@@ -27,7 +27,8 @@
     Map dr = new HashMap();
     String r="Reportes/FinDeCurso/", cicescini, cicescinilib,modalidad, cveplan, idcct, grado, grupo, caso;
     Map parameters = new HashMap();
-    int cicescinilib_int = Integer.parseInt(""+request.getParameter("cicescinilib"));
+    int cicescinilib_int = (request.getParameter("cicescinilib").length()>0 ? 
+            Integer.parseInt(""+request.getParameter("cicescinilib")) : 0);
     File reportFile;
     boolean str_of= false;
     
@@ -53,8 +54,8 @@
         parameters.put("grupo", grupo=request.getParameter("grupo") );
         caso=request.getParameter("caso");
         parameters.put("isComplem", caso.equals("IAEc") || caso.equals("CRELc") || caso.equals("RELc") || caso.equals("Rc") );
-        parameters.put("sqryIdalusCompl", caso.equals("IAEc") || caso.equals("CRELc") || caso.equals("RELc") || caso.equals("Rc")?" AND g.idalu IN ("+request.getParameter("idalusCompl")+")":"" );
-        parameters.put("mesComplem", caso.equals("RELc")? request.getParameter("mesComplem"):"" );
+        parameters.put("sqryIdalusCompl", caso.equals("IAEc") || caso.equals("RELc") || caso.equals("CRELc") || caso.equals("Rc")? " AND g.idalu IN ("+request.getParameter("idalusCompl")+")":"" );
+        parameters.put("mesComplem", caso.equals("RELc")? request.getParameter("idperexmext"):"" );
         //parameters.put("tipo_comp", caso.equals("RELc")? request.getParameter("tipo_comp"):"" );
         sesionOk.setAttribute("modulo", "Rep"+caso);
         parameters.put("sqryTipoCompl", "");
@@ -82,7 +83,7 @@
                     parameters.put("cicescini_reg", Integer.parseInt(""+request.getParameter("cicescini_act")));
                 else
                     parameters.put("cicescini_reg",cicescinilib_int);
-                re.selMesCompl (cicescinilib, idcct, grado, grupo, ""+request.getParameter("mesComplem"), ""+request.getParameter("idalus"), ""+request.getParameter("idExalusCompl"), qryIfx);
+                re.selMesCompl (cicescinilib, idcct, grado, grupo, ""+request.getParameter("idperexmext"), ""+request.getParameter("idalus"), ""+request.getParameter("idalusCompl"), qryIfx);
                 if (!dr.get("returnCase").equals(1))
                     throw new Exception (""+dr.get("mensaje"));            
                 parameters.put("sqryIdalusCompl", " AND g.idalu IN ("+dr.get("idalus")+")");

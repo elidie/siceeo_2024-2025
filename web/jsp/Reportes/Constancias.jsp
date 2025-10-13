@@ -24,9 +24,9 @@
     SICEEO_QueriesInformix qryIfx=null;
     SICEEO_DataModule dm = new SICEEO_DataModule();
     Map dr = new HashMap();
-    String r="Reportes/Constancia/", cicescini, cicescinilib,modalidad, cveplan, idcct, grado, grupo, caso;
+    String r="Reportes/Constancias/", cicescini, cicescinilib, cicescini_ex, cicescini_rep, cveplan, idcct, grado, caso;
     Map parameters = new HashMap();
-    int cicescinilib_int = Integer.parseInt(""+request.getParameter("cicescinilib"));
+    
     File reportFile;
     boolean str_of= false;
     
@@ -37,17 +37,36 @@
             throw new Exception ("SIN_SESION");
         
         /********** ASIGNACIÓN DE VARIABLES **************/        
-        cicescini=request.getParameter("cicescini");        
-        parameters.put("cicescini", cicescini );
-        parameters.put("cicescinilib", cicescinilib=request.getParameter("cicescinilib") );
+        cicescini=request.getParameter("cicescini");                
+        cicescini_ex = request.getParameter("cicescini_ex");
+        cicescinilib=request.getParameter("cicescinilib");
         parameters.put("cveplan", cveplan=request.getParameter("cveplan") );        
         parameters.put("idcct", idcct=request.getParameter("idcct") );
-        parameters.put("grado", grado=request.getParameter("grado") );
-        parameters.put("grupo", grupo=request.getParameter("grupo") );
-        caso=request.getParameter("caso");
+        parameters.put("idperexmext", request.getParameter("idperexmext"));
+        parameters.put("cicescini_ex", cicescini_ex);
         
+        parameters.put("grado", request.getParameter("grado"));
+        parameters.put("grupo", request.getParameter("grupo"));
+        
+        
+        
+        caso=request.getParameter("caso");        
         sesionOk.setAttribute("modulo", "Rep"+caso);
-                       
+        /*cicescini_rep = ""+(caso.equals("EER") ? 
+            (Integer.parseInt(cicescini)==Integer.parseInt(cicescini_act) ? Integer.parseInt(cicescini)-1 : cicescini): cicescini);
+        */
+        /*parameters.put("cicescini", cicescini_rep);*/
+        if(caso.equals("EER") || caso.equals("EERc")){
+            parameters.put("sqryIdalusCons",  request.getParameter("idalusCons").length()>0 ?
+                    " AND fo.idalu IN ("+request.getParameter("idalusCons")+")" :
+                    " AND ag.grado="+ request.getParameter("grado") + " AND ag.grupo='"+request.getParameter("grupo")+"' ");
+            if(caso.equals("EERc")){        
+                cicescinilib = cicescini;
+                cicescini = cicescini_ex;
+            }
+        }
+        parameters.put("cicescini", cicescini);
+        parameters.put("cicescinilib", cicescinilib);
         /* ********************* CONEXION A LA BASE DE DATOS ******************** */
         qryIfx = new SICEEO_QueriesInformix();
         qryIfx.conectar();
@@ -55,24 +74,12 @@
         /************************* PROCESAMIENTO DE DATOS ****************************/
         SICEEO_Reportes re = new SICEEO_Reportes(dr, request);
         /******* Verificar si existen Alumnos con Examenes Extraordinarios ***********/
-        re.isAluConExmExtOfic(parameters, cicescini, cveplan, grado, qryIfx);
+        re.isAluConExmExtOfCons(parameters, cicescini, cveplan, "", qryIfx);
         r += ""+cicescinilib+"/";
         /******** SE CREA EL DOCUMENTO PDF Y SE LE INSERTAN LOS DATOS **************/        
         
-        if (caso.equals("IAR"))
-            r+="IARPre";
-        if (caso.equals("Ra")){  // Para reporte de avances 2023-2024
-            str_of = qryIfx.isCalEvalGradoGrupoOficSinAlusDesofic(idcct, cicescini, grado, grupo, cveplan.equals("3")?"EVALUACION":"CALIFS BIM");
-            parameters.put("str_of", (str_of==true ? 1 : 0));
-            if(cveplan.equals("1") ) {                
-                r+= "RepAvaPrimG1-6";
-            } else {
-                if(grado.equals("2") || grado.equals("3"))
-                    r+="RepAvaSecG2-3";     
-                else 
-                    r+="RepAvaSecG1";     
-            }
-        }
+        if (caso.equals("EER") || caso.equals("EERc"))
+            r+="constanciaExRegularizacion";        
 
         reportFile = new File(application.getRealPath("")+"/../reportes/siceeo/"+r+".jasper");
         byte[] bytes =JasperRunManager.runReportToPdf(reportFile.getPath(),parameters, /*new JREmptyDataSource()*/qryIfx.getConexion());

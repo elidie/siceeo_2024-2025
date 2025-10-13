@@ -165,7 +165,7 @@ function frmwSecHist_Create()
                                                     +'<div><label class="colorDeResalte">Debe en grado anterior: </label><label id="lblTCalif2do_matrepant"></label></div>'
                                                     +'<ul id="ubtnGuardaYCalif2do" class="buttonBar"> '
                                                         + '<li><a href="#" id="btnGdaCalif2do"  class="tam1Button" tabindex="201" title="Guardar"><label class="iconBtnGuardar icon-disquete"></label>Guardar</a></li>'
-                                                        /*+ '<li><a href="#" id="btnCalifDBim2do" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>'*/                                                        
+                                                        /*+ '<li><a href="#" id="btnCalifDBim2do" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>'*/
                                                     +'</ul> '
                                                 +'</div>');
                 $('#pnlExamExtraord2do').append('<div id="pnlExamenes2do" class="panel"><label class="tituloPanel">Exámenes por materia</label></div>');
@@ -209,7 +209,7 @@ function frmwSecHist_Create()
                                                     +'</ul> '
                                                     + '<ul id="ubtnGuardaYCalif3ro" class="buttonBar"> '
                                                         + '<li><a href="#" id="btnGdaCalif3ro"  class="tam1Button" tabindex="201" title="Guardar"><label class="iconBtnGuardar icon-disquete"></label>Guardar</a></li>'
-                                                        /*+ '<li><a href="#" id="btnCalifDBim3ro" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>'*/                                                        
+                                                        /*+ '<li><a href="#" id="btnCalifDBim3ro" tabindex="202" title="Calificación obtenida de bimestres">Calif. obtenida de bimestres</a></li>' */                                                        
                                                     +'</ul> '
                                                 +'</div>');
                 $('#pnlExamExtraord3ro').append('<div id="pnlExamenes3ro" class="panel"><label class="tituloPanel">Exámenes por materia</label></div>');
@@ -265,6 +265,12 @@ function insertarBotonOficial()
     
     if(sisVars.btnActualizaPromNivel)
         $("#ubtnGuardaPromNivel").append(sisVars.btnActualizaPromNivel);
+    
+    if(sisVars.btnCalifDBim1ro){
+        $("#ubtnGuardaYCalif1ro").append(sisVars.btnCalifDBim1ro);
+        $("#ubtnGuardaYCalif2do").append(sisVars.btnCalifDBim2do);
+        $("#ubtnGuardaYCalif3ro").append(sisVars.btnCalifDBim3ro);
+    }
 }
 
 function frmwSecHist_FormActivate() 
@@ -436,9 +442,8 @@ function initTablaExmExt (nombreTablaExmExt, tblExmExt, cbxTExm_Column1, cbxTExm
     var tabla = new Tabla ();
     if(typeof(tblExmExt) !== "undefined" && tblExmExt!==null) {
         if($("#"+nombreTablaExmExt).length>0)
-            $("#"+nombreTablaExmExt).remove();
-                
-        if(typeof(msgExm) !== "undefined" && msgExm!==null && msgExm.length>0){            
+            $("#"+nombreTablaExmExt).remove();            
+        if(typeof(msgExm) !== "undefined" && msgExm!==null && msgExm.length>0 || exmExtOf===true){                
             $("#lbl"+nombreTablaExmExt.replace("tbl","")).remove();
             $("#"+nombreTablaExmExt.replace("tbl","scrl")).append("<label id='lbl"+nombreTablaExmExt.replace("tbl","")+"'>"+msgExm+"</label>");
             habDesBtnExmExt(nombreTablaExmExt,exmExtOf, promedio);
@@ -484,7 +489,7 @@ function initTablaExmExt (nombreTablaExmExt, tblExmExt, cbxTExm_Column1, cbxTExm
 }
 
 function habDesBtnExmExt (nombreTabla,exmExtOf, promedio)
-{    
+{        
     var n_grado = nombreTabla.replace("tblExmExt","");
     
     if(typeof(exmExtOf) !== "undefined" && exmExtOf!==null && exmExtOf && parseFloat(promedio)>=6.0)                                        
@@ -524,7 +529,7 @@ function tblCalif_ChangeSelectedItem (nombreTablaCalif, nombreTablaExmExt, grado
                             idccts = jsSeHi.cbxTExm2do_idccts;
                         }
                         
-                        msg = (grado===1 ? jsSeHi.msgExm1ro : (grado===2 ? jsSeHi.msgExm2do : (grado===3 ? jsSeHi.msgExm3ro : "") ) );
+                        msg = result.msgExmExt;//(grado===1 ? jsSeHi.msgExm1ro : (grado===2 ? jsSeHi.msgExm2do : (grado===3 ? jsSeHi.msgExm3ro : "") ) );
                         var exmExtOf = result.exmExtOf;
                         if(parseFloat(filaConDatos.promedio)>=6.0 && parseFloat(filaConDatos.califant)===0.0)
                             exmExtOf = true;
@@ -1551,7 +1556,9 @@ function mwfExmExtraordinarios_Create (nombreTabla)
                             $('#pnlDatosGeneralesExmExt').append('<label id="lblTblExmExt_cicescini">'+tblCalif.cicescini+'</label>');
         $('#pnlExmExtraordinarios').append('<div id="pnlListadoDeExmXMat" class="panel">'
                                             + '<label class="tituloPanel">Seleccione las materias para oficializar</label>'
-                                            + '<div id="pnlTblExmExtXMat">  <div id="scrlExmExtXMat" class="scrollTable"></div>  </div>'
+                                            + '<div id="pnlTblExmExtXMat">'
+                                                //+' <div id="pnlSelAlumCons"><input type="checkbox" id="ckbTodos" name="ckbTodos_Cons" value="ckbTodos"><label>Seleccionar todos</label></div>'
+                                                +' <div id="scrlExmExtXMat" class="scrollTable"></div>  </div>'
                                         +'</div>');
         $('#pnlExmExtraordinarios').append('<ul class="buttonBar"> '                                            
                                             + '<li><a href="#" id="btnOficExmExt"><label class="icon-sello"></label> Oficializar</a></li>'                                            
@@ -1561,6 +1568,7 @@ function mwfExmExtraordinarios_Create (nombreTabla)
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------    
     $("#btnOficCancelar").on('click',function(){ mwfExmExtraordinarios_Close(); });
     $("#btnOficExmExt").on('click',function(){ btnOficExmExt_Click(); });
+    //$("#ckbTodos").on ('click', function(){ ckbSelTodos_Click(); });
 }
 function mwffExmExtraordinarios_FormActivate (nombreTabla, grado)
 {    
@@ -1611,10 +1619,10 @@ function initTablaMateriasParaOficializar (tblExmExtXMat)
     var tabla = new Tabla();
     var tituloColumnas, colsNameToShow, claseColumnas, textAlign;
     
-    tituloColumnas = ["Seleccionar","idalu","GRADO","CVEMAT","MATERIA","DIA","MES","AÑO","PROMEDIO"];
-    colsNameToShow = ["selec","idalu","grado","cvemat","desmat","dia","mes","anio","promedio","idperexmext"];
+    tituloColumnas = ["Seleccionar","MATERIA","DIA","MES","AÑO","PROMEDIO","GRADO","CVEMAT","idalu"];
+    colsNameToShow = ["selec","desmat","dia","mes","anio","promedio","grado","cvemat","idalu","idperexmext"];
     claseColumnas = ["checkbox","","","","","","","","","hidden"];
-    textAlign = ["center","","","",,"","","","","",""];
+    textAlign = ["center","","","","","","","","",""];
     
     tabla.create("scrlExmExtXMat","tblExmExtXMat",tblExmExtXMat, tituloColumnas, colsNameToShow, claseColumnas, textAlign, true, null, null ,
     function (f,c) {
@@ -1631,7 +1639,7 @@ function initTablaMateriasParaOficializar (tblExmExtXMat)
     for (var i=0; i<tblExmExtXMat.length; i++)
         if (tblExmExtXMat[i].selec === 't'){
             document.getElementById("tblExmExtXMat_chk_f"+i+"_c0").checked = true;
-            $("#pnlExmExtraordinarios #tblExmExtXMat_chk_f"+i+"_c0").prop('disabled', true);
+            //$("#pnlExmExtraordinarios #tblExmExtXMat_chk_f"+i+"_c0").prop('disabled', true);
         }    
 }
 
@@ -1639,22 +1647,24 @@ function btnOficExmExt_Click()
 {
     var mensaje = new Mensajes ();
     var tabla = new Tabla();
-    var reglon="";
+    var j=0;
+    var tblAluMatOf = new Array();
     
     var tblExmExtXMat = tabla.getTable("tblExmExtXMat",["selec","idalu","grado","cvemat","cvetipmat","desmat","cicescini","promedio","idperexmext"], null,"JSON");
-    for (var i=0; i<tblExmExtXMat.length; i++)
-        if (tblExmExtXMat[i].selec === "true") {
-            reglon += (reglon===""?"":", ") + tblExmExtXMat[i].idalu+"~"+tblExmExtXMat[i].grado+"~"+tblExmExtXMat[i].cvetipmat;
-            reglon += "~"+tblExmExtXMat[i].cvemat+"~"+tblExmExtXMat[i].desmat+"~"+tblExmExtXMat[i].cicescini+"~"+tblExmExtXMat[i].promedio+"~"+tblExmExtXMat[i].idperexmext;  
-        }
-    if (reglon === "")
-        mensaje.General("ESPECIFIQUE_DATO","por lo menos un registro para la oficialización");
-    else if ( mensaje.confirmDialog("OFIC_EXTRAOR","examenes extraordinarios") ){
+    
+    for (var i=0; i<tblExmExtXMat.length; i++){        
+        if (tblExmExtXMat[i].selec === "true") {            
+            tblAluMatOf[j] = tblExmExtXMat[i].idalu+"~"+tblExmExtXMat[i].grado+"~"+tblExmExtXMat[i].cvetipmat
+                + "~"+tblExmExtXMat[i].cvemat+"~"+tblExmExtXMat[i].desmat+"~"+tblExmExtXMat[i].cicescini+"~"+tblExmExtXMat[i].promedio+"~"+tblExmExtXMat[i].idperexmext;  
+            j++;    
+        } 
+    }
+    if ( mensaje.confirmDialog("OFIC_EXTRAOR","examenes extraordinarios") ){
         var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
         //------------------ Establecemos los datos a enviar -------------------
         var datos = {
             modulo:"SeHi", metodo:"btnOfExmExt", 
-            matsel:reglon, tblExmExtXMat: tblExmExtXMat, txtUsuario:sisVars.usuario
+            tblAluMatOf:tblAluMatOf, tblExmExtXMat: tblExmExtXMat, txtUsuario:sisVars.usuario
         };
         //------------------------- Hacemos la llamada -------------------------
         cargarLoading();

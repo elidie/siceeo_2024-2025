@@ -373,7 +373,7 @@ public class SICEEO_Mensajes {
         else if (tipo.equals("EXISTEN_REP"))     {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No es posible realizar esta actualización, el alumno tiene materias reprobadas en: "+texto1+"\n\nDeberá realizar el proceso correspondiente para sus examenes de regularización."; }
         else if (tipo.equals("MAT_OF_OK"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "¡No se guardo el dato!. El registro del examen ya se encuentra oficializado.\n\nConsulte con la UDR correspondiente.";  }
         else if (tipo.equals("EXM_EXT_CORR_REP"))      {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Calificaciones reprobatorias no estan permitidas. En este caso si la calificación correcta es reprobatoria deberá eliminar el registro de su examen de Regularización.";  }
-        
+     
         datosReturn.put("tipoMensaje",tipoMensaje[0]);      datosReturn.put("mensaje",tipoMensaje[1]);
     }
 //************************************************************************************************************

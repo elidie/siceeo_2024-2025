@@ -103,7 +103,7 @@ function initInformacion ()
     $('#lblUnidad').text(sisVars.unidad);
     $('#lblIp').text(sisVars.ip);
     $('#lblFecha').text(sisVars.fecha);
-    if ( $('#lblVersionSis').html().trim().indexOf(sisVars.versionSis) === -1  || sisVars.versionSis!=="15.8.5") {
+    if ( $('#lblVersionSis').html().trim().indexOf(sisVars.versionSis) === -1  || sisVars.versionSis!=="15.9.0") {
         $("#lblVersionSis").css("color","red");
         mensaje.Principal("VERSION_NO_ACTUALIZADA",sisVars.versionSis);
     } else {
@@ -439,7 +439,7 @@ function btnExalumnos_Click ()
             if (numRows>0){
                 var tblPrincipal = tabla.getSelectedRow("tblPrincipal",["idcct","modalidad","cct","cveplan","cicescini","grado","grupo"], null, "JSON"); //tabla.getRow("tblPrincipal",numRows-1,["idcct","modalidad","cct","cveplan","cicescini"], null, "JSON")
                 if (tblPrincipal.grado === "3")
-                    frmwExalumnos_Show (tblPrincipal/*{idcct:"1826", modalidad:"DES", cct:"20DES0083C", cveplan:"2", cicescini:"2016"}*/);
+                    frmwExalumnos_Show (tblPrincipal);/*{idcct:"1826", modalidad:"DES", cct:"20DES0083C", cveplan:"2", cicescini:"2016"}*/
                 else
                     mensaje.Exalumnos ("GRADO_SEL_INCORRECTO");
             }else

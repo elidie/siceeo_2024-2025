@@ -68,7 +68,7 @@ public class SICEEO_NewIngresoPri {
     {
         String edadValida, newIdTutor="", entNac="", cveprograma, existeUno, Probem="", Extj="", fechaIng="";
         boolean hacerCommit=false;
-        String txtCurp, curpRaiz, fecini;
+        String txtCurp, curpRaiz;
         int edad, QMaxIdXEsc_libreidalu, QMaximosA_maxlibrea;
         ArrayList<Map> QBuskAlum = null;
         Map planMod, QMaximosP;
@@ -140,11 +140,13 @@ public class SICEEO_NewIngresoPri {
                 if(!fechaIngreso.substring(4, 5).equals("/") || !fechaIngreso.substring(7, 8).equals("/"))                        
                     throw new SICEEO_Excepcion (0,"FECHA_FOR_INCORR");
                 fechaIng = fechaIngreso;
-                fecini = ""+sesion.getAttribute("feciniciclo");                 
-                Date fecha1 = formato.parse(fechaIng.replace('/', '-'));
-                Date fecha2 = formato.parse(fecini);
                 
-                if( fecha1.before(fecha2))
+                
+                Date fechaCap = formato.parse(fechaIng.replace('/', '-'));
+                Date fechaIniCiclo = formato.parse(""+sesion.getAttribute("feciniciclo"));
+                Date fechaFinCiclo = formato.parse(""+sesion.getAttribute("fecfinciclo"));
+                
+                if( fechaCap.before(fechaIniCiclo) || fechaCap.after(fechaFinCiclo))
                     throw new SICEEO_Excepcion (0,"FECHA_NO_VALIDO");
             }
             
@@ -264,7 +266,7 @@ public class SICEEO_NewIngresoPri {
                 this.dr.put("alumEstatus", "X");
                 //--Vista--> l_idalu.Caption:='';
                 
-                hacerCommit=true; //comentado hoy 17-06-2025
+                hacerCommit=true; //comentado hoy 02-10-2025
             }
         }catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("INDISPUESTO", ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.NewIngresoPri(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }

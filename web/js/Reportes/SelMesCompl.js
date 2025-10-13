@@ -7,7 +7,7 @@
 var jsSelMesCompl;
 
 function mwfSelMesCompl_Show(tblPrincipal_selRow)
-{
+{    
     jsSelMesCompl={
         tblPrincipal_cicescini: tblPrincipal_selRow.cicescini,
         tblPrincipal_cicescinilib: tblPrincipal_selRow.cicescinilib,
@@ -36,19 +36,13 @@ function mwfSelMesCompl_Create ()
     modalWindow_Create ("SelMesCompl", "Mes de etapa complementaria",mwfSelMesCompl_Close, 200, {anchoAutoajustable:false});
     $('#mwfpSelMesCompl').append('<div id="pnlSelMesCompl"></div>');
         
-        $('#pnlSelMesCompl').append('<div id="pnlCompRec_alum"><input type="radio" id="rbnRec" name="rbgRecExt_Compl" value="rbnRec"><label>Complementaria de alumnos de recuperación</label></div>');
+        /*$('#pnlSelMesCompl').append('<div id="pnlCompRec_alum"><input type="radio" id="rbnRec" name="rbgRecExt_Compl" value="rbnRec"><label>Complementaria de alumnos de recuperación</label></div>');
         $('#pnlSelMesCompl').append('<label id="lineaComp"></label>');
-        $('#pnlSelMesCompl').append('<div id="pnlCompExt_alum"><input type="radio" id="rbnExt" name="rbgRecExt_Compl" value="rbnExt"><label>Complementaria alumnos Extraordinarios.</label></div>');
+        $('#pnlSelMesCompl').append('<div id="pnlCompExt_alum"><input type="radio" id="rbnExt" name="rbgRecExt_Compl" value="rbnExt"><label>Complementaria alumnos Extraordinarios.</label></div>');*/
                                          
         $('#pnlSelMesCompl').append('<label id="lblInstrucciones">Seleccione el mes que corresponda a la etapa complementaria:</label>');
         $('#pnlSelMesCompl').append('<div id="pnlComboMes" class="combobox">'
-                                        + '<select id="cbxMesCompl">'
-                                            /*+ '<option value="JULIO">JULIO</option>'*/
-                                            + '<option value="AGOSTO">AGOSTO</option>'
-                                            + '<option value="SEPTIEMBRE">SEPTIEMBRE</option>'  
-                                            + '<option value="OCTUBRE">OCTUBRE</option>'  
-                                            + '<option value="ENERO">ENERO</option>'
-                                        + '</select>'
+                                        /* Combo del mes de la complementaria */
                                     +'</div>');
         $('#pnlSelMesCompl').append('<label id="lblSelEspAlus"> <input id="chkSelEspAlus" type="checkbox" name="chkSelEspAlus" value="espAlus">Agregar alumnos en específico</label>');
         $('#pnlSelMesCompl').append('<div id="pnlListadoDeAlumnos" class="panel">'
@@ -72,12 +66,12 @@ function mwfSelMesCompl_Create ()
 
 function mwffSelMesCompl_FormActivate ()
 {
-    var mensaje = new Mensajes ();
-    
+    var mensaje = new Mensajes ();    
     //------------------ Establecemos los datos a enviar -------------------
     var datos = {
         modulo:"Compl", metodo:"foAc", tblPrincipal_cicescini:jsSelMesCompl.tblPrincipal_cicescini, tblPrincipal_idcct:jsSelMesCompl.tblPrincipal_idcct, 
-        tblPrincipal_grado:jsSelMesCompl.tblPrincipal_grado, tblPrincipal_grupo:jsSelMesCompl.tblPrincipal_grupo, casoRep:"selMesCompl"
+        tblPrincipal_grado:jsSelMesCompl.tblPrincipal_grado, tblPrincipal_grupo:jsSelMesCompl.tblPrincipal_grupo, casoRep:"selMesCompl",
+        tblPrincipal_cicescinilib:jsSelMesCompl.tblPrincipal_cicescinilib
     };
     //------------------------- Hacemos la llamada -------------------------
     cargarLoading();
@@ -92,6 +86,10 @@ function mwffSelMesCompl_FormActivate ()
             case 1:
                     if (!result.canSelEspAlus)
                         $("#lblSelEspAlus").remove();
+                    if (result.cbxMesCompl) {
+                        $("#cbxMesCompl").remove();
+                        $("#pnlComboMes").append(result.cbxMesCompl);
+                    }
                 break;
             case 0: case -1:
                     mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
@@ -147,7 +145,7 @@ function chkSelEspAlus_Click ()
         //------------------ Establecemos los datos a enviar -------------------
     var datos = {
         modulo:"Compl", metodo:"geAlSeMeCo", tblPrincipal_cicescinilib:jsSelMesCompl.tblPrincipal_cicescinilib, tblPrincipal_idcct:jsSelMesCompl.tblPrincipal_idcct, 
-        tblPrincipal_grado:jsSelMesCompl.tblPrincipal_grado, tblPrincipal_grupo:jsSelMesCompl.tblPrincipal_grupo
+        tblPrincipal_grado:jsSelMesCompl.tblPrincipal_grado, tblPrincipal_grupo:jsSelMesCompl.tblPrincipal_grupo, idperexmext:$("#cbxMesCompl").val()
     };
     //------------------------- Hacemos la llamada -------------------------
     cargarLoading();
@@ -189,11 +187,11 @@ function btnImpMesCompl_Click ()
     var mensaje = new Mensajes();
     var idalus="",tipo_comp="";
     
-    if(!document.getElementById('rbnRec').checked && !document.getElementById('rbnExt').checked)
+    /*if(!document.getElementById('rbnRec').checked && !document.getElementById('rbnExt').checked)
         return mensaje.General ("ELEGIR_OPCION","de la complementaria deseada.");
     else if(document.getElementById('rbnRec').checked)
         tipo_comp = "c_PR";
-    else tipo_comp = "c_EX";
+    else tipo_comp = "c_EX";*/
         
     var tblAlumnos = tabla.getTable("tblAlumnos",["selec","idalu"], null,"JSON");
     for (var i=0; i<tblAlumnos.length; i++)
@@ -205,7 +203,7 @@ function btnImpMesCompl_Click ()
                 cveplan:jsSelMesCompl.tblPrincipal_cveplan, 
                 idcct:jsSelMesCompl.tblPrincipal_idcct, modalidad:jsSelMesCompl.tblPrincipal_modalidad, 
                 grado:jsSelMesCompl.tblPrincipal_grado, grupo:jsSelMesCompl.tblPrincipal_grupo, 
-                caso:"RELc", mesComplem:$("#cbxMesCompl").val(), idalus:idalus, tipo_comp:tipo_comp, 
+                caso:"RELc", idperexmext:$("#cbxMesCompl").val(), idalus:idalus, tipo_comp:tipo_comp, 
                 cicescini_act:jsSelMesCompl.tblPrincipal_cicescini });
     mwfSelMesCompl_Close();
 }

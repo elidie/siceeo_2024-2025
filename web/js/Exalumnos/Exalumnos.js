@@ -6,6 +6,7 @@
 var jsExalu;
 function frmwExalumnos_Show (tblPrincipal_selRow)
 {
+    
     jsExalu={
         tblPrincipal_cicescini:tblPrincipal_selRow.cicescini,
         tblPrincipal_cveplan: tblPrincipal_selRow.cveplan,
@@ -15,6 +16,7 @@ function frmwExalumnos_Show (tblPrincipal_selRow)
         
         tblPrincipal_grado:tblPrincipal_selRow.grado,
         tblPrincipal_grupo:tblPrincipal_selRow.grupo,
+        cicescini_ex: "",
         cicescinilib:null
     };
     
@@ -85,9 +87,11 @@ function frmwExalumnos_Create()
                                         +'</ul>');
                 $('#pnlBotonesDeControl').append('<ul id="ulImprel" class="buttonBar"> '
                                             +'<li><a href="#" id="btnImpRelComp" title="Imprime REL complementaria del 3er grado grupo '+jsExalu.tblPrincipal_grupo+'">Imp. REL comp. ('+jsExalu.tblPrincipal_grado+jsExalu.tblPrincipal_grupo+')</a></li>'
+                                            +'<li><a href="#" id="btnImpCons" title="Imprime constancia de examen de regularización. '+jsExalu.tblPrincipal_grupo+'">Constancia EER</a></li>'    
                                         +'</ul>');
             //$('#pnlExalumnos').append('<label id="lblRecomendaciones">¡NOTA IMPORTANTE! Revise su captura, cuenta con 5 días para foliar y firmar e imprimir a partir de que introduce los datos del examen, si rebasa el tiempo deberá acudir a su UDSE para este proceso.</label>');
         $("#frmfExalumnos").append('<div id="mwfmSelComplExalum" class="mwfModal" style="display:none"></div>');  
+        $("#frmfExalumnos").append('<div id="mwfmSelConsExalum" class="mwfModal" style="display:none"></div>');  
     
     insertarTablas_AlumMatsCertiYComen_Exal (null, null, null, null);
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------
@@ -111,7 +115,7 @@ function frmwExalumnos_Create()
     $("#btnImprimirCert").on('click',function(){ btnImprimirCert_Click();  return false;});
     //$("#btnUpdatePromFol").on('click',function(){ btnUpdatePromFol_Click();  return false;});
     $("#btnImpRelComp").on('click',function(){ btnImpRelComp_Click();  return false;});
-    
+    $("#btnImpCons").on('click',function(){ btnImpCons_Click();  return false;});    
 }
 
 function frmwExalumnos_FormActivate ()
@@ -261,6 +265,9 @@ var  btnBuskAlum_Exal_ActionPerformed = function ()
             case 1:
                     jsExalu.cicescinilib_ex = result.cicescinilib_ex;
                     jsExalu.cicescini_ex = result.cicescini_ex;
+                    if(!jsExalu.cicescini_ex)
+                        jsExalu.cicescini_ex = $("#txtCicesciniEstud").val().trim();
+                    
                     jsExalu.idaluEncontrado = result.idaluEncontrado;
                     //boton_setEnabled (result.btnCambSituacion_Enabled, 'btnCambSituacion');
                     //$("#btnCambSituacion").text(result.btnCambSituacion_Text);
@@ -525,3 +532,9 @@ var btnImpRelComp_Click = function ()
                             grupo:jsExalu.tblPrincipal_grupo, cicescinilib:jsExalu.cicescinilib_ex, cicescini_act:jsExalu.tblPrincipal_cicescini  });
 };
 
+var btnImpCons_Click = function ()
+{    
+    mwfSelConsExalum_Show ( {cicescini_ex:jsExalu.cicescini_ex, cveplan:jsExalu.tblPrincipal_cveplan, cct:jsExalu.tblPrincipal_cct, 
+                            idcct:jsExalu.tblPrincipal_idcct, modalidad:jsExalu.tblPrincipal_modalidad, grado:jsExalu.tblPrincipal_grado, 
+                            grupo:jsExalu.tblPrincipal_grupo, cicescinilib:jsExalu.cicescinilib_ex, cicescini:jsExalu.tblPrincipal_cicescini });
+};

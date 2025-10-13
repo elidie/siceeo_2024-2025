@@ -100,7 +100,7 @@ public class SICEEO_SecHist
             ModalActive(r.gP("tblAlumCapCalif_idalu"),r.gP("grado"),r.gP("tblCalif_cicescini") );
         
         else if (metodo.equals("btnOfExmExt"))
-            btnOficializaExmExt(dm.vstrToArrMap(r.gPV("tblExmExtXMat"), "~", new String[]{"selec","idalu","grado","cvemat","cvetipmat","cicescini","mes","anio"}),r.gP("matsel"), r.gP("txtUsuario"));
+            btnOficializaExmExt(dm.vstrToArrMap(r.gPV("tblAluMatOf"), "~", new String[]{"idalu","grado","cvetipmat","cvemat","desmat","cicescini","promedio","idperexmext"}), r.gP("txtUsuario"));
         
         else if (metodo.equals("btnActPromNiv"))
             btnActualizaPromNivel_Click(dm.vstrToArrMap(r.gPV("tblCalif3ro"), "~", new String[]{"cvemat","cvetipmat","califant","promedio","promedio_oldValue"}), 
@@ -436,12 +436,12 @@ public class SICEEO_SecHist
             /*Inicio ********************************** Metodo para verificar si ya se capturo el extraordinario *********************/            
             dr.put("tblCalif1ro",QCalif1ro); 
             msgExmExt = qryIfx.verificarExmExt(tblCalif1ro,cicescin, tblCalif1ro_cicescini,tblPrincipal_cveplan, tblCalif1ro_idalu, "1", dm);
-            if(!msgExmExt.isEmpty()){            
+            if(!msgExmExt.isEmpty()) {            
                 throw new SICEEO_Excepcion (-11,"ALUM_SIN_REGISTRO_EXTRA", msgExmExt);            
             }
             
             qryIfx.guardaTablaCalifNGdo (tblCalif1ro, cicescin, tblCalif1ro_cicescini, tblPrincipal_cveplan, tblCalif1ro_idalu, tblCalif1ro_almextrj, 
-                    txtUsuario, dm); //tipoUsuario 0 - sin permisos de oficializar, solo guarda promedio de grado, 
+                    txtUsuario, dm, 1); //tipoUsuario 0 - sin permisos de oficializar, solo guarda promedio de grado, 
                                                    //1- oficializa calificaciones y calcula promedio de nivel
             dr.put("tblCalif1ro",QCalif1ro=qryIfx.calif1ro (tblCalif1ro_idalu));
             
@@ -502,16 +502,18 @@ public class SICEEO_SecHist
     {
         int numFilas = tblExmExt1ro.size(), idperexmext=0;
         boolean hacerCommit = false;
-        boolean exmExtOf1 = false;
+        boolean exmExtOf1, matAprob;
         dm.recalcularPromGdo= false;
         ArrayList<Map> QCalif1ro;
         
         try {
             qryIfx.conectarConTransaccion();
             dr.put("tblExmExt1ro",qryIfx.exmExt1ro_onSelect (idalu_oldValue, cvetipmat_oldValue, cvemat_oldValue) );
-            exmExtOf1 = qryIfx.verificaExmExtOfXMat(idalu_oldValue, tblCalif1ro_cicescini, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue);
-            dr.put("exmExtOf1",exmExtOf1);
-            
+            matAprob = qryIfx.materiaAprobada (idalu_oldValue, tblCalif1ro_cicescini, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue);  
+            if(matAprob)
+                throw new SICEEO_Excepcion (0,"MAT_SIN_REPROB",cvetipmat_oldValue+"-"+cvemat_oldValue);
+            exmExtOf1 = qryIfx.verificaExmExtOfXMat(idalu_oldValue, tblCalif1ro_cicescini, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue);            
+            dr.put("exmExtOf1",exmExtOf1);            
             if(exmExtOf1)
                     throw new SICEEO_Excepcion (0,"MAT_OF_OK",cvetipmat_oldValue+"-"+cvemat_oldValue);
             
@@ -519,8 +521,7 @@ public class SICEEO_SecHist
                 if (tblExmExt1ro.get(i).get("idarray").equals("")) {
                     if(dm.toFloat(tblExmExt1ro.get(i).get("promedio")) < 6.0 )
                         throw new SICEEO_Excepcion (0,"EXM_EXT_SIN_APROB");
-                    if((idperexmext=qryIfx.verificarFechaValidaExmExt(idalu_oldValue, tblCalif1ro_cicescini, ""+tblExmExt1ro.get(i).get("idcct_apl"), grado_oldValue, cvemat_oldValue, 
-                        cvetipmat_oldValue, ""+tblExmExt1ro.get(i).get("dia"), ""+tblExmExt1ro.get(i).get("mes"),""+tblExmExt1ro.get(i).get("anio")))==0)
+                    if((idperexmext=qryIfx.verificarFechaValidaExmExt(""+tblExmExt1ro.get(i).get("dia"), ""+tblExmExt1ro.get(i).get("mes"),""+tblExmExt1ro.get(i).get("anio")))==0)
                         throw new SICEEO_Excepcion (0,"FECHA_INVALIDA");
                 
                     qryIfx.exmExt1ro_onInsert (idalu_oldValue, tblCalif1ro_cicescini, ""+tblExmExt1ro.get(i).get("idcct_apl"), grado_oldValue, cvemat_oldValue, 
@@ -533,12 +534,14 @@ public class SICEEO_SecHist
                             /* No se debe editar el registro ya capturado */
                             if(dm.toFloat(""+tblExmExt1ro.get(i).get("promedio")) < 6.0 )
                                 throw new SICEEO_Excepcion (0,"EXM_EXT_CORR_REP");
+                            if((idperexmext=qryIfx.verificarFechaValidaExmExt(""+tblExmExt1ro.get(i).get("dia"), ""+tblExmExt1ro.get(i).get("mes"),""+tblExmExt1ro.get(i).get("anio")))==0)
+                                throw new SICEEO_Excepcion (0,"FECHA_INVALIDA");
                             else {
                                 qryIfx.exmExt1ro_onUpdate (""+tblExmExt1ro.get(i).get("idcct_apl"), ""+tblExmExt1ro.get(i).get("dia"), ""+tblExmExt1ro.get(i).get("mes"), 
                                         ""+tblExmExt1ro.get(i).get("anio"), ""+tblExmExt1ro.get(i).get("promedio"), txtUsuario, idalu_oldValue, 
                                         ""+tblExmExt1ro_OldValues.get(j).get("idcct_apl"), grado_oldValue, cvetipmat_oldValue, cvemat_oldValue, 
                                         ""+tblExmExt1ro_OldValues.get(j).get("dia"), ""+tblExmExt1ro_OldValues.get(j).get("mes"), ""+tblExmExt1ro_OldValues.get(j).get("anio"), 
-                                        ""+tblExmExt1ro_OldValues.get(j).get("promedio"), tblCalif1ro_cicescini,dm); 
+                                        ""+tblExmExt1ro_OldValues.get(j).get("promedio"), tblCalif1ro_cicescini,dm,idperexmext); 
                                 
                                 tblExmExt1ro_OldValues.remove(j);                   //Si ya lo analizamos lo quitamos
                                 break;
@@ -566,7 +569,7 @@ public class SICEEO_SecHist
             }
             dr.put("reCaProm",dm.recalcularPromGdo);
             dr.put("tblExmExt1ro",qryIfx.exmExt1ro_onSelect (idalu_oldValue, cvetipmat_oldValue, cvemat_oldValue) );
-            //hacerCommit = true;  //Comentado hoy 22-07-2025
+            hacerCommit = true;  //Comentado hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.SecHist(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
@@ -594,7 +597,7 @@ public class SICEEO_SecHist
                 throw new SICEEO_Excepcion (-11,"ALUM_SIN_REGISTRO_EXTRA", msgExmExt);                        
             /*Fin ******************************************************************************************************************/            
             qryIfx.guardaTablaCalifNGdo (tblCalif2do, cicescin, tblCalif2do_cicescini, tblPrincipal_cveplan, tblCalif2do_idalu, tblCalif2do_almextrj, 
-                    txtUsuario, dm); 
+                    txtUsuario, dm, 2); 
             dr.put("tblCalif2do",QCalif2do = qryIfx.calif2do (tblCalif2do_idalu));
             
             actualizaReprobadas(this.qryIfx, tblCalif2do_idalu, tblCalif2do_cicescini, tblCalif3ro_cicescini, tblCalif1ro_matrepact,
@@ -654,13 +657,16 @@ public class SICEEO_SecHist
     {
         int numFilas = tblExmExt2do.size(), idperexmext=0;
         boolean hacerCommit = false;
-        boolean exmExtOf2 = false;
+        boolean exmExtOf2, matAprob;
         dm.recalcularPromGdo= false;
         ArrayList<Map> QCalif2do;
         
         try {
             qryIfx.conectarConTransaccion();
             dr.put("tblExmExt2do",qryIfx.exmExt2do_onSelect (idalu_oldValue, cvetipmat_oldValue, cvemat_oldValue) );                        
+            matAprob = qryIfx.materiaAprobada (idalu_oldValue, tblCalif2do_cicescini, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue);  
+            if(matAprob)
+                throw new SICEEO_Excepcion (0,"MAT_SIN_REPROB",cvetipmat_oldValue+"-"+cvemat_oldValue);
             exmExtOf2 = qryIfx.verificaExmExtOfXMat(idalu_oldValue, tblCalif2do_cicescini, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue);
             dr.put("exmExtOf2",exmExtOf2);
             
@@ -672,10 +678,9 @@ public class SICEEO_SecHist
                 if (tblExmExt2do.get(i).get("idarray").equals("") ) {
                     if(dm.toFloat(tblExmExt2do.get(i).get("promedio")) < 6.0 )
                         throw new SICEEO_Excepcion (0,"EXM_EXT_SIN_APROB");
-                    /*if((idperexmext = qryIfx.verificarFechaValidaExmExt(idalu_oldValue, tblCalif2do_cicescini, ""+tblExmExt2do.get(i).get("idcct_apl"), grado_oldValue, cvemat_oldValue, 
-                        cvetipmat_oldValue, ""+tblExmExt2do.get(i).get("dia"), ""+tblExmExt2do.get(i).get("mes"),""+tblExmExt2do.get(i).get("anio")))==0)
+                    if((idperexmext = qryIfx.verificarFechaValidaExmExt(""+tblExmExt2do.get(i).get("dia"), ""+tblExmExt2do.get(i).get("mes"),""+tblExmExt2do.get(i).get("anio")))==0)
                         throw new SICEEO_Excepcion (0,"FECHA_INVALIDA");
-                    */
+                    
                     qryIfx.exmExt2do_onInsert (idalu_oldValue, tblCalif2do_cicescini, ""+tblExmExt2do.get(i).get("idcct_apl"), grado_oldValue, cvemat_oldValue, 
                         cvetipmat_oldValue, ""+tblExmExt2do.get(i).get("dia"), ""+tblExmExt2do.get(i).get("mes"),""+tblExmExt2do.get(i).get("anio"), 
                         ""+tblExmExt2do.get(i).get("promedio"), idperexmext, txtUsuario);
@@ -685,12 +690,14 @@ public class SICEEO_SecHist
                                 && Integer.parseInt(""+tblExmExt2do_OldValues.get(j).get("anio"))>=2025){
                             if(dm.toFloat(""+tblExmExt2do.get(i).get("promedio")) < 6.0 )
                                 throw new SICEEO_Excepcion (0,"EXM_EXT_CORR_REP");  
+                            if((idperexmext = qryIfx.verificarFechaValidaExmExt(""+tblExmExt2do.get(i).get("dia"), ""+tblExmExt2do.get(i).get("mes"), ""+tblExmExt2do.get(i).get("anio")))==0)
+                                throw new SICEEO_Excepcion (0,"FECHA_INVALIDA");
                             else {
                                 qryIfx.exmExt2do_onUpdate (""+tblExmExt2do.get(i).get("idcct_apl"), ""+tblExmExt2do.get(i).get("dia"), ""+tblExmExt2do.get(i).get("mes"), 
                                         ""+tblExmExt2do.get(i).get("anio"), ""+tblExmExt2do.get(i).get("promedio"), txtUsuario, idalu_oldValue, 
                                         ""+tblExmExt2do_OldValues.get(j).get("idcct_apl"), grado_oldValue, cvetipmat_oldValue, cvemat_oldValue, 
                                         ""+tblExmExt2do_OldValues.get(j).get("dia"), ""+tblExmExt2do_OldValues.get(j).get("mes"), ""+tblExmExt2do_OldValues.get(j).get("anio"), 
-                                        ""+tblExmExt2do_OldValues.get(j).get("promedio"), tblCalif2do_cicescini, dm);
+                                        ""+tblExmExt2do_OldValues.get(j).get("promedio"), tblCalif2do_cicescini, dm, idperexmext);
                                 tblExmExt2do_OldValues.remove(j);                   //Si ya lo analizamos lo quitamos
                                 break;
                             }
@@ -720,7 +727,7 @@ public class SICEEO_SecHist
             dr.put("reCaProm",dm.recalcularPromGdo);
                 dr.put("tblExmExt2do",qryIfx.exmExt2do_onSelect (idalu_oldValue, cvetipmat_oldValue, cvemat_oldValue) );
             
-            //hacerCommit = true; // comentado hoy 22-07-2025
+            hacerCommit = true; // comentado hoy 22-07-2025
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.SecHist(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
@@ -749,7 +756,8 @@ public class SICEEO_SecHist
             if(!msgExmExt.isEmpty())               
                 throw new SICEEO_Excepcion (-11,"ALUM_SIN_REGISTRO_EXTRA", msgExmExt);                        
             
-            qryIfx.guardaTablaCalifNGdo (tblCalif3ro, cicescin, ""+tblCalif3ro_cicescini, tblPrincipal_cveplan, tblCalif3ro_idalu, tblCalif3ro_almextrj, txtUsuario, dm); 
+            qryIfx.guardaTablaCalifNGdo (tblCalif3ro, cicescin, ""+tblCalif3ro_cicescini, tblPrincipal_cveplan, tblCalif3ro_idalu, 
+                    tblCalif3ro_almextrj, txtUsuario, dm,3); 
                                                    
             dr.put("tblCalif3ro",QCalif3ro = qryIfx.calif3ro (tblCalif3ro_idalu));
             
@@ -817,13 +825,16 @@ public class SICEEO_SecHist
     {
         int numFilas = tblExmExt3ro.size(), idperexmext=0;
         boolean hacerCommit = false;
-        boolean exmExtOf3 = false;
+        boolean exmExtOf3, matAprob;
         dm.recalcularPromGdo= false;
         ArrayList<Map> QCalif3ro;
         
         try{
             qryIfx.conectarConTransaccion();
             dr.put("tblExmExt3ro",qryIfx.exmExt3ro_onSelect (idalu_oldValue, cvetipmat_oldValue, cvemat_oldValue) );
+            matAprob = qryIfx.materiaAprobada (idalu_oldValue, tblCalif3ro_cicescini, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue);  
+            if(matAprob)
+                throw new SICEEO_Excepcion (0,"MAT_SIN_REPROB",cvetipmat_oldValue+"-"+cvemat_oldValue);
             exmExtOf3 = qryIfx.verificaExmExtOfXMat(idalu_oldValue, tblCalif3ro_cicescini, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue);            
             dr.put("exmExtOf3",exmExtOf3);
             
@@ -835,8 +846,7 @@ public class SICEEO_SecHist
                 if (tblExmExt3ro.get(i).get("idarray").equals("")) {
                     if(dm.toFloat(tblExmExt3ro.get(i).get("promedio")) < 6.0 )
                         throw new SICEEO_Excepcion (0,"EXM_EXT_SIN_APROB");
-                    if((idperexmext = qryIfx.verificarFechaValidaExmExt(idalu_oldValue, tblCalif3ro_cicescini, ""+tblExmExt3ro.get(i).get("idcct_apl"), grado_oldValue, cvemat_oldValue, 
-                        cvetipmat_oldValue, ""+tblExmExt3ro.get(i).get("dia"), ""+tblExmExt3ro.get(i).get("mes"),""+tblExmExt3ro.get(i).get("anio")))==0)
+                    if((idperexmext = qryIfx.verificarFechaValidaExmExt(""+tblExmExt3ro.get(i).get("dia"), ""+tblExmExt3ro.get(i).get("mes"),""+tblExmExt3ro.get(i).get("anio")))==0)
                         throw new SICEEO_Excepcion (0,"FECHA_INVALIDA");
                     qryIfx.exmExt3ro_onInsert (idalu_oldValue, tblCalif3ro_cicescini, ""+tblExmExt3ro.get(i).get("idcct_apl"), grado_oldValue, cvemat_oldValue, 
                         cvetipmat_oldValue, ""+tblExmExt3ro.get(i).get("dia"), ""+tblExmExt3ro.get(i).get("mes"),""+tblExmExt3ro.get(i).get("anio"), 
@@ -848,13 +858,15 @@ public class SICEEO_SecHist
                         {           
                             if(dm.toFloat(""+tblExmExt3ro.get(i).get("promedio")) < 6.0 )
                                 throw new SICEEO_Excepcion (0,"EXM_EXT_CORR_REP");
+                            if((idperexmext = qryIfx.verificarFechaValidaExmExt(""+tblExmExt3ro.get(i).get("dia"), ""+tblExmExt3ro.get(i).get("mes"), ""+tblExmExt3ro.get(i).get("anio")))==0)
+                                throw new SICEEO_Excepcion (0,"FECHA_INVALIDA");
                             else {
                                 /* No se debe editar el registro ya capturado */
                                 qryIfx.exmExt3ro_onUpdate (""+tblExmExt3ro.get(i).get("idcct_apl"), ""+tblExmExt3ro.get(i).get("dia"), ""+tblExmExt3ro.get(i).get("mes"), 
                                         ""+tblExmExt3ro.get(i).get("anio"), ""+tblExmExt3ro.get(i).get("promedio"), txtUsuario, idalu_oldValue, 
                                         ""+tblExmExt3ro_OldValues.get(j).get("idcct_apl"), grado_oldValue, cvetipmat_oldValue, cvemat_oldValue, 
                                         ""+tblExmExt3ro_OldValues.get(j).get("dia"), ""+tblExmExt3ro_OldValues.get(j).get("mes"), ""+tblExmExt3ro_OldValues.get(j).get("anio"), 
-                                        ""+tblExmExt3ro_OldValues.get(j).get("promedio"), tblCalif3ro_cicescini, dm);
+                                        ""+tblExmExt3ro_OldValues.get(j).get("promedio"), tblCalif3ro_cicescini, dm, idperexmext);
                                 tblExmExt3ro_OldValues.remove(j);                   //Si ya lo analizamos lo quitamos
                                 break;
                             }
@@ -882,7 +894,7 @@ public class SICEEO_SecHist
             dr.put("reCaProm",dm.recalcularPromGdo);
             
             dr.put("tblExmExt3ro",qryIfx.exmExt3ro_onSelect (idalu_oldValue, cvetipmat_oldValue, cvemat_oldValue) );
-            //hacerCommit = true; //Comentado hoy 22-07-2025
+            hacerCommit = true; //Comentado hoy 22-07-2025
         } catch (SQLException ex){ 
             this.dr.put("returnCase", -1); 
             if(ex.getMessage().contains("Unique") && ex.getMessage().contains("idalumno"))
@@ -913,8 +925,7 @@ public class SICEEO_SecHist
             msgExmExt = qryIfx.verificarExmExt(tblCalif3ro,cicescin, ""+tblCalif3ro_cicescini,tblPrincipal_cveplan, tblCalif3ro_idalu, "3", dm);
             if(!msgExmExt.isEmpty())               
                 throw new SICEEO_Excepcion (-11,"ALUM_SIN_REGISTRO_EXTRA", msgExmExt);                        
-            
-            //qryIfx.guardaTablaCalifNGdo (tblCalif3ro, cicescin, ""+tblCalif3ro_cicescini, tblPrincipal_cveplan, tblCalif3ro_idalu, tblCalif3ro_almextrj, txtUsuario, dm);                                                                            
+                        
             actualizaReprobadas(this.qryIfx, tblCalif3ro_idalu, ""+tblCalif2do_cicescini, tblCalif3ro_cicescini, tblCalif1ro_matrepact,
                     tblCalif2do_matrepact, tblCalif1ro_size, tblCalif2do_size, tblCalif3ro.size());
             
@@ -928,8 +939,8 @@ public class SICEEO_SecHist
             
             if(tblCalif1ro_matrepact+tblCalif2do_matrepact+matrepact3ro > 0 || Integer.parseInt(""+QCalif3ro.get(0).get("matrepant"))>0) {
                 msg = (tblCalif1ro_matrepact>0 ? "1er":"");
-                msg += msg.length()>0 ? ", ": "" +(tblCalif2do_matrepact>0 ? "2do":"");
-                msg += msg.length()>0 ? ", ": "" +(matrepact3ro>0 ? "3er":"")+" grado ";
+                msg += (tblCalif2do_matrepact>0 ? (msg.length()>0 ? ", 2do":"2do"): "");
+                msg += (matrepact3ro>0 ? (msg.length()>0 ? ", 3ro":"3ro"): "")+" grado ";
                 if(msg.length()==0)
                     msg = "otros";
                 throw new SICEEO_Excepcion (-11,"EXISTEN_REP",msg);
@@ -1002,21 +1013,24 @@ public class SICEEO_SecHist
         
     }
     
-    private void btnOficializaExmExt (ArrayList<Map>tblExmExtXMat, String matOfic, String txtusuario) {        
+    private void btnOficializaExmExt (ArrayList<Map>tblAluMatOf, String txtusuario) {        
         String[] tblOfExmExt,tblregistro;
-        String strQry="",promedioLetra="";
+        String promedioLetra="";
         boolean hacerCommit = false;
-        int i;
+        int i,numFilas = tblAluMatOf.size();
+        
         try
         {
             qryIfx.conectarConTransaccion();                        
-            if(!matOfic.isEmpty()) {
-                tblOfExmExt = matOfic.split(",");
-                for(i=0; i<tblOfExmExt.length; i++) {                    
-                    tblregistro = (tblOfExmExt[i]).split("~"); //idalu,grado,cvemat,cvetipmat,desmat,cicescini,promedio,idperexmext
-                    if(tblregistro.length==8) {
-                        promedioLetra = dm.convertirPromedioALetra(tblregistro[6]);
-                        qryIfx.oficExmExtXMat(tblregistro[0],tblregistro[1],tblregistro[2],tblregistro[3],tblregistro[4],tblregistro[5],tblregistro[7], promedioLetra, txtusuario); 
+            if(numFilas>0) {                
+                for(i=0; i<numFilas; i++) {                    
+                     //idalu,grado,cvemat,cvetipmat,desmat,cicescini,promedio,idperexmext
+                    if(tblAluMatOf.get(i).get("promedio")!="") {
+                        promedioLetra = dm.convertirPromedioALetra(""+tblAluMatOf.get(i).get("promedio"));
+                        qryIfx.oficExmExtXMat(""+tblAluMatOf.get(i).get("idalu"),""+tblAluMatOf.get(i).get("grado"),
+                            ""+tblAluMatOf.get(i).get("cvetipmat"),""+tblAluMatOf.get(i).get("cvemat"),
+                            ""+tblAluMatOf.get(i).get("desmat"),""+tblAluMatOf.get(i).get("cicescini"),
+                            ""+tblAluMatOf.get(i).get("idperexmext"), promedioLetra, txtusuario); 
                     }
                     else
                         throw new SICEEO_Excepcion(0,"DATOS_INCOMP");

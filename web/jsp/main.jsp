@@ -67,6 +67,7 @@
         <link rel="stylesheet" href="../estilos/Oficializaciones/Desoficializar.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Reportes/Complementaria.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Reportes/SelMesCompl.css<%=hora%>" />
+        <link rel="stylesheet" href="../estilos/Reportes/SelMesCons.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Calificaciones/RevisaGpo.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Exalumnos/Exalumnos.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Exalumnos/SelComplExalum.css<%=hora%>" />
@@ -82,7 +83,7 @@
                     <li title="Usuario"><label id="iconUsuario" class="icon-usuarios iconInfo"></label><label id="lblUsuario"> ... </label>  </li>
                     <li title="Región administrativa"><label id="iconUnidad" class="icon-oaxaca iconInfo"></label><label id="lblUnidad"> ... </label>  </li>
                     <li title="Hora de ingreso a SICEEO"><label id="iconFecha" class="icon-calendreloj iconInfo"></label><label id="lblFecha"> ... </label></li>
-                    <li title="Versión"><label id="iconVersionSis" class="icon-engrane iconInfo"></label><label id="lblVersionSis"> Versión 15.8.5 </label></li>
+                    <li title="Versión"><label id="iconVersionSis" class="icon-engrane iconInfo"></label><label id="lblVersionSis"> Versión 15.9.0 </label></li>
                 </ul>
             </div>
             <div id="pnlBusquedaCCT">
@@ -205,8 +206,10 @@
         <script src="../js/Oficializaciones/Desoficializar.js<%=hora%>"></script>
         <script src="../js/Reportes/Complementaria.js<%=hora%>"></script>
         <script src="../js/Reportes/SelMesCompl.js<%=hora%>"></script>
+        <script src="../js/Reportes/SelMesCons.js<%=hora%>"></script>
         <script src="../js/Calificaciones/RevisaGpo.js<%=hora%>"></script>
         <script src="../js/Exalumnos/Exalumnos.js<%=hora%>"></script>
         <script src="../js/Exalumnos/SelComplExalum.js<%=hora%>"></script>
+        <script src="../js/Exalumnos/SelConsExalum.js<%=hora%>"></script>
     </body>
 </html>

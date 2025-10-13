@@ -22,7 +22,7 @@ function mwfSelComplExalum_Show(tblPrincipal_selRow)
     object_setVisible (true,"mwfmSelComplExalum");                                      // Ocultamos el gridTable
     //$("#mwffSelComplExalum").css("display", "block");                          // Mostramos el formulario correspondiente
     mwfSelComplExalum_Create();
-    //mwffSelComplExalum_FormActivate ();
+    mwffSelComplExalum_FormActivate ();
     //event.stopPropagation();
 }
 
@@ -38,14 +38,8 @@ function mwfSelComplExalum_Create ()
     $('#mwfpSelComplExalum').append('<div id="pnlSelComplExalum"></div>');
         
         $('#pnlSelComplExalum').append('<label id="lblInstrucciones">Seleccione el mes que corresponda a la etapa complementaria:</label>');
-        $('#pnlSelComplExalum').append('<div id="pnlComboMes" class="combobox">'
-                                        + '<select id="cbxMesCompl">'                                            
-                                            + '<option value="ENERO">ENERO</option>'                                            
-                                            + '<option value="AGOSTO">AGOSTO</option>'
-                                            + '<option value="SEPTIEMBRE">SEPTIEMBRE</option>'                                            
-                                            + '<option value="OCTUBRE">OCTUBRE</option>'
-                                        + '</select>'
-                                    +'</div>');
+        $('#pnlSelComplExalum').append('<div id="pnlComboMesEx" class="combobox"></div>');
+                
         $('#pnlSelComplExalum').append('<label id="lblSelEspAlus"> <input id="chkSelEspExalus" type="checkbox" name="chkSelEspExalus" value="espAlus">Seleccionar alumnos en específico</label>');
         $('#pnlSelComplExalum').append('<div id="pnlListadoDeAlumnos" class="panel">'
                                             + '<label class="tituloPanel">Seleccione los alumnos para mandar a complementaria</label>'
@@ -59,7 +53,7 @@ function mwfSelComplExalum_Create ()
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------
     
     $("#pnlSelComplExalum #chkSelEspExalus").on('click',function() { chkSelEspExalum_Click ();  });
-    $("#cbxMesCompl").on('change',function(){ cbxMesCompl_Change($(this).val()); });
+    $("#cbxMesExCompl").on('change',function(){ cbxMesExCompl_Change($(this).val()); });
     $("#btnImpMesComplExalum").on('click',function(){ btnImpMesComplExalum_Click(); });
     $("#btnCancelarMesComplExalum").on('click',function(){ mwfSelComplExalum_Close(); });
     
@@ -68,14 +62,15 @@ function mwfSelComplExalum_Create ()
     object_setVisible(false,"pnlSelComplExalum #pnlListadoDeAlumnos");
 }
 
-/*function mwffSelComplExalum_FormActivate ()
+function mwffSelComplExalum_FormActivate ()
 {
     var mensaje = new Mensajes ();
     
     //------------------ Establecemos los datos a enviar -------------------
     var datos = {
         modulo:"SeMeCoEx", metodo:"foAc", tblPrincipal_cicescini:jsSelComplExalum.tblPrincipal_cicescini, tblPrincipal_idcct:jsSelComplExalum.tblPrincipal_idcct, 
-        tblPrincipal_grado:jsSelComplExalum.tblPrincipal_grado, tblPrincipal_grupo:jsSelComplExalum.tblPrincipal_grupo, casoRep:"selMesCompl"
+        tblPrincipal_grado:jsSelComplExalum.tblPrincipal_grado, tblPrincipal_grupo:jsSelComplExalum.tblPrincipal_grupo, casoRep:"selMesCompl",
+        tblPrincipal_cicescinilib:jsSelComplExalum.tblPrincipal_cicescinilib, cicescini_act:jsSelComplExalum.cicescini_act
     };
     //------------------------- Hacemos la llamada -------------------------
     cargarLoading();
@@ -90,6 +85,12 @@ function mwfSelComplExalum_Create ()
             case 1:
                     if (!result.canSelEspAlus)
                         $("#lblSelEspAlus").remove();
+                    if (result.cbxMesExCompl)
+                    {
+                        $("#cbxMesExCompl").remove();
+                        $("#pnlComboMesEx").append(result.cbxMesExCompl);
+                        $("#cbxMesExCompl").on('change',function(){ cbxMesExCompl_Change($(this).val()); });
+                    }
                 break;
             case 0: case -1:
                     mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
@@ -108,7 +109,7 @@ function mwfSelComplExalum_Create ()
     .always(function() {
         cerrarLoading();
     });
-}*/
+}
 
 function initTablaAlumnosParaMesComplExalum (tblAlumnos)
 {
@@ -134,13 +135,15 @@ function initTablaAlumnosParaMesComplExalum (tblAlumnos)
     }
 }
 
-function cbxMesCompl_Change(mesComplem)
+function cbxMesExCompl_Change(idperexmext)
 {
-    var mensaje = new Mensajes();  
+    var mensaje = new Mensajes();      
     if (document.getElementById('chkSelEspExalus').checked){        
         var datos = {
-            modulo:"SeMeCoEx", metodo:"geExSeMeCo", tblPrincipal_cicescini:jsSelComplExalum.tblPrincipal_cicescinilib, tblPrincipal_idcct:jsSelComplExalum.tblPrincipal_idcct, 
-            tblPrincipal_grado:jsSelComplExalum.tblPrincipal_grado, tblPrincipal_grupo:jsSelComplExalum.tblPrincipal_grupo, mesComplem:mesComplem
+            modulo:"SeMeCoEx", metodo:"geExSeMeCo", tblPrincipal_cicescinilib:jsSelComplExalum.tblPrincipal_cicescinilib, 
+            tblPrincipal_cicescini:jsSelComplExalum.tblPrincipal_cicescini, tblPrincipal_idcct:jsSelComplExalum.tblPrincipal_idcct, 
+            tblPrincipal_grado:jsSelComplExalum.tblPrincipal_grado, tblPrincipal_grupo:jsSelComplExalum.tblPrincipal_grupo, 
+            idperexmext:idperexmext
         };
         //------------------------- Hacemos la llamada -------------------------
         cargarLoading();
@@ -187,7 +190,7 @@ function chkSelEspExalum_Click ()
         //------------------ Establecemos los datos a enviar -------------------
     var datos = {
         modulo:"SeMeCoEx", metodo:"geExSeMeCo", tblPrincipal_cicescini:jsSelComplExalum.tblPrincipal_cicescini, tblPrincipal_idcct:jsSelComplExalum.tblPrincipal_idcct, 
-        tblPrincipal_grado:jsSelComplExalum.tblPrincipal_grado, tblPrincipal_grupo:jsSelComplExalum.tblPrincipal_grupo, mesComplem:$("#cbxMesCompl").val()
+        tblPrincipal_grado:jsSelComplExalum.tblPrincipal_grado, tblPrincipal_grupo:jsSelComplExalum.tblPrincipal_grupo, idperexmext:$("#cbxMesExCompl").val()
     };
     //------------------------- Hacemos la llamada -------------------------
     cargarLoading();
@@ -231,13 +234,12 @@ function btnImpMesComplExalum_Click ()
     var tblAlumnos = tabla.getTable("tblAlumnos",["selec","idalu"], null,"JSON");
     for (var i=0; i<tblAlumnos.length; i++)
         if (tblAlumnos[i].selec === "true")
-            idalus += (idalus===""?"":", ") + tblAlumnos[i].idalu;
-    
+            idalus += (idalus===""?"":", ") + tblAlumnos[i].idalu;    
     showReport ("mwfpSelComplExalum", "Reportes/FinDeCurso.jsp", 
                 {cicescini:jsSelComplExalum.tblPrincipal_cicescini, cicescinilib:jsSelComplExalum.tblPrincipal_cicescinilib, 
                 cveplan:jsSelComplExalum.tblPrincipal_cveplan,idcct:jsSelComplExalum.tblPrincipal_idcct, 
                 modalidad:jsSelComplExalum.tblPrincipal_modalidad,grado:jsSelComplExalum.tblPrincipal_grado, 
                 grupo:jsSelComplExalum.tblPrincipal_grupo, caso:"RELc",cicescini_act: jsSelComplExalum.cicescini_act, 
-                mesComplem:$("#cbxMesCompl").val(), idExalusCompl:idalus });
+                idperexmext:$("#cbxMesExCompl").val(), idalusCompl:idalus });
     mwfSelComplExalum_Close();
 }

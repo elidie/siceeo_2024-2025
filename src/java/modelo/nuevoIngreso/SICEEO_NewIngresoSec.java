@@ -150,11 +150,13 @@ public class SICEEO_NewIngresoSec {
                 if(!fechaIngreso.substring(4, 5).equals("/") || !fechaIngreso.substring(7, 8).equals("/"))                        
                     throw new SICEEO_Excepcion (0,"FECHA_FOR_INCORR");
                 fechaIng = fechaIngreso;
-                fecini = ""+sesion.getAttribute("feciniciclo");                 
-                Date fecha1 = formato.parse(fechaIng.replace('/', '-'));
-                Date fecha2 = formato.parse(fecini);
                 
-                if( fecha1.before(fecha2))
+                
+                Date fechaCap = formato.parse(fechaIng.replace('/', '-'));
+                Date fechaIniCiclo = formato.parse(""+sesion.getAttribute("feciniciclo"));
+                Date fechaFinCiclo = formato.parse(""+sesion.getAttribute("fecfinciclo"));
+                
+                if( fechaCap.before(fechaIniCiclo) || fechaCap.after(fechaFinCiclo))
                     throw new SICEEO_Excepcion (0,"FECHA_NO_VALIDO");
             }
             

@@ -53,7 +53,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
 //************************************************************************************************************ 
     public Map Ciclo () throws SQLException
     {
-        rs = stm.executeQuery("SELECT Cicescini, Cicescfin, descicesc,fecini,version,versiontext, fecha, hora, link, link2, linkdai, actualiz, boton, version_siceeo, maxsesserv_siceeo " 
+        rs = stm.executeQuery("SELECT Cicescini, Cicescfin, descicesc,fecini,fecfin,version,versiontext, fecha, hora, link, link2, linkdai, actualiz, boton, version_siceeo, maxsesserv_siceeo " 
                                         +"FROM CicloEscolar " 
                                         +"WHERE estatus='A'");
         return qryToMap (rs, null, true, 0);
@@ -480,8 +480,8 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     
     public void insertarTutor(String idtutor,String curp, String txtPrimerApe, String txtSegundoApe, String txtNombre, String txtTelefono) throws SQLException
     {            
-        stm.execute("INSERT INTO tutor(idtutor,cvemunicipio,cvelocalidad,cveentidad,nombre,apepat,apemat,telefono,curp, cveparent)"
-                + " VALUES ("+idtutor+",'67','1','20','"+txtNombre+"','"+txtPrimerApe+"','"+txtSegundoApe+"','"+txtTelefono+"','"+curp+"','000')");                    
+        stm.execute("INSERT INTO tutor(idtutor,cvemunicipio,cvelocalidad,cveentidad,nombre,apepat,apemat,telefono,curp)"  //Quite actualización de cveparent
+                + " VALUES ("+idtutor+",'67','1','20','"+txtNombre+"','"+txtPrimerApe+"','"+txtSegundoApe+"','"+txtTelefono+"','"+curp+"')");
     }
     public void actualizarAlumnoTutor(String idtutor, String idalu, String cicescini, String cveparent, String Usuario) throws SQLException
     {                
@@ -499,7 +499,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     }
     public void actualizarTutor(String cicescini, String idtutor, String cveparent, String txtPrimerApe, String txtSegundoApe, String txtNombre, String txtTelefono) throws SQLException{
         stm.execute("UPDATE tutor SET "
-                + "cveparent='"+cveparent+"', "
+                /*+ "cveparent='"+cveparent+"', "*/
                 + "apepat='"+txtPrimerApe+"', "
                 + "apemat='"+txtSegundoApe+"', "
                 + "nombre='"+txtNombre+"', "
@@ -3824,10 +3824,10 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
 
     public void exmExt1ro_onUpdate (String idcct_apl, String dia, String mes, String anio, String promedio, String usuario, String idalu_oldValue, 
             String idcct_apl_oldValue, String grado_oldValue, String cvetipmat_oldValue, String cvemat_oldValue, String dia_oldValue, String mes_oldValue, 
-            String anio_oldValue, String promedio_oldValue, String tblCalif1ro_cicescini, SICEEO_DataModule dm) throws SQLException
+            String anio_oldValue, String promedio_oldValue, String tblCalif1ro_cicescini, SICEEO_DataModule dm, int idperexmext) throws SQLException
     {                    
         exmExt_onUpdate (idcct_apl, dia, mes, anio, promedio, usuario, idalu_oldValue, idcct_apl_oldValue, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue, 
-                dia_oldValue, mes_oldValue, anio_oldValue, promedio_oldValue, tblCalif1ro_cicescini,dm);
+                dia_oldValue, mes_oldValue, anio_oldValue, promedio_oldValue, tblCalif1ro_cicescini,dm, idperexmext);
     }
      
     
@@ -3870,8 +3870,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         return false;
     }
         
-    public int verificarFechaValidaExmExt(String idalu, String cicescini, String idcct_apl, String grado, String cvemat, 
-            String cvetipmat, String dia, String mes,String anio) throws SQLException
+    public int verificarFechaValidaExmExt(String dia, String mes, String anio) throws SQLException
     {         
         int idperexmext = 0;
         rs = stm.executeQuery("SELECT idperexmext,dia_ini,dia_fin FROM exm_ext_ordi_periodos "
@@ -3891,10 +3890,10 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
 
     public void exmExt2do_onUpdate (String idcct_apl, String dia, String mes, String anio, String promedio, String usuario, String idalu_oldValue, 
             String idcct_apl_oldValue, String grado_oldValue, String cvetipmat_oldValue, String cvemat_oldValue, String dia_oldValue, String mes_oldValue, 
-            String anio_oldValue, String promedio_oldValue, String tblCalif2do_cicescini, SICEEO_DataModule dm) throws SQLException
+            String anio_oldValue, String promedio_oldValue, String tblCalif2do_cicescini, SICEEO_DataModule dm, int idperexmext) throws SQLException
     {
         exmExt_onUpdate (idcct_apl, dia, mes, anio, promedio, usuario, idalu_oldValue, idcct_apl_oldValue, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue, 
-                dia_oldValue, mes_oldValue, anio_oldValue, promedio_oldValue, tblCalif2do_cicescini, dm);
+                dia_oldValue, mes_oldValue, anio_oldValue, promedio_oldValue, tblCalif2do_cicescini, dm, idperexmext);
     }
      
     
@@ -3919,10 +3918,10 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     
     public void exmExt3ro_onUpdate (String idcct_apl, String dia, String mes, String anio, String promedio, String usuario, String idalu_oldValue, 
             String idcct_apl_oldValue, String grado_oldValue, String cvetipmat_oldValue, String cvemat_oldValue, String dia_oldValue, String mes_oldValue, 
-            String anio_oldValue, String promedio_oldValue, String tblCalif3ro_cicescini, SICEEO_DataModule dm) throws SQLException
+            String anio_oldValue, String promedio_oldValue, String tblCalif3ro_cicescini, SICEEO_DataModule dm, int idperexmext) throws SQLException
     {
         exmExt_onUpdate (idcct_apl, dia, mes, anio, promedio, usuario, idalu_oldValue, idcct_apl_oldValue, grado_oldValue, cvetipmat_oldValue, cvemat_oldValue, 
-                dia_oldValue, mes_oldValue, anio_oldValue, promedio_oldValue, tblCalif3ro_cicescini, dm);
+                dia_oldValue, mes_oldValue, anio_oldValue, promedio_oldValue, tblCalif3ro_cicescini, dm, idperexmext);
     }
     
     
@@ -3950,6 +3949,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         stm.execute("INSERT INTO exm_ext_ordi_cance "
                 + "SELECT idalu,grado,idcct_apl,cicescini,cvetipmat,cvemat,dia,mes,anio,promedio,usuario,fecha,hora,"
                 + "oficializado,idfolio,idperexmext,desmat,promedioletra, '"+txtUsuario+"', date(current), extend(current, hour to minute) "
+                + "FROM exm_ext_ordi "        
                 + "WHERE idalu="+idalu_oldValue+" AND grado="+grado_oldValue+" AND idcct_apl="+idcct_apl_oldValue+" AND cvetipmat='"+cvetipmat_oldValue+"' "
                            + "AND cvemat='"+cvemat_oldValue+"' AND dia="+dia_oldValue+" AND mes='"+mes_oldValue+"' AND anio="+anio_oldValue+" "
                            + "AND promedio="+promedio_oldValue);
@@ -4002,11 +4002,11 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         
     private void exmExt_onUpdate (String idcct_apl, String dia, String mes, String anio, String promedio, String usuario, String idalu_oldValue, 
            String idcct_apl_oldValue, String grado_oldValue, String cvetipmat_oldValue, String cvemat_oldValue, String dia_oldValue, String mes_oldValue, 
-           String anio_oldValue, String promedio_oldValue, String cicescini, SICEEO_DataModule dm) throws SQLException
+           String anio_oldValue, String promedio_oldValue, String cicescini, SICEEO_DataModule dm, int idperexmext) throws SQLException
     {
         if (!idcct_apl.equals(idcct_apl_oldValue) || !dia.equals(dia_oldValue) || !mes.equals(mes_oldValue) || !anio.equals(anio_oldValue) || !promedio.equals(promedio_oldValue)){                                        
             stm.execute("UPDATE exm_ext_ordi SET idcct_apl="+idcct_apl+", dia="+dia+", mes='"+mes+"', anio = "+anio+ ", promedio = "+promedio +", "
-                           +"usuario='"+usuario+"', fecha=date(current), hora = extend(current, hour to minute) "
+                           + "idperexmext="+idperexmext+", usuario='"+usuario+"', fecha=date(current), hora = extend(current, hour to minute) "
                        + "WHERE idalu="+idalu_oldValue+" AND grado = "+grado_oldValue+" AND idcct_apl="+idcct_apl_oldValue+" AND cvetipmat='"+cvetipmat_oldValue+"' "
                            + "AND cvemat='"+cvemat_oldValue+"' AND dia="+dia_oldValue+" AND mes = '"+mes_oldValue+"' AND anio = "+anio_oldValue+" "
                            + "AND promedio = "+promedio_oldValue);
@@ -4107,14 +4107,14 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         //SECUNDARIA
         if ( elGrado == 3 && tblPrincipal_cveplan==2 && matRep<=5 && dm.toInt(elCiclo)==cicescin )
             qryAlumGdo += "estatusgrado='C', ";
-        else if ( matRep>=6 && dm.toInt(elCiclo)==cicescin )
+        else if ( matRep>=5 && dm.toInt(elCiclo)==cicescin )
             qryAlumGdo += "estatusgrado='NP', ";
         else if ( elGrado!= 3 && tblPrincipal_cveplan==2 && matRep<=5 && dm.toInt(elCiclo)==cicescin )
             qryAlumGdo += "estatusgrado='P', ";
         else                                                                    //   valores cu&&o capturan algun ciclo anterior
         if ( elGrado==3 && tblPrincipal_cveplan==2 && matRep<=5 && dm.toInt(elCiclo)<cicescin )
             qryAlumGdo += "estatusgrado='C', ";
-        else if ( matRep>=6 && tblPrincipal_cveplan==2 && dm.toInt(elCiclo)<cicescin )
+        else if ( matRep>=5 && tblPrincipal_cveplan==2 && dm.toInt(elCiclo)<cicescin )
             qryAlumGdo += "estatusgrado='RC', ";
         else if ( elGrado!=3 && tblPrincipal_cveplan==2 && matRep<=5 && dm.toInt(elCiclo)<cicescin )
             qryAlumGdo += "estatusgrado='RE', ";
@@ -4376,15 +4376,18 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         int f=0;
         while (f<tblCalifNGdo_numRows)
         {                     
-            if(dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))>=5.0 && 
-                dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))< 6.0 && 
+            if(( (dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))>=5.0 && 
+                dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))< 6.0) || dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))==0.0 )&& 
                 dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue")) != dm.toFloat(tblCalifNGdo.get(f).get("promedio")) )
             {
                 if(dm.toFloat(tblCalifNGdo.get(f).get("promedio"))<6.0)
                     throw new SICEEO_Excepcion (-11,"CALIF_SIN_ACTUAL", tblCalifNGdo.get(f).get("cvetipmat")+"-"+tblCalifNGdo.get(f).get("cvemat"));        
-                if(dm.toFloat(tblCalifNGdo.get(f).get("promedio"))>=6 &&
+                if(dm.toFloat(tblCalifNGdo.get(f).get("promedio"))>=6.0 &&
                     !verificaExExtra(tblCalifNGdo_idalu, ""+tblCalifNGdo.get(f).get("cvemat"), ""+tblCalifNGdo.get(f).get("cvetipmat"), grado, tblCalifNGdo_cicescini, ""+tblCalifNGdo.get(f).get("promedio")) )                            
                         NoHayExtra += "\n["+tblCalifNGdo.get(f).get("cvetipmat")+"-"+tblCalifNGdo.get(f).get("cvemat")+"]";                
+                if(dm.toFloat(tblCalifNGdo.get(f).get("promedio"))>0.0 && dm.toFloat(tblCalifNGdo.get(f).get("promedio"))<6.0 &&
+                    !verificaExExtra(tblCalifNGdo_idalu, ""+tblCalifNGdo.get(f).get("cvemat"), ""+tblCalifNGdo.get(f).get("cvetipmat"), grado, tblCalifNGdo_cicescini, ""+tblCalifNGdo.get(f).get("promedio")) )                                    
+                        NoHayExtra += "\n["+tblCalifNGdo.get(f).get("cvetipmat")+"-"+tblCalifNGdo.get(f).get("cvemat")+"], calificación no permitida";                
             }
             f++;    
         }
@@ -4424,14 +4427,28 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
             of = true;
         return of;
     }
+    
+    public boolean materiaAprobada(String idalu, String cicescini, String grado, String cvetipmat, String cvemat) throws SQLException
+    {
+        boolean aprobada = false;
+        rs = stm.executeQuery("SELECT promedio, NVL((select promedio from exm_ext_ordi WHERE idalu = am.idalu "
+                            + "AND cicescini=am.cicescini AND grado=am.grado AND cvetipmat=am.cvetipmat "
+                            + "AND cvemat=am.cvemat and oficializado='f' and anio=2025),-1.0) AS prom_exmext "
+                + "FROM alumnomaterias am WHERE idalu=" + idalu + " AND cicescini=" + cicescini + " "                
+                + " AND grado = " + grado + " AND cvetipmat='"+cvetipmat+"' AND cvemat='"+cvemat+"' ");
+        if(rs.next() && rs.getFloat("promedio") >= 6.0 && rs.getFloat("prom_exmext")==-1.0)
+            aprobada = true;        
+        return aprobada;
+    }
             
     public String guardaTablaCalifNGdo (ArrayList<Map>tblCalifNGdo, int cicescin, String tblCalifNGdo_cicescini, int tblPrincipal_cveplan, 
-            String tblCalifNGdo_idalu, String tblCalifNGdo_almextrj, String txtUsuario, SICEEO_DataModule dm) throws SQLException, SICEEO_Excepcion
+            String tblCalifNGdo_idalu, String tblCalifNGdo_almextrj, String txtUsuario, SICEEO_DataModule dm, int grado) throws SQLException, SICEEO_Excepcion
     {
         int matRep, noMat, elGrado, tblCalifNGdo_numRows = tblCalifNGdo.size();
         String sumCalif;
         String prom, camCalif, elCiclo, elIdalu, ylapaso;
         String qryMatCicAntU, qryAlumGdo;
+        Map QPromXMatBim;
         
         matRep = 0;
         sumCalif = "0";
@@ -4442,13 +4459,13 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
 
         elCiclo = tblCalifNGdo_cicescini;
         elIdalu = tblCalifNGdo_idalu;
-        elGrado = 1;
+        elGrado = grado;
 
         int f=0;
         while (f<tblCalifNGdo_numRows)
         {
-            if( dm.toFloat(tblCalifNGdo.get(f).get("promedio"))!=dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue")) && (dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))>=6.0 ||
-                    dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))==0.0 ))
+            if( dm.toFloat(tblCalifNGdo.get(f).get("promedio"))!=dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue")) && dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))>=6.0 )                    
+                /*|| (dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))==0.0 && !tblCalifNGdo.get(f).get("estatmat").equals("R"))))*/ 
                 throw new SICEEO_Excepcion (-11,"MAT_CALIF_SIN_CAMBIO", tblCalifNGdo.get(f).get("cvetipmat")+"-"+tblCalifNGdo.get(f).get("cvemat"));             
             
             qryMatCicAntU = "UPDATE AlumnoMATERIAS ";
@@ -4456,9 +4473,16 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
 
             if ( dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))>=5.0 && dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))<6.0 && dm.toFloat(tblCalifNGdo.get(f).get("califant"))==0 ) //si antes tenia entre 5.0 y 5.9
                 qryMatCicAntU += "califant="+tblCalifNGdo.get(f).get("promedio_oldValue")+ ", ";      //    pasa el valor a califant
-            else                                                            //si el usuario captura califant hay k guardarla
-                if ( dm.toFloat(tblCalifNGdo.get(f).get("califant"))>=5.0 && dm.toFloat(tblCalifNGdo.get(f).get("califant"))< 6.0 )//y solo puede guardar califant reprobatoria entre 5.0 y 5.9
+            else if ( dm.toFloat(tblCalifNGdo.get(f).get("califant"))>=5.0 && dm.toFloat(tblCalifNGdo.get(f).get("califant"))< 6.0 )//y solo puede guardar califant reprobatoria entre 5.0 y 5.9
                     qryMatCicAntU += "califant="+tblCalifNGdo.get(f).get("califant")+ ", ";
+            /*else if(dm.toFloat(tblCalifNGdo.get(f).get("califant"))==0.0 &&
+                    dm.toFloat(tblCalifNGdo.get(f).get("promedio_oldValue"))==0.0) {                
+                QPromXMatBim = promXMatBim (tblCalifNGdo_cicescini, ""+grado, ""+tblPrincipal_cveplan, 
+                        ""+tblCalifNGdo.get(f).get("idalu"), ""+tblCalifNGdo.get(f).get("cvemat"), 
+                        ""+tblCalifNGdo.get(f).get("cvetipmat"),""+cicescin);
+                if(QPromXMatBim.get("nobim").equals("3"))
+                    qryMatCicAntU += "califant="+QPromXMatBim.get("promxmat")+ ", ";
+            }*/
 
             sumCalif = dm.sumarFraccion (sumCalif, tblCalifNGdo.get(f).get("promedio"));         //sumCalif = sumCalif + dm.toFloat(tblCalifNGdo.get(f).get("promedio"));
             noMat = noMat + 1;
@@ -4532,7 +4556,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         if ( elGrado==3 && tblPrincipal_cveplan==2 && matRep>0 )
             qryAlumGdo += "PromedioGral=0, ";
 
-        if ( matRep <=5 && tblPrincipal_cveplan==2 )
+        if ( matRep <=4 && tblPrincipal_cveplan==2 )
             qryAlumGdo += "Promovido='P', ";
 
         qryAlumGdo += "MatRepAct="+matRep+", usuario='"+txtUsuario.trim().toUpperCase()+"', fecha=date(current), hora=extend(current, hour to minute) "
@@ -4655,10 +4679,11 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         String qryMatCicAntU="";
         ArrayList<Map> QCalif3ro=null;
         
-        int noMat=0;
+        int noMat=0, noexisten=0;
         float sumProm=0, promSec,PromPrim, promEB;
         float dato1, dato2, dato3, dato4, dato5, dato8;
         String dato6, dato7;
+        boolean generaProm = false;
         //**********************************************************
         if ( tblCalif3ro_size >0 )
         {
@@ -4691,13 +4716,30 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                         + "GROUP BY idalu ");
             }
             QPromGral = qryToMap (rs, null, true, 1);
+            
+            if(!QPromGral.isEmpty() && Integer.parseInt(""+QPromGral.get("grados"))<3){
+                for (int i=1; i<=3; i++) {
+                    rs = stm.executeQuery("SELECT promedio FROM alumnogrado "
+                       + "WHERE idalu = "+idalu+" AND cveplan=2 AND grado="+i+" "
+                            + "AND estatusgrado<>'BD' AND estatusgrado<>'RC' and promedio>=6.0");
+                    if(!rs.next())
+                        noexisten +=1; 
+                }   
+                if(noexisten>0){
+                    rs = stm.executeQuery("SELECT 't' FROM alumnocomen "
+                       + "WHERE idalu = "+idalu+" GROUP BY idalu");
+                    if(rs.next())
+                        generaProm=true;
+                }
+            }
+            
             //**********************************************************
 
             //----------------------------------------------------------
-            if ( (""+QPromGral.get("grados")).equals("3"))
+            if ( !QPromGral.isEmpty() && (""+QPromGral.get("grados")).equals("3") || generaProm==true)
             {
                 QAlumProm  = this.getAlumProm2012 (idalu);                          //OJO: Agregado para uso sólo en SICEEO
-                if ( Float.parseFloat(""+QPromGral.get("promgral"))>=6.0 && QPromGral.get("grados").equals("3") 
+                if ( Float.parseFloat(""+QPromGral.get("promgral"))>=6.0 && (QPromGral.get("grados").equals("3") || generaProm==true) 
                         && tipoUsuario.equals("1"))
                 {
                     if (tblCalif3ro_cicescini == 2012 && dm.toFloat(QAlumProm.get("promdp"))>0)                          //OJO: Este if se agrega sólo para SICEEO
@@ -5962,12 +6004,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         temp.put("telefono", "");
         temp.put("curp", "");
         temp.put("cveparent", "");
-        
-        /*rs = stm.executeQuery("SELECT idalu, a.idtutor,t.curp, t.nombre,t.apepat, t.apemat, t.cveparent, t.telefono " 
-                + " FROM alumno a, tutor t " 
-                + " WHERE a.idalu = " + tblPrincipal_idalu
-                + " AND a.idtutor = t.idtutor ");*/
-        
+                
         rs = stm.executeQuery("SELECT t.nombre, t.apepat, t.apemat, t.curp, t.telefono, alt.cveparent " 
                 + " FROM alumnotutor alt, tutor t "
                 + " WHERE alt.idtutor = t.idtutor " 
@@ -6294,20 +6331,50 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     }
     
     public ArrayList<Map> getAlumnosParaMesCompl (String tblPrincipal_cicescini, String tblPrincipal_idcct, String tblPrincipal_grado, 
-            String tblPrincipal_grupo) throws SQLException
+            String tblPrincipal_grupo, String idperexmext) throws SQLException
     {
-        rs = stm.executeQuery(
-                  "SELECT 'f' selec, "
-                    + "a.idalu, a.curp, a.apepat, a.apemat, a.nombre, "
-                    + "(trim(nvl(a.apepat,'')) || '/' || trim(nvl(a.apemat,'')) || \"*\" || trim(nvl(a.nombre,''))) AS nom_tot, "
-                    + "g.grado, g.grupo "
-                + "FROM alumnogrado g, alumno a, folios_impre fi "
-                + "WHERE g.idalu=a.idalu AND g.idalu=fi.idalu AND g.cicescini=fi.cicescinilib "
-                    + "AND fi.promediogral>6 AND fi.estatus='AC' AND g.estatusgrado<>'BD' "
-                    + "AND g.cicescini="+tblPrincipal_cicescini+" AND g.idcct= "+tblPrincipal_idcct+" AND g.grado="+tblPrincipal_grado+" "
-                    + "AND g.grupo = '"+tblPrincipal_grupo+"'"
-                + "ORDER BY a.apepat, a.apemat, a.nombre, a.curp");
+        String idalus="", sqryAnio="";
+        sqryAnio = getData("SELECT anio FROM exm_ext_ordi_periodos WHERE idperexmext = "+ idperexmext);
         
+        rs = stm.executeQuery("SELECT  'f' selec, a.idalu, a.curp, a.apepat, a.apemat, a.nombre, (trim(nvl(a.apepat,'')) || '/' || trim(nvl(a.apemat,'')) || \"*\" || trim(nvl(a.nombre,''))) AS nom_tot, ag.grado, ag.grupo  "
+            + "FROM alumno a, alumnogrado ag, folios_impre fi "
+            + "WHERE a.idalu = ag.idalu AND ag.idalu=fi.idalu AND ag.cicescini=fi.cicescini "
+            + "AND fi.idalu IN (SELECT idalu FROM exm_ext_ordi WHERE idalu = fi.idalu AND oficializado = 't' "
+                    + "AND idperexmext = "+idperexmext+" AND promedio >= 6.0 AND anio="+sqryAnio+" ) "
+            + "AND fi.grado="+tblPrincipal_grado+" AND fi.estatus='AC' AND fi.alos NOT LIKE '% dieciséis días del mes de julio %' "
+            + "AND ag.cveplan=2 AND ag.idcct="+tblPrincipal_idcct+" AND ag.grado="+tblPrincipal_grado+" AND ag.grupo='"+tblPrincipal_grupo+"' AND ag.estatusgrado<>'BD' "
+            + "AND ag.promediogral>=6 AND fi.cicescinilib="+tblPrincipal_cicescini);
+                        
+        return qryToArrlmap(rs, null, true, 2);
+    }
+    
+    public ArrayList<Map> getAlumnosParaMesCons (String tblPrincipal_cicescinilib, String tblPrincipal_cicescini, String tblPrincipal_idcct, 
+            String tblPrincipal_grado, String tblPrincipal_grupo, String idperexmext) throws SQLException
+    {
+        rs = stm.executeQuery( "SELECT 'f' selec, fo.idalu, fo.curp, fo.apepat, fo.apemat, fo.nombre, " 
+            + "(trim(nvl(fo.apepat,'')) || '/' || trim(nvl(fo.apemat,'')) || '*' || trim(nvl(fo.nombre,''))) AS nom_tot, "
+            + "g.grado, g.grupo " 
+            + "FROM alumnogrado g, exaext_folios fo " 
+            + "WHERE g.idalu=fo.idalu AND g.cicescini="+tblPrincipal_cicescini+" AND g.estatusgrado<>'BD' "
+            + "AND g.idcct= " + tblPrincipal_idcct + " AND g.cveplan=2 AND g.grado="+tblPrincipal_grado+" "
+            + "AND g.grupo='"+tblPrincipal_grupo+"' AND fo.idperexmext ="+idperexmext+" AND fo.aniolib = "+tblPrincipal_cicescinilib +" "
+            + "ORDER BY fo.apepat, fo.apemat, fo.nombre, fo.curp");
+                                                
+        return qryToArrlmap(rs, null, true, 2);
+    }
+    
+    public ArrayList<Map> getAlumnosParaMesExCons (String tblPrincipal_cicescinilib, String tblPrincipal_cicescini, String tblPrincipal_idcct, 
+            String tblPrincipal_grado, String tblPrincipal_grupo, String idperexmext) throws SQLException
+    {
+        rs = stm.executeQuery( "SELECT 'f' selec, fo.idalu, fo.curp, fo.apepat, fo.apemat, fo.nombre, " 
+            + "(trim(nvl(fo.apepat,'')) || '/' || trim(nvl(fo.apemat,'')) || '*' || trim(nvl(fo.nombre,''))) AS nom_tot, "
+            + "g.grado, g.grupo, g.cicescini " 
+            + "FROM alumnogrado g, exaext_folios fo " 
+            + "WHERE g.idalu=fo.idalu AND g.cicescini="+tblPrincipal_cicescini+" AND g.estatusgrado<>'BD' "
+            + "AND g.idcct= " + tblPrincipal_idcct + " AND g.cveplan=2 AND g.grado="+tblPrincipal_grado+" "
+            + "AND g.grupo='"+tblPrincipal_grupo+"' AND fo.idperexmext =" + idperexmext +" AND fo.aniolib = "+tblPrincipal_cicescinilib +" "
+            + "ORDER BY fo.apepat, fo.apemat, fo.nombre, fo.curp");
+                                                
         return qryToArrlmap(rs, null, true, 2);
     }
     
@@ -6344,39 +6411,47 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         return qryToArrlmap(rs, null, true, 2);
     }
     
-    public String getIdalusConExtraordinarioAprobado (String cicescini, String idcct, String grado, String grupo, String mes, String idalusPorFiltrar) throws SQLException
+    public String getIdalusConExtraordinarioAprobado (String cicescini, String idcct, String grado, String grupo, String idperexmext, String idalusPorFiltrar) throws SQLException
     {
         String idalus="", sqryAnio="";
-        sqryAnio = mes.equals("ENERO")?"fi.cicescinilib+2":"fi.cicescinilib+1";
-        rs = stm.executeQuery(
-                "SELECT ag.idalu "
-                + "FROM alumnogrado ag, folios_impre fi "
-                + "WHERE  ag.idalu=fi.idalu AND ag.cicescini=fi.cicescini "
-                        + "AND ag.idalu IN (SELECT idalu "
-                                        + "FROM exm_ext_ordi "
-                                        + "WHERE idalu=ag.idalu AND promedio>=6 AND (anio=("+sqryAnio+") "
-                                             + "AND '"+mes+"'= (SELECT mes "
-                                                           + "FROM( "
-                                                                 + "SELECT FIRST 1 mes "
-                                                                 + "FROM exm_ext_ordi  "
-                                                                 + "WHERE idalu=ag.idalu AND promedio>=6 AND (anio=(fi.cicescinilib+1) AND mes IN ('AGOSTO','SEPTIEMBRE','OCTUBRE') "  //añadi OCTUBRE 
-                                                                     + "OR anio=(fi.cicescinilib+2) AND mes IN ('ENERO')) "
-                                                                 + "ORDER BY anio desc, substr(mes,3,1) desc "
-                                                             + ") "
-                                                         + ") "
-                                         + ")) "
-                    //+ "AND ag.idalu IN (SELECT idalu FROM folios_impre WHERE idalu=ag.idalu AND cicescinilib=ag.cicescini AND grado=ag.grado AND alos NOT like '%julio%' ) "
-                    +(idalusPorFiltrar.equals("null") || idalusPorFiltrar.equals("")?"":"AND fi.idalu IN ("+idalusPorFiltrar+") ")
-                    + "AND fi.grado=3 AND fi.estatus='AC' AND fi.alos NOT LIKE '% ocho días del mes de julio%' "
-                    + "AND ag.idcct="+idcct+" AND ag.grado="+grado+" AND ag.grupo='"+grupo+"' " //ag.cicescini="+cicescini+" 
-                    + "AND ag.estatusgrado<>'BD' AND ag.promediogral>=6 "
-                    + "AND fi.cicescinilib="+cicescini);
+        sqryAnio = getData("SELECT anio FROM exm_ext_ordi_periodos WHERE idperexmext = "+ idperexmext);
+        
+        rs = stm.executeQuery( "SELECT ag.idalu "
+            + "FROM alumnogrado ag, folios_impre fi "
+            + "WHERE ag.idalu=fi.idalu AND ag.cicescini=fi.cicescini "
+            + "AND fi.idalu IN (SELECT idalu FROM exm_ext_ordi WHERE idalu = fi.idalu AND oficializado = 't' "
+                    + "AND idperexmext = "+idperexmext+" AND promedio >= 6.0 AND anio="+sqryAnio+" ) "
+            + "AND fi.grado="+grado+" AND fi.estatus='AC' AND fi.alos NOT LIKE '% dieciséis días del mes de julio %' "
+            + "AND ag.cveplan=2 AND ag.idcct="+idcct+" AND ag.grado="+grado+" AND ag.grupo='"+grupo+"' AND ag.estatusgrado<>'BD' "
+            + "AND ag.promediogral>=6 AND fi.cicescinilib="+cicescini);
+        
         while (rs.next()){
             idalus += ((idalus.equals("")?"":", ")+rs.getString("idalu"));
         }
         return idalus;
     }
-
+    
+    public ArrayList<Map> getPerdiodosExmExt (String cicescini, String cicescinilib) throws SQLException
+    {
+        rs = stm.executeQuery("SELECT trim(mes) as mes, anio, num_periodo, idperexmext "
+                + "FROM exm_ext_ordi_periodos WHERE cicescini="+cicescini+" "
+                + "ORDER BY num_periodo asc");
+        return qryToArrlmap(rs, null, true, 2);    
+    }
+    
+    public String getIdalusConExtraordinarioOficializado (String cicescini, String idcct, String grado, String grupo, String idperexmext, String idalusPorFiltrar) throws SQLException
+    {
+        String idalus="";        
+        rs = stm.executeQuery("SELECT ex.idalu FROM exm_ext_ordi ex, exaext_folios fo " 
+                + "WHERE ex.idfolio = fo.idfolio " 
+                + "AND ex.cicescini=" + cicescini+" AND ex.idcct_apl= "+idcct +" "
+                + "AND ex.idperexmext="+idperexmext+" AND ex.oficializado='t' "
+                    + "GROUP BY ex.idalu "); 
+        while (rs.next()){
+            idalus += ((idalus.equals("")?"":", ")+rs.getString("idalu"));
+        }
+        return idalus;
+    }
 //************************************************************************************************************
 //******************************** MÉTODOS USADOS EN EL FORMULARIO RevisaGpo *********************************
 //************************************************************************************************************
@@ -6459,6 +6534,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                             + "FROM alumno a, alumnogrado ag "
                             + "WHERE a.idalu=ag.idalu AND cveplan=2 AND grado=3 "
                                 + "AND ag.cicescini="+cicescini+" AND "+condicion);
+        
        return qryToArrlmap(rs, null, true, 2);
     }
     
@@ -6574,6 +6650,20 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         return qryToArrlmap(rs, null, true, 2);
     }
     
+    public ArrayList<Map> getEstosExaConstancia (String idalus) throws SQLException
+    {
+        rs = stm.executeQuery(
+                "SELECT 't' selec, "
+                    + "fi.idalu, fi.curp, fi.apepat, fi.apemat, fi.nombre, "
+                    + "(trim(nvl(fi.apepat,'')) || '/' || trim(nvl(fi.apemat,'')) || \"*\" || trim(nvl(fi.nombre,''))) AS nom_tot, "
+                    + "fi.grado, fi.grupo, fi.cicescini "
+                + "FROM folios_impre fi "
+                + "WHERE fi.promediogral>6 AND fi.estatus='AC' AND idalu IN ("+idalus+") AND cveplan=2 "
+                + "ORDER BY cicescini, grado, grupo, apepat, apemat, nombre, curp");
+        
+        return qryToArrlmap(rs, null, true, 2);
+    }
+    
     public void actualizarPromediogralDeFolio (String cicescinilib, String idalu) throws SQLException, SICEEO_Excepcion
     {
         String promediogral="null";
@@ -6593,7 +6683,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     
     public ArrayList<Map> getExamenesExt(String cicescini, String idalu, String grado) throws SQLException
     {
-        rs = stm.executeQuery("SELECT 'f' AS selec, *  FROM exm_ext_ordi "
+        rs = stm.executeQuery("SELECT 't' AS selec, *  FROM exm_ext_ordi "
                 + " WHERE cicescini="+cicescini+" AND idalu="+idalu+" AND grado="+grado 
                 + " AND anio>=2025 AND oficializado='f'"); //estatus oficializado inicia en el periodo 2024-2025, anio=2025
         return qryToArrlmap(rs, null, true, 2);

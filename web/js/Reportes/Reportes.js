@@ -116,10 +116,11 @@ function frmwReportes_Create()
                         crearBotonReporte ("pnlReportes","btnR", "R", "Fin de curso", "Reporte R", "", gradoGrupo);
                         crearBotonReporte ("pnlReportes","btnRc", "Rc", "Fin de curso", "Reporte R complementaria", "", gradoGrupo);
                         crearBotonReporte ("pnlReportes","btnKardex", "KX", "Fin de Curso", "Kardex", "", gradoGrupo);  
-                        /*crearBotonReporte ("pnlReportes","btnCER", "CER", "Constancia de", "Regularización", "", gradoGrupo);  */
+                        crearBotonReporte ("pnlReportes","btnImpCons", "EER", "Constancia de", "Regularización", "", gradoGrupo);  
                     break;
             }
         $("#frmfReportes").append('<div id="mwfmSelMesCompl" class="mwfModal" style="display:none"></div>');  
+        $("#frmfReportes").append('<div id="mwfmSelMesCons" class="mwfModal" style="display:none"></div>');  
 
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------
     
@@ -141,7 +142,7 @@ function frmwReportes_Create()
     $("#btnRELc").on("click", function(){ elegirMesCertComplem ("RELc"); });
     $("#btnR").on("click", function(){ finDeCurso ("R"); });
     $("#btnRc").on("click", function(){ elegirComplementaria ("Rc"); });
-    /*$("#btnCER").on("click", function(){ generarConstancias ("CER"); });        */
+    $("#btnImpCons").on("click", function(){ elegirMesCons ("EER"); });        
 }
 
 function frmwReportes_FormActivate ()
@@ -269,16 +270,6 @@ function finDeCurso (caso)
                                                             idcct:jsReportes.tblPrincipal_idcct, modalidad:jsReportes.tblPrincipal_modalidad, 
                                                             grado:jsReportes.tblPrincipal_grado, grupo:jsReportes.tblPrincipal_grupo, caso:caso});
 }
-
-function generarConstancias(caso){
-var mensaje = new Mensajes();
-    
-    mensaje.General("REPORTE_EN_CREACION","","","");
-    showReport ("frmfReportes", "Reportes/Constancias.jsp", {cicescini:jsReportes.cicescini,cicescinilib:jsReportes.cicescinilib, cveplan:jsReportes.tblPrincipal_cveplan, 
-                                                            idcct:jsReportes.tblPrincipal_idcct, modalidad:jsReportes.tblPrincipal_modalidad, 
-                                                            grado:jsReportes.tblPrincipal_grado, grupo:jsReportes.tblPrincipal_grupo, caso:caso});
-}
-
 function elegirComplementaria (casoRep)
 {
     mwfComplementaria_Show ( {cicescinilib:jsReportes.cicescinilib,cicescini:jsReportes.cicescini, cveplan:jsReportes.tblPrincipal_cveplan, cct:jsReportes.tblPrincipal_cct, 
@@ -291,5 +282,12 @@ function elegirMesCertComplem (casoRep)
     mwfSelMesCompl_Show ( {cicescini:jsReportes.cicescini, cicescinilib:jsReportes.cicescinilib, cveplan:jsReportes.tblPrincipal_cveplan, cct:jsReportes.tblPrincipal_cct, 
                             idcct:jsReportes.tblPrincipal_idcct, modalidad:jsReportes.tblPrincipal_modalidad, grado:jsReportes.tblPrincipal_grado, 
                             grupo:jsReportes.tblPrincipal_grupo });
+}
+
+function elegirMesCons (casoRep)
+{
+    mwfSelMesCons_Show ( {cicescini:jsReportes.cicescini, cicescinilib:jsReportes.cicescinilib, cveplan:jsReportes.tblPrincipal_cveplan, cct:jsReportes.tblPrincipal_cct, 
+                            idcct:jsReportes.tblPrincipal_idcct, modalidad:jsReportes.tblPrincipal_modalidad, grado:jsReportes.tblPrincipal_grado, 
+                            grupo:jsReportes.tblPrincipal_grupo, caso: casoRep });
 }
 

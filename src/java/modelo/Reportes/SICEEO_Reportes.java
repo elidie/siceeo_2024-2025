@@ -311,7 +311,23 @@ public class SICEEO_Reportes {
         }finally { try { if (qryIfx2 == null) qryIfx.cerrarConexion();} catch (SQLException ex) { } }
     }
     
-    public void selMesCompl (String tblPrincipal_cicescini, String tblPrincipal_idcct, String tblPrincipal_grado, String tblPrincipal_grupo, String mes, 
+    public void isAluConExmExtOfCons (Map parameters, String cicescini, String cveplan, String grado, SICEEO_QueriesInformix qryIfx2) throws SQLException
+    {
+        ArrayList<Map> paqueteDeMaterias;
+        int numMats, i, numObjsEnReporte=10;         //tenia 9                 //Ojo: Verificar el número en numObjsEnReporte, ya que es la cantidad de objetos estáticos en el reporte
+        String subquery="";
+        
+        try{
+            if (qryIfx2 == null)
+                qryIfx.conectar();
+            else
+                qryIfx = qryIfx2;
+            
+             parameters.put("sqryMaterias", subquery);
+        }finally { try { if (qryIfx2 == null) qryIfx.cerrarConexion();} catch (SQLException ex) { } }
+    }
+    
+    public void selMesCompl (String tblPrincipal_cicescini, String tblPrincipal_idcct, String tblPrincipal_grado, String tblPrincipal_grupo, String idperexmext, 
             String idalusPorAgregar, String idalusPorFiltrar, SICEEO_QueriesInformix qryIfx2)
     {
         String idalusMesCompl="";
@@ -321,7 +337,7 @@ public class SICEEO_Reportes {
             if (!idalusPorAgregar.equals("") && !idalusPorAgregar.equals("null") && !tienePrivilegios)
                 throw new SICEEO_Excepcion(0, "USUARIO_REESTRINGIDO");
             //qryIfx.conectar();
-            idalusMesCompl = qryIfx2.getIdalusConExtraordinarioAprobado(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, mes, idalusPorFiltrar);
+            idalusMesCompl = qryIfx2.getIdalusConExtraordinarioAprobado(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, idperexmext, idalusPorFiltrar);
             
             if (!idalusMesCompl.equals("") && !idalusPorAgregar.equals("") && !idalusPorAgregar.equals("null"))
                 idalusMesCompl += ",";

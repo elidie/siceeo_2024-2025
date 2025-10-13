@@ -130,6 +130,7 @@ public class SICEEO_Password {
             sesion.setAttribute("quitarFolio", this.dr.get("quitarFolio"));
             sesion.setAttribute("seccion", this.dr.get("seccion"));
             sesion.setAttribute("feciniciclo", this.dr.get("feciniciclo"));
+            sesion.setAttribute("fecfinciclo", this.dr.get("fecfinciclo"));
             sesion.setAttribute("tblPrincipal_idcct", "-1");                    //Esta variable guarda el idcct en el que estará trabajando el usuario. Por default tendrá -1 hasta que se ejecute la búsqueda de un cct.
             sesion.setMaxInactiveInterval(Integer.parseInt(""+this.dr.get("tiempoEspera")));                                  //Especifica el tiempo en segundos
            
@@ -202,6 +203,7 @@ public class SICEEO_Password {
             QCiclo = qryIfx.Ciclo();
             this.dr.put("cicescini",QCiclo.get("cicescini"));
             this.dr.put("feciniciclo",QCiclo.get("fecini"));
+            this.dr.put("fecfinciclo",QCiclo.get("fecfin"));
             QUsuario = qryIfx.usuario(txtUsuario);
             
             if (!QUsuario.isEmpty())
@@ -497,11 +499,14 @@ public class SICEEO_Password {
         Object dato;        
         /*******************  btnOfExmExt1ro, btnOfExmExt2do, btnOfExmExt3ro  *****************************/                      
         if(dr.get("superUsuario").equals("si")) {
+            boton.put("btnCalifDBim1ro", "<li><a href='#' id='btnCalifDBim1ro' tabindex='202' title='Calificación obtenida de bimestres'>Calif. obtenida de bimestres</a></li>");
+            boton.put("btnCalifDBim2do", "<li><a href='#' id='btnCalifDBim2do' tabindex='202' title='Calificación obtenida de bimestres'>Calif. obtenida de bimestres</a></li>");
+            boton.put("btnCalifDBim3ro", "<li><a href='#' id='btnCalifDBim3ro' tabindex='202' title='Calificación obtenida de bimestres'>Calif. obtenida de bimestres</a></li>");
             boton.put("btnOfExmExt1ro", "<li><a href='#' id='btnOfExmExt1ro' tabindex='203' title='Oficialización de examenes extraordinarios de 1er grado.' class='icon-sello'>Oficializar Exm.Ext. 1ro</a></li>");
             boton.put("btnOfExmExt2do", "<li><a href='#' id='btnOfExmExt2do' tabindex='203' title='Oficialización de examenes extraordinarios de 2do grado.' class='icon-sello'>Oficializar Exm.Ext. 2do</a></li>");
             boton.put("btnOfExmExt3ro", "<li><a href='#' id='btnOfExmExt3ro' tabindex='203' title='Oficialización de examenes extraordinarios de 3er grado.' class='icon-sello'>Oficializar Exm.Ext. 3ro</a></li>");
             boton.put("btnActualizaPromNivel", "<li><a href='#' id='btnActualizaPromNivel'  tabindex='201' title='Calcula y actualiza el promedio del nivel.'><label class='iconBtnSincronizar iconBtnRedondo  middleHoriz '></label>Promedio de Nivel</a></li>");
-
+                        
             for (Object permiso : permisos)
                 if ((dato = boton.get(permiso))!=null)
                     dr.put(permiso, dato);        

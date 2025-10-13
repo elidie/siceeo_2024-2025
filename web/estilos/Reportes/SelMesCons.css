@@ -1,18 +1,17 @@
 /* 
-    Creado el : 18/10/2017, 12:16:29 PM
+    Creado el : 11-ago-2017, 14:51:37
     Autor     : Ing. Maai Nolasco Sánchez
 */
 
 /* =========================================================================== */
 /* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
 /* =========================================================================== */
-#mwffSelComplExalum, #mwffSelConsExalum
+#mwffSelMesCons
 {
     margin-left: -25%;
     width: 50%;
 }
-#mwfpSelComplExalum #pnlSelComplExalum,
-#mwfpSelConsExalum #pnlSelConsExalum
+#mwfpSelMesCons #pnlSelMesCons
 {
     margin-left: 10px;
     margin-right: 10px;
@@ -25,21 +24,18 @@
 
 
 /* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
-#mwfpSelComplExalum #pnlSelComplExalum .buttonBar li,
-#mwfpSelConsExalum #pnlSelConsExalum .buttonBar li
+#mwfpSelMesCons #pnlSelMesCons .buttonBar li
 {
     margin-bottom: 5px;
     margin-right: 7px;
 }
 
-#mwfpSelComplExalum #pnlSelComplExalum #btnImpMesComplExalum,
-#mwfpSelConsExalum #pnlSelConsExalum #btnImpMesConsExalum
+#mwfpSelMesCons #pnlSelMesCons #btnImpMesCons
 {
     width: 100px;
 }
 
-#mwfpSelComplExalum #pnlSelComplExalum #btnCancelarMesComplExalum,
-#mwfpSelConsExalum #pnlSelConsExalum #btnCancelarMesConsExalum
+#mwfpSelMesCons #pnlSelMesCons #btnCancelarMesCons
 {
     width: 100px;
 }
@@ -48,23 +44,33 @@
 
 
 /* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
-#mwfpSelComplExalum #pnlSelComplExalum #lblInstrucciones,
-#mwfpSelConsExalum #pnlSelConsExalum #lblInstrucciones
+#mwfpSelMesCons #pnlSelMesCons #lblInstrucciones
 {
     display: block;
     margin: 5px;
 }
+#mwfpSelMesCons #pnlSelMesCons #pnlCompRec_alum,
+#mwfpSelMesCons #pnlSelMesCons #pnlCompExt_alum
+{
+    display: block;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    color: olive;
+}
+#mwfpSelMesCons #pnlSelMesCons #lineaComp {
+    border: 1px solid black;
+    display: block;
+    margin-bottom: 12px;
+}
 
-#mwfpSelComplExalum #pnlSelComplExalum #lblSelEspAlus,
-#mwfpSelConsExalum #pnlSelConsExalum #lblSelEspAlus
+#mwfpSelMesCons #pnlSelMesCons #lblSelEspAlus
 {
     display: block;
     margin-bottom: 12px;
 }
 
 /* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
-#mwfpSelComplExalum #pnlSelComplExalum #scrlAlumnos,
-#mwfpSelConsExalum #pnlSelConsExalum #scrlAlumnos
+#mwfpSelMesCons #pnlSelMesCons #scrlAlumnos
 {
     border: 1px solid black;
     height: 200px;
@@ -88,8 +94,7 @@
 
 @media screen and (max-width: 700px)
 {
-    #mwffSelComplExalum,                                                            /*Reajustamos la ventana, Como ya definimos un ancho más arriba, ya no agarra el automático de Estilos Generales*/
-    #mwffSelConsExalum
+    #mwffSelMesCons                                                            /*Reajustamos la ventana, Como ya definimos un ancho más arriba, ya no agarra el automático de Estilos Generales*/
     {
         margin-left: -45%;
         width: 90%;

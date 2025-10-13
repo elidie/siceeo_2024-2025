@@ -234,18 +234,9 @@ public class SICEEO_Tutor {
             QAlumCapRepEval = qryIfx.alumCaptuRepEval(califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"));  //qry de captura de evaluaciones
             if (QAlumCapRepEval.size()>0){
                 dr.putAll(qryIfx.getCaptuRepEval(califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu")));
-                //QMateriasAlumno = qryIfx.getMateriasAlumno(califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu"));
-                //QObsYRecomXBimYAsig = qryIfx.getTablaObsYRecomXBimYAsig (califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu"));
-                //QPreguntasCompLectora = qryIfx.getTablaPreguntasCompLectora (""+tblPrincipal.get(posSelActual).get("cveplan"), ""+tblPrincipal.get(posSelActual).get("grado"));
-                //QLenguas = qryIfx.getLenguas();
             }
             
-            //dr.put("lenguas",QLenguas);
             dr.put("tblAlumCapTutor",QAlumCapRepEval);
-            /*
-            dr.put("matsAlumno",QMateriasAlumno);
-            dr.put("tblObsYRecomXBimYAsig",QObsYRecomXBimYAsig);
-            dr.put("preguntasCompLectora",QPreguntasCompLectora);*/
             
             dr.put("tblPrincipal_selectedRow", posSelActual);
             dr.put("tblPrincipal_grado", tblPrincipal.get(posSelActual).get("grado"));
