@@ -136,8 +136,7 @@ public class SICEEO_Password {
            
             this.dr.put("fecha", dm.getFechaHoy("dd/MM/yyyy h:mm a"));
             
-            permisos (request.getParameter("usuario").toUpperCase().trim(), ""+dr.get("tipo_usuario"), ""+dr.get("QEscuela_cveplan"), ""+dr.get("QEscuela_cveunidad"), ""+dr.get("seccion"));
-                        
+            permisos (request.getParameter("usuario").toUpperCase().trim(), ""+dr.get("tipo_usuario"), ""+dr.get("QEscuela_cveplan"), ""+dr.get("QEscuela_cveunidad"), ""+dr.get("seccion"));                        
         }
     }
     

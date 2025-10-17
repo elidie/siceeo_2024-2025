@@ -530,8 +530,7 @@ public class SICEEO_SecHist
                 } else {
                     for (int j=0; j<tblExmExt1ro_OldValues.size(); j++)          //Buscamos la posición del idarray en el arreglo tblExmExt1ro_OldValues
                         if (tblExmExt1ro.get(i).get("idarray").equals(tblExmExt1ro_OldValues.get(j).get("idarray"))
-                                && Integer.parseInt(""+tblExmExt1ro_OldValues.get(j).get("anio"))>=2025) {
-                            /* No se debe editar el registro ya capturado */
+                                && Integer.parseInt(""+tblExmExt1ro_OldValues.get(j).get("anio"))>=2025) {                            
                             if(dm.toFloat(""+tblExmExt1ro.get(i).get("promedio")) < 6.0 )
                                 throw new SICEEO_Excepcion (0,"EXM_EXT_CORR_REP");
                             if((idperexmext=qryIfx.verificarFechaValidaExmExt(""+tblExmExt1ro.get(i).get("dia"), ""+tblExmExt1ro.get(i).get("mes"),""+tblExmExt1ro.get(i).get("anio")))==0)

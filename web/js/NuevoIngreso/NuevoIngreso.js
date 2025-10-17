@@ -193,11 +193,9 @@ function buscarAlumno(txtApe1, txtApe2, txtNombre, grado, cicescini, cveplan, tx
 }
 
 function setDatosNuevoIngreso(curp, txtApe1, txtApe2, txtNombre, cbxSexo, txtFechaNac, cbxEntidad_SelectedIndex, idalu, cveplan, cbxOtrasLenguas, cbxEtnia) 
-{
-    var camposADeshabilitar = new Array("txtCurp","txtApe1","txtApe2","txtNombre","cbxSexo","txtEdad","cbxEntidad");
-    //cambioDeForm();
-    $("#txtCurp").val(curp.substring(0,16));
-    $("#txt18").val(curp.substring(16,18));    
+{    
+    var camposADeshabilitar = new Array("txtCurp","txtApe1","txtApe2","txtNombre","cbxSexo","txtEdad","cbxEntidad");    
+    
     $("#txtApe1").val(txtApe1);
     $("#txtApe2").val(txtApe2);
     $("#txtNombre").val(txtNombre);
@@ -206,6 +204,7 @@ function setDatosNuevoIngreso(curp, txtApe1, txtApe2, txtNombre, cbxSexo, txtFec
     $("#lblIdalu").text(idalu);
     $("#cbxOtrasLenguas").val(cbxOtrasLenguas);
     $("#cbxEtnia").val(cbxEtnia);
+    
     var indice =  parseInt(cbxEntidad_SelectedIndex);
     if(indice===34)
         $("#cbxEntidad").val(indice-1);
@@ -216,15 +215,17 @@ function setDatosNuevoIngreso(curp, txtApe1, txtApe2, txtNombre, cbxSexo, txtFec
         case "2": txtEdad_Sec_Exit (); break;
         case "3": txtEdad_Pre_Exit (); break;
     }
+    $("#txtCurp").val(curp.substring(0,16));
+    $("#txt18").val(curp.substring(16,18));    
     
-   for(var i=0; i<8;i++)
+    for(var i=0; i<8;i++)
         $("#"+camposADeshabilitar[i]).attr("disabled","disabled");
     
     if($('#frmfSecundaria').length && $('#cbxArtes').attr("value"))
         $("#btnGuardar").focus();
     else if($('#frmfPrimaria').length)
         $("#btnGuardar").focus();
-    else $("#cbxKrta").focus();
+    else $("#cbxKrta").focus();            
 }
 
 function verCurp()

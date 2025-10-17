@@ -42,7 +42,7 @@ function mwfSelMesCons_Create ()
                                     +'</div>');
         $('#pnlSelMesCons').append('<label id="lblSelEspAlus"> <input id="chkSelEspAlusCons" type="checkbox" name="chkSelEspAlusCons" value="espAlus">Agregar alumnos en específico</label>');
         $('#pnlSelMesCons').append('<div id="pnlListadoDeAlumnos" class="panel">'
-                                            + '<label class="tituloPanel">Seleccione los alumnos para agregar en complementaria</label>'
+                                            + '<label class="tituloPanel">Seleccione los alumnos para impresión de Constancia</label>'
                                             + '<div id="scrlAlumnos" class="scrollTable"></div>'
                                         +'</div>');
         $('#pnlSelMesCons').append('<ul class="buttonBar"> '
@@ -107,7 +107,7 @@ function initTablaAlumnosParaMesCons (tblAlumnos)
 {
     var tabla = new Tabla();
     
-    tabla.create("scrlAlumnos","tblAlumnos",tblAlumnos, ["Seleccionar","idalu","CURP","NOMBRE COMPLETO"], ["selec","idalu","curp","nom_tot"], ["checkbox","","",""], ["center","","",""], true, null, null ,
+    tabla.create("scrlAlumnos","tblAlumnos",tblAlumnos, ["Seleccionar","idalu","CURP","NOMBRE COMPLETO","ESTATUS FIRMA"], ["selec","idalu","curp","nom_tot","estatus_firma"], ["checkbox","","","",""], ["center","","","",""], true, null, null ,
     function (f,c){
         $("#pnlSelMesCons #tblAlumnos_chk_f"+f+"_c0").on('click', function(e){ 
             //Si dió click en el checbox, quitamos lo que haya puesto, porque ya lo está controlando el click en la fila, (es como hacer un event.dispose)
@@ -120,11 +120,14 @@ function initTablaAlumnosParaMesCons (tblAlumnos)
         });
     });
     
-    for (var i=0; i<tblAlumnos.length; i++)
+    for (var i=0; i<tblAlumnos.length; i++){
         if (tblAlumnos[i].selec === 't'){
             document.getElementById("tblAlumnos_chk_f"+i+"_c0").checked = true;
-            $("#pnlSelMesCons #tblAlumnos_chk_f"+i+"_c0").prop('disabled', true);
+            $("#pnlSelMesCons #tblAlumnos_chk_f"+i+"_c0").prop('disabled', true);            
         }
+        if (tblAlumnos[i].estatus_firma!=='REALIZADO')
+                $("#tblAlumnos_td_f"+i+"_c4").addClass('resaltar');
+    }
 }
 
 function chkSelEspAlusCons_Click ()

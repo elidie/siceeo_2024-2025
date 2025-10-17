@@ -19,7 +19,8 @@ function frmwTutor_Show(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal
         capRepOf: null,
         tblAlumCapTutor_idalu:null,
         califCicEscIn:null,
-        hayCambios:false
+        hayCambios:false,
+        existeTut:null
     };
     object_setVisible (false,"gridTable");                                      // Ocultamos el gridTable
     $("#frmwCaptuTutorAlum").css("display", "block");                              // Mostramos el formulario correspondiente
@@ -62,22 +63,25 @@ function frmwCaptuTutorAlum_Create()
 
                     $('#pnlRecomendGrales').append('<table id="ftblAlumnoTutor"></table>');
                         $('#ftblAlumnoTutor').append("<tr><th>* CURP</th><td>"
-                                                    +"<input type='text' id='txtCurp' class='alinearHoriz' maxlength='18' style='text-transform:uppercase;' tabindex='100' placeholder='18 dígitos' value=''/>"                                                
+                                                    +"<input type='text' id='txtCurp' class='alinearHoriz' maxlength='18' style='text-transform:uppercase;' tabindex='100' placeholder='18 dígitos' value=''/></td>"                                                
+                                                    +"<td><ul id='ubtnBuscar' class='buttonBar alinearHoriz'><li> "
+                                                        +"<a href='#' id='btnBuskTutor' tabindex='101' title='Buscar curp'> "
+                                                        +"<label class='icon-lupa'></label> Buscar</a></li></ul> " 
                                                 +"</td></tr>"); 
 
-                        $('#ftblAlumnoTutor').append("<tr><th>* Primer Apellido</th>           <td><input type='text' id='txtApe1' maxlength='50' style='text-transform:uppercase;' tabindex='101' value='' required/></td></tr>");
-                        $('#ftblAlumnoTutor').append("<tr><th>Segundo Apellido</th>           <td><input type='text' id='txtApe2' maxlength='50' style='text-transform:uppercase;' tabindex='102' value=''/></td></tr>");
-                        $('#ftblAlumnoTutor').append("<tr><th>* Nombre(s)</th>                  <td><input type='text' id='txtNombre' maxlength='100' tabindex='103' style='text-transform:uppercase;' value='' required/></td></tr>");                
-                        $('#ftblAlumnoTutor').append("<tr><th>Teléfono</th>                  <td><input type='text' id='txtTelefono' size='10' maxlength='10' tabindex='104' style='text-transform:uppercase;' value='' /></td></tr>"); 
-                        $('#ftblAlumnoTutor').append("<tr><th>* Parentesco</th>  <td><select id='cbxParent' tabindex='105'></select></td></tr>");
+                        $('#ftblAlumnoTutor').append("<tr><th>* Primer Apellido</th><td><input type='text' id='txtApe1' maxlength='50' style='text-transform:uppercase;' tabindex='101' value='' required/></td></tr>");
+                        $('#ftblAlumnoTutor').append("<tr><th>Segundo Apellido</th><td><input type='text' id='txtApe2' maxlength='50' style='text-transform:uppercase;' tabindex='102' value=''/></td></tr>");
+                        $('#ftblAlumnoTutor').append("<tr><th>* Nombre(s)</th><td><input type='text' id='txtNombre' maxlength='100' tabindex='103' style='text-transform:uppercase;' value='' required/></td></tr>");                
+                        $('#ftblAlumnoTutor').append("<tr><th>Teléfono</th><td><input type='text' id='txtTelefono' size='10' maxlength='10' tabindex='104' style='text-transform:uppercase;' value='' /></td></tr>"); 
+                        $('#ftblAlumnoTutor').append("<tr><th>* Parentesco</th><td><select id='cbxParent' tabindex='105'></select></td></tr>");
                     $('#pnlRecomendGrales').append('<br><div id="pnlRecomendGrales_instruc"><label>* Campos obligatorios.</label></div>');    
     
                 $('#pnlBotonesDeGestion').append('<ul class="buttonBar">'+
                                                     '<li><a href="#" id="btnCargaTutorGpo"><label class="icon-insertar"></label>Cargar tutores ciclo anterior</a></li>'+
                                                     '<li><a href="#" id="btnGuardarCapTutor"><label class="middleHoriz icon-disquete"></label>Guardar captura</a></li>'+
                                                     '<li><a href="#" id="btnLimpiarCapRepEval"><label class="middleHoriz icon-brocha"></label>Limpiar captura</a></li>'+
-                                                    //'<li><a href="#" id="btnAnteriorGrupo"><label class="iconBtnGpoAnt middleHoriz iconBtnRedondo icon-arrow-left4"></label>Gpo. anterior</a></li>' +
-                                                    //'<li><a href="#" id="btnSiguienteGrupo">Siguiente gpo.<label class="iconBtnGpoSig middleHoriz iconBtnRedondo icon-arrow-right4"></label></a></li>' +
+                                                    '<li><a href="#" id="btnAnteriorGrupo"><label class="iconBtnGpoAnt middleHoriz iconBtnRedondo icon-arrow-left4"></label>Gpo. anterior</a></li>' +
+                                                    '<li><a href="#" id="btnSiguienteGrupo">Siguiente gpo.<label class="iconBtnGpoSig middleHoriz iconBtnRedondo icon-arrow-right4"></label></a></li>' +
                                                 '</ul>');
                 
   
@@ -86,9 +90,11 @@ function frmwCaptuTutorAlum_Create()
     $("#btnRegresar_CaptuRepEval").on("click",function(){ frmwCaptuTutorAlum_Close(); });
     $("#btnGuardarCapTutor").on('click',function(){ btnGuardarCapTutor_Click ();  return false;});
     $("#btnLimpiarCapRepEval").on('click',function(){ limpiarDatosDeCapturaTutor (); });
-    //$("#btnAnteriorGrupo").on('click',function(){ btnAnteriorGrupo_CapTutor_Click(); return false; });
-    //$("#btnSiguienteGrupo").on('click',function(){ btnSiguienteGrupo_CapTutor_Click();  return false;});     
+    $("#btnAnteriorGrupo").on('click',function(){ btnAnteriorGrupo_CapTutor_Click(); return false; });
+    $("#btnSiguienteGrupo").on('click',function(){ btnSiguienteGrupo_CapTutor_Click();  return false;});     
     $('#btnCargaTutorGpo').click(function(e){ btnCargaTutorGpo_ActionPerformed (e); });
+    $("#btnBuskTutor").bind("keydown", function(e){ if(e.which === 13) {btnBusTutor_ActionPerformed (e); e.preventDefault();} });  //El preventDefault es porque en el método que manda a llmar, cuando toca mostrar un alert, se manda a llamar nuevamente dicho método a travéz del evento click
+    $('#btnBuskTutor').click(function(e){ btnBuskTutor_ActionPerformed (e); });
 }
 
 function frmwCaptuTutorAlum_FormActivate ()
@@ -228,12 +234,21 @@ function insertarDatosDeCaptura_Tutor (result)
 }
 
 function insertDatosTutor(result)
-{        
-    $('#txtCurp').val(result.tutor.curp);
-    $('#txtApe1').val(result.tutor.apepat);
-    $('#txtApe2').val(result.tutor.apemat);
-    $("#txtNombre").val(result.tutor.nombre);    
-    $("#txtTelefono").val(result.tutor.telefono);    //cbxParent            
+{   
+    var camposADeshabilitar = new Array("txtCurp","txtApe1","txtApe2","txtNombre");  
+    
+    if( typeof result.tutor !== "undefined" && result.tutor.curp!=="") {     
+        $('#txtCurp').val(result.tutor.curp);
+        $('#txtApe1').val(result.tutor.apepat);
+        $('#txtApe2').val(result.tutor.apemat);
+        $("#txtNombre").val(result.tutor.nombre);    
+        $("#txtTelefono").val(result.tutor.telefono);               
+                
+        for(var i=0; i<4;i++)
+            $("#"+camposADeshabilitar[i]).attr("disabled","disabled");   
+        if(result.tutor.telefono!=="")
+            $("#txtTelefono").attr("disabled","disabled");   
+    }
 }
 
 
@@ -247,10 +262,6 @@ function insertarTablaTblAlumCapTutor (tblAlumCapTutor)
     
     tabla.setSelectedRow ('tblAlumCapTutor', 0);
 }
-
-
-
-
 
 function tblAlumCapTutor_ChangeSelectedItem (index)
 {    
@@ -322,12 +333,17 @@ function setDatosLabel_CapTutorAlum (caso, cveprograma, idalu, curp)
 }
 
 function limpiarDatosDeCapturaTutor ()
-{     
+{   var camposXHabilitar = new Array("txtCurp","txtApe1","txtApe2","txtNombre","txtTelefono"); 
     $("#txtCurp").val("");
     $("#txtApe1").val("");
     $("#txtApe2").val("");
     $("#txtNombre").val("");
     $("#txtTelefono").val("");
+    
+    for (var i=0; i< 5; i++)
+        if ($("#"+camposXHabilitar[i]).prop("disabled") === true) 
+            $("#"+camposXHabilitar[i]).removeAttr("disabled");          
+        
     $($("#pnlCaptuTutorAlum #pnlCapturaDeTutores select")).prop('selectedIndex', "");
     document.getElementById('txtCurp').focus();
 }
@@ -364,6 +380,10 @@ function btnGuardarCapTutor_Click()
             switch(result.returnCase){
                 case 1:
                         mensaje.General("GUARDADO_EXITOSO");
+                        var numFilas = tabla.getNumRows ('tblAlumCapTutor');
+                        var posSelActual = tabla.getSelectedIndexRow ('tblAlumCapTutor');
+                        if (posSelActual < (numFilas-1))
+                            tblAlumCapTutor_ChangeSelectedItem (posSelActual+1);  
                     break;
                 case 0: case -1:
                         mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
@@ -447,8 +467,8 @@ function btnAnteriorGrupo_CapTutor_Click()
 {
     var tabla = new Tabla();
     
-    if (jsCaptuTutorAlum.hayCambios) 
-        btnGuardarCapTutor_Click ();
+    /*if (jsCaptuTutorAlum.hayCambios) 
+        btnGuardarCapTutor_Click ();*/
     
     if ( tabla.getSelectedIndexRow ('tblPrincipal')-1 >= 0 ){
         var datos = { 
@@ -494,16 +514,14 @@ function sigAntGrupo_CapTutor (datos)
     })
     .done(function(result){
         switch(result.returnCase){
-            case 1:
+            case 1:                    
                     //-------------------- Asignamos variables ---------------------
                     tabla.setSelectedRow ('tblPrincipal', result.tblPrincipal_selectedRow);
                     jsCaptuTutorAlum.tblPrincipal_grado = result.tblPrincipal_grado; 
-                    jsCaptuTutorAlum.tblPrincipal_grupo = result.tblPrincipal_grupo;
-
-                    
+                    jsCaptuTutorAlum.tblPrincipal_grupo = result.tblPrincipal_grupo;                    
                     insertarTablaTblAlumCapTutor (result.tblAlumCapTutor);
                     insertarDatosDeCaptura_Tutor (result);
-                    //cerrarLoading();
+                    cerrarLoading();
                 break;
             case 0: case -1:
                     //cerrarLoading();
@@ -525,3 +543,57 @@ function sigAntGrupo_CapTutor (datos)
         cerrarLoading();
     });
 }
+
+function btnBuskTutor_ActionPerformed()
+{
+    var txtCurp = $("#txtCurp").val();
+    if(!$("#txtCurp").attr("disabled"))
+        buscarTutor (txtCurp);
+    
+}
+
+function buscarTutor(txtCurp)
+{
+    var mensaje = new Mensajes();
+    var tabla = new Tabla();
+    
+    jsCaptuTutorAlum.existeTutor = "X";
+    //------------------ Establecemos los datos a enviar -------------------
+    var datos = {
+        modulo:"DaTut", metodo:"btnBuskTu", txtCurp: txtCurp, tblPrincipal_idcct:jsCaptuTutorAlum.tblPrincipal_idcct
+    };
+    //------------------------- Hacemos la llamada -------------------------
+    cargarLoading();
+    $.ajax({url:"../sis_web/siS1",
+        type:"POST",
+        dataType:"JSON",
+        data: datos,
+        async:true
+    })
+    .done(function(result){
+        switch(result.returnCase){
+            case 1:
+                jsCaptuTutorAlum.existeTutor = result.existeTutor;
+                if(result.existeTutor==='O')
+                    insertDatosTutor (result);
+                break;
+            case 0: case -1:
+                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                break;
+            case -10:
+                    //e.preventDefault();
+                    mensaje.General("GENERAL", result.tipoMensaje +"\n\n"+result.mensaje, "");
+                    btnCerrarSesion_ActionPerformed ();
+                break;
+            default:break;
+        }
+    })
+    .fail(function() {
+        mensaje.General("ERROR_AJAX", "", "");
+        //cerrarLoading();
+    })
+    .always(function() {
+        cerrarLoading();
+    });
+}
+

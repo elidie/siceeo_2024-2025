@@ -174,7 +174,12 @@ public class SICEEO_Mensajes {
         else if (tipo.equals("CARACTER_INVALIDO"))  {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Caracter no válido en el "+texto1+"."; }        
         else if (tipo.equals("ESPACIO_BLANCO"))     { tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Más de un espacio en el "+texto1+"."; }
         else if (tipo.equals("OCUPADO"))  {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se logro realizar la acción, intentelo más tarde.\n"+texto1; }
-        
+        else if (tipo.equals("MASDE1_TUTOR"))  {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Se encontraron más de una coincidencia, ingrese más carácteres de la curp."; }
+        else if (tipo.equals("CURP_VACIO"))  {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Debe ingresar una curp para poder realizarle la busqueda."; }
+        else if (tipo.equals("CURP10"))  {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "Debe ingresar como minimo los primeros 10 dígitos de la curp para poder realizarle la busqueda."; }
+        else if (tipo.equals("VERF_CURP"))  {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "La longitud de la curp es de 18 dígitos. Verifique el dato ingresado."; }
+        else if (tipo.equals("NOHAY_TUTOR"))  {  tipoMensaje[0]= this.WARNING;   tipoMensaje[1]= "No se encontraron coincidencias para la curp capturada. Ingrese de manera manual el resto de los datos."; }
+                
         datosReturn.put("tipoMensaje",tipoMensaje[0]);      datosReturn.put("mensaje",tipoMensaje[1]);
         
         return tipoMensaje[1];

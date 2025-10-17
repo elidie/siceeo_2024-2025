@@ -2,6 +2,7 @@ package modelo.Tutor;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -62,7 +63,9 @@ public class SICEEO_Tutor {
         else if (metodo.equals("btAnGp"))
             btnAnteriorGpo_Click (dm.vstrToArrMap(r.gPV("tblPrincipal"), "~", new String[]{"cct","grado","grupo","idcct","cveplan"}),  dm.toInt(r.gP("posSelActual")),  r.gP("califCicEscIn"));
         else if (metodo.equals("btSiGp"))
-            btnSiguienteGpo_Click (dm.vstrToArrMap(r.gPV("tblPrincipal"), "~", new String[]{"cct","grado","grupo","idcct","cveplan"}),  dm.toInt(r.gP("posSelActual")) ,  r.gP("califCicEscIn") ,  r.gP("numeval") );
+            btnSiguienteGpo_Click (dm.vstrToArrMap(r.gPV("tblPrincipal"), "~", new String[]{"cct","grado","grupo","idcct","cveplan"}),  dm.toInt(r.gP("posSelActual")) ,  r.gP("califCicEscIn") );
+        else if (metodo.equals("btnBuskTu"))
+            btnBuskTutor_Click (r.gP("txtCurp"), r.gP("tblPrincipal_idcct"));    
     }
     
     private void formActivate (String califCicEscIn, String txtUsuario, String cicescin)
@@ -200,6 +203,45 @@ public class SICEEO_Tutor {
         finally {try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
     }
     
+    private void btnBuskTutor_Click ( String txtCurp, String tblPrincipal_idcct)
+    {        
+        int caso=0;
+        ArrayList<Map> tutor;
+        Map datosTutor = new HashMap();
+        try
+        {
+            dm.isIdcctAutorizada (sesion, tblPrincipal_idcct);
+            qryIfx.conectar();
+            if(txtCurp.trim().isEmpty())
+                throw new SICEEO_Excepcion(0, "CURP_VACIO");
+            else if(txtCurp.trim().length()<10)
+                throw new SICEEO_Excepcion(0, "CURP10");
+            else if(txtCurp.trim().length()>=10 && txtCurp.trim().length()<18)
+                caso = 1; //curp incompleta
+            else if (txtCurp.trim().length()==18)
+                caso = 2;
+            else             
+                throw new SICEEO_Excepcion(0, "VERF_CURP");        
+            tutor = qryIfx.buscarTutor(txtCurp.trim().toUpperCase(), caso); 
+            if(tutor.isEmpty())
+                throw new SICEEO_Excepcion(0, "NOHAY_TUTOR");
+            else if(tutor.size()>1)
+                throw new SICEEO_Excepcion(0, "MASDE1_TUTOR");
+                        
+            datosTutor.put("nombre", tutor.get(0).get("nombre"));
+            datosTutor.put("apepat", tutor.get(0).get("apepat"));
+            datosTutor.put("apemat", tutor.get(0).get("apemat"));            
+            datosTutor.put("curp", tutor.get(0).get("curp"));
+            datosTutor.put("telefono", "");
+                                                        
+            dr.put("existeTutor", 'O');
+            dr.put("tutor", datosTutor);
+        } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.TutorAlum("OCUPADO", ex.getMessage(), "", this.dr);  }
+        catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.TutorAlum(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
+        catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
+        finally {try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
+    }
+    
     private void tblAlumCapTutor_ChangeSelectedItem (String CalifCicEscIn, String tblPrincipal_idcct,String tblAlumCapTutor_idalu, String tblPrincipal_grado, String tblPrincipal_grupo)
     {
         
@@ -220,23 +262,20 @@ public class SICEEO_Tutor {
     
     private void btnAnteriorGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual, String califCicEscIn) 
 { 
-    ArrayList<Map> QAlumCapRepEval=new ArrayList<Map>(), QMateriasAlumno = new ArrayList<Map>(), QObsYRecomXBimYAsig = new ArrayList<Map>(), QPreguntasCompLectora = new ArrayList<Map>();
-    //Map QLenguas = new HashMap();
-    
+    ArrayList<Map> QAlumCapTutor=new ArrayList<Map>();    
     dr.put("tblPrincipal_selectedRow", posSelActual);
     
     try
     {
         qryIfx.conectar();
         posSelActual--;
-        while ( posSelActual>=0 && QAlumCapRepEval.isEmpty() )
-        {
-            QAlumCapRepEval = qryIfx.alumCaptuRepEval(califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"));  //qry de captura de evaluaciones
-            if (QAlumCapRepEval.size()>0){
-                dr.putAll(qryIfx.getCaptuRepEval(califCicEscIn, ""+QAlumCapRepEval.get(0).get("idalu")));
-            }
-            
-            dr.put("tblAlumCapTutor",QAlumCapRepEval);
+        while ( posSelActual>=0 && QAlumCapTutor.isEmpty() )
+        {    
+            QAlumCapTutor = qryIfx.alumCaptuRepEval(califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"));  
+            dr.put("tblAlumCapTutor",QAlumCapTutor);
+                  
+            dr.put("parentesco",qryIfx.getParentesco());
+            qryIfx.getTutorAlumno(""+QAlumCapTutor.get(0).get("idalu"), califCicEscIn, dr);
             
             dr.put("tblPrincipal_selectedRow", posSelActual);
             dr.put("tblPrincipal_grado", tblPrincipal.get(posSelActual).get("grado"));
@@ -248,22 +287,23 @@ public class SICEEO_Tutor {
     finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
 }
 
-private void btnSiguienteGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual, String califCicEscIn, String numeval) 
+private void btnSiguienteGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual, String califCicEscIn) 
 { 
     int numFilas;
-    ArrayList<Map> QAlumCapRepEval=new ArrayList<Map>(), QMateriasAlumno = new ArrayList<Map>(), QObsYRecomXBimYAsig = new ArrayList<Map>(), QPreguntasCompLectora = new ArrayList<Map>();
-    //Map QLenguas = new HashMap();
+    ArrayList<Map> QAlumCapTutor=new ArrayList<Map>();    
     
     numFilas = tblPrincipal.size();
     try
     {
         qryIfx.conectar();
-        posSelActual++;
-        while ( posSelActual<numFilas && QAlumCapRepEval.isEmpty()  )
-        {
-            QAlumCapRepEval = qryIfx.alumCaptuRepEval(califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"));  //qry de captura de evaluaciones
-            
-            dr.put("tblAlumCapTutor",QAlumCapRepEval);
+        posSelActual++;        
+        while ( posSelActual<numFilas && QAlumCapTutor.isEmpty()  )
+        {                        
+            QAlumCapTutor = qryIfx.alumCaptuRepEval(califCicEscIn, ""+tblPrincipal.get(posSelActual).get("idcct"), ""+tblPrincipal.get(posSelActual).get("grado"), ""+tblPrincipal.get(posSelActual).get("grupo"));  //qry de captura de evaluaciones
+            dr.put("tblAlumCapTutor",QAlumCapTutor);
+                  
+            dr.put("parentesco",qryIfx.getParentesco());
+            qryIfx.getTutorAlumno(""+QAlumCapTutor.get(0).get("idalu"), califCicEscIn, dr);
             
             dr.put("tblPrincipal_selectedRow", posSelActual);
             dr.put("tblPrincipal_grado", tblPrincipal.get(posSelActual).get("grado"));
@@ -271,13 +311,13 @@ private void btnSiguienteGpo_Click(ArrayList<Map>tblPrincipal, int posSelActual,
             posSelActual++;
         }
         
-        if ( posSelActual >= numFilas && QAlumCapRepEval.isEmpty() ) {
+        if ( posSelActual >= numFilas && QAlumCapTutor.isEmpty() ) {
             qryIfx.cerrarConexion();
            btnAnteriorGpo_Click(tblPrincipal, posSelActual, califCicEscIn);
-        }
-        
+        }        
     } catch (SQLException ex){ this.dr.put("returnCase",-1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
     catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
     finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
 }
+
 }

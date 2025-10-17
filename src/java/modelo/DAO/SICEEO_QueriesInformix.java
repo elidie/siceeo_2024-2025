@@ -490,7 +490,8 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
             stm.execute("UPDATE alumnotutor SET "
                     + "idtutor = " + idtutor+", "
                     + "cveparent = '"+cveparent+"', "
-                    + "fecha = date(current), "
+                    + "usuario = '"+Usuario+"', "             
+                    + "fecha = date(current), "                       
                     + "hora = extend(current, hour to minute) "        
                 + "WHERE idalu = " + idalu +" AND cicescini="+cicescini);
         else
@@ -499,7 +500,6 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     }
     public void actualizarTutor(String cicescini, String idtutor, String cveparent, String txtPrimerApe, String txtSegundoApe, String txtNombre, String txtTelefono) throws SQLException{
         stm.execute("UPDATE tutor SET "
-                /*+ "cveparent='"+cveparent+"', "*/
                 + "apepat='"+txtPrimerApe+"', "
                 + "apemat='"+txtSegundoApe+"', "
                 + "nombre='"+txtNombre+"', "
@@ -4009,7 +4009,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                            + "idperexmext="+idperexmext+", usuario='"+usuario+"', fecha=date(current), hora = extend(current, hour to minute) "
                        + "WHERE idalu="+idalu_oldValue+" AND grado = "+grado_oldValue+" AND idcct_apl="+idcct_apl_oldValue+" AND cvetipmat='"+cvetipmat_oldValue+"' "
                            + "AND cvemat='"+cvemat_oldValue+"' AND dia="+dia_oldValue+" AND mes = '"+mes_oldValue+"' AND anio = "+anio_oldValue+" "
-                           + "AND promedio = "+promedio_oldValue);
+                           + "AND promedio = "+promedio_oldValue + " AND oficializado='f' ");
             if(!promedio.equals(promedio_oldValue)) {
                 stm.execute("UPDATE alumnomaterias SET "
                         + "promedio="+promedio+", usuario='"+usuario+"', fecha=date(current), "
@@ -5994,6 +5994,29 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         return idtutor;
     }
     
+    public ArrayList<Map> buscarTutor (String curp, int caso) throws SQLException 
+    {           
+        String strQuery="";
+        ArrayList<Map> tutor;
+        if(caso==1)
+            strQuery = "curp like '"+curp+"%' ";
+        else if(caso==2)
+            strQuery = "curp = '"+curp+"' ";
+        rs = stm.executeQuery( "SELECT nombre, apepat, apemat, curp " 
+                + "FROM tutor "
+                + "WHERE "+strQuery );                       
+            
+        tutor =  qryToArrlmap(rs, null, true, 0);
+        
+        if(tutor.isEmpty()) {
+            rs = stm.executeQuery( "SELECT nombre, apepat, apemat, curp " 
+                + "FROM alumno "
+                + "WHERE "+strQuery );          
+            tutor = qryToArrlmap(rs, null, true, 0);
+        }
+        return tutor;
+    }
+    
     public void getTutorAlumno (String tblPrincipal_idalu, String cicescini, Map dr) throws SQLException
     {
         Map tutor, temp = new HashMap();
@@ -6352,8 +6375,10 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
             String tblPrincipal_grado, String tblPrincipal_grupo, String idperexmext) throws SQLException
     {
         rs = stm.executeQuery( "SELECT 'f' selec, fo.idalu, fo.curp, fo.apepat, fo.apemat, fo.nombre, " 
-            + "(trim(nvl(fo.apepat,'')) || '/' || trim(nvl(fo.apemat,'')) || '*' || trim(nvl(fo.nombre,''))) AS nom_tot, "
-            + "g.grado, g.grupo " 
+            + "(trim(nvl(fo.apepat,'')) || '/' || trim(nvl(fo.apemat,'')) || '*' || trim(nvl(fo.nombre,''))) AS nom_tot, g.grado, g.grupo, "
+            + "(CASE WHEN fo.examenescadena IS NULL THEN 'PROCESO DE FOLEADO' ELSE " 
+                + "NVL((SELECT CASE WHEN fechatimbradoieepo IS NULL THEN 'PROCESO DE FIRMA' ELSE 'REALIZADO' END "
+                    + "FROM exaext_firmas WHERE idexaext_folio = fo.idexaext_folio),'PROCESO DE FIRMA') END) AS estatus_firma " 
             + "FROM alumnogrado g, exaext_folios fo " 
             + "WHERE g.idalu=fo.idalu AND g.cicescini="+tblPrincipal_cicescini+" AND g.estatusgrado<>'BD' "
             + "AND g.idcct= " + tblPrincipal_idcct + " AND g.cveplan=2 AND g.grado="+tblPrincipal_grado+" "
@@ -6368,7 +6393,10 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     {
         rs = stm.executeQuery( "SELECT 'f' selec, fo.idalu, fo.curp, fo.apepat, fo.apemat, fo.nombre, " 
             + "(trim(nvl(fo.apepat,'')) || '/' || trim(nvl(fo.apemat,'')) || '*' || trim(nvl(fo.nombre,''))) AS nom_tot, "
-            + "g.grado, g.grupo, g.cicescini " 
+            + "g.grado, g.grupo, g.cicescini, "
+            + "(CASE WHEN fo.examenescadena IS NULL THEN 'PROCESO DE FOLEADO' ELSE " 
+                + "NVL((SELECT CASE WHEN fechatimbradoieepo IS NULL THEN 'PROCESO DE FIRMA' ELSE 'REALIZADO' END "
+                    + "FROM exaext_firmas WHERE idexaext_folio = fo.idexaext_folio),'PROCESO DE FIRMA') END) AS estatus_firma "     
             + "FROM alumnogrado g, exaext_folios fo " 
             + "WHERE g.idalu=fo.idalu AND g.cicescini="+tblPrincipal_cicescini+" AND g.estatusgrado<>'BD' "
             + "AND g.idcct= " + tblPrincipal_idcct + " AND g.cveplan=2 AND g.grado="+tblPrincipal_grado+" "

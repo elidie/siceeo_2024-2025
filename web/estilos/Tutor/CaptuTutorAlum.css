@@ -134,7 +134,14 @@ pnlCaptuTutorAlum .scrollTable table td{
     width: 170px;
 }
 
-
+#ftblAlumnoTutor #btnBuskTutor
+{
+    font-size: 0.8em;
+    height: 15px;
+    padding-bottom: 1px;
+    padding-top: 3px;
+    width: 70px;
+}
 
 /* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
 #pnlCaptuTutorAlum #tblObsYRecomXBimYAsig .coltblObsYRecomXBimYAsig_col1 select
