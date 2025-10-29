@@ -149,7 +149,15 @@
     width: 120px;
 }
 
-
+#pnlReportes #pnlCambioDeCiclo .inputGpo
+{
+    margin-bottom: 10px;
+}
+#pnlReportes #pnlCambioDeCiclo .inputGpo input
+{
+    size: 5px;
+    text-transform: uppercase;
+}
 /* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
 #pnlReportes #lblEtiquetaCiclo
 {

@@ -6373,35 +6373,39 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     
     public ArrayList<Map> getAlumnosParaMesCons (String tblPrincipal_cicescinilib, String tblPrincipal_cicescini, String tblPrincipal_idcct, 
             String tblPrincipal_grado, String tblPrincipal_grupo, String idperexmext) throws SQLException
-    {
-        rs = stm.executeQuery( "SELECT 'f' selec, fo.idalu, fo.curp, fo.apepat, fo.apemat, fo.nombre, " 
-            + "(trim(nvl(fo.apepat,'')) || '/' || trim(nvl(fo.apemat,'')) || '*' || trim(nvl(fo.nombre,''))) AS nom_tot, g.grado, g.grupo, "
-            + "(CASE WHEN fo.examenescadena IS NULL THEN 'PROCESO DE FOLEADO' ELSE " 
+    {         
+        rs = stm.executeQuery("SELECT 'f' selec, a.idalu, a.curp, a.apepat, a.apemat, a.nombre, " 
+            + "(trim(nvl(a.apepat,'')) || '/' || trim(nvl(a.apemat,'')) || '*' || trim(nvl(a.nombre,''))) AS nom_tot, g.grado, g.grupo, "
+            + "(CASE WHEN fo.examenescadena IS NULL THEN (SELECT (CASE WHEN oficializado='f' THEN 'PENDIENTE DE OFICIALIZAR' ELSE 'PROCESO DE FOLEADO' END) estatus " 
+                                                    + "FROM exm_ext_ordi WHERE idalu = g.idalu AND anio = "+tblPrincipal_cicescinilib+" AND idperexmext = "+idperexmext+" GROUP BY estatus) ELSE " 
                 + "NVL((SELECT CASE WHEN fechatimbradoieepo IS NULL THEN 'PROCESO DE FIRMA' ELSE 'REALIZADO' END "
                     + "FROM exaext_firmas WHERE idexaext_folio = fo.idexaext_folio),'PROCESO DE FIRMA') END) AS estatus_firma " 
-            + "FROM alumnogrado g, exaext_folios fo " 
-            + "WHERE g.idalu=fo.idalu AND g.cicescini="+tblPrincipal_cicescini+" AND g.estatusgrado<>'BD' "
+            + "FROM alumno a, alumnogrado g LEFT JOIN exaext_folios fo ON (fo.idalu = g.idalu AND fo.idperexmext = "+idperexmext+" AND fo.aniolib = "+tblPrincipal_cicescinilib+") " 
+            + "WHERE a.idalu = g.idalu  AND g.cicescini = " + tblPrincipal_cicescini + " AND g.estatusgrado<>'BD' "
             + "AND g.idcct= " + tblPrincipal_idcct + " AND g.cveplan=2 AND g.grado="+tblPrincipal_grado+" "
-            + "AND g.grupo='"+tblPrincipal_grupo+"' AND fo.idperexmext ="+idperexmext+" AND fo.aniolib = "+tblPrincipal_cicescinilib +" "
-            + "ORDER BY fo.apepat, fo.apemat, fo.nombre, fo.curp");
-                                                
+            + "AND g.grupo='"+tblPrincipal_grupo+"' "
+            + "AND EXISTS (SELECT * FROM exm_ext_ordi WHERE idalu = g.idalu AND anio = "+tblPrincipal_cicescinilib+" AND idperexmext = "+idperexmext+") "        
+            + "ORDER BY a.apepat, a.apemat, a.nombre, a.curp");
+                  
         return qryToArrlmap(rs, null, true, 2);
     }
     
     public ArrayList<Map> getAlumnosParaMesExCons (String tblPrincipal_cicescinilib, String tblPrincipal_cicescini, String tblPrincipal_idcct, 
             String tblPrincipal_grado, String tblPrincipal_grupo, String idperexmext) throws SQLException
     {
-        rs = stm.executeQuery( "SELECT 'f' selec, fo.idalu, fo.curp, fo.apepat, fo.apemat, fo.nombre, " 
-            + "(trim(nvl(fo.apepat,'')) || '/' || trim(nvl(fo.apemat,'')) || '*' || trim(nvl(fo.nombre,''))) AS nom_tot, "
+        rs = stm.executeQuery( "SELECT 'f' selec, a.idalu, a.curp, a.apepat, a.apemat, a.nombre, " 
+            + "(trim(nvl(a.apepat,'')) || '/' || trim(nvl(a.apemat,'')) || '*' || trim(nvl(a.nombre,''))) AS nom_tot, "
             + "g.grado, g.grupo, g.cicescini, "
-            + "(CASE WHEN fo.examenescadena IS NULL THEN 'PROCESO DE FOLEADO' ELSE " 
+            + "(CASE WHEN fo.examenescadena IS NULL THEN (SELECT (CASE WHEN oficializado='f' THEN 'PENDIENTE DE OFICIALIZAR' ELSE 'PROCESO DE FOLEADO' END) estatus " 
+                                                    + "FROM exm_ext_ordi WHERE idalu = g.idalu AND anio = "+tblPrincipal_cicescinilib+" AND idperexmext = "+idperexmext+" GROUP BY estatus) ELSE "
                 + "NVL((SELECT CASE WHEN fechatimbradoieepo IS NULL THEN 'PROCESO DE FIRMA' ELSE 'REALIZADO' END "
                     + "FROM exaext_firmas WHERE idexaext_folio = fo.idexaext_folio),'PROCESO DE FIRMA') END) AS estatus_firma "     
-            + "FROM alumnogrado g, exaext_folios fo " 
-            + "WHERE g.idalu=fo.idalu AND g.cicescini="+tblPrincipal_cicescini+" AND g.estatusgrado<>'BD' "
+            + "FROM alumno a, alumnogrado g LEFT JOIN exaext_folios fo ON (fo.idalu = g.idalu AND fo.idperexmext = "+idperexmext+" AND fo.aniolib = "+tblPrincipal_cicescinilib+") " 
+            + "WHERE a.idalu = g.idalu  AND g.cicescini = " + tblPrincipal_cicescini + " AND g.estatusgrado<>'BD' "
             + "AND g.idcct= " + tblPrincipal_idcct + " AND g.cveplan=2 AND g.grado="+tblPrincipal_grado+" "
-            + "AND g.grupo='"+tblPrincipal_grupo+"' AND fo.idperexmext =" + idperexmext +" AND fo.aniolib = "+tblPrincipal_cicescinilib +" "
-            + "ORDER BY fo.apepat, fo.apemat, fo.nombre, fo.curp");
+            + "AND g.grupo='"+tblPrincipal_grupo+"' "
+            + "AND EXISTS (SELECT * FROM exm_ext_ordi WHERE idalu = g.idalu AND anio = "+tblPrincipal_cicescinilib+" AND idperexmext = "+idperexmext+") "        
+            + "ORDER BY a.apepat, a.apemat, a.nombre, a.curp");
                                                 
         return qryToArrlmap(rs, null, true, 2);
     }

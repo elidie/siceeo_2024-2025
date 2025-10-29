@@ -81,6 +81,8 @@ function frmwReportes_Create()
             $("#pnlReportes").append('<div id="pnlCambioDeCiclo">'
                                         + '<label id="lblEtiquetaCiclo">Ciclo escolar a trabajar: </label>'
                                         +'<div class="combobox"><select id="cbxCambioDeCiclo"></select></div>'
+                                        +'<div class="inputGpo"><label>Grupo: '
+                                            +'</label><input id="txtGrupo" size="8px" value='+jsReportes.tblPrincipal_grupo+'></div>'
                                     +'</div>');
             
             crearBotonReporte ("pnlReportes","btnAcuseOfic", "AOP", "Acuse de oficialización", "de Preinscripción", "", "");             
@@ -142,7 +144,8 @@ function frmwReportes_Create()
     $("#btnRELc").on("click", function(){ elegirMesCertComplem ("RELc"); });
     $("#btnR").on("click", function(){ finDeCurso ("R"); });
     $("#btnRc").on("click", function(){ elegirComplementaria ("Rc"); });
-    $("#btnImpCons").on("click", function(){ elegirMesCons ("EER"); });        
+    $("#btnImpCons").on("click", function(){ elegirMesCons ("EER"); });    
+    $("#txtGrupo").on("keyup", function(){ cambioDeGrupo (); }); 
 }
 
 function frmwReportes_FormActivate ()
@@ -291,3 +294,9 @@ function elegirMesCons (casoRep)
                             grupo:jsReportes.tblPrincipal_grupo, caso: casoRep });
 }
 
+function cambioDeGrupo()
+{   
+    jsReportes.tblPrincipal_grupo = $("#txtGrupo").val().toString().toUpperCase();    
+    $(".bandaInferior").text(jsReportes.tblPrincipal_grado+jsReportes.tblPrincipal_grupo);
+    $("#btnAcuseOfic .bandaInferior").text("");
+}

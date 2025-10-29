@@ -76,13 +76,13 @@ function frmwCaptuTutorAlum_Create()
                         $('#ftblAlumnoTutor').append("<tr><th>* Parentesco</th><td><select id='cbxParent' tabindex='105'></select></td></tr>");
                     $('#pnlRecomendGrales').append('<br><div id="pnlRecomendGrales_instruc"><label>* Campos obligatorios.</label></div>');    
     
-                $('#pnlBotonesDeGestion').append('<ul class="buttonBar">'+
-                                                    '<li><a href="#" id="btnCargaTutorGpo"><label class="icon-insertar"></label>Cargar tutores ciclo anterior</a></li>'+
-                                                    '<li><a href="#" id="btnGuardarCapTutor"><label class="middleHoriz icon-disquete"></label>Guardar captura</a></li>'+
-                                                    '<li><a href="#" id="btnLimpiarCapRepEval"><label class="middleHoriz icon-brocha"></label>Limpiar captura</a></li>'+
-                                                    '<li><a href="#" id="btnAnteriorGrupo"><label class="iconBtnGpoAnt middleHoriz iconBtnRedondo icon-arrow-left4"></label>Gpo. anterior</a></li>' +
-                                                    '<li><a href="#" id="btnSiguienteGrupo">Siguiente gpo.<label class="iconBtnGpoSig middleHoriz iconBtnRedondo icon-arrow-right4"></label></a></li>' +
-                                                '</ul>');
+                $('#pnlBotonesDeGestion').append('<ul class="buttonBar">'                                                  
+                                                    + '<li><a href="#" id="btnGuardarCapTutor"><label class="middleHoriz icon-disquete"></label>Guardar captura</a></li>'
+                                                    + '<li><a href="#" id="btnLimpiarCapRepEval"><label class="middleHoriz icon-brocha"></label>Limpiar captura</a></li>'
+                                                    + '<li><a href="#" id="btnCargaTutorGpo"><label class="icon-insertar"></label>Cargar tutores ciclo anterior</a></li>'
+                                                    + '<li><a href="#" id="btnAnteriorGrupo"><label class="iconBtnGpoAnt middleHoriz iconBtnRedondo icon-arrow-left4"></label>Gpo. anterior</a></li>' 
+                                                    + '<li><a href="#" id="btnSiguienteGrupo">Siguiente gpo.<label class="iconBtnGpoSig middleHoriz iconBtnRedondo icon-arrow-right4"></label></a></li>' 
+                                                + '</ul>');
                 
   
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------
@@ -93,8 +93,9 @@ function frmwCaptuTutorAlum_Create()
     $("#btnAnteriorGrupo").on('click',function(){ btnAnteriorGrupo_CapTutor_Click(); return false; });
     $("#btnSiguienteGrupo").on('click',function(){ btnSiguienteGrupo_CapTutor_Click();  return false;});     
     $('#btnCargaTutorGpo').click(function(e){ btnCargaTutorGpo_ActionPerformed (e); });
-    $("#btnBuskTutor").bind("keydown", function(e){ if(e.which === 13) {btnBusTutor_ActionPerformed (e); e.preventDefault();} });  //El preventDefault es porque en el método que manda a llmar, cuando toca mostrar un alert, se manda a llamar nuevamente dicho método a travéz del evento click
+    $("#btnBuskTutor").bind("keydown", function(e){ if(e.which === 13) { btnBuskTutor_ActionPerformed (e); e.preventDefault();} });  //El preventDefault es porque en el método que manda a llmar, cuando toca mostrar un alert, se manda a llamar nuevamente dicho método a travéz del evento click
     $('#btnBuskTutor').click(function(e){ btnBuskTutor_ActionPerformed (e); });
+    $("#txtCurp").bind("keydown", function(e){ txtCurp_Tutor_KeyDown (e); });
 }
 
 function frmwCaptuTutorAlum_FormActivate ()
@@ -544,12 +545,17 @@ function sigAntGrupo_CapTutor (datos)
     });
 }
 
-function btnBuskTutor_ActionPerformed()
+function btnBuskTutor_ActionPerformed(e)
 {
     var txtCurp = $("#txtCurp").val();
     if(!$("#txtCurp").attr("disabled"))
-        buscarTutor (txtCurp);
-    
+        buscarTutor (txtCurp);    
+}
+
+function txtCurp_Tutor_KeyDown(e){
+    if(e.which === 13) { //Si oprimió enter
+        btnBuskTutor_ActionPerformed(e);
+    }
 }
 
 function buscarTutor(txtCurp)
