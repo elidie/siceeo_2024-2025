@@ -59,7 +59,7 @@
         grado=Integer.parseInt(""+request.getParameter("grado"));
         grupo=request.getParameter("grupo");
         
-        if( Integer.parseInt(cicescinilib)<2022 )
+        if( Integer.parseInt(cicescinilib)<2022)
             r+="/noexiste/";
         
         r+=cicescinilib+"/repEval" + nivel[Integer.parseInt(cveplan)] + (cveplan.equals("1") && Integer.parseInt(cicescinilib)<2023 ? ("DPB, DCI".contains(modalidad)?"Indig":"Formal"):"");

@@ -82,7 +82,7 @@ public class SICEEO_Reportes {
             cicescini_aux = Integer.parseInt(""+QCiclo.get("cicescini"));
             if(usuario.equals("IVALLE") || usuario.equals("ELYLOPEZ") || usuario.equals("POBLETEVL") || usuario.equals("VICTORPS")
                     || usuario.equals("MRAMIREZ") || usuario.equals("HZAVALA"))
-                cicescini_aux -= 7;
+                cicescini_aux -= 8;
             if(usuario.equals("DCEPUERTO"))
                 cicescini_aux -= 2;
             else cicescini_aux -= 1;            

@@ -1,6 +1,7 @@
 package modelo.Oficializaciones;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,17 +48,25 @@ public class SICEEO_Oficializar {
         String superUsuario = ""+sesion.getAttribute("superUsuario");
         String txtUsuario = ""+sesion.getAttribute("userName");
         String puedeDesof = ""+sesion.getAttribute("puedeDesof");
+        String quitarFolio = ""+sesion.getAttribute("quitarFolio");
         
         boolean esUsrAdmin;
         boolean puedeDesoficializar = ( (esUsrAdmin=(txtUsuario.equals("IVALLE") || txtUsuario.equals("ELYLOPEZ"))) || (superUsuario.equals("si") && puedeDesof.equals("si")));
+        boolean puedeQuitarFolio = ( txtUsuario.equals("ELYLOPEZ") || quitarFolio.equals("si"));
         
-        if (metodo.equals("foAc"))
+        if (metodo.equals("foAc")) //Ciclos anteriores al 2025-2026
             formActivate (r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_cicescini"), r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"), txtUsuario, puedeDesoficializar, esUsrAdmin);
+        if( metodo.equals("foAcXalu")) //Ciclos anteriores al 2025-2026
+            formActivate1 (r.gP("tblPrincipal_cicescini"), r.gP("tblPrincipal_cveplan"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"), r.gP("bimeval"));
         else if (metodo.equals("ofPr"))
             oficializaPreinscripcion (r.gP("caso"), r.gP("tblPrincipal_idcct"), r.gP("cicesciniPreinsc"), txtUsuario, puedeDesoficializar, esUsrAdmin);
         else if (metodo.equals("ofCa"))
             oficializaCalificaciones (r.gP("caso"), r.gP("tblPrincipal_modalidad"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_cicescini"), r.gP("tblPrincipal_cveplan"), 
-                    r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"), r.gP("bimestre"), r.gP("idalus"), txtUsuario, puedeDesoficializar, esUsrAdmin);
+                    r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"), r.gP("bimestre"), r.gP("idalus"), txtUsuario, puedeDesoficializar, esUsrAdmin);            
+        else if (metodo.equals("of_CaXAlu"))
+            btnOficializarXAlu_Click (r.gP("tblPrincipal_cicescini"),r.gP("tblPrincipal_cveplan"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_grado"), 
+                    r.gP("tblPrincipal_grupo"), r.gP("bim"), dm.vstrToArrMap(r.gPV("tblAlumnos"), "~", new String[]{"selec","idalu"}), 
+                    ""+sesion.getAttribute("userName"), puedeDesoficializar, puedeQuitarFolio,r.gP("chkTodos"));        
         else if (metodo.equals("ofPrPr"))
             oficializaEvaluacionesPreesc (r.gP("caso"), r.gP("tblPrincipal_modalidad"), r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_cicescini"), r.gP("tblPrincipal_cveplan"), 
                     r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo"), r.gP("evaluacion"), r.gP("idalus"), txtUsuario, puedeDesoficializar, esUsrAdmin);
@@ -76,15 +85,7 @@ public class SICEEO_Oficializar {
             dr.put("verDesofic",puedeDesoficializar); 
             
             dr.put("esPreinscOficializada",qryIfx.isOficializado(tblPrincipal_idcct, ""+(dm.toInt(tblPrincipal_cicescini)+1),"","","PREINSCRIPCION"));
-            /*dr.put("esCalifBim1Oficializada",qryIfx.isOficializado(tblPrincipal_idcct, tblPrincipal_cicescini,tblPrincipal_grado,tblPrincipal_grupo,"CALIFS BIM 1"));
-            dr.put("esCalifBim2Oficializada",qryIfx.isOficializado(tblPrincipal_idcct, tblPrincipal_cicescini,tblPrincipal_grado,tblPrincipal_grupo,"CALIFS BIM 2"));
-            dr.put("esCalifBim3Oficializada",qryIfx.isOficializado(tblPrincipal_idcct, tblPrincipal_cicescini,tblPrincipal_grado,tblPrincipal_grupo,"CALIFS BIM 3"));
-            dr.put("esCalifBim4Oficializada",qryIfx.isOficializado(tblPrincipal_idcct, tblPrincipal_cicescini,tblPrincipal_grado,tblPrincipal_grupo,"CALIFS BIM 4"));
-            dr.put("esCalifBim5Oficializada",qryIfx.isOficializado(tblPrincipal_idcct, tblPrincipal_cicescini,tblPrincipal_grado,tblPrincipal_grupo,"CALIFS BIM 5"));
-            dr.put("esEval1Oficializada",qryIfx.isOficializado(tblPrincipal_idcct, tblPrincipal_cicescini,tblPrincipal_grado,tblPrincipal_grupo,"EVALUACION 1"));
-            dr.put("esEval2Oficializada",qryIfx.isOficializado(tblPrincipal_idcct, tblPrincipal_cicescini,tblPrincipal_grado,tblPrincipal_grupo,"EVALUACION 2"));
-            dr.put("esEval3Oficializada",qryIfx.isOficializado(tblPrincipal_idcct, tblPrincipal_cicescini,tblPrincipal_grado,tblPrincipal_grupo,"EVALUACION 3"));*/
-            
+           
             dr.put("ofsCal", qryIfx.ofYDeofEnCalEvalYGpos(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, "CALIFS BIM"));
             dr.put("ofsEval", qryIfx.ofYDeofEnCalEvalYGpos(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION"));
             dr.put("esInscripOficializada",qryIfx.isOficializado(tblPrincipal_idcct, tblPrincipal_cicescini,"","","INSCRIPCION"));
@@ -93,6 +94,17 @@ public class SICEEO_Oficializar {
             
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         //catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.NewIngresoSec(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
+        catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
+        finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
+    }
+    
+    private void formActivate1 (String tblPrincipal_cicescini, String tblPrincipal_cveplan, String tblPrincipal_idcct, String tblPrincipal_grado, String tblPrincipal_grupo, String bimeval)
+    {
+        try
+        {
+            qryIfx.conectar();
+            dr.put("tblAlumnos",qryIfx.getAlumnosParaOficializar(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, tblPrincipal_cveplan.equals("3")?"EVALUACION "+bimeval:"CALIFS BIM "+bimeval, bimeval));
+        } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexion(); } catch (SQLException ex) { } }
     }
@@ -158,8 +170,26 @@ public class SICEEO_Oficializar {
             
             dr.put("ofsCal", qryIfx.ofYDeofEnCalEvalYGpos(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, "CALIFS BIM"));
             dr.put("ofsEval", qryIfx.ofYDeofEnCalEvalYGpos(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION"));
-            hacerCommit=true; 
+            //hacerCommit=true; 
         } catch (SQLException ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
+        catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.Oficializar(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
+        catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
+        finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }
+    }
+    private void btnOficializarXAlu_Click (String tblPrincipal_cicescini, String tblPrincipal_cveplan, String tblPrincipal_idcct, String tblPrincipal_grado, 
+            String tblPrincipal_grupo, String bimeval, ArrayList<Map> tblAlumnos, String txtUsuario, boolean puedeDesoficializar, boolean puedeQuitarFolio,String chkTodos)
+    {
+        boolean hacerCommit = false;
+        try
+        {
+            if (!puedeDesoficializar)
+                throw new SICEEO_Excepcion (0,"SIN_PERMISO_DESOFIC");
+            qryIfx.conectarConTransaccion();
+            qryIfx.desoficXAlumno (puedeDesoficializar, puedeQuitarFolio, tblPrincipal_cicescini, tblPrincipal_cveplan, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, tblAlumnos, txtUsuario, tblPrincipal_cveplan.equals("3")?"EVALUACION "+bimeval:"CALIFS BIM "+bimeval, bimeval,Boolean.valueOf(chkTodos));
+            dr.put("ofsCal", qryIfx.ofYDeofEnCalEvalYGpos(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, "CALIFS BIM"));
+            dr.put("ofsEval", qryIfx.ofYDeofEnCalEvalYGpos(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION"));
+            //hacerCommit = true;  
+        } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.Oficializar(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }
         finally { try { qryIfx.cerrarConexionConTransaccion(hacerCommit);} catch (SQLException ex) { } }

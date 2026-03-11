@@ -114,6 +114,8 @@ function Mensajes ()
     {
         if (tipo === "TIPO_CAPTURA")
             alert("PRECAUCIÓN\n\nIndique un tipo de captura");
+        else if (tipo==="PERIODO_EVAL")
+            alert("PRECAUCIÓN\n\nFuera del periodo de captura de calificaciones.");
     };
     
     this.Tutor = function (tipo, texto1, texto2)
@@ -240,6 +242,8 @@ function Mensajes ()
                 return confirm("PREGUNTA EMERGENTE\n\n"+(texto==="oficializar"?"Si los promedios son correctos debe oficializar.\n":"")+"¿Confirma que desea "+texto+" "+texto2+"?\n\nOprima Aceptar para que SÍ "+(texto==="oficializar"?"oficialice":"desoficialice")+".\nOprima Cancelar para que NO "+(texto==="oficializar"?"oficialice":"desoficialice")+".");                
             else if (tipo==="QUIERE_ESOFIC")
                 return confirm("PRECAUCIÓN\n\nLa desoficialización implica la cancelación de folios de los\ndocumentos que ya se hayan generado con anterioridad a los\nalumnos que desoficializará.\n\n¿Desea continuar para cancelar folios y desoficializar?\n\nOprima botón Acepatar para continuar o botón Cancelar para regresar.");            
+            else if (tipo==="QUIERE_OFIC")
+                return confirm("PRECAUCIÓN\n\nLa oficialización implica la asignación de folios para boletas de los\nalumnos que oficializará.\n\n¿Desea continuar para la oficialización de la evaluación del alumno?\n\nOprima botón Aceptar para continuar o botón Cancelar para regresar.");                
         }else {
             if (tipo==="ESCUELA_DESOFIC")
                 alert("INFORMACIÓN\n\nPara desoficializar pida ayuda a su UDSE.");

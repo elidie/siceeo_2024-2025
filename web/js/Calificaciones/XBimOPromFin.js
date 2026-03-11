@@ -273,8 +273,27 @@ function cbxBim_Change (item)
 
 function btnCapDatosRepEv_Click()
 {
-    var tabla = new Tabla();
+    var tabla = new Tabla();    
+    var mensaje = new Mensajes ();
     object_setVisible (false,'frmwXBimOPromFin');
-    var tblPrincipal = tabla.getSelectedRow("tblPrincipal",["idcct","modalidad","cct","nombre","grado","grupo","cveplan","cicescini","cveprograma"], null, "JSON");
-    frmwCaptuRepEval_Show(tblPrincipal.cicescini, tblPrincipal.modalidad, tblPrincipal.idcct, tblPrincipal.cct, tblPrincipal.cveplan, tblPrincipal.grado, tblPrincipal.grupo, tblPrincipal.cveprograma);
+    var tblPrincipal = tabla.getSelectedRow("tblPrincipal",["idcct","modalidad","cct","nombre","grado","grupo","cveplan","cicescini","cveprograma"], null, "JSON");    
+    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );       
+    var ceCapTrim1=false, ceCapTrim2=false, ceCapTrim3=false;
+        
+    if (sisVars){        
+        for (var boton in sisVars.botonesDeCalif) {              
+            if(sisVars.botonesDeCalif[boton]==="btnTrim1")
+                ceCapTrim1 = true;
+            else if (sisVars.botonesDeCalif[boton]==="btnTrim2")
+                ceCapTrim2 = true;
+            else if (sisVars.botonesDeCalif[boton]==="btnTrim3")
+                ceCapTrim3 = true;
+        }    
+    }
+    if(ceCapTrim1===false && ceCapTrim2===false && ceCapTrim3===false) {
+        mensaje.XbimOPromFin ("PERIODO_EVAL");
+        frmwXBimOPromFin_Close();
+    }        
+    else
+        frmwCaptuRepEval_Show(tblPrincipal.cicescini, tblPrincipal.modalidad, tblPrincipal.idcct, tblPrincipal.cct, tblPrincipal.cveplan, tblPrincipal.grado, tblPrincipal.grupo, tblPrincipal.cveprograma);
 }

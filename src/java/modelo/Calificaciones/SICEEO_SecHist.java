@@ -523,7 +523,7 @@ public class SICEEO_SecHist
                         throw new SICEEO_Excepcion (0,"EXM_EXT_SIN_APROB");
                     if((idperexmext=qryIfx.verificarFechaValidaExmExt(""+tblExmExt1ro.get(i).get("dia"), ""+tblExmExt1ro.get(i).get("mes"),""+tblExmExt1ro.get(i).get("anio")))==0)
                         throw new SICEEO_Excepcion (0,"FECHA_INVALIDA");
-                
+                    
                     qryIfx.exmExt1ro_onInsert (idalu_oldValue, tblCalif1ro_cicescini, ""+tblExmExt1ro.get(i).get("idcct_apl"), grado_oldValue, cvemat_oldValue, 
                         cvetipmat_oldValue, ""+tblExmExt1ro.get(i).get("dia"), ""+tblExmExt1ro.get(i).get("mes"),""+tblExmExt1ro.get(i).get("anio"), 
                         ""+tblExmExt1ro.get(i).get("promedio"), idperexmext, txtUsuario);

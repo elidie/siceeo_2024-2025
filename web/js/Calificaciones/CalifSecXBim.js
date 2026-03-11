@@ -62,6 +62,7 @@ function frmwCalifSecXBim_Close()
 
 function frmwCalifSecXBim_Create ()
 {
+    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
     if($('#frmfCalifSecXBim').length) // Verificando si la tabla Existe
         $('#frmfCalifSecXBim').remove();
     $('#frmwCalifSecXBim').append('<fieldset id="frmfCalifSecXBim"><legend>Calificaciones trimestrales</legend><div id="btnRegresar" class="divBtnRegresar" title="Regresar a la ventana anterior" tabindex="90"><label id="ibtnRegresar" class="icon-regresar"></label></div> </fieldset>');
@@ -116,13 +117,13 @@ function frmwCalifSecXBim_Create ()
             }        
                 $('#pnlGestionBim').append('<div id="pnlBotonesDecontrol" class="pnlBotonesDecontrol"></div>');  // Se agrego la clase=pnlBotonesDecontrol por Ely
                     $('#pnlBotonesDecontrol').append('<div id="pnlBotonesDecontrolIzq"></div>');
-                        $('#pnlBotonesDecontrolIzq').append('<ul class="buttonBar"> '
+                        $('#pnlBotonesDecontrolIzq').append('<ul class="buttonBar" id="ubtnDeconrolIzq">'
                                                                 + ((jsCaSeXBi.bim!=="0") ? '<li><a href="#" id="btnGenBim" title="Le crea el paquete de materias del trimestre a todos los alumnos que les haga falta">Generar materias del periodo</a></li>' : '')
                                                                 + ((jsCaSeXBi.bim!=="0") ? '<li><a href="#" id="btnChekMat" title="Corrige el paquete de materias al alumno seleccionado de acuerdo al plan de estudios vigente">Corregir materias del alumno</a></li>' : '')
                                                                 //+'<li><a href="#" id="btnElimBimAlum" title="Elimina todas las materias de todos los bimestres al alumno seleccionado">Elimina todos los Bim. del Alum.</a></li>'
                                                                 //+'<li><a href="#" id="btnElimBim" title="Elimina todas las materias de todos los bimestres a todos los alumnos">Elimina materias Bim. del Gpo.</a></li>'
-                                                                +'<li><a href="#" id="btnKardex">Imprime Kárdex</a></li>'
-                                                                +'<li><a href="#" id="btnHistAcad" title="Muestra la ventana para ingresar calificaciones de exámenes extraordinarios">Exam. Extraord.</a></li>'
+                                                                +'<li><a href="#" id="btnKardex">Imprime Kárdex</a></li>'                                                                
+                                                                //+'<li><a href="#" id="btnHistAcad" title="Muestra la ventana para ingresar calificaciones de exámenes extraordinarios">Exam. Extraord.</a></li>'
                                                             +'</ul>');
                     $('#pnlBotonesDecontrol').append('<div id="pnlBotonesDecontrolDer"></div>');
                         $('#pnlBotonesDecontrolDer').append('<ul class="buttonBar"> '                                                                
@@ -141,6 +142,9 @@ function frmwCalifSecXBim_Create ()
                 $('#pnlGestionBim').append('<div id="pnlTblTotMat">  <div id="scrlTotMat" class="scrollTable"></div>  </div>');*/
     
     //object_setVisible (false,'pnlTblTotMat');
+    if(sisVars.btnHistAcad){            
+        $("#ubtnDeconrolIzq").append(sisVars.btnHistAcad);
+    }
     
     //------------------------------------- DECLARACIÓN DE VENTANAS MODALES --------------------------------------------
     $("#frmfCalifSecXBim").append('<div id="mwfmRevisaGpo" class="mwfModal" style="display:none"></div>');  

@@ -471,7 +471,7 @@ function showReport (panelContenedor, jsp, jsonParameters)
                                         +'<button type="submit">Firmar</button>'
                                     +'</form>');
     var form = document.getElementById("formulario");
-    form.submit();
+    form.submit();    
     //$("#pnlReportContainer").remove();
     panelContenedor="";
     jsp="";

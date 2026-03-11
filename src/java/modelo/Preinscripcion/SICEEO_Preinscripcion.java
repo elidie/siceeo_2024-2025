@@ -1170,7 +1170,7 @@ public class SICEEO_Preinscripcion {
                 //--Vista--> l_idalu.Caption:='';
             }
             //*******************************************termina validar k no exista el alumno
-            hacerCommit = true;
+            hacerCommit = true; //comentado hoy 26-02-2026
         } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("INDISPUESTO", ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.NewIngresoSec(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){  this.dr.put("returnCase", -1);   mensaje.General("GENERAL", ex.getMessage(), "", this.dr);   }

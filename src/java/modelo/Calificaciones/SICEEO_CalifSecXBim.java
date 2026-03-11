@@ -116,16 +116,18 @@ public class SICEEO_CalifSecXBim {
                     r.gP("tblPrincipal_cveplan"), r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_grupo") );
         /*else if (metodo.equals("chToMa"))
             chkTotMat_Click (r.gP("tblAlumCapCalif_idalu"), r.gP("tblAlumCapCalif_cicescini") ) ;*/
-        else if (metodo.equals("btGdCaRe")){
-            /*btnGdaCalifReal_Click (r.gP("numLlamada"), dm.toInt(r.gP("tblMatCalifXBim_size")), 
-                    dm.vstrToArrMap(r.gPV("tblMatCalifXBim_calif1_OldValue"), "~", new String[]{"OldValue"}), r.gP("existeCalif2"), 
-                    dm.vstrToArrMap(r.gPV("tblMatCalifXBim_calif2_OldValue"),  "~", new String[]{"OldValue"}), txtUsuario, r.gP("califCicEscIn"), 
-                    r.gP("calProm"), r.gP("cicescin"), dm.vstrToArrMap(r.gPV("tblMatCalifXBim"), "~", new String[]{"calif1","calif2","idalu","cvemat","cvetipmat","numeval","cicescini","grado","cveplan","cvemat","cvetipmat"}), 
-                    r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_cveplan"), dm.strToMap(r.gP("tblAlumCapCalif"), "~", new String[]{"idalu","grado","matrepensecu","c_rep","promd1rop","promd2dop","promd3rop","promd4top","promd5top"}),
-                    dm.toInt(r.gP("matRepGdo")),r.gP("sumCalif"),dm.toInt(r.gP("noMat")), r.gP("todasSusMat"), r.gP("esp"),r.gP("mat"), r.gP("prom"), 
-                    r.gP("respAlumProCond"), r.gP("respAlumRep"), r.gP("respAcredPorCursarlo"), r.gP("cbxBim_SelItem"), r.gP("tblAlumCapCalif_changeToidalu")
-            );*/
-        } else if (metodo.equals("tbMaCa_KePr")) {//Comentado para no guardar calificaciones 2018 (OJO) 
+        /*else if (metodo.equals("btGdCaRe")){
+            btnGdaCalifReal_Click (r.gP("numLlamada"), dm.toInt(r.gP("tblMatCalifXBim_size")), 
+                dm.vstrToArrMap(r.gPV("tblMatCalifXBim_calif1_OldValue"), "~", new String[]{"OldValue"}), r.gP("existeCalif2"), 
+                dm.vstrToArrMap(r.gPV("tblMatCalifXBim_calif2_OldValue"),  "~", new String[]{"OldValue"}), txtUsuario, r.gP("califCicEscIn"), 
+                r.gP("calProm"), r.gP("cicescin"), dm.vstrToArrMap(r.gPV("tblMatCalifXBim"), "~", new String[]{"calif1","calif2","idalu","cvemat","cvetipmat","numeval","cicescini","grado","cveplan","cvemat","cvetipmat"}), 
+                r.gP("tblPrincipal_grado"), r.gP("tblPrincipal_cveplan"), dm.strToMap(r.gP("tblAlumCapCalif"), "~", new String[]{"idalu","grado","matrepensecu","c_rep","promd1rop","promd2dop","promd3rop","promd4top","promd5top"}),
+                dm.toInt(r.gP("matRepGdo")),dm.toInt(r.gP("matAprobGdo")),dm.toInt(r.gP("porcAsist")),dm.toInt(r.gP("aluSolicitud")),r.gP("sumCalif"),
+                dm.toInt(r.gP("noMat")), r.gP("todasSusMat"), r.gP("esp"),r.gP("mat"), r.gP("prom"), 
+                r.gP("respAlumProCond"), r.gP("respAlumRep"), r.gP("respAcredPorCursarlo"), r.gP("cbxBim_SelItem"), r.gP("tblAlumCapCalif_changeToidalu"),
+                r.gP("tblPrincipal_idcct"), r.gP("tblPrincipal_grupo")
+            );    
+        }*/ else if (metodo.equals("tbMaCa_KePr")) {//Comentado para no guardar calificaciones 2018 (OJO) 
             tblMatCalif_KeyPress (r.gP("numLlamada"), dm.toInt(r.gP("tblAlumCapCalif_SelecRow")), dm.toInt(r.gP("tblMatCalifXBim_size")), 
                     dm.vstrToArrMap(r.gPV("tblMatCalifXBim_calif1_OldValue"), "~", new String[]{"OldValue"}), r.gP("existeCalif2"), 
                     dm.vstrToArrMap(r.gPV("tblMatCalifXBim_calif2_OldValue"),  "~", new String[]{"OldValue"}), txtUsuario, r.gP("califCicEscIn"), r.gP("calProm"), 
@@ -707,10 +709,10 @@ private void btnGdaCalifReal_Click (String numLlamada, int tblMatCalifXBim_size,
             dr.put("tblAlumCapCalif_c_rep", tblAlumCapCalif.get("c_rep"));
             dr.put("todasSusMat", dr.get("todasSusMat"));
             dr.put("aluSolicitud",v.get("aluSolicitud"));
-            //hacerCommit=true;  //comentado hoy 15-07-2025
+            hacerCommit=true;  //comentado hoy 15-07-2025
             mensaje.General(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);
         }else{ 
-            //hacerCommit=true; //comentado hoy 15-07-2025
+            hacerCommit=true; //comentado hoy 15-07-2025
             mensaje.CalifSecxBim(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);
         }
     } catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }

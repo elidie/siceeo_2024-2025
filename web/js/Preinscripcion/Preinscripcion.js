@@ -701,9 +701,7 @@ function setDatosPreinscripcion(curp, txtPrimerApe, txtSegundoApe, txtNombre, tx
 {
     var camposADeshabilitar = new Array("txtCurp16","txtPrimerApe","txtSegundoApe","txtNombre","cbxGenero","txtFechaNac","cbxEntidad");
     //cambioDeForm();
-    
-    $("#txtCurp16").val(curp.substring(0,16));
-    $("#txtCurp17y18").val(curp.substring(16,18));
+        
     $("#lblIdalu").text(idalu);
     $("#txtPrimerApe").val(txtPrimerApe);
     $("#txtSegundoApe").val(txtSegundoApe);
@@ -722,8 +720,10 @@ function setDatosPreinscripcion(curp, txtPrimerApe, txtSegundoApe, txtNombre, tx
         case "2": txtFechaNac_Exit (); break;
         case "3": txtEdad_Pre_Exit (); break;
     }
+    $("#txtCurp16").val(curp.substring(0,16));
+    $("#txtCurp17y18").val(curp.substring(16,18));
     
-   for(var i=0; i<8;i++)
+    for(var i=0; i<8;i++)
         $("#"+camposADeshabilitar[i]).attr("disabled","disabled");
     
     if($('#frmfSecundaria').length && $('#cbxArtes').attr("value"))

@@ -8,7 +8,7 @@ var jsCaptuRepEval;
 function frmwCaptuRepEval_Show(tblPrincipal_cicescini, tblPrincipal_modalidad, tblPrincipal_idcct, tblPrincipal_cct, tblPrincipal_cveplan, tblPrincipal_grado, tblPrincipal_grupo, tblPrincipal_cveprograma)
 {
 
-    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );   
+    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );       
     var bimMax=0, bimMin=0;
     if (sisVars){        
         for (var boton in sisVars.botonesDeCalif) {              
@@ -24,7 +24,7 @@ function frmwCaptuRepEval_Show(tblPrincipal_cicescini, tblPrincipal_modalidad, t
             }
         }    
     }
-    
+                        
     jsCaptuRepEval = {
         tblPrincipal_cicescini: tblPrincipal_cicescini,
         tblPrincipal_idcct: tblPrincipal_idcct,
@@ -87,7 +87,7 @@ function frmwCaptuRepEval_Create()
             
     /************************* Fecha: 23-05-2025 ***************************************************************************/        
         
-    /************************* Agregado para la captura de observaciones por materia para Primaria *************************/            
+    /************************* Agregado para la captura de observaciones por materia para Primaria *************************/                    
             $('#pnlCaptuRepEval').append('<div id="pnlCapturaDeRecomedaciones"></div>'); //pnlCapturaDeEvaluaciones                
                 $('#pnlCapturaDeRecomedaciones').append('<div id="pnlLengua" class="panel"><div class="tituloPanel">Lengua</div></div>');                    
                     $('#pnlLengua').append('<div id="pnlHablaOtraLengua"> '
@@ -103,15 +103,14 @@ function frmwCaptuRepEval_Create()
                     $('#pnlRecomendaciones').append('<div id="scrlRecomXMat"></div>'); // antes scrlAvancesXEval
                     $('#pnlRecomendaciones').append('<div id="pnlMensajeGuardar">  <label id="lblMensajeGuardar" title="No olvide guardar la evaluación por cada alumno.">No olvide guardar las sugerencias y recomendaciones por cada alumno.<label>  </div>');
                     $('#pnlRecomendaciones').append('<ul class="buttonBar"> <li><a href="#" id="btnGuardarRecom"><label class="iconBtnGuardar icon-disquete"></label>Guardar captura del alumno</a></li>  </ul>');
-            }   /*era pnlScrlCapturaDeEvaluaciones*/                     
-                
-                
+               /*era pnlScrlCapturaDeEvaluaciones*/                     
+                                
                 $('#pnlCapturaDeRecomedaciones').append('<ul class="buttonBar">'+                                                    
                                                     /*'<li><a href="#" id="btnLimpiarCapRepEval"><label class="middleHoriz icon-brocha"></label>Limpiar captura</a></li>'+*/
                                                     '<li><a href="#" id="btnAnteriorGrupo"><label class="iconBtnGpoAnt middleHoriz iconBtnRedondo icon-arrow-left4"></label>Gpo. anterior</a></li>' +
                                                     '<li><a href="#" id="btnSiguienteGrupo">Siguiente gpo.<label class="iconBtnGpoSig middleHoriz iconBtnRedondo icon-arrow-right4"></label></a></li>' +
                                                 '</ul>');
-                
+            }                                            
         
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------
     

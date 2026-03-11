@@ -507,9 +507,10 @@ public class SICEEO_NewIngresoSec {
                     escalonAct = 12;
             }
             
+            
             qryIfx.conectar();
             if ( txtCurp.length()==16 && txt18.length()==2 && existeUno.equals("x") )
-            {
+            {                
                 QBuskAlum = qryIfx.BuskAlum(5,txtCurp+txt18, "", "", "");
                 if (QBuskAlum.size()==1 ) existeUno = "si";
                 else existeUno = "no";

@@ -39,12 +39,12 @@ public class SICEEO_Password {
         this.mensaje = new SICEEO_Mensajes();
         this.dr = datosReturn;
         this.dm = new SICEEO_DataModule ();
-        //this.pathConfigsSICEEO = "/opt/tomcat/siceeoConfigs/configsSICEEO.sco";  // puerto 88
-        this.pathConfigsSICEEO = "/var/lib/tomcat/siceeoConfigs/configsSICEEO.sco";  // puerto 80 
+        this.pathConfigsSICEEO = "/opt/tomcat/siceeoConfigs/configsSICEEO.sco";  // puerto 88
+        //this.pathConfigsSICEEO = "/var/lib/tomcat/siceeoConfigs/configsSICEEO.sco";  // puerto 80 
     }
 /*******************************************************************************/
 /****************************** ÁREA PARA EL CONTROLADOR ***********************/
-/*******************************************************************************/
+/*******************************************************************************/    
     /**
      *
      * @param request Solicitud del servidor
@@ -260,11 +260,12 @@ public class SICEEO_Password {
                         if (QUsuario.get("usertipo").equals("1") && (""+QUsuario.get("modulos")).contains(",28,"))
                            this.dr.put("quitarFolio","si");
                         
+                        
                         if (QUsuario.get("usertipo").equals("1"))
                            this.dr.put("superUsuario","si");
                         else if (QUsuario.get("usertipo").equals("no22"))
                            this.dr.put("usuarioNo22","si");
-                        
+                                                                            
                         if ( (""+QUsuario.get("cveunidad")).substring(0,3).equals("CCT") ||  (""+QUsuario.get("cveunidad")).substring(0,3).equals("CXT") || QUsuario.get("cveunidad").equals("LECTU") || QUsuario.get("cveunidad").equals("CAPTU") || QUsuario.get("cveunidad").equals("MESA") )   //solo usuarios de regiones x el momento
                         {
                              this.dr.put("tipo_usuario",""+QUsuario.get("idcct"));
@@ -505,7 +506,8 @@ public class SICEEO_Password {
             boton.put("btnOfExmExt2do", "<li><a href='#' id='btnOfExmExt2do' tabindex='203' title='Oficialización de examenes extraordinarios de 2do grado.' class='icon-sello'>Oficializar Exm.Ext. 2do</a></li>");
             boton.put("btnOfExmExt3ro", "<li><a href='#' id='btnOfExmExt3ro' tabindex='203' title='Oficialización de examenes extraordinarios de 3er grado.' class='icon-sello'>Oficializar Exm.Ext. 3ro</a></li>");
             boton.put("btnActualizaPromNivel", "<li><a href='#' id='btnActualizaPromNivel'  tabindex='201' title='Calcula y actualiza el promedio del nivel.'><label class='iconBtnSincronizar iconBtnRedondo  middleHoriz '></label>Promedio de Nivel</a></li>");
-                        
+            boton.put("btnHistAcad","<li><a href='#' id='btnHistAcad' title='Muestra la ventana para ingresar calificaciones de exámenes extraordinarios'>Exam. Extraord.</a></li>");
+            
             for (Object permiso : permisos)
                 if ((dato = boton.get(permiso))!=null)
                     dr.put(permiso, dato);        

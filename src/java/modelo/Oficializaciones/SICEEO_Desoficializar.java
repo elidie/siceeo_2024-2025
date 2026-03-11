@@ -90,7 +90,7 @@ public class SICEEO_Desoficializar {
             qryIfx.desoficXAlumno (puedeDesoficializar, puedeQuitarFolio, tblPrincipal_cicescini, tblPrincipal_cveplan, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, tblAlumnos, txtUsuario, tblPrincipal_cveplan.equals("3")?"EVALUACION "+bimeval:"CALIFS BIM "+bimeval, bimeval,Boolean.valueOf(chkTodos));
             dr.put("ofsCal", qryIfx.ofYDeofEnCalEvalYGpos(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, "CALIFS BIM"));
             dr.put("ofsEval", qryIfx.ofYDeofEnCalEvalYGpos(tblPrincipal_cicescini, tblPrincipal_idcct, tblPrincipal_grado, tblPrincipal_grupo, "EVALUACION"));
-            hacerCommit = true;  
+            //hacerCommit = true;  
         } catch (SQLException ex){ this.dr.put("returnCase",0); mensaje.General("GENERAL", ex.getMessage(), "", this.dr);  }
         catch (SICEEO_Excepcion ex){  this.dr.put("returnCase",ex.getNumError());  mensaje.Oficializar(ex.getMensaje(), ex.getMensaje2(), ex.getMensaje3(), this.dr);  }
         catch (Exception ex){ this.dr.put("returnCase", -1); mensaje.General("GENERAL", ex.getMessage(), "", this.dr); }

@@ -125,7 +125,9 @@ function frmwOficializar_Create()
     $("#btnRegresar_Oficializar").on("click",function(){ frmwOficializar_Close(); });
     
     //$("#btnOficInscripcion").on('click', function(){ oficializaInscripcion_Click ("oficializar"); });
-    $("#btnOficCalifBim1").on('click', function(event){ oficializaCalificaciones (event, "oficializar",1); event.preventDefault(); });
+    
+    $("#btnOficCalifBim1").on('click', function(event){ if (!jsOficializar.lockClickInBimEv[1]) oficializarPorAlumno (event, 1, "1a Evaluación"); event.preventDefault(); });
+    //$("#btnOficCalifBim1").on('click', function(event){ oficializaCalificaciones (event, "oficializar",1); event.preventDefault(); });
     $("#btnOficCalifBim2").on('click', function(event){ oficializaCalificaciones (event, "oficializar",2); event.preventDefault(); });
     $("#btnOficCalifBim3").on('click', function(event){ oficializaCalificaciones (event, "oficializar",3); event.preventDefault(); });
     
@@ -608,6 +610,25 @@ function desoficializarPorAlumno (event, bim, tituloBimEval)
     
     if (mensaje.Oficializaciones("QUIERE_ESOFIC","","","CONFIRM_DIALOG"))
         mwfDesoficializar_Show (event, {cicescini:jsOficializar.tblPrincipal_cicescini, cveplan:jsOficializar.tblPrincipal_cveplan, cct:jsOficializar.tblPrincipal_cct, 
+                                idcct:jsOficializar.tblPrincipal_idcct, modalidad:jsOficializar.tblPrincipal_modalidad, grado:jsOficializar.tblPrincipal_grado, 
+                                grupo:jsOficializar.tblPrincipal_grupo }, bim, tituloBimEval, nombreBotonOficializar, nombreBotonDesoficializar);
+}
+
+function oficializarPorAlumno (event, bim, tituloBimEval)
+{
+    var mensaje = new Mensajes();
+    var nombreBotonOficializar, nombreBotonDesoficializar;
+    
+    if (tituloBimEval.indexOf ("Bimestre")>=0){
+        nombreBotonOficializar="btnOficCalifBim"+bim;
+        nombreBotonDesoficializar="btnDesoficCalifBim"+bim;
+    }else if (tituloBimEval.indexOf("Evaluaci")>=0){
+        nombreBotonOficializar="btnOficEval"+bim;
+        nombreBotonDesoficializar="btnDesoficEval"+bim;
+    }
+    
+    if (mensaje.Oficializaciones("QUIERE_ESOFIC","","","CONFIRM_DIALOG"))
+        mwfOficializarXalu_Show (event, {cicescini:jsOficializar.tblPrincipal_cicescini, cveplan:jsOficializar.tblPrincipal_cveplan, cct:jsOficializar.tblPrincipal_cct, 
                                 idcct:jsOficializar.tblPrincipal_idcct, modalidad:jsOficializar.tblPrincipal_modalidad, grado:jsOficializar.tblPrincipal_grado, 
                                 grupo:jsOficializar.tblPrincipal_grupo }, bim, tituloBimEval, nombreBotonOficializar, nombreBotonDesoficializar);
 }

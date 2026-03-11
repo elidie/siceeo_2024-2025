@@ -4390,8 +4390,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                         NoHayExtra += "\n["+tblCalifNGdo.get(f).get("cvetipmat")+"-"+tblCalifNGdo.get(f).get("cvemat")+"], calificación no permitida";                
             }
             f++;    
-        }
-        
+        }        
         return NoHayExtra;
     }
     
@@ -5638,6 +5637,23 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
         }else
             stm.execute("DELETE FROM Oficializacion WHERE idcct="+tblPrincipal_idcct+" AND cicescini="+tblPrincipal_cicescini+" AND cveoficializacion="+cveoficializacion);
     }
+    
+    public ArrayList<Map> getAlumnosParaOficializar (String tblPrincipal_cicescini, String tblPrincipal_idcct, String tblPrincipal_grado, 
+            String tblPrincipal_grupo, String oficializacion, String bimeval) throws SQLException
+    {
+        String cveoficializacion = this.getData("SELECT cveoficializacion FROM catoficializacion WHERE oficializacion='"+oficializacion+"'");
+        rs = stm.executeQuery("SELECT 't' AS selec, "
+                                + "a.idalu, a.curp, a.apepat, a.apemat, a.nombre, "
+                                + "(trim(nvl(a.apepat,'')) || '/' || trim(nvl(a.apemat,'')) || \"*\" || trim(nvl(a.nombre,''))) AS nom_tot, "
+                                + "g.grado, g.grupo "
+                            + "FROM alumnogrado g, alumno a "
+                            + "WHERE g.idalu=a.idalu AND g.estatusgrado<>'BD' AND g.estatusgrado<>'RG' "
+                                + "AND g.cicescini="+tblPrincipal_cicescini+" AND g.idcct= "+tblPrincipal_idcct+" AND g.grado="+tblPrincipal_grado+" "
+                                + "AND g.grupo = '"+tblPrincipal_grupo+"'"
+                            + "ORDER BY a.apepat, a.apemat, a.nombre, a.curp");
+        
+        return qryToArrlmap(rs, null, true, 2);
+    }
        
     private void verifPreviaOfic (String tblPrincipal_idcct, String cicescini, String tblPrincipal_cveplan, String grado, String grupo, String bimeval, String oficializacion, String nombreExcepcion) throws SQLException, SICEEO_Excepcion
     {
@@ -5859,10 +5875,11 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
     
     public void asignarFolioRepEval (String cicescini, String modalidad, String cveplan, String idcct, String grado, String grupo, String usuario) throws SQLException
     {
-        String nivelmod="";
+        String nivelmod="", foliodie;
         int folionum;
         Statement stm2=null;
         ResultSet rs2=null;
+        
         
         //Obtenemos el nuevo número de folio
         if (cveplan.equals("1"))
@@ -5890,7 +5907,8 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                     + "AND ag.idalu NOT IN (SELECT idalu FROM fol_re_elec WHERE cicescini="+cicescini+" AND cveplan="+cveplan+") "
                     + "AND ag.idalu NOT IN (SELECT idalu FROM comipems WHERE cicescini="+cicescini+") "          
                     + "ORDER BY a.apepat, a.apemat, a.nombre, a.curp ");*/
-            rs2 = stm2.executeQuery("SELECT ag.idalu, (SELECT folionum FROM fol_re_elec f WHERE f.idalu = ag.idalu AND f.cicescini="+cicescini+") AS folio "
+            rs2 = stm2.executeQuery("SELECT ag.idalu, (SELECT folionum FROM fol_re_elec f WHERE f.idalu = ag.idalu AND f.cicescini="+cicescini+") AS folio, "
+                    + " a.curp, a.nombre, a.apepat, a.apemat,(SELECT cct FROM escuela WHERE idcct = ag.idcct) AS cct " 
                     + " FROM alumnogrado ag, alumno a " 
                     + " WHERE ag.idalu=a.idalu  AND ag.estatusgrado<>'BD' AND ag.estatusgrado<>'RG' "
                     + " AND ag.cicescini="+cicescini+" AND ag.idcct="+idcct+" AND ag.grado="+grado+" AND ag.grupo='"+grupo+"' " 
@@ -5898,8 +5916,8 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                     + " ORDER BY a.apepat, a.apemat, a.nombre, a.curp");
             
             //Creamos los nuevos registros con folio de Reportes de Evaluación
-            while (rs2.next()){
-                if((""+rs2.getString("folio")).equals("null") || rs2.getString("folio")==null) {
+            /*while (rs2.next()){
+                if((""+rs2.getString("folio")).equals("null") || rs2.getString("folio")==null) {                    
                     stm.execute(
                               "INSERT INTO fol_re_elec (idalu, cveplan, foliolet, folionum, idcct, grado, cicescini, usuario, fecha, hora, estatus, nivelmod, fecha_expedicion) "
                             + "SELECT idalu, cveplan, 'BE', "+folionum+", idcct, grado, cicescini, '"+usuario+"', date(current), extend(current, hour to minute), 'A', '"+nivelmod+"','2025-07-16' "
@@ -5907,10 +5925,49 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                             + "WHERE cicescini="+cicescini+" AND idalu="+rs2.getString("idalu")+" ");
                     folionum ++;
                 }
+            } comentado while */ /** OJO: Se comento código 2024-2025, reemplazarlo con codigo para añadir mas datos a la tabla **/
+            
+            /** Codigo nuevo para ciclo 2025-2026  **/
+            while (rs2.next()){
+                if((""+rs2.getString("folio")).equals("null") || rs2.getString("folio")==null) {
+                    /* Crear foliodie interno con la clavecct del cct y de la curp */ 
+                    foliodie = creaFolioDPE(""+rs2.getString("curp").trim(), ""+rs2.getString("cct").trim());
+                    if(!foliodie.isEmpty()) //Se ejecuta el query siempre y cuando se construyo el folio die
+                    {
+                        stm.execute(
+                              "INSERT INTO fol_re_elec (idalu, cveplan, foliolet, folionum, idcct, grado, cicescini, usuario, "
+                                    + "fecha, hora, estatus, nivelmod, fecha_expedicion, "
+                                    + "curp, nombre, apepat, apemat, grupo, cct, foliodpe) "
+                            + "SELECT idalu, cveplan, 'BE', "+folionum+", idcct, grado, ag.cicescini, '"+usuario+"', "
+                                    + "date(current), extend(current, hour to minute), 'A', '"+nivelmod+"',cf.fecha_date, '"
+                                    + rs2.getString("curp").trim()+"','"+rs2.getString("nombre").trim()+"','"
+                                    + rs2.getString("apepat").trim()+"','"+rs2.getString("apemat").trim()+"','"
+                                    + rs2.getString("grupo").trim()+"','"+rs2.getString("cct").trim()+"','"+foliodie+"' "                                    
+                            + "FROM alumnogrado ag, cat_fecha_certi cf "  /*  Agregue relacion con la tabla de catalogo de fechas de certificados */
+                            + "WHERE ag.cicescini = cf.cicescini AND ag.cicescini="+cicescini+" AND ag.idalu="+rs2.getString("idalu")+" ");
+                        folionum ++;
+                    }
+                }
             }
+            /**  Fin de código agregado para periodo 2025-2026  **/
         }finally {
             closeStatement(stm2, rs2);
         }
+    }
+    
+    public String creaFolioDPE( String curp, String cct)
+    {
+        String foliodie="";  /* LOSE140102    20DST0086S  */
+        if(curp.length()>=10 && cct.length()>=9) {
+            foliodie = curp.substring(4,5)+cct.substring(8,9); //81
+            foliodie += curp.substring(5,6)+cct.substring(7,8);  //5
+            foliodie += curp.substring(6,7)+cct.substring(6,7); //81
+            foliodie += curp.substring(7,8)+cct.substring(5,6   );  //5
+            foliodie += curp.substring(8,9);
+            foliodie += curp.substring(9,10);            
+        }
+        
+        return foliodie;  //1648001002  
     }
     
     public boolean hayAlumnosParaComplementaria (String cicescini, String cicescinilib, String idcct, String grado, String grupo) throws SQLException
@@ -6199,7 +6256,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                                     + "cveplan="+ tblPersonal_selRow.get("cveplan")+", cveprograma=null, usuario='"+txtUsuario.trim().toUpperCase()+"', "
                                     + "fecha=date(current), hora=extend(current, hour to minute) "
                                 + "WHERE idcct="+tblPersonal_selRow.get("idcct")+" AND cicescini="+califCicEscIn+" AND grado="+tblPersonal_selRow.get("grado")+" AND grupo='"+tblPersonal_selRow.get("grupo")+"'");
-                }else
+                } else
                     throw new SQLException (ex);
             }
         }
@@ -6258,7 +6315,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                                         + " WHERE c.cicescini= "+tblPrincipal_cicescini+" AND c.idalu="+tblAlumnos.get(i).get("idalu")+""); 
                 
                 if((""+comipems).equals("f") || (""+comipems).equals("null") || (""+comipems).equals("") || (""+comipems).equals("NULL"))
-                    try{                    
+                    try {                    
 
                         stm.execute("INSERT INTO desoficializacion (idcct, cicescini, grado, grupo, idalu, cveoficializacion, usuario, fecha)"
                                      + "VALUES ("+tblPrincipal_idcct+", "+tblPrincipal_cicescini+", "+grado+", '"+grupo+"',"+tblAlumnos.get(i).get("idalu")+", "+cveoficializacion+",'"+txtUsuario+"', extend(current, YEAR TO SECOND) )");
@@ -6266,7 +6323,7 @@ public class SICEEO_QueriesInformix extends SICEEO_ConexionInformix {
                         //----------------- Cancelamos folios de certificado -----------------
                         if (tblPrincipal_cveplan.equals("1") && grado.equals("6") || tblPrincipal_cveplan.equals("2") && grado.equals("3"))
                             cancelarFolioCertif (tblPrincipal_cicescini, tblPrincipal_idcct, grado, grupo, ""+tblAlumnos.get(i).get("idalu"), txtUsuario);
-
+                        
                         //----------------- Cancelamos folios de boleta -----------------
                         /*stm.execute(
                               "INSTERT INTO fol_re_elec_cance (idfolio,idalu,cveplan,foliolet,folionum,idcct,grado,cicescini,usuario,fecha,hora,usuario_cance,fecha_cance,hora_cance,estatus,nivelmod)"

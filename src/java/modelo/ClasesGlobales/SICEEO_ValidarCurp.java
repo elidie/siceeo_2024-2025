@@ -16,7 +16,7 @@ public class SICEEO_ValidarCurp {
                         "DD ","EL " ,"LA ","LOS ","LAS ","LE ","LES ",
                         "MAC ","MC ","VAN ","VON ","Y ","M "};
     
-    String [] ATAB2 = {"BACA","BAKA","BUEI","BUEY","CACA","CACO","CAGA","CAGO",
+    String [] ATAB2 = {"VACA","BACA","BAKA","BUEI","BUEY","CACA","CACO","CAGA","CAGO",
                         "CAKA","CAKO","COGE","COGI","COJA","COJE","COJI","COJO",
                         "COLA","CULO","FALO","FETO","GETA","GUEI","GUEY","JETA",
                         "JOTO","KACA","KACO","KAGA","KAGO","KAKA","KAKO","KOGE",

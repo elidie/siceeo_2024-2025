@@ -1,0 +1,78 @@
+/* 
+    Creado el : 27/01/2025, 13:34:14 PM
+    Autor     : Eli López
+*/
+
+/* =========================================================================== */
+/* *************** P A R A   T O D O   E L   F O R M U L A R I O ************* */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ******************** P A R A   C A D A   E L E M E N T O ****************** */
+/* =========================================================================== */
+/* ------------------------- CONFIGURACIÓN DE PÁNELES ------------------------ */
+#pnlOficializarXalu #pnlDatosGrales {
+    background-color: #804000;
+    color: white;
+    font-size: 0.9em;
+    height: 18px;
+    margin: 7px 7px 15px 7px;
+}
+
+#pnlOficializarXalu #pnlListadoDeXAlumnos
+{
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+/* ------------------------- CONFIGURACIÓN DE BOTONES ------------------------ */
+#pnlOficializarXalu #btnOficAlumnos
+{
+    width: 120px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE COMBOBOX ------------------------ */
+
+
+/* ------------------------- CONFIGURACIÓN DE LABELS ------------------------- */
+#pnlOficializarXalu #pnlDatosGrales label
+{
+    font-weight:bold;
+}
+#pnlOficializarXalu #lblTblPrincipal_cct
+{
+    margin-right: 2em;
+}
+#pnlOficializarXalu #lblTblPrincipal_grado
+{
+    margin-right: 1em;
+}
+#pnlOficializarXalu #lblTblPrincipal_grupo
+{
+    margin-right: 3em;
+}
+
+/* ------------------------- CONFIGURACIÓN DE TABLAS ------------------------- */
+#pnlOficializarXalu #scrlXAlumnos
+{
+    height: 280px;
+}
+
+/* ------------------------ CONFIGURACIÓN DE TEXTBOX ------------------------- */
+
+
+
+
+/* =========================================================================== */
+/* *** P A R A   I N I C I A L I Z A C I Ó N   D E L   R E S P O N S I V E *** */
+/* =========================================================================== */
+
+
+
+
+/* =========================================================================== */
+/* ************************* M E D I A   Q U E R Y S ************************* */
+/* =========================================================================== */

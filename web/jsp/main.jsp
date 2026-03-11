@@ -65,6 +65,7 @@
         <link rel="stylesheet" href="../estilos/Tutor/CaptuTutorAlum.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Reportes/Reportes.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Oficializaciones/Desoficializar.css<%=hora%>" />
+        <link rel="stylesheet" href="../estilos/Oficializaciones/OficializarXAlu.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Reportes/Complementaria.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Reportes/SelMesCompl.css<%=hora%>" />
         <link rel="stylesheet" href="../estilos/Reportes/SelMesCons.css<%=hora%>" />
@@ -75,7 +76,7 @@
     <body>
         <div id="winPrincipal">
             <nav id="mnuSICEEO">
-                <ul data-liffect="slideLeft" ></ul>
+                <ul data-liffect="slideLeft" ></ul>    
             </nav>
             <div id="pnlDatosInfoSistema">
                 <ul>
@@ -83,7 +84,7 @@
                     <li title="Usuario"><label id="iconUsuario" class="icon-usuarios iconInfo"></label><label id="lblUsuario"> ... </label>  </li>
                     <li title="Región administrativa"><label id="iconUnidad" class="icon-oaxaca iconInfo"></label><label id="lblUnidad"> ... </label>  </li>
                     <li title="Hora de ingreso a SICEEO"><label id="iconFecha" class="icon-calendreloj iconInfo"></label><label id="lblFecha"> ... </label></li>
-                    <li title="Versión"><label id="iconVersionSis" class="icon-engrane iconInfo"></label><label id="lblVersionSis"> Versión 15.9.3 </label></li>
+                    <li title="Versión"><label id="iconVersionSis" class="icon-engrane iconInfo"></label><label id="lblVersionSis"> Versión 15.9.7 </label></li>
                 </ul>
             </div>
             <div id="pnlBusquedaCCT">
@@ -133,6 +134,7 @@
                 
                 <div id="mwfmPermisos" class="mwfModal" style="display:none"></div>
                 <div id="mwfmDesoficializar" class="mwfModal" style="display:none"></div>
+                <div id="mwfmOficializarXalu" class="mwfModal" style="display:none"></div>                
                 <div id="mwfmComplementaria" class="mwfModal" style="display:none"></div>
                 <div id="mwfmExmExtraordinarios" class="mwfModal" style="display:none"></div>
                 <div id="mwfmAvisos" class="mwfModal" style="display:none"></div>
@@ -204,6 +206,7 @@
         <script src="../js/Tutor/Tutor.js<%=hora%>"></script>
         <script src="../js/Reportes/Reportes.js<%=hora%>"></script>
         <script src="../js/Oficializaciones/Desoficializar.js<%=hora%>"></script>
+        <script src="../js/Oficializaciones/OficializarXalu.js<%=hora%>"></script>
         <script src="../js/Reportes/Complementaria.js<%=hora%>"></script>
         <script src="../js/Reportes/SelMesCompl.js<%=hora%>"></script>
         <script src="../js/Reportes/SelMesCons.js<%=hora%>"></script>

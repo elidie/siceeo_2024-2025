@@ -36,6 +36,7 @@ function frmwExalumnos_Close()
 function frmwExalumnos_Create() 
 {
     var tabindexIni = 100, tabindexReturn=100;
+    var sisVars = JSON.parse( sessionStorage.getItem("sistemVars") );
     
     if($('#frmfExalumnos').length)                                                // Verificando si la tabla Existe
         $('#frmfExalumnos').remove();
@@ -80,7 +81,7 @@ function frmwExalumnos_Create()
             
             $('#pnlExalumnos').append('<div id="pnlBotonesDeControl"></div>');
                 $('#pnlBotonesDeControl').append('<ul id="ulHistFolImp" class="buttonBar"> '
-                                            +'<li><a href="#" id="btnHistAcad" title="Muestra la ventana para ingresar calificaciones de exámenes extraordinarios">Exam. Extraord.</a></li>'
+                                            //+'<li><a href="#" id="btnHistAcad" title="Muestra la ventana para ingresar calificaciones de exámenes extraordinarios">Exam. Extraord.</a></li>'
                                             //+'<li><a href="#" id="btnFoliarYFirmar" title="Folea y firma a este alumno">Foliar y firmar.</a></li>'
                                             +'<li><a href="#" id="btnImprimirCert" title="Imprime el certificado del alumno">Imp. Certificado</a></li>'
                                             //+'<li><a href="#" id="btnUpdatePromFol" title="Actualiza el promedio faltante al folio de secundaria">Actualiza prom. de folio</a></li>'
@@ -93,6 +94,9 @@ function frmwExalumnos_Create()
         $("#frmfExalumnos").append('<div id="mwfmSelComplExalum" class="mwfModal" style="display:none"></div>');  
         $("#frmfExalumnos").append('<div id="mwfmSelConsExalum" class="mwfModal" style="display:none"></div>');  
     
+    if(sisVars.btnHistAcad){            
+        $("#ulHistFolImp").append(sisVars.btnHistAcad);
+    }
     insertarTablas_AlumMatsCertiYComen_Exal (null, null, null, null);
     //------------------------------------------ ACTIVACIÓN DE EVENTOS -------------------------------------------------
     $("#btnRegresar_Exa").on("click",function(){ frmwExalumnos_Close(); });
